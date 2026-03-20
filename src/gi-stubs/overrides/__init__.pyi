@@ -1,3 +1,5 @@
-import typing
+from typing import TypeVar
 
-def override(_type: typing.Type) -> typing.Type: ...
+T = TypeVar("T")
+
+def override(_type: type[T]) -> type[T]: ...

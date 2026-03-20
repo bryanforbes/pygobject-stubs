@@ -1,12 +1,11 @@
-import typing
+from typing import Any
 
 import enum
+from collections.abc import Callable
 
 from gi.repository import Gio
 from gi.repository import GLib
 from gi.repository import GObject
-
-T = typing.TypeVar("T")
 
 _lock = ...  # FIXME Constant
 _namespace: str = "Gly"
@@ -70,12 +69,12 @@ class Creator(GObject.Object):
         texture: GLib.Bytes,
     ) -> NewFrame: ...
     def add_metadata_key_value(self, key: str, value: str) -> bool: ...
-    def create(self) -> typing.Optional[EncodedImage]: ...
+    def create(self) -> EncodedImage | None: ...
     def create_async(
         self,
-        cancellable: typing.Optional[Gio.Cancellable] = None,
-        callback: typing.Optional[typing.Callable[..., None]] = None,
-        *user_data: typing.Any,
+        cancellable: Gio.Cancellable | None = None,
+        callback: Callable[..., None] | None = None,
+        *user_data: Any,
     ) -> None: ...
     def create_finish(self, result: Gio.AsyncResult) -> EncodedImage: ...
     @classmethod
@@ -142,7 +141,7 @@ class Frame(GObject.Object):
       notify (GParam)
     """
     def get_buf_bytes(self) -> GLib.Bytes: ...
-    def get_color_cicp(self) -> typing.Optional[Cicp]: ...
+    def get_color_cicp(self) -> Cicp | None: ...
     def get_delay(self) -> int: ...
     def get_height(self) -> int: ...
     def get_memory_format(self) -> MemoryFormat: ...
@@ -216,16 +215,16 @@ class Image(GObject.Object):
       notify (GParam)
     """
     def get_height(self) -> int: ...
-    def get_metadata_key_value(self, key: str) -> typing.Optional[str]: ...
+    def get_metadata_key_value(self, key: str) -> str | None: ...
     def get_metadata_keys(self) -> list[str]: ...
     def get_mime_type(self) -> str: ...
     def get_specific_frame(self, frame_request: FrameRequest) -> Frame: ...
     def get_specific_frame_async(
         self,
         frame_request: FrameRequest,
-        cancellable: typing.Optional[Gio.Cancellable] = None,
-        callback: typing.Optional[typing.Callable[..., None]] = None,
-        *user_data: typing.Any,
+        cancellable: Gio.Cancellable | None = None,
+        callback: Callable[..., None] | None = None,
+        *user_data: Any,
     ) -> None: ...
     def get_specific_frame_finish(self, result: Gio.AsyncResult) -> Frame: ...
     def get_transformation_orientation(self) -> int: ...
@@ -233,9 +232,9 @@ class Image(GObject.Object):
     def next_frame(self) -> Frame: ...
     def next_frame_async(
         self,
-        cancellable: typing.Optional[Gio.Cancellable] = None,
-        callback: typing.Optional[typing.Callable[..., None]] = None,
-        *user_data: typing.Any,
+        cancellable: Gio.Cancellable | None = None,
+        callback: Callable[..., None] | None = None,
+        *user_data: Any,
     ) -> None: ...
     def next_frame_finish(self, result: Gio.AsyncResult) -> Frame: ...
 
@@ -299,18 +298,18 @@ class Loader(GObject.Object):
     def get_mime_types() -> list[str]: ...
     @staticmethod
     def get_mime_types_async(
-        cancellable: typing.Optional[Gio.Cancellable] = None,
-        callback: typing.Optional[typing.Callable[..., None]] = None,
-        *user_data: typing.Any,
+        cancellable: Gio.Cancellable | None = None,
+        callback: Callable[..., None] | None = None,
+        *user_data: Any,
     ) -> None: ...
     @staticmethod
     def get_mime_types_finish(result: Gio.AsyncResult) -> list[str]: ...
     def load(self) -> Image: ...
     def load_async(
         self,
-        cancellable: typing.Optional[Gio.Cancellable] = None,
-        callback: typing.Optional[typing.Callable[..., None]] = None,
-        *user_data: typing.Any,
+        cancellable: Gio.Cancellable | None = None,
+        callback: Callable[..., None] | None = None,
+        *user_data: Any,
     ) -> None: ...
     def load_finish(self, result: Gio.AsyncResult) -> Image: ...
     @classmethod

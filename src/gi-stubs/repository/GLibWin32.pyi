@@ -1,7 +1,3 @@
-import typing
-
-T = typing.TypeVar("T")
-
 _lock = ...  # FIXME Constant
 _namespace: str = "GLibWin32"
 _version: str = "2.0"

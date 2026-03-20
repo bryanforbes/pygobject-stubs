@@ -1,8 +1,4 @@
-import typing
-
 from gi.repository import GObject
-
-T = typing.TypeVar("T")
 
 _lock = ...  # FIXME Constant
 _namespace: str = "win32"

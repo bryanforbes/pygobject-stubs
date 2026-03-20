@@ -1,10 +1,9 @@
-import typing
+from typing import Any
+
+from collections.abc import Callable
 
 from gi.repository import Gio
 from gi.repository import GObject
-from typing_extensions import Self
-
-T = typing.TypeVar("T")
 
 ATTR_APPLICATION_ICON: str = "application.icon"
 ATTR_APPLICATION_ICON_NAME: str = "application.icon_name"
@@ -74,20 +73,20 @@ class Context(GObject.Object, Gio.Initable):
     """
     def cache(self, attrs: dict[str, str]) -> bool: ...
     @classmethod
-    def new(cls, cancellable: typing.Optional[Gio.Cancellable] = None) -> Context: ...
+    def new(cls, cancellable: Gio.Cancellable | None = None) -> Context: ...
     def open(self) -> bool: ...
     def play_full(
         self,
         attrs: dict[str, str],
-        cancellable: typing.Optional[Gio.Cancellable] = None,
-        callback: typing.Optional[typing.Callable[..., None]] = None,
-        *user_data: typing.Any,
+        cancellable: Gio.Cancellable | None = None,
+        callback: Callable[..., None] | None = None,
+        *user_data: Any,
     ) -> None: ...
     def play_full_finish(self, result: Gio.AsyncResult) -> bool: ...
     def play_simple(
         self,
         attrs: dict[str, str],
-        cancellable: typing.Optional[Gio.Cancellable] = None,
+        cancellable: Gio.Cancellable | None = None,
     ) -> bool: ...
     def set_attributes(self, attrs: dict[str, str]) -> bool: ...
     def set_driver(self, driver: str) -> bool: ...

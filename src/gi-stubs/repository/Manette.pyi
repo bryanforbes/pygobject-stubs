@@ -1,5 +1,3 @@
-from typing import Union
-
 from gi.repository import Gio
 from gi.repository import GObject
 
@@ -38,7 +36,7 @@ class Monitor(GObject.Object):
     def new() -> Monitor: ...
 
 class MonitorIter:
-    def next(self) -> tuple[bool, Union[Device, None]]: ...
+    def next(self) -> tuple[bool, Device | None]: ...
 
 class EventType(GObject.GEnum):
     EVENT_ABSOLUTE = ...

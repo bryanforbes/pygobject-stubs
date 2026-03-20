@@ -1,12 +1,13 @@
-import typing
+from typing import TypeVar
+from typing_extensions import Any
+
+from collections.abc import Callable
 
 import cairo
 from gi.repository import GObject
 from gi.repository import Pango
-from typing_extensions import Self
 
-T = typing.TypeVar("T")
-_SomeSurface = typing.TypeVar("_SomeSurface", bound=cairo.Surface)
+_SomeSurface = TypeVar("_SomeSurface", bound=cairo.Surface)
 
 _lock = ...  # FIXME Constant
 _namespace: str = "PangoCairo"
@@ -14,16 +15,16 @@ _version: str = "1.0"
 
 def context_get_font_options(
     context: Pango.Context,
-) -> typing.Optional[cairo.FontOptions]: ...
+) -> cairo.FontOptions | None: ...
 def context_get_resolution(context: Pango.Context) -> float: ...
 def context_set_font_options(
-    context: Pango.Context, options: typing.Optional[cairo.FontOptions] = None
+    context: Pango.Context, options: cairo.FontOptions | None = None
 ) -> None: ...
 def context_set_resolution(context: Pango.Context, dpi: float) -> None: ...
 def context_set_shape_renderer(
     context: Pango.Context,
-    func: typing.Optional[typing.Callable[..., None]] = None,
-    *data: typing.Any,
+    func: Callable[..., None] | None = None,
+    *data: Any,
 ) -> None: ...
 def create_context(cr: cairo.Context[_SomeSurface]) -> Pango.Context: ...
 def create_layout(cr: cairo.Context[_SomeSurface]) -> Pango.Layout: ...
@@ -34,7 +35,7 @@ def font_map_get_default() -> Pango.FontMap: ...
 def font_map_new() -> Pango.FontMap: ...
 def font_map_new_for_font_type(
     fonttype: cairo.FontType,
-) -> typing.Optional[Pango.FontMap]: ...
+) -> Pango.FontMap | None: ...
 def glyph_string_path(
     cr: cairo.Context[_SomeSurface], font: Pango.Font, glyphs: Pango.GlyphString
 ) -> None: ...
@@ -65,7 +66,7 @@ class Font(GObject.GInterface):
     Signals from GObject:
       notify (GParam)
     """
-    def get_scaled_font(self) -> typing.Optional[cairo.ScaledFont]: ...
+    def get_scaled_font(self) -> cairo.ScaledFont | None: ...
 
 class FontMap(GObject.GInterface):
     """
@@ -84,8 +85,6 @@ class FontMap(GObject.GInterface):
     def new(cls) -> Pango.FontMap: ...
     # override
     @classmethod
-    def new_for_font_type(
-        cls, fonttype: cairo.FontType
-    ) -> typing.Optional[Pango.FontMap]: ...
+    def new_for_font_type(cls, fonttype: cairo.FontType) -> Pango.FontMap | None: ...
     def set_default(self) -> None: ...
     def set_resolution(self, dpi: float) -> None: ...

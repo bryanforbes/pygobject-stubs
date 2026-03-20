@@ -1,9 +1,5 @@
-import typing
-
-from gi.repository import Gdk
+from gi.repository import _Gdk3 as Gdk
 from gi.repository import GObject
-
-T = typing.TypeVar("T")
 
 _lock = ...  # FIXME Constant
 _namespace: str = "GdkWin32"
@@ -42,8 +38,8 @@ class Win32Display(Gdk.Display):
     """
 
     @staticmethod
-    def get_wgl_version(display: Gdk.Display) -> typing.Tuple[bool, int, int]: ...
-    def set_cursor_theme(self, name: typing.Optional[str], size: int) -> None: ...
+    def get_wgl_version(display: Gdk.Display) -> tuple[bool, int, int]: ...
+    def set_cursor_theme(self, name: str | None, size: int) -> None: ...
 
 class Win32DisplayClass(GObject.GPointer): ...
 class Win32DisplayManager(Gdk.DisplayManager): ...
