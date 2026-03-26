@@ -1216,6 +1216,7 @@ def start(
 ) -> str:
     repo = GIRepository.Repository()
     repo.require(module, version, 0)  # type: ignore
+    gi.require_version(module, version)
     m = importlib.import_module(f".{module}", "gi.repository")
     if init:
         exec(init)
