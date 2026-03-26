@@ -8,7 +8,7 @@ from collections.abc import Sequence
 
 import cairo
 from gi import _gi
-from gi.repository import Gdk
+from gi.repository import _Gdk4
 from gi.repository import GdkPixbuf
 from gi.repository import Gio
 from gi.repository import GLib
@@ -129,32 +129,32 @@ TEXT_VIEW_PRIORITY_VALIDATE: int = 125
 TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID: int = -1
 TREE_SORTABLE_UNSORTED_SORT_COLUMN_ID: int = -2
 
-def accelerator_get_default_mod_mask() -> Gdk.ModifierType: ...
+def accelerator_get_default_mod_mask() -> _Gdk4.ModifierType: ...
 def accelerator_get_label(
-    accelerator_key: int, accelerator_mods: Gdk.ModifierType
+    accelerator_key: int, accelerator_mods: _Gdk4.ModifierType
 ) -> str: ...
 def accelerator_get_label_with_keycode(
-    display: Gdk.Display | None,
+    display: _Gdk4.Display | None,
     accelerator_key: int,
     keycode: int,
-    accelerator_mods: Gdk.ModifierType,
+    accelerator_mods: _Gdk4.ModifierType,
 ) -> str: ...
 def accelerator_name(
-    accelerator_key: int, accelerator_mods: Gdk.ModifierType
+    accelerator_key: int, accelerator_mods: _Gdk4.ModifierType
 ) -> str: ...
 def accelerator_name_with_keycode(
-    display: Gdk.Display | None,
+    display: _Gdk4.Display | None,
     accelerator_key: int,
     keycode: int,
-    accelerator_mods: Gdk.ModifierType,
+    accelerator_mods: _Gdk4.ModifierType,
 ) -> str: ...
 def accelerator_parse(
     accelerator: str,
-) -> tuple[bool, int, Gdk.ModifierType]: ...
+) -> tuple[bool, int, _Gdk4.ModifierType]: ...
 def accelerator_parse_with_keycode(
-    accelerator: str, display: Gdk.Display | None = None
-) -> tuple[bool, int, list[int], Gdk.ModifierType]: ...
-def accelerator_valid(keyval: int, modifiers: Gdk.ModifierType) -> bool: ...
+    accelerator: str, display: _Gdk4.Display | None = None
+) -> tuple[bool, int, list[int], _Gdk4.ModifierType]: ...
+def accelerator_valid(keyval: int, modifiers: _Gdk4.ModifierType) -> bool: ...
 def accessible_property_init_value(
     property: AccessibleProperty, value: Any
 ) -> None: ...
@@ -202,7 +202,7 @@ def icon_theme_error_quark() -> int: ...
 def init() -> None: ...
 def init_check() -> bool: ...
 def is_initialized() -> bool: ...
-def native_get_for_surface(surface: Gdk.Surface) -> Native | None: ...
+def native_get_for_surface(surface: _Gdk4.Surface) -> Native | None: ...
 def paper_size_get_default() -> str: ...
 def paper_size_get_paper_sizes(include_custom: bool) -> list[PaperSize]: ...
 def param_spec_expression(
@@ -289,7 +289,7 @@ def render_handle(
 def render_icon(
     context: StyleContext,
     cr: cairo.Context[_SomeSurface],
-    texture: Gdk.Texture,
+    texture: _Gdk4.Texture,
     x: float,
     y: float,
 ) -> None: ...
@@ -353,7 +353,7 @@ def test_register_all_types() -> None: ...
 def test_widget_wait_for_draw(widget: Widget) -> None: ...
 def tree_create_row_drag_content(
     tree_model: TreeModel, path: TreePath
-) -> Gdk.ContentProvider: ...
+) -> _Gdk4.ContentProvider: ...
 def tree_get_row_drag_data(
     value: Any,
 ) -> tuple[bool, TreeModel, TreePath]: ...
@@ -389,21 +389,21 @@ class ATContext(GObject.Object):
     class Props(GObject.Object.Props):
         accessible: Accessible
         accessible_role: AccessibleRole
-        display: Gdk.Display
+        display: _Gdk4.Display
 
     props: Props = ...
     def __init__(
         self,
         accessible: Accessible = ...,
         accessible_role: AccessibleRole = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
     ) -> None: ...
     @classmethod
     def create(
         cls,
         accessible_role: AccessibleRole,
         accessible: Accessible,
-        display: Gdk.Display,
+        display: _Gdk4.Display,
     ) -> ATContext | None: ...
     def get_accessible(self) -> Accessible: ...
     def get_accessible_role(self) -> AccessibleRole: ...
@@ -542,7 +542,7 @@ class AboutDialog(
         documenters: list[str]
         license: str | None
         license_type: License
-        logo: Gdk.Paintable | None
+        logo: _Gdk4.Paintable | None
         logo_icon_name: str | None
         program_name: str | None
         system_information: str | None
@@ -559,7 +559,7 @@ class AboutDialog(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -580,7 +580,7 @@ class AboutDialog(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -624,7 +624,7 @@ class AboutDialog(
         documenters: Sequence[str] = ...,
         license: str | None = ...,
         license_type: License = ...,
-        logo: Gdk.Paintable | None = ...,
+        logo: _Gdk4.Paintable | None = ...,
         logo_icon_name: str | None = ...,
         program_name: str | None = ...,
         system_information: str | None = ...,
@@ -641,7 +641,7 @@ class AboutDialog(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -661,7 +661,7 @@ class AboutDialog(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -697,7 +697,7 @@ class AboutDialog(
     def get_documenters(self) -> list[str]: ...
     def get_license(self) -> str | None: ...
     def get_license_type(self) -> License: ...
-    def get_logo(self) -> Gdk.Paintable | None: ...
+    def get_logo(self) -> _Gdk4.Paintable | None: ...
     def get_logo_icon_name(self) -> str | None: ...
     def get_program_name(self) -> str | None: ...
     def get_system_information(self) -> str | None: ...
@@ -715,7 +715,7 @@ class AboutDialog(
     def set_documenters(self, documenters: Sequence[str]) -> None: ...
     def set_license(self, license: str | None = None) -> None: ...
     def set_license_type(self, license_type: License) -> None: ...
-    def set_logo(self, logo: Gdk.Paintable | None = None) -> None: ...
+    def set_logo(self, logo: _Gdk4.Paintable | None = None) -> None: ...
     def set_logo_icon_name(self, icon_name: str | None = None) -> None: ...
     def set_program_name(self, name: str | None = None) -> None: ...
     def set_system_information(self, system_information: str | None = None) -> None: ...
@@ -945,7 +945,7 @@ class ActionBar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -986,7 +986,7 @@ class ActionBar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -1407,7 +1407,7 @@ class AppChooserButton(Widget, Accessible, AppChooser, Buildable, ConstraintTarg
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -1452,7 +1452,7 @@ class AppChooserButton(Widget, Accessible, AppChooser, Buildable, ConstraintTarg
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -1629,7 +1629,7 @@ class AppChooserDialog(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -1650,7 +1650,7 @@ class AppChooserDialog(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -1699,7 +1699,7 @@ class AppChooserDialog(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -1719,7 +1719,7 @@ class AppChooserDialog(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -1849,7 +1849,7 @@ class AppChooserWidget(Widget, Accessible, AppChooser, Buildable, ConstraintTarg
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -1896,7 +1896,7 @@ class AppChooserWidget(Widget, Accessible, AppChooser, Buildable, ConstraintTarg
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -2197,7 +2197,7 @@ class ApplicationWindow(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -2218,7 +2218,7 @@ class ApplicationWindow(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -2265,7 +2265,7 @@ class ApplicationWindow(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -2285,7 +2285,7 @@ class ApplicationWindow(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -2416,7 +2416,7 @@ class AspectFrame(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -2461,7 +2461,7 @@ class AspectFrame(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -2629,7 +2629,7 @@ class Assistant(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -2650,7 +2650,7 @@ class Assistant(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -2696,7 +2696,7 @@ class Assistant(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -2716,7 +2716,7 @@ class Assistant(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -3114,7 +3114,7 @@ class Box(Widget, Accessible, Buildable, ConstraintTarget, Orientable):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -3160,7 +3160,7 @@ class Box(Widget, Accessible, Buildable, ConstraintTarget, Orientable):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -3715,7 +3715,7 @@ class Button(Widget, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -3764,7 +3764,7 @@ class Button(Widget, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -3956,7 +3956,7 @@ class Calendar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -4003,7 +4003,7 @@ class Calendar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -4108,7 +4108,7 @@ class CellArea(GObject.InitiallyUnowned, Buildable, CellLayout):
         self,
         context: CellAreaContext,
         widget: Widget,
-        cell_area: Gdk.Rectangle,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
         edit_only: bool,
     ) -> bool: ...
@@ -4116,8 +4116,8 @@ class CellArea(GObject.InitiallyUnowned, Buildable, CellLayout):
         self,
         widget: Widget,
         renderer: CellRenderer,
-        event: Gdk.Event,
-        cell_area: Gdk.Rectangle,
+        event: _Gdk4.Event,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
     ) -> bool: ...
     def add(self, renderer: CellRenderer) -> None: ...
@@ -4148,7 +4148,7 @@ class CellArea(GObject.InitiallyUnowned, Buildable, CellLayout):
         self,
         context: CellAreaContext,
         widget: Widget,
-        cell_area: Gdk.Rectangle,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
         edit_only: bool,
     ) -> bool: ...
@@ -4166,8 +4166,8 @@ class CellArea(GObject.InitiallyUnowned, Buildable, CellLayout):
         self,
         context: CellAreaContext,
         widget: Widget,
-        event: Gdk.Event,
-        cell_area: Gdk.Rectangle,
+        event: _Gdk4.Event,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
     ) -> int: ...
     def do_focus(self, direction: DirectionType) -> bool: ...
@@ -4178,8 +4178,8 @@ class CellArea(GObject.InitiallyUnowned, Buildable, CellLayout):
         self,
         context: CellAreaContext,
         widget: Widget,
-        cell_area: Gdk.Rectangle,
-        background_area: Gdk.Rectangle,
+        cell_area: _Gdk4.Rectangle,
+        background_area: _Gdk4.Rectangle,
         callback: Callable[..., bool],
         *callback_data: Any,
     ) -> None: ...
@@ -4217,8 +4217,8 @@ class CellArea(GObject.InitiallyUnowned, Buildable, CellLayout):
         context: CellAreaContext,
         widget: Widget,
         snapshot: Snapshot,
-        background_area: Gdk.Rectangle,
-        cell_area: Gdk.Rectangle,
+        background_area: _Gdk4.Rectangle,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
         paint_focus: bool,
     ) -> None: ...
@@ -4226,8 +4226,8 @@ class CellArea(GObject.InitiallyUnowned, Buildable, CellLayout):
         self,
         context: CellAreaContext,
         widget: Widget,
-        event: Gdk.Event,
-        cell_area: Gdk.Rectangle,
+        event: _Gdk4.Event,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
     ) -> int: ...
     # override
@@ -4238,8 +4238,8 @@ class CellArea(GObject.InitiallyUnowned, Buildable, CellLayout):
         self,
         context: CellAreaContext,
         widget: Widget,
-        cell_area: Gdk.Rectangle,
-        background_area: Gdk.Rectangle,
+        cell_area: _Gdk4.Rectangle,
+        background_area: _Gdk4.Rectangle,
         callback: Callable[..., bool],
         *callback_data: Any,
     ) -> None: ...
@@ -4248,16 +4248,16 @@ class CellArea(GObject.InitiallyUnowned, Buildable, CellLayout):
         context: CellAreaContext,
         widget: Widget,
         renderer: CellRenderer,
-        cell_area: Gdk.Rectangle,
-    ) -> Gdk.Rectangle: ...
+        cell_area: _Gdk4.Rectangle,
+    ) -> _Gdk4.Rectangle: ...
     def get_cell_at_position(
         self,
         context: CellAreaContext,
         widget: Widget,
-        cell_area: Gdk.Rectangle,
+        cell_area: _Gdk4.Rectangle,
         x: int,
         y: int,
-    ) -> tuple[CellRenderer, Gdk.Rectangle]: ...
+    ) -> tuple[CellRenderer, _Gdk4.Rectangle]: ...
     def get_current_path_string(self) -> str: ...
     def get_edit_widget(self) -> CellEditable | None: ...
     def get_edited_cell(self) -> CellRenderer | None: ...
@@ -4279,8 +4279,8 @@ class CellArea(GObject.InitiallyUnowned, Buildable, CellLayout):
     def get_request_mode(self) -> SizeRequestMode: ...
     def has_renderer(self, renderer: CellRenderer) -> bool: ...
     def inner_cell_area(
-        self, widget: Widget, cell_area: Gdk.Rectangle
-    ) -> Gdk.Rectangle: ...
+        self, widget: Widget, cell_area: _Gdk4.Rectangle
+    ) -> _Gdk4.Rectangle: ...
     # override
     def install_cell_property(
         self, property_id: int, pspec: GObject.ParamSpec
@@ -4308,8 +4308,8 @@ class CellArea(GObject.InitiallyUnowned, Buildable, CellLayout):
         context: CellAreaContext,
         widget: Widget,
         snapshot: Snapshot,
-        background_area: Gdk.Rectangle,
-        cell_area: Gdk.Rectangle,
+        background_area: _Gdk4.Rectangle,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
         paint_focus: bool,
     ) -> None: ...
@@ -4387,8 +4387,8 @@ class CellAreaClass(GObject.GPointer):
             CellArea,
             CellAreaContext,
             Widget,
-            Gdk.Event,
-            Gdk.Rectangle,
+            _Gdk4.Event,
+            _Gdk4.Rectangle,
             CellRendererState,
         ],
         int,
@@ -4399,8 +4399,8 @@ class CellAreaClass(GObject.GPointer):
             CellAreaContext,
             Widget,
             Snapshot,
-            Gdk.Rectangle,
-            Gdk.Rectangle,
+            _Gdk4.Rectangle,
+            _Gdk4.Rectangle,
             CellRendererState,
             bool,
         ],
@@ -4431,7 +4431,7 @@ class CellAreaClass(GObject.GPointer):
     focus: Callable[[CellArea, DirectionType], bool] = ...
     is_activatable: Callable[[CellArea], bool] = ...
     activate: Callable[
-        [CellArea, CellAreaContext, Widget, Gdk.Rectangle, CellRendererState, bool],
+        [CellArea, CellAreaContext, Widget, _Gdk4.Rectangle, CellRendererState, bool],
         bool,
     ] = ...
     padding: list[None] = ...
@@ -4519,7 +4519,7 @@ class CellEditable(GObject.GInterface):
     """
     def editing_done(self) -> None: ...
     def remove_widget(self) -> None: ...
-    def start_editing(self, event: Gdk.Event | None = None) -> None: ...
+    def start_editing(self, event: _Gdk4.Event | None = None) -> None: ...
 
 class CellEditableIface(GObject.GPointer):
     """
@@ -4533,7 +4533,7 @@ class CellEditableIface(GObject.GPointer):
     g_iface: GObject.TypeInterface = ...
     editing_done: Callable[[CellEditable], None] = ...
     remove_widget: Callable[[CellEditable], None] = ...
-    start_editing: Callable[[CellEditable, Gdk.Event | None], None] = ...
+    start_editing: Callable[[CellEditable, _Gdk4.Event | None], None] = ...
 
 class CellLayout(GObject.GInterface):
     """
@@ -4614,7 +4614,7 @@ class CellRenderer(GObject.InitiallyUnowned):
       notify (GParam)
     """
     class Props(GObject.InitiallyUnowned.Props):
-        cell_background_rgba: Gdk.RGBA
+        cell_background_rgba: _Gdk4.RGBA
         cell_background_set: bool
         editing: bool
         height: int
@@ -4636,7 +4636,7 @@ class CellRenderer(GObject.InitiallyUnowned):
     def __init__(
         self,
         cell_background: str = ...,
-        cell_background_rgba: Gdk.RGBA = ...,
+        cell_background_rgba: _Gdk4.RGBA = ...,
         cell_background_set: bool = ...,
         height: int = ...,
         is_expanded: bool = ...,
@@ -4652,27 +4652,27 @@ class CellRenderer(GObject.InitiallyUnowned):
     ) -> None: ...
     def activate(
         self,
-        event: Gdk.Event,
+        event: _Gdk4.Event,
         widget: Widget,
         path: str,
-        background_area: Gdk.Rectangle,
-        cell_area: Gdk.Rectangle,
+        background_area: _Gdk4.Rectangle,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
     ) -> bool: ...
     def do_activate(
         self,
-        event: Gdk.Event,
+        event: _Gdk4.Event,
         widget: Widget,
         path: str,
-        background_area: Gdk.Rectangle,
-        cell_area: Gdk.Rectangle,
+        background_area: _Gdk4.Rectangle,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
     ) -> bool: ...
     def do_editing_canceled(self) -> None: ...
     def do_editing_started(self, editable: CellEditable, path: str) -> None: ...
     def do_get_aligned_area(
-        self, widget: Widget, flags: CellRendererState, cell_area: Gdk.Rectangle
-    ) -> Gdk.Rectangle: ...
+        self, widget: Widget, flags: CellRendererState, cell_area: _Gdk4.Rectangle
+    ) -> _Gdk4.Rectangle: ...
     def do_get_preferred_height(self, widget: Widget) -> tuple[int, int]: ...
     def do_get_preferred_height_for_width(
         self, widget: Widget, width: int
@@ -4686,22 +4686,22 @@ class CellRenderer(GObject.InitiallyUnowned):
         self,
         snapshot: Snapshot,
         widget: Widget,
-        background_area: Gdk.Rectangle,
-        cell_area: Gdk.Rectangle,
+        background_area: _Gdk4.Rectangle,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
     ) -> None: ...
     def do_start_editing(
         self,
-        event: Gdk.Event | None,
+        event: _Gdk4.Event | None,
         widget: Widget,
         path: str,
-        background_area: Gdk.Rectangle,
-        cell_area: Gdk.Rectangle,
+        background_area: _Gdk4.Rectangle,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
     ) -> CellEditable | None: ...
     def get_aligned_area(
-        self, widget: Widget, flags: CellRendererState, cell_area: Gdk.Rectangle
-    ) -> Gdk.Rectangle: ...
+        self, widget: Widget, flags: CellRendererState, cell_area: _Gdk4.Rectangle
+    ) -> _Gdk4.Rectangle: ...
     def get_alignment(self) -> tuple[float, float]: ...
     def get_fixed_size(self) -> tuple[int, int]: ...
     def get_is_expanded(self) -> bool: ...
@@ -4734,17 +4734,17 @@ class CellRenderer(GObject.InitiallyUnowned):
         self,
         snapshot: Snapshot,
         widget: Widget,
-        background_area: Gdk.Rectangle,
-        cell_area: Gdk.Rectangle,
+        background_area: _Gdk4.Rectangle,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
     ) -> None: ...
     def start_editing(
         self,
-        event: Gdk.Event | None,
+        event: _Gdk4.Event | None,
         widget: Widget,
         path: str,
-        background_area: Gdk.Rectangle,
-        cell_area: Gdk.Rectangle,
+        background_area: _Gdk4.Rectangle,
+        cell_area: _Gdk4.Rectangle,
         flags: CellRendererState,
     ) -> CellEditable | None: ...
     def stop_editing(self, canceled: bool) -> None: ...
@@ -4848,12 +4848,12 @@ class CellRendererAccel(CellRendererText):
     class Props(CellRendererText.Props):
         accel_key: int
         accel_mode: CellRendererAccelMode
-        accel_mods: Gdk.ModifierType
+        accel_mods: _Gdk4.ModifierType
         keycode: int
         align_set: bool
         alignment: Pango.Alignment
         attributes: Pango.AttrList
-        background_rgba: Gdk.RGBA
+        background_rgba: _Gdk4.RGBA
         background_set: bool
         editable: bool
         editable_set: bool
@@ -4863,7 +4863,7 @@ class CellRendererAccel(CellRendererText):
         family_set: bool
         font: str
         font_desc: Pango.FontDescription
-        foreground_rgba: Gdk.RGBA
+        foreground_rgba: _Gdk4.RGBA
         foreground_set: bool
         language: str
         language_set: bool
@@ -4893,7 +4893,7 @@ class CellRendererAccel(CellRendererText):
         width_chars: int
         wrap_mode: Pango.WrapMode
         wrap_width: int
-        cell_background_rgba: Gdk.RGBA
+        cell_background_rgba: _Gdk4.RGBA
         cell_background_set: bool
         editing: bool
         height: int
@@ -4917,13 +4917,13 @@ class CellRendererAccel(CellRendererText):
         self,
         accel_key: int = ...,
         accel_mode: CellRendererAccelMode = ...,
-        accel_mods: Gdk.ModifierType = ...,
+        accel_mods: _Gdk4.ModifierType = ...,
         keycode: int = ...,
         align_set: bool = ...,
         alignment: Pango.Alignment = ...,
         attributes: Pango.AttrList = ...,
         background: str = ...,
-        background_rgba: Gdk.RGBA = ...,
+        background_rgba: _Gdk4.RGBA = ...,
         background_set: bool = ...,
         editable: bool = ...,
         editable_set: bool = ...,
@@ -4934,7 +4934,7 @@ class CellRendererAccel(CellRendererText):
         font: str = ...,
         font_desc: Pango.FontDescription = ...,
         foreground: str = ...,
-        foreground_rgba: Gdk.RGBA = ...,
+        foreground_rgba: _Gdk4.RGBA = ...,
         foreground_set: bool = ...,
         language: str = ...,
         language_set: bool = ...,
@@ -4966,7 +4966,7 @@ class CellRendererAccel(CellRendererText):
         wrap_mode: Pango.WrapMode = ...,
         wrap_width: int = ...,
         cell_background: str = ...,
-        cell_background_rgba: Gdk.RGBA = ...,
+        cell_background_rgba: _Gdk4.RGBA = ...,
         cell_background_set: bool = ...,
         height: int = ...,
         is_expanded: bool = ...,
@@ -5003,15 +5003,15 @@ class CellRendererClass(GObject.GPointer):
         [CellRenderer, Widget, int], tuple[int, int]
     ] = ...
     get_aligned_area: Callable[
-        [CellRenderer, Widget, CellRendererState, Gdk.Rectangle], Gdk.Rectangle
+        [CellRenderer, Widget, CellRendererState, _Gdk4.Rectangle], _Gdk4.Rectangle
     ] = ...
     snapshot: Callable[
         [
             CellRenderer,
             Snapshot,
             Widget,
-            Gdk.Rectangle,
-            Gdk.Rectangle,
+            _Gdk4.Rectangle,
+            _Gdk4.Rectangle,
             CellRendererState,
         ],
         None,
@@ -5019,11 +5019,11 @@ class CellRendererClass(GObject.GPointer):
     activate: Callable[
         [
             CellRenderer,
-            Gdk.Event,
+            _Gdk4.Event,
             Widget,
             str,
-            Gdk.Rectangle,
-            Gdk.Rectangle,
+            _Gdk4.Rectangle,
+            _Gdk4.Rectangle,
             CellRendererState,
         ],
         bool,
@@ -5031,11 +5031,11 @@ class CellRendererClass(GObject.GPointer):
     start_editing: Callable[
         [
             CellRenderer,
-            Gdk.Event | None,
+            _Gdk4.Event | None,
             Widget,
             str,
-            Gdk.Rectangle,
-            Gdk.Rectangle,
+            _Gdk4.Rectangle,
+            _Gdk4.Rectangle,
             CellRendererState,
         ],
         CellEditable | None,
@@ -5147,7 +5147,7 @@ class CellRendererCombo(CellRendererText):
         align_set: bool
         alignment: Pango.Alignment
         attributes: Pango.AttrList
-        background_rgba: Gdk.RGBA
+        background_rgba: _Gdk4.RGBA
         background_set: bool
         editable: bool
         editable_set: bool
@@ -5157,7 +5157,7 @@ class CellRendererCombo(CellRendererText):
         family_set: bool
         font: str
         font_desc: Pango.FontDescription
-        foreground_rgba: Gdk.RGBA
+        foreground_rgba: _Gdk4.RGBA
         foreground_set: bool
         language: str
         language_set: bool
@@ -5187,7 +5187,7 @@ class CellRendererCombo(CellRendererText):
         width_chars: int
         wrap_mode: Pango.WrapMode
         wrap_width: int
-        cell_background_rgba: Gdk.RGBA
+        cell_background_rgba: _Gdk4.RGBA
         cell_background_set: bool
         editing: bool
         height: int
@@ -5216,7 +5216,7 @@ class CellRendererCombo(CellRendererText):
         alignment: Pango.Alignment = ...,
         attributes: Pango.AttrList = ...,
         background: str = ...,
-        background_rgba: Gdk.RGBA = ...,
+        background_rgba: _Gdk4.RGBA = ...,
         background_set: bool = ...,
         editable: bool = ...,
         editable_set: bool = ...,
@@ -5227,7 +5227,7 @@ class CellRendererCombo(CellRendererText):
         font: str = ...,
         font_desc: Pango.FontDescription = ...,
         foreground: str = ...,
-        foreground_rgba: Gdk.RGBA = ...,
+        foreground_rgba: _Gdk4.RGBA = ...,
         foreground_set: bool = ...,
         language: str = ...,
         language_set: bool = ...,
@@ -5259,7 +5259,7 @@ class CellRendererCombo(CellRendererText):
         wrap_mode: Pango.WrapMode = ...,
         wrap_width: int = ...,
         cell_background: str = ...,
-        cell_background_rgba: Gdk.RGBA = ...,
+        cell_background_rgba: _Gdk4.RGBA = ...,
         cell_background_set: bool = ...,
         height: int = ...,
         is_expanded: bool = ...,
@@ -5326,8 +5326,8 @@ class CellRendererPixbuf(CellRenderer):
         icon_size: IconSize
         pixbuf_expander_closed: GdkPixbuf.Pixbuf
         pixbuf_expander_open: GdkPixbuf.Pixbuf
-        texture: Gdk.Texture
-        cell_background_rgba: Gdk.RGBA
+        texture: _Gdk4.Texture
+        cell_background_rgba: _Gdk4.RGBA
         cell_background_set: bool
         editing: bool
         height: int
@@ -5353,9 +5353,9 @@ class CellRendererPixbuf(CellRenderer):
         pixbuf: GdkPixbuf.Pixbuf = ...,
         pixbuf_expander_closed: GdkPixbuf.Pixbuf = ...,
         pixbuf_expander_open: GdkPixbuf.Pixbuf = ...,
-        texture: Gdk.Texture = ...,
+        texture: _Gdk4.Texture = ...,
         cell_background: str = ...,
-        cell_background_rgba: Gdk.RGBA = ...,
+        cell_background_rgba: _Gdk4.RGBA = ...,
         cell_background_set: bool = ...,
         height: int = ...,
         is_expanded: bool = ...,
@@ -5424,7 +5424,7 @@ class CellRendererProgress(CellRenderer, Orientable):
         text_xalign: float
         text_yalign: float
         value: int
-        cell_background_rgba: Gdk.RGBA
+        cell_background_rgba: _Gdk4.RGBA
         cell_background_set: bool
         editing: bool
         height: int
@@ -5451,7 +5451,7 @@ class CellRendererProgress(CellRenderer, Orientable):
         text_yalign: float = ...,
         value: int = ...,
         cell_background: str = ...,
-        cell_background_rgba: Gdk.RGBA = ...,
+        cell_background_rgba: _Gdk4.RGBA = ...,
         cell_background_set: bool = ...,
         height: int = ...,
         is_expanded: bool = ...,
@@ -5567,7 +5567,7 @@ class CellRendererSpin(CellRendererText):
         align_set: bool
         alignment: Pango.Alignment
         attributes: Pango.AttrList
-        background_rgba: Gdk.RGBA
+        background_rgba: _Gdk4.RGBA
         background_set: bool
         editable: bool
         editable_set: bool
@@ -5577,7 +5577,7 @@ class CellRendererSpin(CellRendererText):
         family_set: bool
         font: str
         font_desc: Pango.FontDescription
-        foreground_rgba: Gdk.RGBA
+        foreground_rgba: _Gdk4.RGBA
         foreground_set: bool
         language: str
         language_set: bool
@@ -5607,7 +5607,7 @@ class CellRendererSpin(CellRendererText):
         width_chars: int
         wrap_mode: Pango.WrapMode
         wrap_width: int
-        cell_background_rgba: Gdk.RGBA
+        cell_background_rgba: _Gdk4.RGBA
         cell_background_set: bool
         editing: bool
         height: int
@@ -5636,7 +5636,7 @@ class CellRendererSpin(CellRendererText):
         alignment: Pango.Alignment = ...,
         attributes: Pango.AttrList = ...,
         background: str = ...,
-        background_rgba: Gdk.RGBA = ...,
+        background_rgba: _Gdk4.RGBA = ...,
         background_set: bool = ...,
         editable: bool = ...,
         editable_set: bool = ...,
@@ -5647,7 +5647,7 @@ class CellRendererSpin(CellRendererText):
         font: str = ...,
         font_desc: Pango.FontDescription = ...,
         foreground: str = ...,
-        foreground_rgba: Gdk.RGBA = ...,
+        foreground_rgba: _Gdk4.RGBA = ...,
         foreground_set: bool = ...,
         language: str = ...,
         language_set: bool = ...,
@@ -5679,7 +5679,7 @@ class CellRendererSpin(CellRendererText):
         wrap_mode: Pango.WrapMode = ...,
         wrap_width: int = ...,
         cell_background: str = ...,
-        cell_background_rgba: Gdk.RGBA = ...,
+        cell_background_rgba: _Gdk4.RGBA = ...,
         cell_background_set: bool = ...,
         height: int = ...,
         is_expanded: bool = ...,
@@ -5740,7 +5740,7 @@ class CellRendererSpinner(CellRenderer):
         active: bool
         pulse: int
         size: IconSize
-        cell_background_rgba: Gdk.RGBA
+        cell_background_rgba: _Gdk4.RGBA
         cell_background_set: bool
         editing: bool
         height: int
@@ -5763,7 +5763,7 @@ class CellRendererSpinner(CellRenderer):
         pulse: int = ...,
         size: IconSize = ...,
         cell_background: str = ...,
-        cell_background_rgba: Gdk.RGBA = ...,
+        cell_background_rgba: _Gdk4.RGBA = ...,
         cell_background_set: bool = ...,
         height: int = ...,
         is_expanded: bool = ...,
@@ -5870,7 +5870,7 @@ class CellRendererText(CellRenderer):
         align_set: bool
         alignment: Pango.Alignment
         attributes: Pango.AttrList
-        background_rgba: Gdk.RGBA
+        background_rgba: _Gdk4.RGBA
         background_set: bool
         editable: bool
         editable_set: bool
@@ -5880,7 +5880,7 @@ class CellRendererText(CellRenderer):
         family_set: bool
         font: str
         font_desc: Pango.FontDescription
-        foreground_rgba: Gdk.RGBA
+        foreground_rgba: _Gdk4.RGBA
         foreground_set: bool
         language: str
         language_set: bool
@@ -5910,7 +5910,7 @@ class CellRendererText(CellRenderer):
         width_chars: int
         wrap_mode: Pango.WrapMode
         wrap_width: int
-        cell_background_rgba: Gdk.RGBA
+        cell_background_rgba: _Gdk4.RGBA
         cell_background_set: bool
         editing: bool
         height: int
@@ -5937,7 +5937,7 @@ class CellRendererText(CellRenderer):
         alignment: Pango.Alignment = ...,
         attributes: Pango.AttrList = ...,
         background: str = ...,
-        background_rgba: Gdk.RGBA = ...,
+        background_rgba: _Gdk4.RGBA = ...,
         background_set: bool = ...,
         editable: bool = ...,
         editable_set: bool = ...,
@@ -5948,7 +5948,7 @@ class CellRendererText(CellRenderer):
         font: str = ...,
         font_desc: Pango.FontDescription = ...,
         foreground: str = ...,
-        foreground_rgba: Gdk.RGBA = ...,
+        foreground_rgba: _Gdk4.RGBA = ...,
         foreground_set: bool = ...,
         language: str = ...,
         language_set: bool = ...,
@@ -5980,7 +5980,7 @@ class CellRendererText(CellRenderer):
         wrap_mode: Pango.WrapMode = ...,
         wrap_width: int = ...,
         cell_background: str = ...,
-        cell_background_rgba: Gdk.RGBA = ...,
+        cell_background_rgba: _Gdk4.RGBA = ...,
         cell_background_set: bool = ...,
         height: int = ...,
         is_expanded: bool = ...,
@@ -6061,7 +6061,7 @@ class CellRendererToggle(CellRenderer):
         active: bool
         inconsistent: bool
         radio: bool
-        cell_background_rgba: Gdk.RGBA
+        cell_background_rgba: _Gdk4.RGBA
         cell_background_set: bool
         editing: bool
         height: int
@@ -6085,7 +6085,7 @@ class CellRendererToggle(CellRenderer):
         inconsistent: bool = ...,
         radio: bool = ...,
         cell_background: str = ...,
-        cell_background_rgba: Gdk.RGBA = ...,
+        cell_background_rgba: _Gdk4.RGBA = ...,
         cell_background_set: bool = ...,
         height: int = ...,
         is_expanded: bool = ...,
@@ -6195,7 +6195,7 @@ class CellView(Widget, Accessible, Buildable, CellLayout, ConstraintTarget, Orie
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -6241,7 +6241,7 @@ class CellView(Widget, Accessible, Buildable, CellLayout, ConstraintTarget, Orie
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -6283,7 +6283,7 @@ class CellView(Widget, Accessible, Buildable, CellLayout, ConstraintTarget, Orie
     @classmethod
     def new_with_text(cls, text: str) -> CellView: ...
     @classmethod
-    def new_with_texture(cls, texture: Gdk.Texture) -> CellView: ...
+    def new_with_texture(cls, texture: _Gdk4.Texture) -> CellView: ...
     def set_displayed_row(self, path: TreePath | None = None) -> None: ...
     def set_draw_sensitive(self, draw_sensitive: bool) -> None: ...
     def set_fit_model(self, fit_model: bool) -> None: ...
@@ -6372,7 +6372,7 @@ class CenterBox(Widget, Accessible, Buildable, ConstraintTarget, Orientable):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -6418,7 +6418,7 @@ class CenterBox(Widget, Accessible, Buildable, ConstraintTarget, Orientable):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -6600,7 +6600,7 @@ class CheckButton(Widget, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -6650,7 +6650,7 @@ class CheckButton(Widget, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -6818,7 +6818,7 @@ class ColorButton(Widget, Accessible, Buildable, ColorChooser, ConstraintTarget)
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -6850,7 +6850,7 @@ class ColorButton(Widget, Accessible, Buildable, ColorChooser, ConstraintTarget)
         visible: bool
         width_request: int
         accessible_role: AccessibleRole
-        rgba: Gdk.RGBA
+        rgba: _Gdk4.RGBA
         use_alpha: bool
 
     props: Props = ...
@@ -6863,7 +6863,7 @@ class ColorButton(Widget, Accessible, Buildable, ColorChooser, ConstraintTarget)
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -6890,7 +6890,7 @@ class ColorButton(Widget, Accessible, Buildable, ColorChooser, ConstraintTarget)
         visible: bool = ...,
         width_request: int = ...,
         accessible_role: AccessibleRole = ...,
-        rgba: Gdk.RGBA = ...,
+        rgba: _Gdk4.RGBA = ...,
         use_alpha: bool = ...,
     ) -> None: ...
     def get_modal(self) -> bool: ...
@@ -6898,7 +6898,7 @@ class ColorButton(Widget, Accessible, Buildable, ColorChooser, ConstraintTarget)
     @classmethod
     def new(cls) -> ColorButton: ...
     @classmethod
-    def new_with_rgba(cls, rgba: Gdk.RGBA) -> ColorButton: ...
+    def new_with_rgba(cls, rgba: _Gdk4.RGBA) -> ColorButton: ...
     def set_modal(self, modal: bool) -> None: ...
     def set_title(self, title: str) -> None: ...
 
@@ -6913,11 +6913,11 @@ class ColorChooser(GObject.GInterface):
         self,
         orientation: Orientation,
         colors_per_line: int,
-        colors: Sequence[Gdk.RGBA] | None = None,
+        colors: Sequence[_Gdk4.RGBA] | None = None,
     ) -> None: ...
-    def get_rgba(self) -> Gdk.RGBA: ...
+    def get_rgba(self) -> _Gdk4.RGBA: ...
     def get_use_alpha(self) -> bool: ...
-    def set_rgba(self, color: Gdk.RGBA) -> None: ...
+    def set_rgba(self, color: _Gdk4.RGBA) -> None: ...
     def set_use_alpha(self, use_alpha: bool) -> None: ...
 
 class ColorChooserDialog(
@@ -7054,7 +7054,7 @@ class ColorChooserDialog(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -7075,7 +7075,7 @@ class ColorChooserDialog(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -7107,7 +7107,7 @@ class ColorChooserDialog(
         visible: bool
         width_request: int
         accessible_role: AccessibleRole
-        rgba: Gdk.RGBA
+        rgba: _Gdk4.RGBA
         use_alpha: bool
         startup_id: str
 
@@ -7124,7 +7124,7 @@ class ColorChooserDialog(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -7144,7 +7144,7 @@ class ColorChooserDialog(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -7171,7 +7171,7 @@ class ColorChooserDialog(
         visible: bool = ...,
         width_request: int = ...,
         accessible_role: AccessibleRole = ...,
-        rgba: Gdk.RGBA = ...,
+        rgba: _Gdk4.RGBA = ...,
         use_alpha: bool = ...,
     ) -> None: ...
     @classmethod
@@ -7189,13 +7189,13 @@ class ColorChooserInterface(GObject.GPointer):
     """
 
     base_interface: GObject.TypeInterface = ...
-    get_rgba: Callable[[ColorChooser], Gdk.RGBA] = ...
-    set_rgba: Callable[[ColorChooser, Gdk.RGBA], None] = ...
+    get_rgba: Callable[[ColorChooser], _Gdk4.RGBA] = ...
+    set_rgba: Callable[[ColorChooser, _Gdk4.RGBA], None] = ...
     add_palette: Callable[
-        [ColorChooser, Orientation, int, Sequence[Gdk.RGBA] | None],
+        [ColorChooser, Orientation, int, Sequence[_Gdk4.RGBA] | None],
         None,
     ] = ...
-    color_activated: Callable[[ColorChooser, Gdk.RGBA], None] = ...
+    color_activated: Callable[[ColorChooser, _Gdk4.RGBA], None] = ...
     padding: list[None] = ...
 
 class ColorChooserWidget(Widget, Accessible, Buildable, ColorChooser, ConstraintTarget):
@@ -7276,7 +7276,7 @@ class ColorChooserWidget(Widget, Accessible, Buildable, ColorChooser, Constraint
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -7308,7 +7308,7 @@ class ColorChooserWidget(Widget, Accessible, Buildable, ColorChooser, Constraint
         visible: bool
         width_request: int
         accessible_role: AccessibleRole
-        rgba: Gdk.RGBA
+        rgba: _Gdk4.RGBA
         use_alpha: bool
 
     props: Props = ...
@@ -7319,7 +7319,7 @@ class ColorChooserWidget(Widget, Accessible, Buildable, ColorChooser, Constraint
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -7346,7 +7346,7 @@ class ColorChooserWidget(Widget, Accessible, Buildable, ColorChooser, Constraint
         visible: bool = ...,
         width_request: int = ...,
         accessible_role: AccessibleRole = ...,
-        rgba: Gdk.RGBA = ...,
+        rgba: _Gdk4.RGBA = ...,
         use_alpha: bool = ...,
     ) -> None: ...
     @classmethod
@@ -7383,12 +7383,12 @@ class ColorDialog(GObject.Object):
     def choose_rgba(
         self,
         parent: Window | None = None,
-        initial_color: Gdk.RGBA | None = None,
+        initial_color: _Gdk4.RGBA | None = None,
         cancellable: Gio.Cancellable | None = None,
         callback: Callable[..., None] | None = None,
         *user_data: Any,
     ) -> None: ...
-    def choose_rgba_finish(self, result: Gio.AsyncResult) -> Gdk.RGBA: ...
+    def choose_rgba_finish(self, result: Gio.AsyncResult) -> _Gdk4.RGBA: ...
     def get_modal(self) -> bool: ...
     def get_title(self) -> str: ...
     def get_with_alpha(self) -> bool: ...
@@ -7473,12 +7473,12 @@ class ColorDialogButton(Widget, Accessible, Buildable, ConstraintTarget):
     """
     class Props(Widget.Props):
         dialog: ColorDialog | None
-        rgba: Gdk.RGBA
+        rgba: _Gdk4.RGBA
         can_focus: bool
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -7515,12 +7515,12 @@ class ColorDialogButton(Widget, Accessible, Buildable, ConstraintTarget):
     def __init__(
         self,
         dialog: ColorDialog = ...,
-        rgba: Gdk.RGBA = ...,
+        rgba: _Gdk4.RGBA = ...,
         can_focus: bool = ...,
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -7549,11 +7549,11 @@ class ColorDialogButton(Widget, Accessible, Buildable, ConstraintTarget):
         accessible_role: AccessibleRole = ...,
     ) -> None: ...
     def get_dialog(self) -> ColorDialog | None: ...
-    def get_rgba(self) -> Gdk.RGBA: ...
+    def get_rgba(self) -> _Gdk4.RGBA: ...
     @classmethod
     def new(cls, dialog: ColorDialog | None = None) -> ColorDialogButton: ...
     def set_dialog(self, dialog: ColorDialog) -> None: ...
-    def set_rgba(self, color: Gdk.RGBA) -> None: ...
+    def set_rgba(self, color: _Gdk4.RGBA) -> None: ...
 
 class ColorDialogButtonClass(GObject.GPointer):
     """
@@ -7675,7 +7675,7 @@ class ColumnView(Widget, Accessible, Buildable, ConstraintTarget, Scrollable):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -7728,7 +7728,7 @@ class ColumnView(Widget, Accessible, Buildable, ConstraintTarget, Scrollable):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -8151,7 +8151,7 @@ class ComboBox(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -8203,7 +8203,7 @@ class ComboBox(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -8257,7 +8257,7 @@ class ComboBox(
     def new_with_model_and_entry(cls, model: TreeModel) -> ComboBox: ...
     def popdown(self) -> None: ...
     def popup(self) -> None: ...
-    def popup_for_device(self, device: Gdk.Device) -> None: ...
+    def popup_for_device(self, device: _Gdk4.Device) -> None: ...
     def set_active(self, index_: int) -> None: ...
     def set_active_id(self, active_id: str | None = None) -> bool: ...
     def set_active_iter(self, iter: TreeIter | None = None) -> None: ...
@@ -8402,7 +8402,7 @@ class ComboBoxText(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -8453,7 +8453,7 @@ class ComboBoxText(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -9086,7 +9086,7 @@ class Dialog(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -9107,7 +9107,7 @@ class Dialog(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -9154,7 +9154,7 @@ class Dialog(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -9174,7 +9174,7 @@ class Dialog(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -9392,7 +9392,7 @@ class DragIcon(Widget, Accessible, Buildable, ConstraintTarget, Native, Root):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -9433,7 +9433,7 @@ class DragIcon(Widget, Accessible, Buildable, ConstraintTarget, Native, Root):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -9465,11 +9465,11 @@ class DragIcon(Widget, Accessible, Buildable, ConstraintTarget, Native, Root):
     def create_widget_for_value(value: Any) -> Widget | None: ...
     def get_child(self) -> Widget | None: ...
     @classmethod
-    def get_for_drag(cls, drag: Gdk.Drag) -> DragIcon: ...
+    def get_for_drag(cls, drag: _Gdk4.Drag) -> DragIcon: ...
     def set_child(self, child: Widget | None = None) -> None: ...
     @staticmethod
     def set_from_paintable(
-        drag: Gdk.Drag, paintable: Gdk.Paintable, hot_x: int, hot_y: int
+        drag: _Gdk4.Drag, paintable: _Gdk4.Paintable, hot_x: int, hot_y: int
     ) -> None: ...
 
 class DragIconClass(GObject.GPointer):
@@ -9529,8 +9529,8 @@ class DragSource(GestureSingle):
       notify (GParam)
     """
     class Props(GestureSingle.Props):
-        actions: Gdk.DragAction
-        content: Gdk.ContentProvider | None
+        actions: _Gdk4.DragAction
+        content: _Gdk4.ContentProvider | None
         button: int
         exclusive: bool
         touch_only: bool
@@ -9543,8 +9543,8 @@ class DragSource(GestureSingle):
     props: Props = ...
     def __init__(
         self,
-        actions: Gdk.DragAction = ...,
-        content: Gdk.ContentProvider | None = ...,
+        actions: _Gdk4.DragAction = ...,
+        content: _Gdk4.ContentProvider | None = ...,
         button: int = ...,
         exclusive: bool = ...,
         touch_only: bool = ...,
@@ -9554,15 +9554,15 @@ class DragSource(GestureSingle):
         propagation_phase: PropagationPhase = ...,
     ) -> None: ...
     def drag_cancel(self) -> None: ...
-    def get_actions(self) -> Gdk.DragAction: ...
-    def get_content(self) -> Gdk.ContentProvider | None: ...
-    def get_drag(self) -> Gdk.Drag | None: ...
+    def get_actions(self) -> _Gdk4.DragAction: ...
+    def get_content(self) -> _Gdk4.ContentProvider | None: ...
+    def get_drag(self) -> _Gdk4.Drag | None: ...
     @classmethod
     def new(cls) -> DragSource: ...
-    def set_actions(self, actions: Gdk.DragAction) -> None: ...
-    def set_content(self, content: Gdk.ContentProvider | None = None) -> None: ...
+    def set_actions(self, actions: _Gdk4.DragAction) -> None: ...
+    def set_content(self, content: _Gdk4.ContentProvider | None = None) -> None: ...
     def set_icon(
-        self, paintable: Gdk.Paintable | None, hot_x: int, hot_y: int
+        self, paintable: _Gdk4.Paintable | None, hot_x: int, hot_y: int
     ) -> None: ...
 
 class DragSourceClass(GObject.GPointer): ...
@@ -9647,7 +9647,7 @@ class DrawingArea(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -9690,7 +9690,7 @@ class DrawingArea(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -9776,7 +9776,7 @@ class DropControllerMotion(EventController):
     """
     class Props(EventController.Props):
         contains_pointer: bool
-        drop: Gdk.Drop | None
+        drop: _Gdk4.Drop | None
         is_pointer: bool
         name: str | None
         propagation_limit: PropagationLimit
@@ -9791,7 +9791,7 @@ class DropControllerMotion(EventController):
         propagation_phase: PropagationPhase = ...,
     ) -> None: ...
     def contains_pointer(self) -> bool: ...
-    def get_drop(self) -> Gdk.Drop | None: ...
+    def get_drop(self) -> _Gdk4.Drop | None: ...
     def is_pointer(self) -> bool: ...
     @classmethod
     def new(cls) -> DropControllerMotion: ...
@@ -9896,7 +9896,7 @@ class DropDown(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -9946,7 +9946,7 @@ class DropDown(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -10051,10 +10051,10 @@ class DropTarget(EventController):
       notify (GParam)
     """
     class Props(EventController.Props):
-        actions: Gdk.DragAction
-        current_drop: Gdk.Drop | None
-        drop: Gdk.Drop | None
-        formats: Gdk.ContentFormats | None
+        actions: _Gdk4.DragAction
+        current_drop: _Gdk4.Drop | None
+        drop: _Gdk4.Drop | None
+        formats: _Gdk4.ContentFormats | None
         preload: bool
         value: Any | None
         name: str | None
@@ -10065,25 +10065,25 @@ class DropTarget(EventController):
     props: Props = ...
     def __init__(
         self,
-        actions: Gdk.DragAction = ...,
-        formats: Gdk.ContentFormats = ...,
+        actions: _Gdk4.DragAction = ...,
+        formats: _Gdk4.ContentFormats = ...,
         preload: bool = ...,
         name: str | None = ...,
         propagation_limit: PropagationLimit = ...,
         propagation_phase: PropagationPhase = ...,
     ) -> None: ...
-    def get_actions(self) -> Gdk.DragAction: ...
-    def get_current_drop(self) -> Gdk.Drop | None: ...
-    def get_drop(self) -> Gdk.Drop | None: ...
-    def get_formats(self) -> Gdk.ContentFormats | None: ...
+    def get_actions(self) -> _Gdk4.DragAction: ...
+    def get_current_drop(self) -> _Gdk4.Drop | None: ...
+    def get_drop(self) -> _Gdk4.Drop | None: ...
+    def get_formats(self) -> _Gdk4.ContentFormats | None: ...
     def get_gtypes(self) -> list[type[Any]] | None: ...
     def get_preload(self) -> bool: ...
     def get_value(self) -> Any | None: ...
     # override
     @classmethod
-    def new(cls, type: type[Any], actions: Gdk.DragAction) -> DropTarget: ...
+    def new(cls, type: type[Any], actions: _Gdk4.DragAction) -> DropTarget: ...
     def reject(self) -> None: ...
-    def set_actions(self, actions: Gdk.DragAction) -> None: ...
+    def set_actions(self, actions: _Gdk4.DragAction) -> None: ...
     def set_gtypes(self, types: Sequence[type[Any]] | None = None) -> None: ...
     def set_preload(self, preload: bool) -> None: ...
 
@@ -10119,8 +10119,8 @@ class DropTargetAsync(EventController):
       notify (GParam)
     """
     class Props(EventController.Props):
-        actions: Gdk.DragAction
-        formats: Gdk.ContentFormats | None
+        actions: _Gdk4.DragAction
+        formats: _Gdk4.ContentFormats | None
         name: str | None
         propagation_limit: PropagationLimit
         propagation_phase: PropagationPhase
@@ -10129,21 +10129,21 @@ class DropTargetAsync(EventController):
     props: Props = ...
     def __init__(
         self,
-        actions: Gdk.DragAction = ...,
-        formats: Gdk.ContentFormats | None = ...,
+        actions: _Gdk4.DragAction = ...,
+        formats: _Gdk4.ContentFormats | None = ...,
         name: str | None = ...,
         propagation_limit: PropagationLimit = ...,
         propagation_phase: PropagationPhase = ...,
     ) -> None: ...
-    def get_actions(self) -> Gdk.DragAction: ...
-    def get_formats(self) -> Gdk.ContentFormats | None: ...
+    def get_actions(self) -> _Gdk4.DragAction: ...
+    def get_formats(self) -> _Gdk4.ContentFormats | None: ...
     @classmethod
     def new(
-        cls, formats: Gdk.ContentFormats | None, actions: Gdk.DragAction
+        cls, formats: _Gdk4.ContentFormats | None, actions: _Gdk4.DragAction
     ) -> DropTargetAsync: ...
-    def reject_drop(self, drop: Gdk.Drop) -> None: ...
-    def set_actions(self, actions: Gdk.DragAction) -> None: ...
-    def set_formats(self, formats: Gdk.ContentFormats | None = None) -> None: ...
+    def reject_drop(self, drop: _Gdk4.Drop) -> None: ...
+    def set_actions(self, actions: _Gdk4.DragAction) -> None: ...
+    def set_formats(self, formats: _Gdk4.ContentFormats | None = None) -> None: ...
 
 class DropTargetAsyncClass(GObject.GPointer): ...
 class DropTargetClass(GObject.GPointer): ...
@@ -10304,7 +10304,7 @@ class EditableLabel(Widget, Accessible, Buildable, ConstraintTarget, Editable):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -10353,7 +10353,7 @@ class EditableLabel(Widget, Accessible, Buildable, ConstraintTarget, Editable):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -10496,13 +10496,13 @@ class EmojiChooser(
         default_widget: Widget | None
         has_arrow: bool
         mnemonics_visible: bool
-        pointing_to: Gdk.Rectangle
+        pointing_to: _Gdk4.Rectangle
         position: PositionType
         can_focus: bool
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -10544,13 +10544,13 @@ class EmojiChooser(
         default_widget: Widget | None = ...,
         has_arrow: bool = ...,
         mnemonics_visible: bool = ...,
-        pointing_to: Gdk.Rectangle | None = ...,
+        pointing_to: _Gdk4.Rectangle | None = ...,
         position: PositionType = ...,
         can_focus: bool = ...,
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -10728,7 +10728,7 @@ class Entry(Widget, Accessible, Buildable, CellEditable, ConstraintTarget, Edita
         primary_icon_activatable: bool
         primary_icon_gicon: Gio.Icon
         primary_icon_name: str
-        primary_icon_paintable: Gdk.Paintable
+        primary_icon_paintable: _Gdk4.Paintable
         primary_icon_sensitive: bool
         primary_icon_storage_type: ImageType
         primary_icon_tooltip_markup: str
@@ -10739,7 +10739,7 @@ class Entry(Widget, Accessible, Buildable, CellEditable, ConstraintTarget, Edita
         secondary_icon_activatable: bool
         secondary_icon_gicon: Gio.Icon
         secondary_icon_name: str
-        secondary_icon_paintable: Gdk.Paintable
+        secondary_icon_paintable: _Gdk4.Paintable
         secondary_icon_sensitive: bool
         secondary_icon_storage_type: ImageType
         secondary_icon_tooltip_markup: str
@@ -10753,7 +10753,7 @@ class Entry(Widget, Accessible, Buildable, CellEditable, ConstraintTarget, Edita
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -10819,7 +10819,7 @@ class Entry(Widget, Accessible, Buildable, CellEditable, ConstraintTarget, Edita
         primary_icon_activatable: bool = ...,
         primary_icon_gicon: Gio.Icon = ...,
         primary_icon_name: str = ...,
-        primary_icon_paintable: Gdk.Paintable = ...,
+        primary_icon_paintable: _Gdk4.Paintable = ...,
         primary_icon_sensitive: bool = ...,
         primary_icon_tooltip_markup: str = ...,
         primary_icon_tooltip_text: str = ...,
@@ -10828,7 +10828,7 @@ class Entry(Widget, Accessible, Buildable, CellEditable, ConstraintTarget, Edita
         secondary_icon_activatable: bool = ...,
         secondary_icon_gicon: Gio.Icon = ...,
         secondary_icon_name: str = ...,
-        secondary_icon_paintable: Gdk.Paintable = ...,
+        secondary_icon_paintable: _Gdk4.Paintable = ...,
         secondary_icon_sensitive: bool = ...,
         secondary_icon_tooltip_markup: str = ...,
         secondary_icon_tooltip_text: str = ...,
@@ -10840,7 +10840,7 @@ class Entry(Widget, Accessible, Buildable, CellEditable, ConstraintTarget, Edita
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -10885,13 +10885,13 @@ class Entry(Widget, Accessible, Buildable, CellEditable, ConstraintTarget, Edita
     def get_extra_menu(self) -> Gio.MenuModel | None: ...
     def get_has_frame(self) -> bool: ...
     def get_icon_activatable(self, icon_pos: EntryIconPosition) -> bool: ...
-    def get_icon_area(self, icon_pos: EntryIconPosition) -> Gdk.Rectangle: ...
+    def get_icon_area(self, icon_pos: EntryIconPosition) -> _Gdk4.Rectangle: ...
     def get_icon_at_pos(self, x: int, y: int) -> int: ...
     def get_icon_gicon(self, icon_pos: EntryIconPosition) -> Gio.Icon | None: ...
     def get_icon_name(self, icon_pos: EntryIconPosition) -> str | None: ...
     def get_icon_paintable(
         self, icon_pos: EntryIconPosition
-    ) -> Gdk.Paintable | None: ...
+    ) -> _Gdk4.Paintable | None: ...
     def get_icon_sensitive(self, icon_pos: EntryIconPosition) -> bool: ...
     def get_icon_storage_type(self, icon_pos: EntryIconPosition) -> ImageType: ...
     def get_icon_tooltip_markup(self, icon_pos: EntryIconPosition) -> str | None: ...
@@ -10928,8 +10928,8 @@ class Entry(Widget, Accessible, Buildable, CellEditable, ConstraintTarget, Edita
     def set_icon_drag_source(
         self,
         icon_pos: EntryIconPosition,
-        provider: Gdk.ContentProvider,
-        actions: Gdk.DragAction,
+        provider: _Gdk4.ContentProvider,
+        actions: _Gdk4.DragAction,
     ) -> None: ...
     def set_icon_from_gicon(
         self, icon_pos: EntryIconPosition, icon: Gio.Icon | None = None
@@ -10940,7 +10940,7 @@ class Entry(Widget, Accessible, Buildable, CellEditable, ConstraintTarget, Edita
     def set_icon_from_paintable(
         self,
         icon_pos: EntryIconPosition,
-        paintable: Gdk.Paintable | None = None,
+        paintable: _Gdk4.Paintable | None = None,
     ) -> None: ...
     def set_icon_sensitive(
         self, icon_pos: EntryIconPosition, sensitive: bool
@@ -11161,9 +11161,9 @@ class EventController(GObject.Object):
         propagation_limit: PropagationLimit = ...,
         propagation_phase: PropagationPhase = ...,
     ) -> None: ...
-    def get_current_event(self) -> Gdk.Event | None: ...
-    def get_current_event_device(self) -> Gdk.Device | None: ...
-    def get_current_event_state(self) -> Gdk.ModifierType: ...
+    def get_current_event(self) -> _Gdk4.Event | None: ...
+    def get_current_event_device(self) -> _Gdk4.Device | None: ...
+    def get_current_event_state(self) -> _Gdk4.ModifierType: ...
     def get_current_event_time(self) -> int: ...
     def get_name(self) -> str | None: ...
     def get_propagation_limit(self) -> PropagationLimit: ...
@@ -11412,7 +11412,7 @@ class EventControllerScroll(EventController):
         propagation_phase: PropagationPhase = ...,
     ) -> None: ...
     def get_flags(self) -> EventControllerScrollFlags: ...
-    def get_unit(self) -> Gdk.ScrollUnit: ...
+    def get_unit(self) -> _Gdk4.ScrollUnit: ...
     @classmethod
     def new(cls, flags: EventControllerScrollFlags) -> EventControllerScroll: ...
     def set_flags(self, flags: EventControllerScrollFlags) -> None: ...
@@ -11547,7 +11547,7 @@ class Expander(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -11594,7 +11594,7 @@ class Expander(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -11840,7 +11840,7 @@ class FileChooserDialog(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -11861,7 +11861,7 @@ class FileChooserDialog(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -11913,7 +11913,7 @@ class FileChooserDialog(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -11933,7 +11933,7 @@ class FileChooserDialog(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -12141,7 +12141,7 @@ class FileChooserWidget(Widget, Accessible, Buildable, ConstraintTarget, FileCho
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -12188,7 +12188,7 @@ class FileChooserWidget(Widget, Accessible, Buildable, ConstraintTarget, FileCho
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -12674,7 +12674,7 @@ class Fixed(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -12715,7 +12715,7 @@ class Fixed(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -12987,7 +12987,7 @@ class FlowBox(Widget, Accessible, Buildable, ConstraintTarget, Orientable):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -13036,7 +13036,7 @@ class FlowBox(Widget, Accessible, Buildable, ConstraintTarget, Orientable):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -13193,7 +13193,7 @@ class FlowBoxChild(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -13235,7 +13235,7 @@ class FlowBoxChild(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -13374,7 +13374,7 @@ class FontButton(Widget, Accessible, Buildable, ConstraintTarget, FontChooser):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -13425,7 +13425,7 @@ class FontButton(Widget, Accessible, Buildable, ConstraintTarget, FontChooser):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -13633,7 +13633,7 @@ class FontChooserDialog(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -13654,7 +13654,7 @@ class FontChooserDialog(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -13707,7 +13707,7 @@ class FontChooserDialog(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -13727,7 +13727,7 @@ class FontChooserDialog(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -13863,7 +13863,7 @@ class FontChooserWidget(Widget, Accessible, Buildable, ConstraintTarget, FontCho
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -13910,7 +13910,7 @@ class FontChooserWidget(Widget, Accessible, Buildable, ConstraintTarget, FontCho
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -14125,7 +14125,7 @@ class FontDialogButton(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -14172,7 +14172,7 @@ class FontDialogButton(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -14320,7 +14320,7 @@ class Frame(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -14365,7 +14365,7 @@ class Frame(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -14393,7 +14393,7 @@ class Frame(Widget, Accessible, Buildable, ConstraintTarget):
         width_request: int = ...,
         accessible_role: AccessibleRole = ...,
     ) -> None: ...
-    def do_compute_child_allocation(self, allocation: Gdk.Rectangle) -> None: ...
+    def do_compute_child_allocation(self, allocation: _Gdk4.Rectangle) -> None: ...
     def get_child(self) -> Widget | None: ...
     def get_label(self) -> str | None: ...
     def get_label_align(self) -> float: ...
@@ -14415,7 +14415,7 @@ class FrameClass(GObject.GPointer):
     """
 
     parent_class: WidgetClass = ...
-    compute_child_allocation: Callable[[Frame, Gdk.Rectangle], None] = ...
+    compute_child_allocation: Callable[[Frame, _Gdk4.Rectangle], None] = ...
     padding: list[None] = ...
 
 class GLArea(Widget, Accessible, Buildable, ConstraintTarget):
@@ -14499,10 +14499,10 @@ class GLArea(Widget, Accessible, Buildable, ConstraintTarget):
       notify (GParam)
     """
     class Props(Widget.Props):
-        allowed_apis: Gdk.GLAPI
-        api: Gdk.GLAPI
+        allowed_apis: _Gdk4.GLAPI
+        api: _Gdk4.GLAPI
         auto_render: bool
-        context: Gdk.GLContext | None
+        context: _Gdk4.GLContext | None
         has_depth_buffer: bool
         has_stencil_buffer: bool
         use_es: bool
@@ -14510,7 +14510,7 @@ class GLArea(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -14547,7 +14547,7 @@ class GLArea(Widget, Accessible, Buildable, ConstraintTarget):
     parent_instance: Widget = ...
     def __init__(
         self,
-        allowed_apis: Gdk.GLAPI = ...,
+        allowed_apis: _Gdk4.GLAPI = ...,
         auto_render: bool = ...,
         has_depth_buffer: bool = ...,
         has_stencil_buffer: bool = ...,
@@ -14556,7 +14556,7 @@ class GLArea(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -14585,12 +14585,12 @@ class GLArea(Widget, Accessible, Buildable, ConstraintTarget):
         accessible_role: AccessibleRole = ...,
     ) -> None: ...
     def attach_buffers(self) -> None: ...
-    def do_render(self, context: Gdk.GLContext) -> bool: ...
+    def do_render(self, context: _Gdk4.GLContext) -> bool: ...
     def do_resize(self, width: int, height: int) -> None: ...
-    def get_allowed_apis(self) -> Gdk.GLAPI: ...
-    def get_api(self) -> Gdk.GLAPI: ...
+    def get_allowed_apis(self) -> _Gdk4.GLAPI: ...
+    def get_api(self) -> _Gdk4.GLAPI: ...
     def get_auto_render(self) -> bool: ...
-    def get_context(self) -> Gdk.GLContext | None: ...
+    def get_context(self) -> _Gdk4.GLContext | None: ...
     def get_error(self) -> GLib.Error | None: ...
     def get_has_depth_buffer(self) -> bool: ...
     def get_has_stencil_buffer(self) -> bool: ...
@@ -14600,7 +14600,7 @@ class GLArea(Widget, Accessible, Buildable, ConstraintTarget):
     @classmethod
     def new(cls) -> GLArea: ...
     def queue_render(self) -> None: ...
-    def set_allowed_apis(self, apis: Gdk.GLAPI) -> None: ...
+    def set_allowed_apis(self, apis: _Gdk4.GLAPI) -> None: ...
     def set_auto_render(self, auto_render: bool) -> None: ...
     def set_error(self, error: GLib.Error | None = None) -> None: ...
     def set_has_depth_buffer(self, has_depth_buffer: bool) -> None: ...
@@ -14618,7 +14618,7 @@ class GLAreaClass(GObject.GPointer):
     """
 
     parent_class: WidgetClass = ...
-    render: Callable[[GLArea, Gdk.GLContext], bool] = ...
+    render: Callable[[GLArea, _Gdk4.GLContext], bool] = ...
     resize: Callable[[GLArea, int, int], None] = ...
     create_context: None = ...
 
@@ -14666,26 +14666,28 @@ class Gesture(EventController):
         propagation_limit: PropagationLimit = ...,
         propagation_phase: PropagationPhase = ...,
     ) -> None: ...
-    def get_bounding_box(self) -> tuple[bool, Gdk.Rectangle]: ...
+    def get_bounding_box(self) -> tuple[bool, _Gdk4.Rectangle]: ...
     def get_bounding_box_center(self) -> tuple[bool, float, float]: ...
-    def get_device(self) -> Gdk.Device | None: ...
+    def get_device(self) -> _Gdk4.Device | None: ...
     def get_group(self) -> list[Gesture]: ...
     def get_last_event(
-        self, sequence: Gdk.EventSequence | None = None
-    ) -> Gdk.Event | None: ...
-    def get_last_updated_sequence(self) -> Gdk.EventSequence | None: ...
+        self, sequence: _Gdk4.EventSequence | None = None
+    ) -> _Gdk4.Event | None: ...
+    def get_last_updated_sequence(self) -> _Gdk4.EventSequence | None: ...
     def get_point(
-        self, sequence: Gdk.EventSequence | None = None
+        self, sequence: _Gdk4.EventSequence | None = None
     ) -> tuple[bool, float, float]: ...
-    def get_sequence_state(self, sequence: Gdk.EventSequence) -> EventSequenceState: ...
-    def get_sequences(self) -> list[Gdk.EventSequence]: ...
+    def get_sequence_state(
+        self, sequence: _Gdk4.EventSequence
+    ) -> EventSequenceState: ...
+    def get_sequences(self) -> list[_Gdk4.EventSequence]: ...
     def group(self, gesture: Gesture) -> None: ...
-    def handles_sequence(self, sequence: Gdk.EventSequence | None = None) -> bool: ...
+    def handles_sequence(self, sequence: _Gdk4.EventSequence | None = None) -> bool: ...
     def is_active(self) -> bool: ...
     def is_grouped_with(self, other: Gesture) -> bool: ...
     def is_recognized(self) -> bool: ...
     def set_sequence_state(
-        self, sequence: Gdk.EventSequence, state: EventSequenceState
+        self, sequence: _Gdk4.EventSequence, state: EventSequenceState
     ) -> bool: ...
     def set_state(self, state: EventSequenceState) -> bool: ...
     def ungroup(self) -> None: ...
@@ -15086,7 +15088,7 @@ class GestureSingle(Gesture):
     ) -> None: ...
     def get_button(self) -> int: ...
     def get_current_button(self) -> int: ...
-    def get_current_sequence(self) -> Gdk.EventSequence | None: ...
+    def get_current_sequence(self) -> _Gdk4.EventSequence | None: ...
     def get_exclusive(self) -> bool: ...
     def get_touch_only(self) -> bool: ...
     def set_button(self, button: int) -> None: ...
@@ -15162,10 +15164,10 @@ class GestureStylus(GestureSingle):
         propagation_limit: PropagationLimit = ...,
         propagation_phase: PropagationPhase = ...,
     ) -> None: ...
-    def get_axes(self, axes: Sequence[Gdk.AxisUse]) -> tuple[bool, list[float]]: ...
-    def get_axis(self, axis: Gdk.AxisUse) -> tuple[bool, float]: ...
-    def get_backlog(self) -> tuple[bool, list[Gdk.TimeCoord]]: ...
-    def get_device_tool(self) -> Gdk.DeviceTool | None: ...
+    def get_axes(self, axes: Sequence[_Gdk4.AxisUse]) -> tuple[bool, list[float]]: ...
+    def get_axis(self, axis: _Gdk4.AxisUse) -> tuple[bool, float]: ...
+    def get_backlog(self) -> tuple[bool, list[_Gdk4.TimeCoord]]: ...
+    def get_device_tool(self) -> _Gdk4.DeviceTool | None: ...
     def get_stylus_only(self) -> bool: ...
     @classmethod
     def new(cls) -> GestureStylus: ...
@@ -15371,7 +15373,7 @@ class GraphicsOffload(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -15414,7 +15416,7 @@ class GraphicsOffload(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -15545,7 +15547,7 @@ class Grid(Widget, Accessible, Buildable, ConstraintTarget, Orientable):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -15592,7 +15594,7 @@ class Grid(Widget, Accessible, Buildable, ConstraintTarget, Orientable):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -15887,7 +15889,7 @@ class GridView(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -15939,7 +15941,7 @@ class GridView(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -16081,7 +16083,7 @@ class HeaderBar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -16125,7 +16127,7 @@ class HeaderBar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -16201,13 +16203,13 @@ class IMContext(GObject.Object):
     def __init__(
         self, input_hints: InputHints = ..., input_purpose: InputPurpose = ...
     ) -> None: ...
-    def activate_osk(self, event: Gdk.Event | None = None) -> bool: ...
+    def activate_osk(self, event: _Gdk4.Event | None = None) -> bool: ...
     def delete_surrounding(self, offset: int, n_chars: int) -> bool: ...
     def do_activate_osk(self) -> None: ...
-    def do_activate_osk_with_event(self, event: Gdk.Event) -> bool: ...
+    def do_activate_osk_with_event(self, event: _Gdk4.Event) -> bool: ...
     def do_commit(self, str: str) -> None: ...
     def do_delete_surrounding(self, offset: int, n_chars: int) -> bool: ...
-    def do_filter_keypress(self, event: Gdk.Event) -> bool: ...
+    def do_filter_keypress(self, event: _Gdk4.Event) -> bool: ...
     def do_focus_in(self) -> None: ...
     def do_focus_out(self) -> None: ...
     def do_get_preedit_string(self) -> tuple[str, Pango.AttrList, int]: ...
@@ -16221,7 +16223,7 @@ class IMContext(GObject.Object):
     def do_reset(self) -> None: ...
     def do_retrieve_surrounding(self) -> bool: ...
     def do_set_client_widget(self, widget: Widget | None = None) -> None: ...
-    def do_set_cursor_location(self, area: Gdk.Rectangle) -> None: ...
+    def do_set_cursor_location(self, area: _Gdk4.Rectangle) -> None: ...
     def do_set_surrounding(self, text: str, len: int, cursor_index: int) -> None: ...
     def do_set_surrounding_with_selection(
         self, text: str, len: int, cursor_index: int, anchor_index: int
@@ -16230,14 +16232,14 @@ class IMContext(GObject.Object):
     def filter_key(
         self,
         press: bool,
-        surface: Gdk.Surface,
-        device: Gdk.Device,
+        surface: _Gdk4.Surface,
+        device: _Gdk4.Device,
         time: int,
         keycode: int,
-        state: Gdk.ModifierType,
+        state: _Gdk4.ModifierType,
         group: int,
     ) -> bool: ...
-    def filter_keypress(self, event: Gdk.Event) -> bool: ...
+    def filter_keypress(self, event: _Gdk4.Event) -> bool: ...
     def focus_in(self) -> None: ...
     def focus_out(self) -> None: ...
     def get_preedit_string(self) -> tuple[str, Pango.AttrList, int]: ...
@@ -16247,7 +16249,7 @@ class IMContext(GObject.Object):
     def get_surrounding_with_selection(self) -> tuple[bool, str, int, int]: ...
     def reset(self) -> None: ...
     def set_client_widget(self, widget: Widget | None = None) -> None: ...
-    def set_cursor_location(self, area: Gdk.Rectangle) -> None: ...
+    def set_cursor_location(self, area: _Gdk4.Rectangle) -> None: ...
     def set_surrounding(self, text: str, len: int, cursor_index: int) -> None: ...
     def set_surrounding_with_selection(
         self, text: str, len: int, cursor_index: int, anchor_index: int
@@ -16272,11 +16274,11 @@ class IMContextClass(GObject.GPointer):
     delete_surrounding: Callable[[IMContext, int, int], bool] = ...
     set_client_widget: Callable[[IMContext, Widget | None], None] = ...
     get_preedit_string: Callable[[IMContext], tuple[str, Pango.AttrList, int]] = ...
-    filter_keypress: Callable[[IMContext, Gdk.Event], bool] = ...
+    filter_keypress: Callable[[IMContext, _Gdk4.Event], bool] = ...
     focus_in: Callable[[IMContext], None] = ...
     focus_out: Callable[[IMContext], None] = ...
     reset: Callable[[IMContext], None] = ...
-    set_cursor_location: Callable[[IMContext, Gdk.Rectangle], None] = ...
+    set_cursor_location: Callable[[IMContext, _Gdk4.Rectangle], None] = ...
     set_use_preedit: Callable[[IMContext, bool], None] = ...
     set_surrounding: Callable[[IMContext, str, int, int], None] = ...
     get_surrounding: Callable[[IMContext], tuple[bool, str, int]] = ...
@@ -16287,7 +16289,7 @@ class IMContextClass(GObject.GPointer):
         [IMContext], tuple[bool, str, int, int]
     ] = ...
     activate_osk: Callable[[IMContext], None] = ...
-    activate_osk_with_event: Callable[[IMContext, Gdk.Event], bool] = ...
+    activate_osk_with_event: Callable[[IMContext, _Gdk4.Event], bool] = ...
 
 class IMContextSimple(IMContext):
     """
@@ -16396,7 +16398,7 @@ class IMMulticontextClass(GObject.GPointer):
 
 class IMMulticontextPrivate(GObject.GPointer): ...
 
-class IconPaintable(GObject.Object, Gdk.Paintable, SymbolicPaintable):
+class IconPaintable(GObject.Object, _Gdk4.Paintable, SymbolicPaintable):
     """
     :Constructors:
 
@@ -16479,7 +16481,7 @@ class IconTheme(GObject.Object):
       notify (GParam)
     """
     class Props(GObject.Object.Props):
-        display: Gdk.Display | None
+        display: _Gdk4.Display | None
         icon_names: list[str]
         resource_path: list[str] | None
         search_path: list[str] | None
@@ -16488,16 +16490,16 @@ class IconTheme(GObject.Object):
     props: Props = ...
     def __init__(
         self,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         resource_path: Sequence[str] | None = ...,
         search_path: Sequence[str] | None = ...,
         theme_name: str | None = ...,
     ) -> None: ...
     def add_resource_path(self, path: str) -> None: ...
     def add_search_path(self, path: str) -> None: ...
-    def get_display(self) -> Gdk.Display | None: ...
+    def get_display(self) -> _Gdk4.Display | None: ...
     @staticmethod
-    def get_for_display(display: Gdk.Display) -> IconTheme: ...
+    def get_for_display(display: _Gdk4.Display) -> IconTheme: ...
     def get_icon_names(self) -> list[str]: ...
     def get_icon_sizes(self, icon_name: str) -> list[int]: ...
     def get_resource_path(self) -> list[str] | None: ...
@@ -16647,7 +16649,7 @@ class IconView(Widget, Accessible, Buildable, CellLayout, ConstraintTarget, Scro
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -16708,7 +16710,7 @@ class IconView(Widget, Accessible, Buildable, CellLayout, ConstraintTarget, Scro
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -16740,20 +16742,20 @@ class IconView(Widget, Accessible, Buildable, CellLayout, ConstraintTarget, Scro
         vadjustment: Adjustment | None = ...,
         vscroll_policy: ScrollablePolicy = ...,
     ) -> None: ...
-    def create_drag_icon(self, path: TreePath) -> Gdk.Paintable | None: ...
+    def create_drag_icon(self, path: TreePath) -> _Gdk4.Paintable | None: ...
     def enable_model_drag_dest(
-        self, formats: Gdk.ContentFormats, actions: Gdk.DragAction
+        self, formats: _Gdk4.ContentFormats, actions: _Gdk4.DragAction
     ) -> None: ...
     def enable_model_drag_source(
         self,
-        start_button_mask: Gdk.ModifierType,
-        formats: Gdk.ContentFormats,
-        actions: Gdk.DragAction,
+        start_button_mask: _Gdk4.ModifierType,
+        formats: _Gdk4.ContentFormats,
+        actions: _Gdk4.DragAction,
     ) -> None: ...
     def get_activate_on_single_click(self) -> bool: ...
     def get_cell_rect(
         self, path: TreePath, cell: CellRenderer | None = None
-    ) -> tuple[bool, Gdk.Rectangle]: ...
+    ) -> tuple[bool, _Gdk4.Rectangle]: ...
     def get_column_spacing(self) -> int: ...
     def get_columns(self) -> int: ...
     def get_cursor(self) -> tuple[bool, TreePath, CellRenderer]: ...
@@ -16923,7 +16925,7 @@ class Image(Widget, Accessible, Buildable, ConstraintTarget):
         gicon: Gio.Icon | None
         icon_name: str | None
         icon_size: IconSize
-        paintable: Gdk.Paintable | None
+        paintable: _Gdk4.Paintable | None
         pixel_size: int
         resource: str
         storage_type: ImageType
@@ -16932,7 +16934,7 @@ class Image(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -16972,7 +16974,7 @@ class Image(Widget, Accessible, Buildable, ConstraintTarget):
         gicon: Gio.Icon = ...,
         icon_name: str | None = ...,
         icon_size: IconSize = ...,
-        paintable: Gdk.Paintable | None = ...,
+        paintable: _Gdk4.Paintable | None = ...,
         pixel_size: int = ...,
         resource: str = ...,
         use_fallback: bool = ...,
@@ -16980,7 +16982,7 @@ class Image(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -17012,7 +17014,7 @@ class Image(Widget, Accessible, Buildable, ConstraintTarget):
     def get_gicon(self) -> Gio.Icon | None: ...
     def get_icon_name(self) -> str | None: ...
     def get_icon_size(self) -> IconSize: ...
-    def get_paintable(self) -> Gdk.Paintable | None: ...
+    def get_paintable(self) -> _Gdk4.Paintable | None: ...
     def get_pixel_size(self) -> int: ...
     def get_storage_type(self) -> ImageType: ...
     @classmethod
@@ -17024,7 +17026,7 @@ class Image(Widget, Accessible, Buildable, ConstraintTarget):
     @classmethod
     def new_from_icon_name(cls, icon_name: str | None = None) -> Image: ...
     @classmethod
-    def new_from_paintable(cls, paintable: Gdk.Paintable | None = None) -> Image: ...
+    def new_from_paintable(cls, paintable: _Gdk4.Paintable | None = None) -> Image: ...
     @classmethod
     def new_from_pixbuf(cls, pixbuf: GdkPixbuf.Pixbuf | None = None) -> Image: ...
     @classmethod
@@ -17032,7 +17034,7 @@ class Image(Widget, Accessible, Buildable, ConstraintTarget):
     def set_from_file(self, filename: str | None = None) -> None: ...
     def set_from_gicon(self, icon: Gio.Icon) -> None: ...
     def set_from_icon_name(self, icon_name: str | None = None) -> None: ...
-    def set_from_paintable(self, paintable: Gdk.Paintable | None = None) -> None: ...
+    def set_from_paintable(self, paintable: _Gdk4.Paintable | None = None) -> None: ...
     def set_from_pixbuf(self, pixbuf: GdkPixbuf.Pixbuf | None = None) -> None: ...
     def set_from_resource(self, resource_path: str | None = None) -> None: ...
     def set_icon_size(self, icon_size: IconSize) -> None: ...
@@ -17121,7 +17123,7 @@ class InfoBar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -17164,7 +17166,7 @@ class InfoBar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -17303,7 +17305,7 @@ class Inscription(Widget, Accessible, AccessibleText, Buildable, ConstraintTarge
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -17355,7 +17357,7 @@ class Inscription(Widget, Accessible, AccessibleText, Buildable, ConstraintTarge
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -17438,16 +17440,16 @@ class KeyvalTrigger(ShortcutTrigger):
     """
     class Props(ShortcutTrigger.Props):
         keyval: int
-        modifiers: Gdk.ModifierType
+        modifiers: _Gdk4.ModifierType
 
     props: Props = ...
     def __init__(
-        self, keyval: int = ..., modifiers: Gdk.ModifierType = ...
+        self, keyval: int = ..., modifiers: _Gdk4.ModifierType = ...
     ) -> None: ...
     def get_keyval(self) -> int: ...
-    def get_modifiers(self) -> Gdk.ModifierType: ...
+    def get_modifiers(self) -> _Gdk4.ModifierType: ...
     @classmethod
-    def new(cls, keyval: int, modifiers: Gdk.ModifierType) -> KeyvalTrigger: ...
+    def new(cls, keyval: int, modifiers: _Gdk4.ModifierType) -> KeyvalTrigger: ...
 
 class KeyvalTriggerClass(GObject.GPointer): ...
 
@@ -17571,7 +17573,7 @@ class Label(Widget, Accessible, AccessibleText, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -17630,7 +17632,7 @@ class Label(Widget, Accessible, AccessibleText, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -17899,7 +17901,7 @@ class LevelBar(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -17945,7 +17947,7 @@ class LevelBar(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -18091,7 +18093,7 @@ class LinkButton(Button, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -18141,7 +18143,7 @@ class LinkButton(Button, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -18254,7 +18256,7 @@ class ListBase(Widget, Accessible, Buildable, ConstraintTarget, Orientable, Scro
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -18299,7 +18301,7 @@ class ListBase(Widget, Accessible, Buildable, ConstraintTarget, Orientable, Scro
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -18427,7 +18429,7 @@ class ListBox(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -18472,7 +18474,7 @@ class ListBox(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -18636,7 +18638,7 @@ class ListBoxRow(Widget, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -18682,7 +18684,7 @@ class ListBoxRow(Widget, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -19033,7 +19035,7 @@ class ListView(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -19085,7 +19087,7 @@ class ListView(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -19249,7 +19251,7 @@ class LockButton(Button, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -19303,7 +19305,7 @@ class LockButton(Button, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -19474,7 +19476,7 @@ class MediaControls(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -19515,7 +19517,7 @@ class MediaControls(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -19559,7 +19561,7 @@ class MediaControlsClass(GObject.GPointer):
 
     parent_class: WidgetClass = ...
 
-class MediaFile(MediaStream, Gdk.Paintable):
+class MediaFile(MediaStream, _Gdk4.Paintable):
     """
     :Constructors:
 
@@ -19665,7 +19667,7 @@ class MediaFileClass(GObject.GPointer):
     open: Callable[[MediaFile], None] = ...
     close: Callable[[MediaFile], None] = ...
 
-class MediaStream(GObject.Object, Gdk.Paintable):
+class MediaStream(GObject.Object, _Gdk4.Paintable):
     """
     :Constructors:
 
@@ -19723,9 +19725,9 @@ class MediaStream(GObject.Object, Gdk.Paintable):
     ) -> None: ...
     def do_pause(self) -> None: ...
     def do_play(self) -> bool: ...
-    def do_realize(self, surface: Gdk.Surface) -> None: ...
+    def do_realize(self, surface: _Gdk4.Surface) -> None: ...
     def do_seek(self, timestamp: int) -> None: ...
-    def do_unrealize(self, surface: Gdk.Surface) -> None: ...
+    def do_unrealize(self, surface: _Gdk4.Surface) -> None: ...
     def do_update_audio(self, muted: bool, volume: float) -> None: ...
     def gerror(self, error: GLib.Error) -> None: ...
     def get_duration(self) -> int: ...
@@ -19743,7 +19745,7 @@ class MediaStream(GObject.Object, Gdk.Paintable):
     def is_seeking(self) -> bool: ...
     def pause(self) -> None: ...
     def play(self) -> None: ...
-    def realize(self, surface: Gdk.Surface) -> None: ...
+    def realize(self, surface: _Gdk4.Surface) -> None: ...
     def seek(self, timestamp: int) -> None: ...
     def seek_failed(self) -> None: ...
     def seek_success(self) -> None: ...
@@ -19756,7 +19758,7 @@ class MediaStream(GObject.Object, Gdk.Paintable):
         self, has_audio: bool, has_video: bool, seekable: bool, duration: int
     ) -> None: ...
     def stream_unprepared(self) -> None: ...
-    def unrealize(self, surface: Gdk.Surface) -> None: ...
+    def unrealize(self, surface: _Gdk4.Surface) -> None: ...
     def update(self, timestamp: int) -> None: ...
 
 class MediaStreamClass(GObject.GPointer):
@@ -19773,8 +19775,8 @@ class MediaStreamClass(GObject.GPointer):
     pause: Callable[[MediaStream], None] = ...
     seek: Callable[[MediaStream, int], None] = ...
     update_audio: Callable[[MediaStream, bool, float], None] = ...
-    realize: Callable[[MediaStream, Gdk.Surface], None] = ...
-    unrealize: Callable[[MediaStream, Gdk.Surface], None] = ...
+    realize: Callable[[MediaStream, _Gdk4.Surface], None] = ...
+    unrealize: Callable[[MediaStream, _Gdk4.Surface], None] = ...
 
 class MenuButton(Widget, Accessible, Buildable, ConstraintTarget):
     """
@@ -19876,7 +19878,7 @@ class MenuButton(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -19928,7 +19930,7 @@ class MenuButton(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -20124,7 +20126,7 @@ class MessageDialog(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -20145,7 +20147,7 @@ class MessageDialog(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -20199,7 +20201,7 @@ class MessageDialog(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -20219,7 +20221,7 @@ class MessageDialog(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -20337,7 +20339,7 @@ class MountOperation(Gio.MountOperation):
       notify (GParam)
     """
     class Props(Gio.MountOperation.Props):
-        display: Gdk.Display
+        display: _Gdk4.Display
         is_showing: bool
         parent: Window | None
         anonymous: bool
@@ -20355,7 +20357,7 @@ class MountOperation(Gio.MountOperation):
     priv: MountOperationPrivate = ...
     def __init__(
         self,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         parent: Window | None = ...,
         anonymous: bool = ...,
         choice: int = ...,
@@ -20367,12 +20369,12 @@ class MountOperation(Gio.MountOperation):
         pim: int = ...,
         username: str | None = ...,
     ) -> None: ...
-    def get_display(self) -> Gdk.Display: ...
+    def get_display(self) -> _Gdk4.Display: ...
     def get_parent(self) -> Window | None: ...
     def is_showing(self) -> bool: ...
     @classmethod
     def new(cls, parent: Window | None = None) -> MountOperation: ...
-    def set_display(self, display: Gdk.Display) -> None: ...
+    def set_display(self, display: _Gdk4.Display) -> None: ...
     def set_parent(self, parent: Window | None = None) -> None: ...
 
 class MountOperationClass(GObject.GPointer):
@@ -20553,9 +20555,9 @@ class Native(GObject.GInterface):
       notify (GParam)
     """
     @staticmethod
-    def get_for_surface(surface: Gdk.Surface) -> Native | None: ...
+    def get_for_surface(surface: _Gdk4.Surface) -> Native | None: ...
     def get_renderer(self) -> Gsk.Renderer | None: ...
-    def get_surface(self) -> Gdk.Surface | None: ...
+    def get_surface(self) -> _Gdk4.Surface | None: ...
     def get_surface_transform(self) -> tuple[float, float]: ...
     def realize(self) -> None: ...
     def unrealize(self) -> None: ...
@@ -20797,7 +20799,7 @@ class Notebook(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -20844,7 +20846,7 @@ class Notebook(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -21169,7 +21171,7 @@ class Overlay(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -21210,7 +21212,7 @@ class Overlay(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -21369,7 +21371,7 @@ class PadController(EventController):
     """
     class Props(EventController.Props):
         action_group: Gio.ActionGroup
-        pad: Gdk.Device
+        pad: _Gdk4.Device
         name: str | None
         propagation_limit: PropagationLimit
         propagation_phase: PropagationPhase
@@ -21379,14 +21381,14 @@ class PadController(EventController):
     def __init__(
         self,
         action_group: Gio.ActionGroup = ...,
-        pad: Gdk.Device = ...,
+        pad: _Gdk4.Device = ...,
         name: str | None = ...,
         propagation_limit: PropagationLimit = ...,
         propagation_phase: PropagationPhase = ...,
     ) -> None: ...
     @classmethod
     def new(
-        cls, group: Gio.ActionGroup, pad: Gdk.Device | None = None
+        cls, group: Gio.ActionGroup, pad: _Gdk4.Device | None = None
     ) -> PadController: ...
     def set_action(
         self, type: PadActionType, index: int, mode: int, label: str, action_name: str
@@ -21582,7 +21584,7 @@ class PageSetupUnixDialog(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -21603,7 +21605,7 @@ class PageSetupUnixDialog(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -21649,7 +21651,7 @@ class PageSetupUnixDialog(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -21669,7 +21671,7 @@ class PageSetupUnixDialog(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -21813,7 +21815,7 @@ class Paned(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -21863,7 +21865,7 @@ class Paned(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -22064,7 +22066,7 @@ class PasswordEntry(Widget, Accessible, Buildable, ConstraintTarget, Editable):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -22116,7 +22118,7 @@ class PasswordEntry(Widget, Accessible, Buildable, ConstraintTarget, Editable):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -22288,12 +22290,12 @@ class Picture(Widget, Accessible, Buildable, ConstraintTarget):
         content_fit: ContentFit
         file: Gio.File | None
         keep_aspect_ratio: bool
-        paintable: Gdk.Paintable | None
+        paintable: _Gdk4.Paintable | None
         can_focus: bool
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -22334,12 +22336,12 @@ class Picture(Widget, Accessible, Buildable, ConstraintTarget):
         content_fit: ContentFit = ...,
         file: Gio.File | None = ...,
         keep_aspect_ratio: bool = ...,
-        paintable: Gdk.Paintable | None = ...,
+        paintable: _Gdk4.Paintable | None = ...,
         can_focus: bool = ...,
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -22372,7 +22374,7 @@ class Picture(Widget, Accessible, Buildable, ConstraintTarget):
     def get_content_fit(self) -> ContentFit: ...
     def get_file(self) -> Gio.File | None: ...
     def get_keep_aspect_ratio(self) -> bool: ...
-    def get_paintable(self) -> Gdk.Paintable | None: ...
+    def get_paintable(self) -> _Gdk4.Paintable | None: ...
     @classmethod
     def new(cls) -> Picture: ...
     @classmethod
@@ -22380,7 +22382,7 @@ class Picture(Widget, Accessible, Buildable, ConstraintTarget):
     @classmethod
     def new_for_filename(cls, filename: str | None = None) -> Picture: ...
     @classmethod
-    def new_for_paintable(cls, paintable: Gdk.Paintable | None = None) -> Picture: ...
+    def new_for_paintable(cls, paintable: _Gdk4.Paintable | None = None) -> Picture: ...
     @classmethod
     def new_for_pixbuf(cls, pixbuf: GdkPixbuf.Pixbuf | None = None) -> Picture: ...
     @classmethod
@@ -22391,7 +22393,7 @@ class Picture(Widget, Accessible, Buildable, ConstraintTarget):
     def set_file(self, file: Gio.File | None = None) -> None: ...
     def set_filename(self, filename: str | None = None) -> None: ...
     def set_keep_aspect_ratio(self, keep_aspect_ratio: bool) -> None: ...
-    def set_paintable(self, paintable: Gdk.Paintable | None = None) -> None: ...
+    def set_paintable(self, paintable: _Gdk4.Paintable | None = None) -> None: ...
     def set_pixbuf(self, pixbuf: GdkPixbuf.Pixbuf | None = None) -> None: ...
     def set_resource(self, resource_path: str | None = None) -> None: ...
 
@@ -22493,13 +22495,13 @@ class Popover(Widget, Accessible, Buildable, ConstraintTarget, Native, ShortcutM
         default_widget: Widget | None
         has_arrow: bool
         mnemonics_visible: bool
-        pointing_to: Gdk.Rectangle
+        pointing_to: _Gdk4.Rectangle
         position: PositionType
         can_focus: bool
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -22542,13 +22544,13 @@ class Popover(Widget, Accessible, Buildable, ConstraintTarget, Native, ShortcutM
         default_widget: Widget | None = ...,
         has_arrow: bool = ...,
         mnemonics_visible: bool = ...,
-        pointing_to: Gdk.Rectangle | None = ...,
+        pointing_to: _Gdk4.Rectangle | None = ...,
         position: PositionType = ...,
         can_focus: bool = ...,
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -22584,7 +22586,7 @@ class Popover(Widget, Accessible, Buildable, ConstraintTarget, Native, ShortcutM
     def get_has_arrow(self) -> bool: ...
     def get_mnemonics_visible(self) -> bool: ...
     def get_offset(self) -> tuple[int, int]: ...
-    def get_pointing_to(self) -> tuple[bool, Gdk.Rectangle]: ...
+    def get_pointing_to(self) -> tuple[bool, _Gdk4.Rectangle]: ...
     def get_position(self) -> PositionType: ...
     @classmethod
     def new(cls) -> Popover: ...
@@ -22598,7 +22600,7 @@ class Popover(Widget, Accessible, Buildable, ConstraintTarget, Native, ShortcutM
     def set_has_arrow(self, has_arrow: bool) -> None: ...
     def set_mnemonics_visible(self, mnemonics_visible: bool) -> None: ...
     def set_offset(self, x_offset: int, y_offset: int) -> None: ...
-    def set_pointing_to(self, rect: Gdk.Rectangle | None = None) -> None: ...
+    def set_pointing_to(self, rect: _Gdk4.Rectangle | None = None) -> None: ...
     def set_position(self, position: PositionType) -> None: ...
 
 class PopoverClass(GObject.GPointer):
@@ -22713,13 +22715,13 @@ class PopoverMenu(
         default_widget: Widget | None
         has_arrow: bool
         mnemonics_visible: bool
-        pointing_to: Gdk.Rectangle
+        pointing_to: _Gdk4.Rectangle
         position: PositionType
         can_focus: bool
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -22764,13 +22766,13 @@ class PopoverMenu(
         default_widget: Widget | None = ...,
         has_arrow: bool = ...,
         mnemonics_visible: bool = ...,
-        pointing_to: Gdk.Rectangle | None = ...,
+        pointing_to: _Gdk4.Rectangle | None = ...,
         position: PositionType = ...,
         can_focus: bool = ...,
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -22886,7 +22888,7 @@ class PopoverMenuBar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -22927,7 +22929,7 @@ class PopoverMenuBar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -23612,7 +23614,7 @@ class PrintUnixDialog(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -23633,7 +23635,7 @@ class PrintUnixDialog(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -23686,7 +23688,7 @@ class PrintUnixDialog(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -23706,7 +23708,7 @@ class PrintUnixDialog(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -23920,7 +23922,7 @@ class ProgressBar(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -23967,7 +23969,7 @@ class ProgressBar(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -24130,7 +24132,7 @@ class Range(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -24178,7 +24180,7 @@ class Range(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -24216,7 +24218,7 @@ class Range(
     def get_fill_level(self) -> float: ...
     def get_flippable(self) -> bool: ...
     def get_inverted(self) -> bool: ...
-    def get_range_rect(self) -> Gdk.Rectangle: ...
+    def get_range_rect(self) -> _Gdk4.Rectangle: ...
     def get_restrict_to_fill_level(self) -> bool: ...
     def get_round_digits(self) -> int: ...
     def get_show_fill_level(self) -> bool: ...
@@ -24467,7 +24469,7 @@ class Revealer(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -24511,7 +24513,7 @@ class Revealer(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -24558,7 +24560,7 @@ class Root(GObject.GInterface):
     Signals from GObject:
       notify (GParam)
     """
-    def get_display(self) -> Gdk.Display: ...
+    def get_display(self) -> _Gdk4.Display: ...
     def get_focus(self) -> Widget | None: ...
     def set_focus(self, focus: Widget | None = None) -> None: ...
 
@@ -24668,7 +24670,7 @@ class Scale(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -24720,7 +24722,7 @@ class Scale(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -24868,7 +24870,7 @@ class ScaleButton(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -24914,7 +24916,7 @@ class ScaleButton(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -25113,7 +25115,7 @@ class Scrollbar(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -25155,7 +25157,7 @@ class Scrollbar(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -25300,7 +25302,7 @@ class ScrolledWindow(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -25355,7 +25357,7 @@ class ScrolledWindow(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -25500,7 +25502,7 @@ class SearchBar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -25544,7 +25546,7 @@ class SearchBar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -25680,7 +25682,7 @@ class SearchEntry(Widget, Accessible, Buildable, ConstraintTarget, Editable):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -25733,7 +25735,7 @@ class SearchEntry(Widget, Accessible, Buildable, ConstraintTarget, Editable):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -25959,7 +25961,7 @@ class Separator(Widget, Accessible, Buildable, ConstraintTarget, Orientable):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -26000,7 +26002,7 @@ class Separator(Widget, Accessible, Buildable, ConstraintTarget, Orientable):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -26221,7 +26223,7 @@ class Settings(GObject.Object, StyleProvider):
     @staticmethod
     def get_default() -> Settings | None: ...
     @staticmethod
-    def get_for_display(display: Gdk.Display) -> Settings: ...
+    def get_for_display(display: _Gdk4.Display) -> Settings: ...
     def reset_property(self, name: str) -> None: ...
 
 class Shortcut(GObject.Object):
@@ -26339,7 +26341,7 @@ class ShortcutController(EventController, Gio.ListModel, Buildable):
     """
     class Props(EventController.Props):
         item_type: type[Any]
-        mnemonic_modifiers: Gdk.ModifierType
+        mnemonic_modifiers: _Gdk4.ModifierType
         n_items: int
         scope: ShortcutScope
         name: str | None
@@ -26351,7 +26353,7 @@ class ShortcutController(EventController, Gio.ListModel, Buildable):
     props: Props = ...
     def __init__(
         self,
-        mnemonic_modifiers: Gdk.ModifierType = ...,
+        mnemonic_modifiers: _Gdk4.ModifierType = ...,
         model: Gio.ListModel = ...,
         scope: ShortcutScope = ...,
         name: str | None = ...,
@@ -26359,14 +26361,14 @@ class ShortcutController(EventController, Gio.ListModel, Buildable):
         propagation_phase: PropagationPhase = ...,
     ) -> None: ...
     def add_shortcut(self, shortcut: Shortcut) -> None: ...
-    def get_mnemonics_modifiers(self) -> Gdk.ModifierType: ...
+    def get_mnemonics_modifiers(self) -> _Gdk4.ModifierType: ...
     def get_scope(self) -> ShortcutScope: ...
     @classmethod
     def new(cls) -> ShortcutController: ...
     @classmethod
     def new_for_model(cls, model: Gio.ListModel) -> ShortcutController: ...
     def remove_shortcut(self, shortcut: Shortcut) -> None: ...
-    def set_mnemonics_modifiers(self, modifiers: Gdk.ModifierType) -> None: ...
+    def set_mnemonics_modifiers(self, modifiers: _Gdk4.ModifierType) -> None: ...
     def set_scope(self, scope: ShortcutScope) -> None: ...
 
 class ShortcutControllerClass(GObject.GPointer): ...
@@ -26448,7 +26450,7 @@ class ShortcutLabel(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -26490,7 +26492,7 @@ class ShortcutLabel(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -26561,10 +26563,10 @@ class ShortcutTrigger(GObject.Object):
     @classmethod
     def parse_string(cls, string: str) -> ShortcutTrigger | None: ...
     def print_(self, string: GLib.String) -> None: ...
-    def print_label(self, display: Gdk.Display, string: GLib.String) -> bool: ...
-    def to_label(self, display: Gdk.Display) -> str: ...
+    def print_label(self, display: _Gdk4.Display, string: GLib.String) -> bool: ...
+    def to_label(self, display: _Gdk4.Display) -> str: ...
     def to_string(self) -> str: ...
-    def trigger(self, event: Gdk.Event, enable_mnemonics: bool) -> Gdk.KeyMatch: ...
+    def trigger(self, event: _Gdk4.Event, enable_mnemonics: bool) -> _Gdk4.KeyMatch: ...
 
 class ShortcutTriggerClass(GObject.GPointer): ...
 
@@ -26658,7 +26660,7 @@ class ShortcutsGroup(Box, Accessible, Buildable, ConstraintTarget, Orientable):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -26709,7 +26711,7 @@ class ShortcutsGroup(Box, Accessible, Buildable, ConstraintTarget, Orientable):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -26835,7 +26837,7 @@ class ShortcutsSection(Box, Accessible, Buildable, ConstraintTarget, Orientable)
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -26884,7 +26886,7 @@ class ShortcutsSection(Box, Accessible, Buildable, ConstraintTarget, Orientable)
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -27009,7 +27011,7 @@ class ShortcutsShortcut(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -27062,7 +27064,7 @@ class ShortcutsShortcut(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -27214,7 +27216,7 @@ class ShortcutsWindow(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -27235,7 +27237,7 @@ class ShortcutsWindow(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -27282,7 +27284,7 @@ class ShortcutsWindow(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -27302,7 +27304,7 @@ class ShortcutsWindow(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -27551,7 +27553,7 @@ class SliceListModelClass(GObject.GPointer):
 
     parent_class: GObject.ObjectClass = ...
 
-class Snapshot(Gdk.Snapshot):
+class Snapshot(_Gdk4.Snapshot):
     """
     :Constructors:
 
@@ -27569,10 +27571,10 @@ class Snapshot(Gdk.Snapshot):
         self,
         outline: Gsk.RoundedRect,
         border_width: Sequence[float],
-        border_color: Sequence[Gdk.RGBA],
+        border_color: Sequence[_Gdk4.RGBA],
     ) -> None: ...
     def append_cairo(self, bounds: Graphene.Rect) -> cairo.Context: ...
-    def append_color(self, color: Gdk.RGBA, bounds: Graphene.Rect) -> None: ...
+    def append_color(self, color: _Gdk4.RGBA, bounds: Graphene.Rect) -> None: ...
     def append_conic_gradient(
         self,
         bounds: Graphene.Rect,
@@ -27581,18 +27583,18 @@ class Snapshot(Gdk.Snapshot):
         stops: Sequence[Gsk.ColorStop],
     ) -> None: ...
     def append_fill(
-        self, path: Gsk.Path, fill_rule: Gsk.FillRule, color: Gdk.RGBA
+        self, path: Gsk.Path, fill_rule: Gsk.FillRule, color: _Gdk4.RGBA
     ) -> None: ...
     def append_inset_shadow(
         self,
         outline: Gsk.RoundedRect,
-        color: Gdk.RGBA,
+        color: _Gdk4.RGBA,
         dx: float,
         dy: float,
         spread: float,
         blur_radius: float,
     ) -> None: ...
-    def append_layout(self, layout: Pango.Layout, color: Gdk.RGBA) -> None: ...
+    def append_layout(self, layout: Pango.Layout, color: _Gdk4.RGBA) -> None: ...
     def append_linear_gradient(
         self,
         bounds: Graphene.Rect,
@@ -27604,7 +27606,7 @@ class Snapshot(Gdk.Snapshot):
     def append_outset_shadow(
         self,
         outline: Gsk.RoundedRect,
-        color: Gdk.RGBA,
+        color: _Gdk4.RGBA,
         dx: float,
         dy: float,
         spread: float,
@@ -27638,12 +27640,12 @@ class Snapshot(Gdk.Snapshot):
         stops: Sequence[Gsk.ColorStop],
     ) -> None: ...
     def append_scaled_texture(
-        self, texture: Gdk.Texture, filter: Gsk.ScalingFilter, bounds: Graphene.Rect
+        self, texture: _Gdk4.Texture, filter: Gsk.ScalingFilter, bounds: Graphene.Rect
     ) -> None: ...
     def append_stroke(
-        self, path: Gsk.Path, stroke: Gsk.Stroke, color: Gdk.RGBA
+        self, path: Gsk.Path, stroke: Gsk.Stroke, color: _Gdk4.RGBA
     ) -> None: ...
-    def append_texture(self, texture: Gdk.Texture, bounds: Graphene.Rect) -> None: ...
+    def append_texture(self, texture: _Gdk4.Texture, bounds: Graphene.Rect) -> None: ...
     def gl_shader_pop_texture(self) -> None: ...
     @classmethod
     def new(cls) -> Snapshot: ...
@@ -27705,7 +27707,7 @@ class Snapshot(Gdk.Snapshot):
     def to_node(self) -> Gsk.RenderNode | None: ...
     def to_paintable(
         self, size: Graphene.Size | None = None
-    ) -> Gdk.Paintable | None: ...
+    ) -> _Gdk4.Paintable | None: ...
     def transform(self, transform: Gsk.Transform | None = None) -> None: ...
     def transform_matrix(self, matrix: Graphene.Matrix) -> None: ...
     def translate(self, point: Graphene.Point) -> None: ...
@@ -27948,7 +27950,7 @@ class SpinButton(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -28007,7 +28009,7 @@ class SpinButton(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -28153,7 +28155,7 @@ class Spinner(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -28194,7 +28196,7 @@ class Spinner(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -28320,7 +28322,7 @@ class Stack(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -28367,7 +28369,7 @@ class Stack(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -28556,7 +28558,7 @@ class StackSidebar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -28597,7 +28599,7 @@ class StackSidebar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -28705,7 +28707,7 @@ class StackSwitcher(Widget, Accessible, Buildable, ConstraintTarget, Orientable)
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -28747,7 +28749,7 @@ class StackSwitcher(Widget, Accessible, Buildable, ConstraintTarget, Orientable)
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -28856,7 +28858,7 @@ class Statusbar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -28896,7 +28898,7 @@ class Statusbar(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -29152,36 +29154,36 @@ class StyleContext(GObject.Object):
       notify (GParam)
     """
     class Props(GObject.Object.Props):
-        display: Gdk.Display
+        display: _Gdk4.Display
 
     props: Props = ...
     parent_object: GObject.Object = ...
-    def __init__(self, display: Gdk.Display = ...) -> None: ...
+    def __init__(self, display: _Gdk4.Display = ...) -> None: ...
     def add_class(self, class_name: str) -> None: ...
     def add_provider(self, provider: StyleProvider, priority: int) -> None: ...
     @staticmethod
     def add_provider_for_display(
-        display: Gdk.Display, provider: StyleProvider, priority: int
+        display: _Gdk4.Display, provider: StyleProvider, priority: int
     ) -> None: ...
     def do_changed(self) -> None: ...
     def get_border(self) -> Border: ...
-    def get_color(self) -> Gdk.RGBA: ...
-    def get_display(self) -> Gdk.Display: ...
+    def get_color(self) -> _Gdk4.RGBA: ...
+    def get_display(self) -> _Gdk4.Display: ...
     def get_margin(self) -> Border: ...
     def get_padding(self) -> Border: ...
     def get_scale(self) -> int: ...
     def get_state(self) -> StateFlags: ...
     def has_class(self, class_name: str) -> bool: ...
-    def lookup_color(self, color_name: str) -> tuple[bool, Gdk.RGBA]: ...
+    def lookup_color(self, color_name: str) -> tuple[bool, _Gdk4.RGBA]: ...
     def remove_class(self, class_name: str) -> None: ...
     def remove_provider(self, provider: StyleProvider) -> None: ...
     @staticmethod
     def remove_provider_for_display(
-        display: Gdk.Display, provider: StyleProvider
+        display: _Gdk4.Display, provider: StyleProvider
     ) -> None: ...
     def restore(self) -> None: ...
     def save(self) -> None: ...
-    def set_display(self, display: Gdk.Display) -> None: ...
+    def set_display(self, display: _Gdk4.Display) -> None: ...
     def set_scale(self, scale: int) -> None: ...
     def set_state(self, flags: StateFlags) -> None: ...
     def to_string(self, flags: StyleContextPrintFlags) -> str: ...
@@ -29281,7 +29283,7 @@ class Switch(Widget, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -29325,7 +29327,7 @@ class Switch(Widget, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -29371,10 +29373,10 @@ class SymbolicPaintable(GObject.GInterface):
     """
     def snapshot_symbolic(
         self,
-        snapshot: Gdk.Snapshot,
+        snapshot: _Gdk4.Snapshot,
         width: float,
         height: float,
-        colors: Sequence[Gdk.RGBA],
+        colors: Sequence[_Gdk4.RGBA],
     ) -> None: ...
 
 class SymbolicPaintableInterface(GObject.GPointer):
@@ -29388,7 +29390,7 @@ class SymbolicPaintableInterface(GObject.GPointer):
 
     g_iface: GObject.TypeInterface = ...
     snapshot_symbolic: Callable[
-        [SymbolicPaintable, Gdk.Snapshot, float, float, Sequence[Gdk.RGBA]], None
+        [SymbolicPaintable, _Gdk4.Snapshot, float, float, Sequence[_Gdk4.RGBA]], None
     ] = ...
 
 # override
@@ -29542,7 +29544,7 @@ class Text(Widget, Accessible, AccessibleText, Buildable, ConstraintTarget, Edit
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -29608,7 +29610,7 @@ class Text(Widget, Accessible, AccessibleText, Buildable, ConstraintTarget, Edit
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -29745,7 +29747,7 @@ class TextBuffer(GObject.Object):
         *user_data: Any,
     ) -> int: ...
     def add_mark(self, mark: TextMark, where: TextIter) -> None: ...
-    def add_selection_clipboard(self, clipboard: Gdk.Clipboard) -> None: ...
+    def add_selection_clipboard(self, clipboard: _Gdk4.Clipboard) -> None: ...
     def apply_tag(self, tag: TextTag, start: TextIter, end: TextIter) -> None: ...
     def apply_tag_by_name(self, name: str, start: TextIter, end: TextIter) -> None: ...
     def backspace(
@@ -29753,7 +29755,7 @@ class TextBuffer(GObject.Object):
     ) -> bool: ...
     def begin_irreversible_action(self) -> None: ...
     def begin_user_action(self) -> None: ...
-    def copy_clipboard(self, clipboard: Gdk.Clipboard) -> None: ...
+    def copy_clipboard(self, clipboard: _Gdk4.Clipboard) -> None: ...
     def create_child_anchor(self, iter: TextIter) -> TextChildAnchor: ...
     # override
     def create_mark(
@@ -29765,7 +29767,7 @@ class TextBuffer(GObject.Object):
     # override
     def create_tag(self, tag_name: str | None = None, **properties: Any) -> TextTag: ...
     def cut_clipboard(
-        self, clipboard: Gdk.Clipboard, default_editable: bool
+        self, clipboard: _Gdk4.Clipboard, default_editable: bool
     ) -> None: ...
     def delete(self, start: TextIter, end: TextIter) -> None: ...
     def delete_interactive(
@@ -29782,14 +29784,16 @@ class TextBuffer(GObject.Object):
     def do_insert_child_anchor(
         self, iter: TextIter, anchor: TextChildAnchor
     ) -> None: ...
-    def do_insert_paintable(self, iter: TextIter, paintable: Gdk.Paintable) -> None: ...
+    def do_insert_paintable(
+        self, iter: TextIter, paintable: _Gdk4.Paintable
+    ) -> None: ...
     def do_insert_text(
         self, pos: TextIter, new_text: str, new_text_length: int
     ) -> None: ...
     def do_mark_deleted(self, mark: TextMark) -> None: ...
     def do_mark_set(self, location: TextIter, mark: TextMark) -> None: ...
     def do_modified_changed(self) -> None: ...
-    def do_paste_done(self, clipboard: Gdk.Clipboard) -> None: ...
+    def do_paste_done(self, clipboard: _Gdk4.Clipboard) -> None: ...
     def do_redo(self) -> None: ...
     def do_remove_tag(self, tag: TextTag, start: TextIter, end: TextIter) -> None: ...
     def do_undo(self) -> None: ...
@@ -29821,7 +29825,7 @@ class TextBuffer(GObject.Object):
     def get_selection_bounds(
         self,
     ) -> tuple[TextIter, TextIter] | tuple[()]: ...  # CHECK Wrapped function
-    def get_selection_content(self) -> Gdk.ContentProvider: ...
+    def get_selection_content(self) -> _Gdk4.ContentProvider: ...
     def get_slice(
         self, start: TextIter, end: TextIter, include_hidden_chars: bool
     ) -> str: ...
@@ -29842,7 +29846,7 @@ class TextBuffer(GObject.Object):
         self, text: str, len: int, default_editable: bool
     ) -> bool: ...
     def insert_markup(self, iter: TextIter, markup: str, len: int) -> None: ...
-    def insert_paintable(self, iter: TextIter, paintable: Gdk.Paintable) -> None: ...
+    def insert_paintable(self, iter: TextIter, paintable: _Gdk4.Paintable) -> None: ...
     def insert_range(self, iter: TextIter, start: TextIter, end: TextIter) -> None: ...
     def insert_range_interactive(
         self, iter: TextIter, start: TextIter, end: TextIter, default_editable: bool
@@ -29860,7 +29864,7 @@ class TextBuffer(GObject.Object):
     def new(cls, table: TextTagTable | None = None) -> TextBuffer: ...
     def paste_clipboard(
         self,
-        clipboard: Gdk.Clipboard,
+        clipboard: _Gdk4.Clipboard,
         override_location: TextIter | None,
         default_editable: bool,
     ) -> None: ...
@@ -29868,7 +29872,7 @@ class TextBuffer(GObject.Object):
     def redo(self) -> None: ...
     def remove_all_tags(self, start: TextIter, end: TextIter) -> None: ...
     def remove_commit_notify(self, commit_notify_handler: int) -> None: ...
-    def remove_selection_clipboard(self, clipboard: Gdk.Clipboard) -> None: ...
+    def remove_selection_clipboard(self, clipboard: _Gdk4.Clipboard) -> None: ...
     def remove_tag(self, tag: TextTag, start: TextIter, end: TextIter) -> None: ...
     def remove_tag_by_name(self, name: str, start: TextIter, end: TextIter) -> None: ...
     def select_range(self, ins: TextIter, bound: TextIter) -> None: ...
@@ -29890,7 +29894,7 @@ class TextBufferClass(GObject.GPointer):
 
     parent_class: GObject.ObjectClass = ...
     insert_text: Callable[[TextBuffer, TextIter, str, int], None] = ...
-    insert_paintable: Callable[[TextBuffer, TextIter, Gdk.Paintable], None] = ...
+    insert_paintable: Callable[[TextBuffer, TextIter, _Gdk4.Paintable], None] = ...
     insert_child_anchor: Callable[[TextBuffer, TextIter, TextChildAnchor], None] = ...
     delete_range: Callable[[TextBuffer, TextIter, TextIter], None] = ...
     changed: Callable[[TextBuffer], None] = ...
@@ -29901,7 +29905,7 @@ class TextBufferClass(GObject.GPointer):
     remove_tag: Callable[[TextBuffer, TextTag, TextIter, TextIter], None] = ...
     begin_user_action: Callable[[TextBuffer], None] = ...
     end_user_action: Callable[[TextBuffer], None] = ...
-    paste_done: Callable[[TextBuffer, Gdk.Clipboard], None] = ...
+    paste_done: Callable[[TextBuffer, _Gdk4.Clipboard], None] = ...
     undo: Callable[[TextBuffer], None] = ...
     redo: Callable[[TextBuffer], None] = ...
 
@@ -30042,7 +30046,7 @@ class TextIter(GObject.GBoxed):
     def get_line_offset(self) -> int: ...
     def get_marks(self) -> list[TextMark]: ...
     def get_offset(self) -> int: ...
-    def get_paintable(self) -> Gdk.Paintable | None: ...
+    def get_paintable(self) -> _Gdk4.Paintable | None: ...
     def get_slice(self, end: TextIter) -> str: ...
     def get_tags(self) -> list[TextTag]: ...
     def get_text(self, end: TextIter) -> str: ...
@@ -30229,7 +30233,7 @@ class TextTag(GObject.Object):
         allow_breaks_set: bool
         background_full_height: bool
         background_full_height_set: bool
-        background_rgba: Gdk.RGBA
+        background_rgba: _Gdk4.RGBA
         background_set: bool
         direction: TextDirection
         editable: bool
@@ -30242,7 +30246,7 @@ class TextTag(GObject.Object):
         font_desc: Pango.FontDescription
         font_features: str
         font_features_set: bool
-        foreground_rgba: Gdk.RGBA
+        foreground_rgba: _Gdk4.RGBA
         foreground_set: bool
         indent: int
         indent_set: bool
@@ -30262,10 +30266,10 @@ class TextTag(GObject.Object):
         line_height_set: bool
         name: str
         overline: Pango.Overline
-        overline_rgba: Gdk.RGBA
+        overline_rgba: _Gdk4.RGBA
         overline_rgba_set: bool
         overline_set: bool
-        paragraph_background_rgba: Gdk.RGBA
+        paragraph_background_rgba: _Gdk4.RGBA
         paragraph_background_set: bool
         pixels_above_lines: int
         pixels_above_lines_set: bool
@@ -30289,7 +30293,7 @@ class TextTag(GObject.Object):
         stretch: Pango.Stretch
         stretch_set: bool
         strikethrough: bool
-        strikethrough_rgba: Gdk.RGBA
+        strikethrough_rgba: _Gdk4.RGBA
         strikethrough_rgba_set: bool
         strikethrough_set: bool
         style: Pango.Style
@@ -30299,7 +30303,7 @@ class TextTag(GObject.Object):
         text_transform: Pango.TextTransform
         text_transform_set: bool
         underline: Pango.Underline
-        underline_rgba: Gdk.RGBA
+        underline_rgba: _Gdk4.RGBA
         underline_rgba_set: bool
         underline_set: bool
         variant: Pango.Variant
@@ -30325,7 +30329,7 @@ class TextTag(GObject.Object):
         background: str = ...,
         background_full_height: bool = ...,
         background_full_height_set: bool = ...,
-        background_rgba: Gdk.RGBA = ...,
+        background_rgba: _Gdk4.RGBA = ...,
         background_set: bool = ...,
         direction: TextDirection = ...,
         editable: bool = ...,
@@ -30339,7 +30343,7 @@ class TextTag(GObject.Object):
         font_features: str = ...,
         font_features_set: bool = ...,
         foreground: str = ...,
-        foreground_rgba: Gdk.RGBA = ...,
+        foreground_rgba: _Gdk4.RGBA = ...,
         foreground_set: bool = ...,
         indent: int = ...,
         indent_set: bool = ...,
@@ -30359,11 +30363,11 @@ class TextTag(GObject.Object):
         line_height_set: bool = ...,
         name: str = ...,
         overline: Pango.Overline = ...,
-        overline_rgba: Gdk.RGBA = ...,
+        overline_rgba: _Gdk4.RGBA = ...,
         overline_rgba_set: bool = ...,
         overline_set: bool = ...,
         paragraph_background: str = ...,
-        paragraph_background_rgba: Gdk.RGBA = ...,
+        paragraph_background_rgba: _Gdk4.RGBA = ...,
         paragraph_background_set: bool = ...,
         pixels_above_lines: int = ...,
         pixels_above_lines_set: bool = ...,
@@ -30387,7 +30391,7 @@ class TextTag(GObject.Object):
         stretch: Pango.Stretch = ...,
         stretch_set: bool = ...,
         strikethrough: bool = ...,
-        strikethrough_rgba: Gdk.RGBA = ...,
+        strikethrough_rgba: _Gdk4.RGBA = ...,
         strikethrough_rgba_set: bool = ...,
         strikethrough_set: bool = ...,
         style: Pango.Style = ...,
@@ -30397,7 +30401,7 @@ class TextTag(GObject.Object):
         text_transform: Pango.TextTransform = ...,
         text_transform_set: bool = ...,
         underline: Pango.Underline = ...,
-        underline_rgba: Gdk.RGBA = ...,
+        underline_rgba: _Gdk4.RGBA = ...,
         underline_rgba_set: bool = ...,
         underline_set: bool = ...,
         variant: Pango.Variant = ...,
@@ -30591,7 +30595,7 @@ class TextView(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -30658,7 +30662,7 @@ class TextView(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -30724,7 +30728,7 @@ class TextView(
     def get_buffer(self) -> TextBuffer: ...
     def get_cursor_locations(
         self, iter: TextIter | None = None
-    ) -> tuple[Gdk.Rectangle, Gdk.Rectangle]: ...
+    ) -> tuple[_Gdk4.Rectangle, _Gdk4.Rectangle]: ...
     def get_cursor_visible(self) -> bool: ...
     def get_editable(self) -> bool: ...
     def get_extra_menu(self) -> Gio.MenuModel: ...
@@ -30734,7 +30738,7 @@ class TextView(
     def get_input_purpose(self) -> InputPurpose: ...
     def get_iter_at_location(self, x: int, y: int) -> tuple[bool, TextIter]: ...
     def get_iter_at_position(self, x: int, y: int) -> tuple[bool, TextIter, int]: ...
-    def get_iter_location(self, iter: TextIter) -> Gdk.Rectangle: ...
+    def get_iter_location(self, iter: TextIter) -> _Gdk4.Rectangle: ...
     def get_justification(self) -> Justification: ...
     def get_left_margin(self) -> int: ...
     def get_line_at_y(self, y: int) -> tuple[TextIter, int]: ...
@@ -30750,9 +30754,9 @@ class TextView(
     def get_tabs(self) -> Pango.TabArray | None: ...
     def get_top_margin(self) -> int: ...
     def get_visible_offset(self) -> tuple[float, float]: ...
-    def get_visible_rect(self) -> Gdk.Rectangle: ...
+    def get_visible_rect(self) -> _Gdk4.Rectangle: ...
     def get_wrap_mode(self) -> WrapMode: ...
-    def im_context_filter_keypress(self, event: Gdk.Event) -> bool: ...
+    def im_context_filter_keypress(self, event: _Gdk4.Event) -> bool: ...
     def move_mark_onscreen(self, mark: TextMark) -> bool: ...
     def move_overlay(self, child: Widget, xpos: int, ypos: int) -> None: ...
     def move_visually(self, iter: TextIter, count: int) -> bool: ...
@@ -30935,7 +30939,7 @@ class ToggleButton(Button, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -30987,7 +30991,7 @@ class ToggleButton(Button, Accessible, Actionable, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -31056,12 +31060,12 @@ class Tooltip(GObject.Object):
       notify (GParam)
     """
     def set_custom(self, custom_widget: Widget | None = None) -> None: ...
-    def set_icon(self, paintable: Gdk.Paintable | None = None) -> None: ...
+    def set_icon(self, paintable: _Gdk4.Paintable | None = None) -> None: ...
     def set_icon_from_gicon(self, gicon: Gio.Icon | None = None) -> None: ...
     def set_icon_from_icon_name(self, icon_name: str | None = None) -> None: ...
     def set_markup(self, markup: str | None = None) -> None: ...
     def set_text(self, text: str | None = None) -> None: ...
-    def set_tip_area(self, rect: Gdk.Rectangle) -> None: ...
+    def set_tip_area(self, rect: _Gdk4.Rectangle) -> None: ...
 
 class TreeDragDest(GObject.GInterface):
     """
@@ -31088,7 +31092,7 @@ class TreeDragSource(GObject.GInterface):
     Interface GtkTreeDragSource
     """
     def drag_data_delete(self, path: TreePath) -> bool: ...
-    def drag_data_get(self, path: TreePath) -> Gdk.ContentProvider | None: ...
+    def drag_data_get(self, path: TreePath) -> _Gdk4.ContentProvider | None: ...
     def row_draggable(self, path: TreePath) -> bool: ...
 
 class TreeDragSourceIface(GObject.GPointer):
@@ -31103,7 +31107,7 @@ class TreeDragSourceIface(GObject.GPointer):
     g_iface: GObject.TypeInterface = ...
     row_draggable: Callable[[TreeDragSource, TreePath], bool] = ...
     drag_data_get: Callable[
-        [TreeDragSource, TreePath], Gdk.ContentProvider | None
+        [TreeDragSource, TreePath], _Gdk4.ContentProvider | None
     ] = ...
     drag_data_delete: Callable[[TreeDragSource, TreePath], bool] = ...
 
@@ -31192,7 +31196,7 @@ class TreeExpander(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -31237,7 +31241,7 @@ class TreeExpander(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -32057,7 +32061,7 @@ class TreeView(Widget, Accessible, Buildable, ConstraintTarget, Scrollable):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -32119,7 +32123,7 @@ class TreeView(Widget, Accessible, Buildable, ConstraintTarget, Scrollable):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -32169,7 +32173,7 @@ class TreeView(Widget, Accessible, Buildable, ConstraintTarget, Scrollable):
         self, wx: int, wy: int
     ) -> tuple[int, int]: ...
     def convert_widget_to_tree_coords(self, wx: int, wy: int) -> tuple[int, int]: ...
-    def create_row_drag_icon(self, path: TreePath) -> Gdk.Paintable | None: ...
+    def create_row_drag_icon(self, path: TreePath) -> _Gdk4.Paintable | None: ...
     def do_columns_changed(self) -> None: ...
     def do_cursor_changed(self) -> None: ...
     def do_expand_collapse_cursor_row(
@@ -32192,13 +32196,13 @@ class TreeView(Widget, Accessible, Buildable, ConstraintTarget, Scrollable):
     def do_toggle_cursor_row(self) -> bool: ...
     def do_unselect_all(self) -> bool: ...
     def enable_model_drag_dest(
-        self, formats: Gdk.ContentFormats, actions: Gdk.DragAction
+        self, formats: _Gdk4.ContentFormats, actions: _Gdk4.DragAction
     ) -> None: ...
     def enable_model_drag_source(
         self,
-        start_button_mask: Gdk.ModifierType,
-        formats: Gdk.ContentFormats,
-        actions: Gdk.DragAction,
+        start_button_mask: _Gdk4.ModifierType,
+        formats: _Gdk4.ContentFormats,
+        actions: _Gdk4.DragAction,
     ) -> None: ...
     def expand_all(self) -> None: ...
     def expand_row(self, path: TreePath, open_all: bool) -> bool: ...
@@ -32208,7 +32212,7 @@ class TreeView(Widget, Accessible, Buildable, ConstraintTarget, Scrollable):
         self,
         path: TreePath | None = None,
         column: TreeViewColumn | None = None,
-    ) -> Gdk.Rectangle: ...
+    ) -> _Gdk4.Rectangle: ...
     def get_cell_area(
         self, path, column=None
     ): ...  # FIXME: Override is missing typing annotation
@@ -32248,7 +32252,7 @@ class TreeView(Widget, Accessible, Buildable, ConstraintTarget, Scrollable):
     def get_visible_range(
         self,
     ) -> tuple[TreePath, TreePath] | None: ...  # CHECK Wrapped function
-    def get_visible_rect(self) -> Gdk.Rectangle: ...
+    def get_visible_rect(self) -> _Gdk4.Rectangle: ...
     def insert_column(self, column: TreeViewColumn, position: int) -> int: ...
     # override
     def insert_column_with_attributes(
@@ -32654,7 +32658,7 @@ class Video(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -32699,7 +32703,7 @@ class Video(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -32838,7 +32842,7 @@ class Viewport(Widget, Accessible, Buildable, ConstraintTarget, Scrollable):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -32884,7 +32888,7 @@ class Viewport(Widget, Accessible, Buildable, ConstraintTarget, Scrollable):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -33024,7 +33028,7 @@ class VolumeButton(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -33071,7 +33075,7 @@ class VolumeButton(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -33173,7 +33177,7 @@ class Widget(GObject.InitiallyUnowned, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -33215,7 +33219,7 @@ class Widget(GObject.InitiallyUnowned, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -33324,32 +33328,32 @@ class Widget(GObject.InitiallyUnowned, Accessible, Buildable, ConstraintTarget):
     def get_allocated_baseline(self) -> int: ...
     def get_allocated_height(self) -> int: ...
     def get_allocated_width(self) -> int: ...
-    def get_allocation(self) -> Gdk.Rectangle: ...
+    def get_allocation(self) -> _Gdk4.Rectangle: ...
     # override
     def get_ancestor(self, widget_type: type[WidgetT]) -> WidgetT | None: ...
     def get_baseline(self) -> int: ...
     def get_can_focus(self) -> bool: ...
     def get_can_target(self) -> bool: ...
     def get_child_visible(self) -> bool: ...
-    def get_clipboard(self) -> Gdk.Clipboard: ...
-    def get_color(self) -> Gdk.RGBA: ...
+    def get_clipboard(self) -> _Gdk4.Clipboard: ...
+    def get_color(self) -> _Gdk4.RGBA: ...
     def get_css_classes(self) -> list[str]: ...
     # override
     @classmethod
     def get_css_name(cls) -> str: ...
-    def get_cursor(self) -> Gdk.Cursor | None: ...
+    def get_cursor(self) -> _Gdk4.Cursor | None: ...
     # override
     @classmethod
     def get_default_direction(cls) -> TextDirection: ...
     def get_direction(self) -> TextDirection: ...
-    def get_display(self) -> Gdk.Display: ...
+    def get_display(self) -> _Gdk4.Display: ...
     def get_first_child(self) -> Widget | None: ...
     def get_focus_child(self) -> Widget | None: ...
     def get_focus_on_click(self) -> bool: ...
     def get_focusable(self) -> bool: ...
     def get_font_map(self) -> Pango.FontMap | None: ...
     def get_font_options(self) -> cairo.FontOptions | None: ...
-    def get_frame_clock(self) -> Gdk.FrameClock | None: ...
+    def get_frame_clock(self) -> _Gdk4.FrameClock | None: ...
     def get_halign(self) -> Align: ...
     def get_has_tooltip(self) -> bool: ...
     def get_height(self) -> int: ...
@@ -33374,7 +33378,7 @@ class Widget(GObject.InitiallyUnowned, Accessible, Buildable, ConstraintTarget):
     def get_parent(self) -> Widget | None: ...
     def get_preferred_size(self) -> tuple[Requisition, Requisition]: ...
     def get_prev_sibling(self) -> Widget | None: ...
-    def get_primary_clipboard(self) -> Gdk.Clipboard: ...
+    def get_primary_clipboard(self) -> _Gdk4.Clipboard: ...
     def get_realized(self) -> bool: ...
     def get_receives_default(self) -> bool: ...
     def get_request_mode(self) -> SizeRequestMode: ...
@@ -33468,7 +33472,7 @@ class Widget(GObject.InitiallyUnowned, Accessible, Buildable, ConstraintTarget):
     # override
     @classmethod
     def set_css_name(cls, name: str) -> None: ...
-    def set_cursor(self, cursor: Gdk.Cursor | None = None) -> None: ...
+    def set_cursor(self, cursor: _Gdk4.Cursor | None = None) -> None: ...
     def set_cursor_from_name(self, name: str | None = None) -> None: ...
     # override
     @classmethod
@@ -33520,7 +33524,7 @@ class Widget(GObject.InitiallyUnowned, Accessible, Buildable, ConstraintTarget):
     def set_visible(self, visible: bool) -> None: ...
     def should_layout(self) -> bool: ...
     def show(self) -> None: ...
-    def size_allocate(self, allocation: Gdk.Rectangle, baseline: int) -> None: ...
+    def size_allocate(self, allocation: _Gdk4.Rectangle, baseline: int) -> None: ...
     def snapshot_child(self, child: Widget, snapshot: Snapshot) -> None: ...
     def translate_coordinates(
         self, dest_widget: Widget, src_x: float, src_y: float
@@ -33604,7 +33608,7 @@ class WidgetClass(GObject.GPointer):
 
 class WidgetClassPrivate(GObject.GPointer): ...
 
-class WidgetPaintable(GObject.Object, Gdk.Paintable):
+class WidgetPaintable(GObject.Object, _Gdk4.Paintable):
     """
     :Constructors:
 
@@ -33760,7 +33764,7 @@ class Window(
         default_width: int
         deletable: bool
         destroy_with_parent: bool
-        display: Gdk.Display
+        display: _Gdk4.Display
         focus_visible: bool
         focus_widget: Widget | None
         fullscreened: bool
@@ -33781,7 +33785,7 @@ class Window(
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -33827,7 +33831,7 @@ class Window(
         default_width: int = ...,
         deletable: bool = ...,
         destroy_with_parent: bool = ...,
-        display: Gdk.Display = ...,
+        display: _Gdk4.Display = ...,
         focus_visible: bool = ...,
         focus_widget: Widget | None = ...,
         fullscreened: bool = ...,
@@ -33847,7 +33851,7 @@ class Window(
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -33883,7 +33887,7 @@ class Window(
     def do_enable_debugging(self, toggle: bool) -> bool: ...
     def do_keys_changed(self) -> None: ...
     def fullscreen(self) -> None: ...
-    def fullscreen_on_monitor(self, monitor: Gdk.Monitor) -> None: ...
+    def fullscreen_on_monitor(self, monitor: _Gdk4.Monitor) -> None: ...
     def get_application(self) -> Application | None: ...
     def get_child(self) -> Widget | None: ...
     def get_decorated(self) -> bool: ...
@@ -33933,7 +33937,7 @@ class Window(
     def set_default_widget(self, default_widget: Widget | None = None) -> None: ...
     def set_deletable(self, setting: bool) -> None: ...
     def set_destroy_with_parent(self, setting: bool) -> None: ...
-    def set_display(self, display: Gdk.Display) -> None: ...
+    def set_display(self, display: _Gdk4.Display) -> None: ...
     def set_focus(self, focus: Widget | None = None) -> None: ...
     def set_focus_visible(self, setting: bool) -> None: ...
     def set_gravity(self, gravity: WindowGravity) -> None: ...
@@ -34051,7 +34055,7 @@ class WindowControls(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -34094,7 +34098,7 @@ class WindowControls(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
@@ -34254,7 +34258,7 @@ class WindowHandle(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool
         css_classes: list[str]
         css_name: str
-        cursor: Gdk.Cursor | None
+        cursor: _Gdk4.Cursor | None
         focus_on_click: bool
         focusable: bool
         halign: Align
@@ -34295,7 +34299,7 @@ class WindowHandle(Widget, Accessible, Buildable, ConstraintTarget):
         can_target: bool = ...,
         css_classes: Sequence[str] = ...,
         css_name: str = ...,
-        cursor: Gdk.Cursor | None = ...,
+        cursor: _Gdk4.Cursor | None = ...,
         focus_on_click: bool = ...,
         focusable: bool = ...,
         halign: Align = ...,
