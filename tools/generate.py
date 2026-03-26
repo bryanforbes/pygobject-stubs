@@ -466,7 +466,23 @@ def _build_function(
             return _wrapped_strip_boolean_result(stub, name, function, in_class)
 
     if isinstance(function, GI.FunctionInfo) or isinstance(function, GI.VFuncInfo):
+        if in_class is None and function.get_namespace() != stub.namespace:
+            # Set up a constant for functions that are aliases
+            return f"{name}: {stub.get_final()} = {
+                stub.get_namespace_member(function.get_namespace(), function.get_name())
+            }\n"
+
         return _build_function_info(stub, name, function, in_class)
+
+    if in_class is None and function.__module__.startswith(
+        ("gi.overrides.", "gi.repository.")
+    ):
+        _, func_namespace = function.__module__.rsplit(".", 1)
+        if func_namespace != stub.namespace:
+            # Set up a constant for functions that are aliases
+            return f"{name}: {stub.get_final()} = {
+                stub.get_namespace_member(func_namespace, function.__name__)
+            }\n"
 
     signature_string: str
     missing_annotation = False
@@ -657,6 +673,18 @@ class Stub:
             _import = self.__add_import("gi.repository", namespace)
 
         return f"{_import.symbol}.{name}"
+
+    def get_final(self, annotation: str | None = None) -> str:
+        final_symbol = self.get_import("typing", "Final")
+
+        if annotation is None:
+            return final_symbol
+
+        return (
+            annotation
+            if f"{final_symbol}[" in annotation
+            else f"{final_symbol}[{annotation}]"
+        )
 
     def __replace_typing(self, match: re.Match[str]) -> str:
         match match.group("name"):
@@ -868,19 +896,30 @@ def _gi_build_stub_parts(
     # Functions
     if "__new__" in functions or (in_class and issubclass(in_class, GObject.GObject)):
         functions.pop("__init__", None)
-    for name in sorted(functions):
+
+    for name, func in sorted(functions.items()):
         override = stub.check_override(prefix_name, name)
         if override:
             ret += override + "\n"
             continue
 
-        ret += _build_function(stub, name, functions[name], in_class)
+        ret += _build_function(stub, name, func, in_class)
 
     if ret and classes:
         ret += "\n"
 
     # Classes
     for name, obj in sorted(classes.items()):
+        if in_class is None and obj.__module__.startswith(
+            ("gi.overrides.", "gi.repository.")
+        ):
+            _, class_namespace = obj.__module__.rsplit(".", 1)
+            if class_namespace != stub.namespace:
+                ret += f"{name}: {stub.get_final()} = {
+                    stub.get_namespace_member(class_namespace, obj.__qualname__)
+                }\n"
+                continue
+
         override = stub.check_override(prefix_name, name)
         if override:
             ret += override + "\n\n"
