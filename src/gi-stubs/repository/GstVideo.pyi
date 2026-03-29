@@ -1,5 +1,4 @@
 from typing import Any
-from typing import Protocol
 from typing import TypeVar
 from typing_extensions import Self
 
