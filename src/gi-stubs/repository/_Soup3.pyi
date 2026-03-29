@@ -138,7 +138,7 @@ class Auth(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         authority: str
         is_authenticated: bool
         is_cancelled: bool
@@ -146,8 +146,10 @@ class Auth(GObject.Object):
         realm: str
         scheme_name: str
 
-    props: Props = ...
-    parent_instance: GObject.Object = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> GObject.Object: ...
     def __init__(
         self, authority: str = ..., is_for_proxy: bool = ..., realm: str = ...
     ) -> None: ...
@@ -203,7 +205,7 @@ class AuthBasic(Auth):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Auth.Props):
         authority: str
         is_authenticated: bool
         is_cancelled: bool
@@ -211,7 +213,8 @@ class AuthBasic(Auth):
         realm: str
         scheme_name: str
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self, authority: str = ..., is_for_proxy: bool = ..., realm: str = ...
     ) -> None: ...
@@ -265,7 +268,7 @@ class AuthDigest(Auth):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Auth.Props):
         authority: str
         is_authenticated: bool
         is_cancelled: bool
@@ -273,7 +276,8 @@ class AuthDigest(Auth):
         realm: str
         scheme_name: str
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self, authority: str = ..., is_for_proxy: bool = ..., realm: str = ...
     ) -> None: ...
@@ -307,7 +311,7 @@ class AuthDomain(GObject.Object):
     """
 
     # override
-    class Props:
+    class Props(GObject.Object.Props):
         filter: Callable[..., bool]
         filter_data: None
         generic_auth_callback: Callable[..., bool]
@@ -316,8 +320,10 @@ class AuthDomain(GObject.Object):
         realm: str
 
     # override
-    props: Props = ...
-    parent_instance: GObject.Object = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> GObject.Object: ...
     # override
     def __init__(
         self,
@@ -382,7 +388,7 @@ class AuthDomainBasic(AuthDomain):
     """
 
     # override
-    class Props:
+    class Props(AuthDomain.Props):
         auth_callback: Callable[..., bool]
         auth_data: None
         filter: Callable[..., bool]
@@ -393,7 +399,8 @@ class AuthDomainBasic(AuthDomain):
         realm: str
 
     # override
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     # override
     def __init__(
         self,
@@ -471,7 +478,7 @@ class AuthDomainDigest(AuthDomain):
     """
 
     # override
-    class Props:
+    class Props(AuthDomain.Props):
         auth_callback: Callable[..., str | None]
         auth_data: None
         filter: Callable[..., bool]
@@ -482,7 +489,8 @@ class AuthDomainDigest(AuthDomain):
         realm: str
 
     # override
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     # override
     def __init__(
         self,
@@ -569,8 +577,7 @@ class AuthNTLM(Auth):
     Signals from GObject:
       notify (GParam)
     """
-
-    class Props:
+    class Props(Auth.Props):
         authority: str
         is_authenticated: bool
         is_cancelled: bool
@@ -578,7 +585,8 @@ class AuthNTLM(Auth):
         realm: str
         scheme_name: str
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self, authority: str = ..., is_for_proxy: bool = ..., realm: str = ...
     ) -> None: ...
@@ -610,8 +618,7 @@ class AuthNegotiate(Auth):
     Signals from GObject:
       notify (GParam)
     """
-
-    class Props:
+    class Props(Auth.Props):
         authority: str
         is_authenticated: bool
         is_cancelled: bool
@@ -619,7 +626,8 @@ class AuthNegotiate(Auth):
         realm: str
         scheme_name: str
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self, authority: str = ..., is_for_proxy: bool = ..., realm: str = ...
     ) -> None: ...
@@ -647,12 +655,14 @@ class Cache(GObject.Object, SessionFeature):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         cache_dir: str
         cache_type: CacheType
 
-    props: Props = ...
-    parent_instance: GObject.Object = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> GObject.Object: ...
     def __init__(self, cache_dir: str = ..., cache_type: CacheType = ...) -> None: ...
     def clear(self) -> None: ...
     def do_get_cacheability(self, msg: Message) -> Cacheability: ...
@@ -784,12 +794,14 @@ class CookieJar(GObject.Object, SessionFeature):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         accept_policy: CookieJarAcceptPolicy
         read_only: bool
 
-    props: Props = ...
-    parent_instance: GObject.Object = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> GObject.Object: ...
     def __init__(
         self, accept_policy: CookieJarAcceptPolicy = ..., read_only: bool = ...
     ) -> None: ...
@@ -872,12 +884,13 @@ class CookieJarDB(CookieJar, SessionFeature):
       notify (GParam)
     """
 
-    class Props:
+    class Props(CookieJar.Props):
         filename: str
         accept_policy: CookieJarAcceptPolicy
         read_only: bool
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         filename: str = ...,
@@ -926,12 +939,13 @@ class CookieJarText(CookieJar, SessionFeature):
       notify (GParam)
     """
 
-    class Props:
+    class Props(CookieJar.Props):
         filename: str
         accept_policy: CookieJarAcceptPolicy
         read_only: bool
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         filename: str = ...,
@@ -970,7 +984,8 @@ class HSTSEnforcer(GObject.Object, SessionFeature):
       notify (GParam)
     """
 
-    parent_instance: GObject.Object = ...
+    @property
+    def parent_instance(self) -> GObject.Object: ...
     def do_changed(self, old_policy: HSTSPolicy, new_policy: HSTSPolicy) -> None: ...
     def do_has_valid_policy(self, domain: str) -> bool: ...
     def do_is_persistent(self) -> bool: ...
@@ -1020,10 +1035,11 @@ class HSTSEnforcerDB(HSTSEnforcer, SessionFeature):
       notify (GParam)
     """
 
-    class Props:
+    class Props(HSTSEnforcer.Props):
         filename: str
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, filename: str = ...) -> None: ...
     @classmethod
     def new(cls, filename: str) -> HSTSEnforcerDB: ...
@@ -1094,11 +1110,12 @@ class Logger(GObject.Object, SessionFeature):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         level: LoggerLogLevel
         max_body_size: int
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self, level: LoggerLogLevel = ..., max_body_size: int = ...
     ) -> None: ...
@@ -1205,7 +1222,7 @@ class Message(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         first_party: GLib.Uri
         flags: MessageFlags
         http_version: HTTPVersion
@@ -1225,7 +1242,8 @@ class Message(GObject.Object):
         tls_protocol_version: Gio.TlsProtocolVersion
         uri: GLib.Uri
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         first_party: GLib.Uri = ...,
@@ -1477,12 +1495,13 @@ class MultipartInputStream(Gio.FilterInputStream, Gio.PollableInputStream):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.FilterInputStream.Props):
         message: Message
         base_stream: Gio.InputStream
         close_base_stream: bool
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         message: Message = ...,
@@ -1561,15 +1580,17 @@ class Server(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         raw_paths: bool
         server_header: str
         tls_auth_mode: Gio.TlsAuthenticationMode
         tls_certificate: Gio.TlsCertificate | None
         tls_database: Gio.TlsDatabase | None
 
-    props: Props = ...
-    parent_instance: GObject.Object = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> GObject.Object: ...
     def __init__(
         self,
         raw_paths: bool = ...,
@@ -1684,11 +1705,12 @@ class ServerMessage(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         tls_peer_certificate: Gio.TlsCertificate | None
         tls_peer_certificate_errors: Gio.TlsCertificateFlags
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def get_http_version(self) -> HTTPVersion: ...
     def get_local_address(self) -> Gio.SocketAddress | None: ...
     def get_method(self) -> str: ...
@@ -1776,7 +1798,7 @@ class Session(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         accept_language: str | None
         accept_language_auto: bool
         idle_timeout: int
@@ -1790,8 +1812,10 @@ class Session(GObject.Object):
         tls_interaction: Gio.TlsInteraction | None
         user_agent: str | None
 
-    props: Props = ...
-    parent_instance: GObject.Object = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> GObject.Object: ...
     def __init__(
         self,
         accept_language: str = ...,
@@ -1979,7 +2003,7 @@ class WebsocketConnection(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         connection_type: WebsocketConnectionType
         extensions: None
         io_stream: Gio.IOStream
@@ -1991,7 +2015,8 @@ class WebsocketConnection(GObject.Object):
         state: WebsocketState
         uri: GLib.Uri
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         connection_type: WebsocketConnectionType = ...,
@@ -2059,7 +2084,8 @@ class WebsocketExtension(GObject.Object):
       notify (GParam)
     """
 
-    parent_instance: GObject.Object = ...
+    @property
+    def parent_instance(self) -> GObject.Object: ...
     def configure(
         self,
         connection_type: WebsocketConnectionType,

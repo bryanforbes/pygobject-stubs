@@ -109,7 +109,7 @@ class Compass(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintT
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         viewport: Viewport | None
         can_focus: bool
         can_target: bool
@@ -147,7 +147,8 @@ class Compass(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintT
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         viewport: Viewport | None = ...,
@@ -214,12 +215,14 @@ class Coordinate(GObject.InitiallyUnowned, Location):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.InitiallyUnowned.Props):
         latitude: float
         longitude: float
 
-    props: Props = ...
-    parent_instance: GObject.InitiallyUnowned = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> GObject.InitiallyUnowned: ...
     def __init__(self, latitude: float = ..., longitude: float = ...) -> None: ...
     @classmethod
     def new(cls) -> Coordinate: ...
@@ -261,12 +264,14 @@ class DataSource(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         max_zoom_level: int
         min_zoom_level: int
 
-    props: Props = ...
-    parent_instance: GObject.Object = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> GObject.Object: ...
     def __init__(
         self, max_zoom_level: int = ..., min_zoom_level: int = ...
     ) -> None: ...
@@ -355,7 +360,7 @@ class DataSourceRequest(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         completed: bool
         data: GLib.Bytes | None
         error: GLib.Error | None
@@ -363,8 +368,10 @@ class DataSourceRequest(GObject.Object):
         y: int
         zoom_level: int
 
-    props: Props = ...
-    parent_instance: GObject.Object = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> GObject.Object: ...
     def __init__(self, x: int = ..., y: int = ..., zoom_level: int = ...) -> None: ...
     def complete(self) -> None: ...
     def emit_data(self, data: GLib.Bytes, complete: bool) -> None: ...
@@ -413,12 +420,13 @@ class FileCache(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         cache_dir: str
         cache_key: str
         size_limit: int
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self, cache_dir: str = ..., cache_key: str = ..., size_limit: int = ...
     ) -> None: ...
@@ -543,7 +551,7 @@ class Layer(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTar
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         viewport: Viewport
         can_focus: bool
         can_target: bool
@@ -581,8 +589,10 @@ class Layer(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTar
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
-    parent_instance: _Gtk4.Widget = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk4.Widget: ...
     def __init__(
         self,
         viewport: Viewport = ...,
@@ -705,7 +715,7 @@ class License(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintT
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         extra_text: str
         xalign: float
         can_focus: bool
@@ -744,7 +754,8 @@ class License(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintT
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         extra_text: str = ...,
@@ -910,7 +921,7 @@ class Map(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarge
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         animate_zoom: bool
         go_to_duration: int
         state: State
@@ -952,7 +963,8 @@ class Map(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarge
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         animate_zoom: bool = ...,
@@ -1110,7 +1122,7 @@ class MapLayer(Layer, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget)
       notify (GParam)
     """
 
-    class Props:
+    class Props(Layer.Props):
         map_source: MapSource
         viewport: Viewport
         can_focus: bool
@@ -1149,7 +1161,8 @@ class MapLayer(Layer, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget)
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         map_source: MapSource = ...,
@@ -1231,7 +1244,7 @@ class MapSource(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         id: str
         license: str
         license_uri: str
@@ -1241,8 +1254,10 @@ class MapSource(GObject.Object):
         projection: MapProjection
         tile_size: int
 
-    props: Props = ...
-    parent_instance: GObject.Object = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> GObject.Object: ...
     def __init__(
         self,
         id: str = ...,
@@ -1424,7 +1439,7 @@ class Marker(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         child: _Gtk4.Widget | None
         selectable: bool
         can_focus: bool
@@ -1465,8 +1480,10 @@ class Marker(
         latitude: float
         longitude: float
 
-    props: Props = ...
-    parent_instance: _Gtk4.Widget = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk4.Widget: ...
     def __init__(
         self,
         child: _Gtk4.Widget | None = ...,
@@ -1609,7 +1626,7 @@ class MarkerLayer(Layer, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarg
       notify (GParam)
     """
 
-    class Props:
+    class Props(Layer.Props):
         selection_mode: _Gtk4.SelectionMode
         viewport: Viewport
         can_focus: bool
@@ -1648,7 +1665,8 @@ class MarkerLayer(Layer, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarg
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         selection_mode: _Gtk4.SelectionMode = ...,
@@ -1799,7 +1817,7 @@ class PathLayer(Layer, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
       notify (GParam)
     """
 
-    class Props:
+    class Props(Layer.Props):
         closed: bool
         fill: bool
         fill_color: _Gdk4.RGBA
@@ -1845,7 +1863,8 @@ class PathLayer(Layer, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         closed: bool = ...,
@@ -1999,7 +2018,7 @@ class Point(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Marker.Props):
         child: _Gtk4.Widget | None
         selectable: bool
         can_focus: bool
@@ -2040,7 +2059,8 @@ class Point(
         latitude: float
         longitude: float
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         child: _Gtk4.Widget | None = ...,
@@ -2132,7 +2152,7 @@ class RasterRenderer(MapSource):
       notify (GParam)
     """
 
-    class Props:
+    class Props(MapSource.Props):
         data_source: DataSource
         id: str
         license: str
@@ -2143,7 +2163,8 @@ class RasterRenderer(MapSource):
         projection: MapProjection
         tile_size: int
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         data_source: DataSource = ...,
@@ -2272,7 +2293,7 @@ class Scale(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTar
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         max_width: int
         unit: Unit
         viewport: Viewport | None
@@ -2312,7 +2333,8 @@ class Scale(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTar
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         max_width: int = ...,
@@ -2456,7 +2478,7 @@ class SimpleMap(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         compass: Compass
         license: License
         map: Map
@@ -2500,7 +2522,8 @@ class SimpleMap(
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         map_source: MapSource | None = ...,
@@ -2584,14 +2607,15 @@ class SymbolEvent(GObject.Object, Location):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         feature_id: str
         layer: str
         source_layer: str
         latitude: float
         longitude: float
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, latitude: float = ..., longitude: float = ...) -> None: ...
     def get_feature_id(self) -> str: ...
     def get_keys(self) -> list[str]: ...
@@ -2644,7 +2668,7 @@ class Tile(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         fade_in: bool
         paintable: _Gdk4.Paintable | None
         scale_factor: float
@@ -2654,7 +2678,8 @@ class Tile(GObject.Object):
         y: int
         zoom_level: int
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         fade_in: bool = ...,
@@ -2726,12 +2751,13 @@ class TileDownloader(DataSource):
       notify (GParam)
     """
 
-    class Props:
+    class Props(DataSource.Props):
         url_template: str
         max_zoom_level: int
         min_zoom_level: int
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         url_template: str = ...,
@@ -2800,10 +2826,11 @@ class VectorReaderIter(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         reader: VectorReader
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, reader: VectorReader = ...) -> None: ...
     def feature_contains_point(self, x: float, y: float) -> bool: ...
     def get_feature_geometry_type(self) -> GeometryType: ...
@@ -2871,7 +2898,7 @@ class VectorRenderer(MapSource, Gio.Initable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(MapSource.Props):
         sprite_sheet: VectorSpriteSheet
         style_json: str
         id: str
@@ -2883,7 +2910,8 @@ class VectorRenderer(MapSource, Gio.Initable):
         projection: MapProjection
         tile_size: int
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         sprite_sheet: VectorSpriteSheet = ...,
@@ -2951,14 +2979,15 @@ class VectorSprite(GObject.Object, _Gdk4.Paintable, _Gtk4.SymbolicPaintable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         height: int
         scale_factor: float
         source_paintable: _Gdk4.Paintable
         source_rect: _Gdk4.Rectangle | None
         width: int
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         height: int = ...,
@@ -3061,7 +3090,7 @@ class Viewport(GObject.Object, Location):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         max_zoom_level: int
         min_zoom_level: int
         reference_map_source: MapSource | None
@@ -3070,7 +3099,8 @@ class Viewport(GObject.Object, Location):
         latitude: float
         longitude: float
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         max_zoom_level: int = ...,

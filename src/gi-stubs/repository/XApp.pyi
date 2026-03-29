@@ -442,7 +442,7 @@ class GtkWindow(_Gtk3.Window, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Window.Props):
         accept_focus: bool
         application: _Gtk3.Application | None
         attached_to: _Gtk3.Widget | None
@@ -519,8 +519,10 @@ class GtkWindow(_Gtk3.Window, Atk.ImplementorIface, _Gtk3.Buildable):
         startup_id: str
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: _Gtk3.Window = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk3.Window: ...
     def __init__(
         self,
         accept_focus: bool = ...,
@@ -834,7 +836,7 @@ class IconChooserButton(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Button.Props):
         category: str
         icon: str
         icon_size: _Gtk3.IconSize
@@ -894,7 +896,8 @@ class IconChooserButton(
         use_action_appearance: bool
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         category: str = ...,
@@ -1241,7 +1244,7 @@ class IconChooserDialog(GtkWindow, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GtkWindow.Props):
         allow_paths: bool
         default_icon: str
         icon_size: IconSize
@@ -1321,7 +1324,8 @@ class IconChooserDialog(GtkWindow, Atk.ImplementorIface, _Gtk3.Buildable):
         startup_id: str
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         allow_paths: bool = ...,
@@ -1446,12 +1450,14 @@ class KbdLayoutController(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         enabled: bool
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     parent_object: GObject.Object = ...
-    priv: KbdLayoutControllerPrivate = ...
+    @property
+    def priv(self) -> KbdLayoutControllerPrivate: ...
     def get_all_names(self) -> list[str]: ...
     def get_current_flag_id(self) -> int: ...
     def get_current_group(self) -> int: ...
@@ -1601,7 +1607,7 @@ class ObjectManagerClient(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusObjectManagerClient.Props):
         connection: Gio.DBusConnection
         flags: Gio.DBusObjectManagerClientFlags
         get_proxy_type_destroy_notify: None
@@ -1612,9 +1618,12 @@ class ObjectManagerClient(
         object_path: str
         bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusObjectManagerClient = ...
-    priv: ObjectManagerClientPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusObjectManagerClient: ...
+    @property
+    def priv(self) -> ObjectManagerClientPrivate: ...
     def __init__(
         self,
         bus_type: Gio.BusType = ...,
@@ -1718,14 +1727,17 @@ class ObjectProxy(Gio.DBusObjectProxy, Gio.DBusObject, Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusObjectProxy.Props):
         g_connection: Gio.DBusConnection
         g_object_path: str
         status_icon_interface: StatusIconInterface | None
 
-    props: Props = ...
-    parent_instance: Gio.DBusObjectProxy = ...
-    priv: ObjectProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusObjectProxy: ...
+    @property
+    def priv(self) -> ObjectProxyPrivate: ...
     def __init__(
         self,
         g_connection: Gio.DBusConnection = ...,
@@ -1778,13 +1790,16 @@ class ObjectSkeleton(Gio.DBusObjectSkeleton, Gio.DBusObject, Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusObjectSkeleton.Props):
         g_object_path: str
         status_icon_interface: StatusIconInterface | None
 
-    props: Props = ...
-    parent_instance: Gio.DBusObjectSkeleton = ...
-    priv: ObjectSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusObjectSkeleton: ...
+    @property
+    def priv(self) -> ObjectSkeletonPrivate: ...
     def __init__(
         self, g_object_path: str = ..., status_icon_interface: StatusIconInterface = ...
     ): ...
@@ -2065,7 +2080,7 @@ class PreferencesWindow(_Gtk3.Window, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Window.Props):
         accept_focus: bool
         application: _Gtk3.Application | None
         attached_to: _Gtk3.Widget | None
@@ -2142,8 +2157,10 @@ class PreferencesWindow(_Gtk3.Window, Atk.ImplementorIface, _Gtk3.Buildable):
         startup_id: str
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: _Gtk3.Window = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk3.Window: ...
     def __init__(
         self,
         accept_focus: bool = ...,
@@ -2417,7 +2434,7 @@ class StackSidebar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         stack: _Gtk3.Stack | None
         border_width: int
         resize_mode: _Gtk3.ResizeMode
@@ -2462,7 +2479,8 @@ class StackSidebar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         stack: _Gtk3.Stack = ...,
@@ -2554,13 +2572,14 @@ class StatusIcon(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         icon_size: int
         name: str
         primary_menu: _Gtk3.Widget
         secondary_menu: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         icon_size: int = ...,
@@ -2767,7 +2786,7 @@ class StatusIconInterfaceProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -2787,9 +2806,12 @@ class StatusIconInterfaceProxy(
         visible: bool
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: StatusIconInterfaceProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> StatusIconInterfaceProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -2895,7 +2917,7 @@ class StatusIconInterfaceSkeleton(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
         icon_name: str
         icon_size: int
@@ -2907,9 +2929,12 @@ class StatusIconInterfaceSkeleton(
         tooltip_text: str
         visible: bool
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: StatusIconInterfaceSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> StatusIconInterfaceSkeletonPrivate: ...
     def __init__(
         self,
         g_flags: Gio.DBusInterfaceSkeletonFlags = ...,
@@ -2992,10 +3017,11 @@ class StyleManager(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         widget: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, widget: _Gtk3.Widget = ...): ...
     def get_widget(self) -> _Gtk3.Widget: ...
     @classmethod
@@ -3089,7 +3115,7 @@ class SwitcherooControlProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -3103,9 +3129,12 @@ class SwitcherooControlProxy(
         num_gpus: int
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: SwitcherooControlProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> SwitcherooControlProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -3200,15 +3229,18 @@ class SwitcherooControlSkeleton(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
         gpus: GLib.Variant
         has_dual_gpu: bool
         num_gpus: int
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: SwitcherooControlSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> SwitcherooControlSkeletonPrivate: ...
     def __init__(
         self,
         g_flags: Gio.DBusInterfaceSkeletonFlags = ...,

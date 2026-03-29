@@ -221,7 +221,7 @@ class AccountProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -254,9 +254,12 @@ class AccountProxy(
         todo_disabled: bool
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: AccountProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> AccountProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -372,7 +375,7 @@ class AccountSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Account):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
         attention_needed: bool
         calendar_disabled: bool
@@ -397,9 +400,12 @@ class AccountSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Account):
         ticketing_disabled: bool
         todo_disabled: bool
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: AccountSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> AccountSkeletonPrivate: ...
     def __init__(
         self,
         g_flags: Gio.DBusInterfaceSkeletonFlags = ...,
@@ -514,7 +520,7 @@ class CalendarProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -527,9 +533,12 @@ class CalendarProxy(
         uri: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: CalendarProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> CalendarProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -621,14 +630,17 @@ class CalendarSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Calendar):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
         accept_ssl_errors: bool
         uri: str
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: CalendarSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> CalendarSkeletonPrivate: ...
     def __init__(
         self,
         g_flags: Gio.DBusInterfaceSkeletonFlags = ...,
@@ -721,7 +733,7 @@ class ChatProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -732,9 +744,12 @@ class ChatProxy(
         g_object_path: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: ChatProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> ChatProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -824,12 +839,15 @@ class ChatSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Chat):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: ChatSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> ChatSkeletonPrivate: ...
     def __init__(self, g_flags: Gio.DBusInterfaceSkeletonFlags = ...): ...
     @classmethod
     def new(cls) -> ChatSkeleton: ...
@@ -872,10 +890,11 @@ class Client(GObject.Object, Gio.AsyncInitable, Gio.Initable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         object_manager: Gio.DBusObjectManager
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def get_accounts(self) -> list[Object]: ...
     def get_manager(self) -> Manager | None: ...
     def get_object_manager(self) -> Gio.DBusObjectManager: ...
@@ -974,7 +993,7 @@ class ContactsProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -987,9 +1006,12 @@ class ContactsProxy(
         uri: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: ContactsProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> ContactsProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -1081,14 +1103,17 @@ class ContactsSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Contacts):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
         accept_ssl_errors: bool
         uri: str
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: ContactsSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> ContactsSkeletonPrivate: ...
     def __init__(
         self,
         g_flags: Gio.DBusInterfaceSkeletonFlags = ...,
@@ -1181,7 +1206,7 @@ class DocumentsProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -1192,9 +1217,12 @@ class DocumentsProxy(
         g_object_path: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: DocumentsProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> DocumentsProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -1284,12 +1312,15 @@ class DocumentsSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Documents)
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: DocumentsSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> DocumentsSkeletonPrivate: ...
     def __init__(self, g_flags: Gio.DBusInterfaceSkeletonFlags = ...): ...
     @classmethod
     def new(cls) -> DocumentsSkeleton: ...
@@ -1379,7 +1410,7 @@ class ExchangeProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -1392,9 +1423,12 @@ class ExchangeProxy(
         host: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: ExchangeProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> ExchangeProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -1486,14 +1520,17 @@ class ExchangeSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Exchange):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
         accept_ssl_errors: bool
         host: str
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: ExchangeSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> ExchangeSkeletonPrivate: ...
     def __init__(
         self,
         g_flags: Gio.DBusInterfaceSkeletonFlags = ...,
@@ -1588,7 +1625,7 @@ class FilesProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -1601,9 +1638,12 @@ class FilesProxy(
         uri: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: FilesProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> FilesProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -1695,14 +1735,17 @@ class FilesSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Files):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
         accept_ssl_errors: bool
         uri: str
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: FilesSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> FilesSkeletonPrivate: ...
     def __init__(
         self,
         g_flags: Gio.DBusInterfaceSkeletonFlags = ...,
@@ -1813,7 +1856,7 @@ class MailProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -1842,9 +1885,12 @@ class MailProxy(
         smtp_user_name: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: MailProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> MailProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -1952,7 +1998,7 @@ class MailSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Mail):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
         email_address: str
         imap_accept_ssl_errors: bool
@@ -1973,9 +2019,12 @@ class MailSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Mail):
         smtp_use_tls: bool
         smtp_user_name: str
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: MailSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> MailSkeletonPrivate: ...
     def __init__(
         self,
         g_flags: Gio.DBusInterfaceSkeletonFlags = ...,
@@ -2135,7 +2184,7 @@ class ManagerProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -2146,9 +2195,12 @@ class ManagerProxy(
         g_object_path: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: ManagerProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> ManagerProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -2242,12 +2294,15 @@ class ManagerSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Manager):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: ManagerSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> ManagerSkeletonPrivate: ...
     def __init__(self, g_flags: Gio.DBusInterfaceSkeletonFlags = ...): ...
     @classmethod
     def new(cls) -> ManagerSkeleton: ...
@@ -2335,7 +2390,7 @@ class MapsProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -2346,9 +2401,12 @@ class MapsProxy(
         g_object_path: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: MapsProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> MapsProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -2438,12 +2496,15 @@ class MapsSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Maps):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: MapsSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> MapsSkeletonPrivate: ...
     def __init__(self, g_flags: Gio.DBusInterfaceSkeletonFlags = ...): ...
     @classmethod
     def new(cls) -> MapsSkeleton: ...
@@ -2533,7 +2594,7 @@ class MediaServerProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -2546,9 +2607,12 @@ class MediaServerProxy(
         udn: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: MediaServerProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> MediaServerProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -2640,14 +2704,17 @@ class MediaServerSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, MediaSer
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
         dlna_supported: bool
         udn: str
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: MediaServerSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> MediaServerSkeletonPrivate: ...
     def __init__(
         self,
         g_flags: Gio.DBusInterfaceSkeletonFlags = ...,
@@ -2740,7 +2807,7 @@ class MusicProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -2751,9 +2818,12 @@ class MusicProxy(
         g_object_path: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: MusicProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> MusicProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -2843,12 +2913,15 @@ class MusicSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Music):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: MusicSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> MusicSkeletonPrivate: ...
     def __init__(self, g_flags: Gio.DBusInterfaceSkeletonFlags = ...): ...
     @classmethod
     def new(cls) -> MusicSkeleton: ...
@@ -2959,7 +3032,7 @@ class OAuth2BasedProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -2972,9 +3045,12 @@ class OAuth2BasedProxy(
         client_secret: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: OAuth2BasedProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> OAuth2BasedProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -3069,14 +3145,17 @@ class OAuth2BasedSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, OAuth2Ba
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
         client_id: str
         client_secret: str
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: OAuth2BasedSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> OAuth2BasedSkeletonPrivate: ...
     def __init__(
         self,
         g_flags: Gio.DBusInterfaceSkeletonFlags = ...,
@@ -3196,7 +3275,7 @@ class OAuthBasedProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -3209,9 +3288,12 @@ class OAuthBasedProxy(
         consumer_secret: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: OAuthBasedProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> OAuthBasedProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -3306,14 +3388,17 @@ class OAuthBasedSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, OAuthBase
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
         consumer_key: str
         consumer_secret: str
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: OAuthBasedSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> OAuthBasedSkeletonPrivate: ...
     def __init__(
         self,
         g_flags: Gio.DBusInterfaceSkeletonFlags = ...,
@@ -3432,7 +3517,7 @@ class ObjectManagerClient(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusObjectManagerClient.Props):
         connection: Gio.DBusConnection
         flags: Gio.DBusObjectManagerClientFlags
         get_proxy_type_destroy_notify: None
@@ -3443,9 +3528,12 @@ class ObjectManagerClient(
         object_path: str
         bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusObjectManagerClient = ...
-    priv: ObjectManagerClientPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusObjectManagerClient: ...
+    @property
+    def priv(self) -> ObjectManagerClientPrivate: ...
     def __init__(
         self,
         bus_type: Gio.BusType = ...,
@@ -3549,7 +3637,7 @@ class ObjectProxy(Gio.DBusObjectProxy, Gio.DBusObject, Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusObjectProxy.Props):
         g_connection: Gio.DBusConnection
         g_object_path: str
         account: Account | None
@@ -3573,9 +3661,12 @@ class ObjectProxy(Gio.DBusObjectProxy, Gio.DBusObject, Object):
         ticketing: Ticketing | None
         todo: Todo | None
 
-    props: Props = ...
-    parent_instance: Gio.DBusObjectProxy = ...
-    priv: ObjectProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusObjectProxy: ...
+    @property
+    def priv(self) -> ObjectProxyPrivate: ...
     def __init__(
         self,
         g_connection: Gio.DBusConnection = ...,
@@ -3647,7 +3738,7 @@ class ObjectSkeleton(Gio.DBusObjectSkeleton, Gio.DBusObject, Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusObjectSkeleton.Props):
         g_object_path: str
         account: Account | None
         calendar: Calendar | None
@@ -3670,9 +3761,12 @@ class ObjectSkeleton(Gio.DBusObjectSkeleton, Gio.DBusObject, Object):
         ticketing: Ticketing | None
         todo: Todo | None
 
-    props: Props = ...
-    parent_instance: Gio.DBusObjectSkeleton = ...
-    priv: ObjectSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusObjectSkeleton: ...
+    @property
+    def priv(self) -> ObjectSkeletonPrivate: ...
     def __init__(
         self,
         g_object_path: str = ...,
@@ -3823,7 +3917,7 @@ class PasswordBasedProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -3834,9 +3928,12 @@ class PasswordBasedProxy(
         g_object_path: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: PasswordBasedProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> PasswordBasedProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -3931,12 +4028,15 @@ class PasswordBasedSkeleton(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: PasswordBasedSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> PasswordBasedSkeletonPrivate: ...
     def __init__(self, g_flags: Gio.DBusInterfaceSkeletonFlags = ...): ...
     @classmethod
     def new(cls) -> PasswordBasedSkeleton: ...
@@ -4024,7 +4124,7 @@ class PhotosProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -4035,9 +4135,12 @@ class PhotosProxy(
         g_object_path: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: PhotosProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> PhotosProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -4127,12 +4230,15 @@ class PhotosSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Photos):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: PhotosSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> PhotosSkeletonPrivate: ...
     def __init__(self, g_flags: Gio.DBusInterfaceSkeletonFlags = ...): ...
     @classmethod
     def new(cls) -> PhotosSkeleton: ...
@@ -4220,7 +4326,7 @@ class PrintersProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -4231,9 +4337,12 @@ class PrintersProxy(
         g_object_path: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: PrintersProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> PrintersProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -4323,12 +4432,15 @@ class PrintersSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Printers):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: PrintersSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> PrintersSkeletonPrivate: ...
     def __init__(self, g_flags: Gio.DBusInterfaceSkeletonFlags = ...): ...
     @classmethod
     def new(cls) -> PrintersSkeleton: ...
@@ -4416,7 +4528,7 @@ class ReadLaterProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -4427,9 +4539,12 @@ class ReadLaterProxy(
         g_object_path: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: ReadLaterProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> ReadLaterProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -4519,12 +4634,15 @@ class ReadLaterSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, ReadLater)
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: ReadLaterSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> ReadLaterSkeletonPrivate: ...
     def __init__(self, g_flags: Gio.DBusInterfaceSkeletonFlags = ...): ...
     @classmethod
     def new(cls) -> ReadLaterSkeleton: ...
@@ -4628,7 +4746,7 @@ class TicketingProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -4640,9 +4758,12 @@ class TicketingProxy(
         details: GLib.Variant
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: TicketingProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> TicketingProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -4736,13 +4857,16 @@ class TicketingSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Ticketing)
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
         details: GLib.Variant
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: TicketingSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> TicketingSkeletonPrivate: ...
     def __init__(
         self, g_flags: Gio.DBusInterfaceSkeletonFlags = ..., details: GLib.Variant = ...
     ): ...
@@ -4832,7 +4956,7 @@ class TodoProxy(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -4843,9 +4967,12 @@ class TodoProxy(
         g_object_path: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
-    priv: TodoProxyPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
+    @property
+    def priv(self) -> TodoProxyPrivate: ...
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -4935,12 +5062,15 @@ class TodoSkeleton(Gio.DBusInterfaceSkeleton, Gio.DBusInterface, Todo):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusInterfaceSkeleton.Props):
         g_flags: Gio.DBusInterfaceSkeletonFlags
 
-    props: Props = ...
-    parent_instance: Gio.DBusInterfaceSkeleton = ...
-    priv: TodoSkeletonPrivate = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusInterfaceSkeleton: ...
+    @property
+    def priv(self) -> TodoSkeletonPrivate: ...
     def __init__(self, g_flags: Gio.DBusInterfaceSkeletonFlags = ...): ...
     @classmethod
     def new(cls) -> TodoSkeleton: ...

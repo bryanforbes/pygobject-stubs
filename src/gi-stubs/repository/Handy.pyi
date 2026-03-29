@@ -234,7 +234,7 @@ class ActionRow(
       notify (GParam)
     """
 
-    class Props:
+    class Props(PreferencesRow.Props):
         activatable_widget: _Gtk3.Widget | None
         icon_name: str
         subtitle: str | None
@@ -289,8 +289,10 @@ class ActionRow(
         action_target: GLib.Variant
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: PreferencesRow = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> PreferencesRow: ...
     def __init__(
         self,
         activatable_widget: _Gtk3.Widget | None = ...,
@@ -651,7 +653,7 @@ class ApplicationWindow(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.ApplicationWindow.Props):
         show_menubar: bool
         accept_focus: bool
         application: _Gtk3.Application | None
@@ -729,8 +731,10 @@ class ApplicationWindow(
         startup_id: str
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: _Gtk3.ApplicationWindow = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk3.ApplicationWindow: ...
     def __init__(
         self,
         show_menubar: bool = ...,
@@ -996,7 +1000,7 @@ class Avatar(_Gtk3.DrawingArea, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.DrawingArea.Props):
         icon_name: str | None
         loadable_icon: Gio.LoadableIcon | None
         show_initials: bool
@@ -1042,7 +1046,8 @@ class Avatar(_Gtk3.DrawingArea, Atk.ImplementorIface, _Gtk3.Buildable):
         width_request: int
         window: _Gdk3.Window | None
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         icon_name: str | None = ...,
@@ -1342,7 +1347,7 @@ class Carousel(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.EventBox.Props):
         allow_long_swipes: bool
         allow_mouse_drag: bool
         allow_scroll_wheel: bool
@@ -1398,7 +1403,8 @@ class Carousel(
         orientation: _Gtk3.Orientation
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         allow_long_swipes: bool = ...,
@@ -1658,7 +1664,7 @@ class CarouselIndicatorDots(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.DrawingArea.Props):
         carousel: Carousel | None
         app_paintable: bool
         can_default: bool
@@ -1701,7 +1707,8 @@ class CarouselIndicatorDots(
         window: _Gdk3.Window | None
         orientation: _Gtk3.Orientation
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         carousel: Carousel | None = ...,
@@ -1931,7 +1938,7 @@ class CarouselIndicatorLines(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.DrawingArea.Props):
         carousel: Carousel | None
         app_paintable: bool
         can_default: bool
@@ -1974,7 +1981,8 @@ class CarouselIndicatorLines(
         window: _Gdk3.Window | None
         orientation: _Gtk3.Orientation
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         carousel: Carousel | None = ...,
@@ -2218,7 +2226,7 @@ class Clamp(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable, _Gtk3.Orientable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         maximum_size: int
         tightening_threshold: int
         border_width: int
@@ -2265,7 +2273,8 @@ class Clamp(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable, _Gtk3.Orientable):
         orientation: _Gtk3.Orientation
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         maximum_size: int = ...,
@@ -2547,7 +2556,7 @@ class ComboRow(ActionRow, Atk.ImplementorIface, _Gtk3.Actionable, _Gtk3.Buildabl
       notify (GParam)
     """
 
-    class Props:
+    class Props(ActionRow.Props):
         selected_index: int
         use_subtitle: bool
         activatable_widget: _Gtk3.Widget | None
@@ -2604,8 +2613,10 @@ class ComboRow(ActionRow, Atk.ImplementorIface, _Gtk3.Actionable, _Gtk3.Buildabl
         action_target: GLib.Variant
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: ActionRow = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> ActionRow: ...
     def __init__(
         self,
         selected_index: int = ...,
@@ -2910,7 +2921,7 @@ class Deck(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Container.Props):
         can_swipe_back: bool
         can_swipe_forward: bool
         hhomogeneous: bool
@@ -2965,8 +2976,10 @@ class Deck(
         orientation: _Gtk3.Orientation
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: _Gtk3.Container = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk3.Container: ...
     def __init__(
         self,
         can_swipe_back: bool = ...,
@@ -3308,7 +3321,7 @@ class ExpanderRow(
       notify (GParam)
     """
 
-    class Props:
+    class Props(PreferencesRow.Props):
         enable_expansion: bool
         expanded: bool
         icon_name: str
@@ -3363,8 +3376,10 @@ class ExpanderRow(
         action_target: GLib.Variant
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: PreferencesRow = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> PreferencesRow: ...
     def __init__(
         self,
         enable_expansion: bool = ...,
@@ -3664,7 +3679,7 @@ class Flap(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Container.Props):
         content: _Gtk3.Widget | None
         flap: _Gtk3.Widget | None
         flap_position: _Gtk3.PackType
@@ -3724,7 +3739,8 @@ class Flap(
         orientation: _Gtk3.Orientation
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         content: _Gtk3.Widget | None = ...,
@@ -4029,7 +4045,7 @@ class HeaderBar(_Gtk3.Container, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Container.Props):
         centering_policy: CenteringPolicy
         custom_title: _Gtk3.Widget | None
         decoration_layout: str
@@ -4085,8 +4101,10 @@ class HeaderBar(_Gtk3.Container, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: _Gtk3.Container = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk3.Container: ...
     def __init__(
         self,
         centering_policy: CenteringPolicy = ...,
@@ -4198,10 +4216,11 @@ class HeaderGroup(GObject.Object, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         decorate_all: bool
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, decorate_all: bool = ...): ...
     def add_gtk_header_bar(self, header_bar: _Gtk3.HeaderBar) -> None: ...
     def add_header_bar(self, header_bar: HeaderBar) -> None: ...
@@ -4453,7 +4472,7 @@ class Keypad(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         column_spacing: int
         end_action: _Gtk3.Widget | None
         entry: _Gtk3.Entry
@@ -4504,8 +4523,10 @@ class Keypad(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: _Gtk3.Bin = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk3.Bin: ...
     def __init__(
         self,
         column_spacing: int = ...,
@@ -4799,7 +4820,7 @@ class Leaflet(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Container.Props):
         can_swipe_back: bool
         can_swipe_forward: bool
         child_transition_duration: int
@@ -4858,8 +4879,10 @@ class Leaflet(
         orientation: _Gtk3.Orientation
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: _Gtk3.Container = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk3.Container: ...
     def __init__(
         self,
         can_swipe_back: bool = ...,
@@ -5152,7 +5175,7 @@ class PreferencesGroup(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         description: str
         title: str
         use_markup: bool
@@ -5199,8 +5222,10 @@ class PreferencesGroup(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: _Gtk3.Bin = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk3.Bin: ...
     def __init__(
         self,
         description: str = ...,
@@ -5453,7 +5478,7 @@ class PreferencesPage(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         icon_name: str | None
         title: str | None
         border_width: int
@@ -5499,8 +5524,10 @@ class PreferencesPage(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: _Gtk3.Bin = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk3.Bin: ...
     def __init__(
         self,
         icon_name: str | None = ...,
@@ -5761,7 +5788,7 @@ class PreferencesRow(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.ListBoxRow.Props):
         title: str | None
         use_underline: bool
         activatable: bool
@@ -5811,8 +5838,10 @@ class PreferencesRow(
         action_target: GLib.Variant
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: _Gtk3.ListBoxRow = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk3.ListBoxRow: ...
     def __init__(
         self,
         title: str | None = ...,
@@ -6141,7 +6170,7 @@ class PreferencesWindow(Window, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Window.Props):
         can_swipe_back: bool
         search_enabled: bool
         accept_focus: bool
@@ -6220,8 +6249,10 @@ class PreferencesWindow(Window, Atk.ImplementorIface, _Gtk3.Buildable):
         startup_id: str
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: Window = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Window: ...
     def __init__(
         self,
         can_swipe_back: bool = ...,
@@ -6502,7 +6533,7 @@ class SearchBar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         search_mode_enabled: bool
         show_close_button: bool
         border_width: int
@@ -6548,8 +6579,10 @@ class SearchBar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: _Gtk3.Bin = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk3.Bin: ...
     def __init__(
         self,
         search_mode_enabled: bool = ...,
@@ -6815,7 +6848,7 @@ class Squeezer(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Container.Props):
         homogeneous: bool
         interpolate_size: bool
         transition_duration: int
@@ -6868,7 +6901,8 @@ class Squeezer(
         orientation: _Gtk3.Orientation
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         homogeneous: bool = ...,
@@ -7136,7 +7170,7 @@ class StatusPage(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         description: str | None
         icon_name: str | None
         title: str | None
@@ -7183,7 +7217,8 @@ class StatusPage(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         description: str | None = ...,
@@ -7275,14 +7310,15 @@ class StyleManager(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         color_scheme: ColorScheme
         dark: bool
         display: _Gdk3.Display
         high_contrast: bool
         system_supports_color_schemes: bool
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self, color_scheme: ColorScheme = ..., display: _Gdk3.Display = ...
     ): ...
@@ -7372,7 +7408,7 @@ class SwipeTracker(GObject.Object, _Gtk3.Orientable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         allow_long_swipes: bool
         allow_mouse_drag: bool
         enabled: bool
@@ -7380,7 +7416,8 @@ class SwipeTracker(GObject.Object, _Gtk3.Orientable):
         swipeable: Swipeable
         orientation: _Gtk3.Orientation
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         allow_long_swipes: bool = ...,
@@ -7657,7 +7694,7 @@ class TabBar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         autohide: bool
         end_action_widget: _Gtk3.Widget | None
         expand_tabs: bool
@@ -7710,7 +7747,8 @@ class TabBar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         autohide: bool = ...,
@@ -7830,7 +7868,7 @@ class TabPage(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         child: _Gtk3.Widget
         icon: Gio.Icon | None
         indicator_activatable: bool
@@ -7843,7 +7881,8 @@ class TabPage(GObject.Object):
         title: str | None
         tooltip: str | None
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         child: _Gtk3.Widget = ...,
@@ -8091,7 +8130,7 @@ class TabView(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         default_icon: Gio.Icon
         is_transferring_page: bool
         menu_model: Gio.MenuModel | None
@@ -8142,7 +8181,8 @@ class TabView(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         default_icon: Gio.Icon = ...,
@@ -8427,7 +8467,7 @@ class TitleBar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         selection_mode: bool
         border_width: int
         resize_mode: _Gtk3.ResizeMode
@@ -8472,7 +8512,8 @@ class TitleBar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         selection_mode: bool = ...,
@@ -8551,10 +8592,11 @@ class ValueObject(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         value: Any
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, value: Any = ...): ...
     def copy_value(self, dest: Any) -> None: ...
     def dup_string(self) -> str: ...
@@ -8762,7 +8804,7 @@ class ViewSwitcher(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         narrow_ellipsize: Pango.EllipsizeMode
         policy: ViewSwitcherPolicy
         stack: _Gtk3.Stack | None
@@ -8809,7 +8851,8 @@ class ViewSwitcher(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         narrow_ellipsize: Pango.EllipsizeMode = ...,
@@ -9052,7 +9095,7 @@ class ViewSwitcherBar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         policy: ViewSwitcherPolicy
         reveal: bool
         stack: _Gtk3.Stack | None
@@ -9099,7 +9142,8 @@ class ViewSwitcherBar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         policy: ViewSwitcherPolicy = ...,
@@ -9370,7 +9414,7 @@ class ViewSwitcherTitle(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Bin.Props):
         policy: ViewSwitcherPolicy
         stack: _Gtk3.Stack | None
         subtitle: str | None
@@ -9420,7 +9464,8 @@ class ViewSwitcherTitle(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         policy: ViewSwitcherPolicy = ...,
@@ -9748,7 +9793,7 @@ class Window(_Gtk3.Window, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.Window.Props):
         accept_focus: bool
         application: _Gtk3.Application | None
         attached_to: _Gtk3.Widget | None
@@ -9825,8 +9870,10 @@ class Window(_Gtk3.Window, Atk.ImplementorIface, _Gtk3.Buildable):
         startup_id: str
         child: _Gtk3.Widget
 
-    props: Props = ...
-    parent_instance: _Gtk3.Window = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk3.Window: ...
     def __init__(
         self,
         accept_focus: bool = ...,
@@ -10099,7 +10146,7 @@ class WindowHandle(_Gtk3.EventBox, Atk.ImplementorIface, _Gtk3.Buildable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk3.EventBox.Props):
         above_child: bool
         visible_window: bool
         border_width: int
@@ -10145,7 +10192,8 @@ class WindowHandle(_Gtk3.EventBox, Atk.ImplementorIface, _Gtk3.Buildable):
         window: _Gdk3.Window | None
         child: _Gtk3.Widget
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         above_child: bool = ...,

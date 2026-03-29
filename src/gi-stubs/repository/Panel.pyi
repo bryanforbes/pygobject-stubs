@@ -170,7 +170,7 @@ class Application(Adw.Application, Gio.ActionGroup, Gio.ActionMap):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Adw.Application.Props):
         style_manager: Adw.StyleManager
         active_window: _Gtk4.Window | None
         menubar: Gio.MenuModel | None
@@ -185,8 +185,10 @@ class Application(Adw.Application, Gio.ActionGroup, Gio.ActionMap):
         resource_base_path: str | None
         action_group: Gio.ActionGroup | None
 
-    props: Props = ...
-    parent_instance: Adw.Application = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Adw.Application: ...
     def __init__(
         self,
         menubar: Gio.MenuModel | None = ...,
@@ -310,7 +312,7 @@ class Dock(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarg
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         bottom_height: int
         can_reveal_bottom: bool
         can_reveal_end: bool
@@ -359,8 +361,10 @@ class Dock(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarg
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
-    parent_instance: _Gtk4.Widget = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk4.Widget: ...
     def __init__(
         self,
         bottom_height: int = ...,
@@ -594,7 +598,7 @@ class DocumentWorkspace(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Workspace.Props):
         dock: Dock
         grid: Grid
         statusbar: Statusbar | None
@@ -663,8 +667,10 @@ class DocumentWorkspace(
         accessible_role: _Gtk4.AccessibleRole
         startup_id: str
 
-    props: Props = ...
-    parent_instance: Workspace = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Workspace: ...
     def __init__(
         self,
         id: str = ...,
@@ -836,7 +842,7 @@ class Frame(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         closeable: bool
         empty: bool
         placeholder: _Gtk4.Widget | None
@@ -878,8 +884,10 @@ class Frame(
         accessible_role: _Gtk4.AccessibleRole
         orientation: _Gtk4.Orientation
 
-    props: Props = ...
-    parent_instance: _Gtk4.Widget = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk4.Widget: ...
     def __init__(
         self,
         placeholder: _Gtk4.Widget | None = ...,
@@ -1040,7 +1048,7 @@ class FrameHeaderBar(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         show_icon: bool
         can_focus: bool
         can_target: bool
@@ -1079,7 +1087,8 @@ class FrameHeaderBar(
         accessible_role: _Gtk4.AccessibleRole
         frame: Frame | None
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         show_icon: bool = ...,
@@ -1220,7 +1229,7 @@ class FrameSwitcher(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         can_focus: bool
         can_target: bool
         css_classes: list[str]
@@ -1259,7 +1268,8 @@ class FrameSwitcher(
         orientation: _Gtk4.Orientation
         frame: Frame | None
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         can_focus: bool = ...,
@@ -1385,7 +1395,7 @@ class FrameTabBar(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         autohide: bool
         expand_tabs: bool
         inverted: bool
@@ -1426,7 +1436,8 @@ class FrameTabBar(
         accessible_role: _Gtk4.AccessibleRole
         frame: Frame | None
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         autohide: bool = ...,
@@ -1507,10 +1518,11 @@ class GSettingsActionGroup(GObject.Object, Gio.ActionGroup):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         settings: Gio.Settings
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, settings: Gio.Settings = ...): ...
     @staticmethod
     def new(settings: Gio.Settings) -> Gio.ActionGroup: ...
@@ -1595,7 +1607,7 @@ class Grid(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarg
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         can_focus: bool
         can_target: bool
         css_classes: list[str]
@@ -1632,8 +1644,10 @@ class Grid(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarg
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
-    parent_instance: _Gtk4.Widget = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk4.Widget: ...
     def __init__(
         self,
         can_focus: bool = ...,
@@ -1765,7 +1779,7 @@ class GridColumn(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         can_focus: bool
         can_target: bool
         css_classes: list[str]
@@ -1802,7 +1816,8 @@ class GridColumn(
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         can_focus: bool = ...,
@@ -1906,11 +1921,12 @@ class LayeredSettings(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         path: str
         schema_id: str
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, path: str = ..., schema_id: str = ...): ...
     def append(self, settings: Gio.Settings) -> None: ...
     def bind(
@@ -2079,7 +2095,7 @@ class OmniBar(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         action_tooltip: str
         icon_name: str
         menu_model: Gio.MenuModel
@@ -2123,8 +2139,10 @@ class OmniBar(
         action_name: str | None
         action_target: GLib.Variant
 
-    props: Props = ...
-    parent_instance: _Gtk4.Widget = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk4.Widget: ...
     def __init__(
         self,
         action_tooltip: str = ...,
@@ -2261,7 +2279,7 @@ class Paned(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         can_focus: bool
         can_target: bool
         css_classes: list[str]
@@ -2299,7 +2317,8 @@ class Paned(
         accessible_role: _Gtk4.AccessibleRole
         orientation: _Gtk4.Orientation
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         can_focus: bool = ...,
@@ -2381,7 +2400,7 @@ class Position(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         area: Area
         area_set: bool
         column: int
@@ -2391,7 +2410,8 @@ class Position(GObject.Object):
         row: int
         row_set: bool
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         area: Area = ...,
@@ -2472,7 +2492,7 @@ class SaveDelegate(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         icon: Gio.Icon | None
         icon_name: str | None
         is_draft: bool
@@ -2480,8 +2500,10 @@ class SaveDelegate(GObject.Object):
         subtitle: str | None
         title: str | None
 
-    props: Props = ...
-    parent_instance: GObject.Object = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> GObject.Object: ...
     def __init__(
         self,
         icon: Gio.Icon | None = ...,
@@ -2665,7 +2687,7 @@ class SaveDialog(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Adw.MessageDialog.Props):
         close_after_save: bool
         body: str
         body_use_markup: bool
@@ -2735,7 +2757,8 @@ class SaveDialog(
         accessible_role: _Gtk4.AccessibleRole
         startup_id: str
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         close_after_save: bool = ...,
@@ -2887,14 +2910,15 @@ class SessionItem(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         id: str | None
         module_name: str | None
         position: Position | None
         type_hint: str | None
         workspace: str | None
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         id: str | None = ...,
@@ -2977,7 +3001,7 @@ class Settings(GObject.Object, Gio.ActionGroup):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         identifier: str
         path: str
         path_prefix: str
@@ -2985,7 +3009,8 @@ class Settings(GObject.Object, Gio.ActionGroup):
         schema_id: str
         schema_id_prefix: str
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         identifier: str = ...,
@@ -3125,7 +3150,7 @@ class Statusbar(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         can_focus: bool
         can_target: bool
         css_classes: list[str]
@@ -3162,7 +3187,8 @@ class Statusbar(
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         can_focus: bool = ...,
@@ -3285,7 +3311,7 @@ class ThemeSelector(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         action_name: str
         can_focus: bool
         can_target: bool
@@ -3323,7 +3349,8 @@ class ThemeSelector(
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         action_name: str = ...,
@@ -3446,7 +3473,7 @@ class ToggleButton(
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         area: Area
         dock: Dock
         can_focus: bool
@@ -3485,7 +3512,8 @@ class ToggleButton(
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         area: Area = ...,
@@ -3634,7 +3662,7 @@ class Widget(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTa
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.Widget.Props):
         busy: bool
         can_maximize: bool
         child: _Gtk4.Widget | None
@@ -3685,8 +3713,10 @@ class Widget(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTa
         width_request: int
         accessible_role: _Gtk4.AccessibleRole
 
-    props: Props = ...
-    parent_instance: _Gtk4.Widget = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk4.Widget: ...
     def __init__(
         self,
         can_maximize: bool = ...,
@@ -3786,7 +3816,8 @@ class WidgetClass(GObject.GPointer):
         WidgetClass()
     """
 
-    parent_instance: _Gtk4.WidgetClass = ...
+    @property
+    def parent_instance(self) -> _Gtk4.WidgetClass: ...
     get_default_focus: Callable[[Widget], _Gtk4.Widget | None] = ...
     presented: Callable[[Widget], None] = ...
     _reserved: list[None] = ...
@@ -3819,11 +3850,13 @@ class Workbench(_Gtk4.WindowGroup):
       notify (GParam)
     """
 
-    class Props:
+    class Props(_Gtk4.WindowGroup.Props):
         id: str
 
-    props: Props = ...
-    parent_instance: _Gtk4.WindowGroup = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> _Gtk4.WindowGroup: ...
     def __init__(self, id: str = ...): ...
     def action_set_enabled(self, action_name: str, enabled: bool) -> None: ...
     def activate(self) -> None: ...
@@ -4015,7 +4048,7 @@ class Workspace(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Adw.ApplicationWindow.Props):
         id: str
         content: _Gtk4.Widget | None
         current_breakpoint: Adw.Breakpoint | None
@@ -4081,8 +4114,10 @@ class Workspace(
         accessible_role: _Gtk4.AccessibleRole
         startup_id: str
 
-    props: Props = ...
-    parent_instance: Adw.ApplicationWindow = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Adw.ApplicationWindow: ...
     def __init__(
         self,
         id: str = ...,

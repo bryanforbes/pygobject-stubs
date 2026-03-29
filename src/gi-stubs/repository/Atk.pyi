@@ -162,7 +162,7 @@ class EditableTextIface(GObject.GPointer):
     paste_text: Callable[[EditableText, int], None] = ...
 
 class GObjectAccessible(Object):
-    class Props:
+    class Props(Object.Props):
         accessible_component_layer: int
         accessible_component_mdi_zorder: int
         accessible_description: str
@@ -179,7 +179,8 @@ class GObjectAccessible(Object):
         accessible_table_summary: Object
         accessible_value: float
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     parent: Object = ...
     def __init__(
         self,
@@ -206,13 +207,14 @@ class GObjectAccessibleClass(GObject.GPointer):
     pad2: Callable[..., bool] = ...
 
 class Hyperlink(GObject.Object, Action):
-    class Props:
+    class Props(GObject.Object.Props):
         end_index: int
         number_of_anchors: int
         selected_link: bool
         start_index: int
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     parent: GObject.Object = ...
     def do_get_end_index(self) -> int: ...
     def do_get_n_anchors(self) -> int: ...
@@ -323,7 +325,7 @@ class NoOpObject(
     Value,
     Window,
 ):
-    class Props:
+    class Props(Object.Props):
         accessible_component_layer: int
         accessible_component_mdi_zorder: int
         accessible_description: str
@@ -340,7 +342,8 @@ class NoOpObject(
         accessible_table_summary: Object
         accessible_value: float
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     parent: Object = ...
     def __init__(
         self,
@@ -372,7 +375,7 @@ class NoOpObjectFactoryClass(GObject.GPointer):
     parent_class: ObjectFactoryClass = ...
 
 class Object(GObject.Object):
-    class Props:
+    class Props(GObject.Object.Props):
         accessible_component_layer: int
         accessible_component_mdi_zorder: int
         accessible_description: str
@@ -389,7 +392,8 @@ class Object(GObject.Object):
         accessible_table_summary: Object
         accessible_value: float
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     parent: GObject.Object = ...
     description: str = ...
     name: str = ...
@@ -510,7 +514,7 @@ class ObjectFactoryClass(GObject.GPointer):
     pad2: Callable[..., bool] = ...
 
 class Plug(Object, Component):
-    class Props:
+    class Props(Object.Props):
         accessible_component_layer: int
         accessible_component_mdi_zorder: int
         accessible_description: str
@@ -527,7 +531,8 @@ class Plug(Object, Component):
         accessible_table_summary: Object
         accessible_value: float
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     parent: Object = ...
     def __init__(
         self,
@@ -586,11 +591,12 @@ class RegistryClass(GObject.GPointer):
     parent_class: GObject.ObjectClass = ...
 
 class Relation(GObject.Object):
-    class Props:
+    class Props(GObject.Object.Props):
         relation_type: RelationType
         target: GObject.ValueArray
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     parent: GObject.Object = ...
     target: list[None] = ...
     relationship: RelationType = ...
@@ -649,7 +655,7 @@ class SelectionIface(GObject.GPointer):
     selection_changed: Callable[[Selection], None] = ...
 
 class Socket(Object, Component):
-    class Props:
+    class Props(Object.Props):
         accessible_component_layer: int
         accessible_component_mdi_zorder: int
         accessible_description: str
@@ -666,7 +672,8 @@ class Socket(Object, Component):
         accessible_table_summary: Object
         accessible_value: float
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     parent: Object = ...
     embedded_plug_id: str = ...
     def __init__(

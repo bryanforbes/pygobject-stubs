@@ -615,12 +615,13 @@ class Repo(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         path: Gio.File
         remotes_config_dir: str
         sysroot_path: Gio.File
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         path: Gio.File = ...,
@@ -1529,10 +1530,11 @@ class RepoFinderMount(GObject.Object, RepoFinder):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         monitor: Gio.VolumeMonitor
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, monitor: Gio.VolumeMonitor = ...): ...
     @classmethod
     def new(cls, monitor: Gio.VolumeMonitor | None = None) -> RepoFinderMount: ...
@@ -1669,11 +1671,12 @@ class SePolicy(GObject.Object, Gio.Initable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         path: Gio.File | None
         rootfs_dfd: int
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, path: Gio.File = ..., rootfs_dfd: int = ...): ...
     @staticmethod
     def fscreatecon_cleanup(unused: None) -> None: ...
@@ -1829,10 +1832,11 @@ class Sysroot(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         path: Gio.File
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, path: Gio.File = ...): ...
     def cleanup(self, cancellable: Gio.Cancellable | None = None) -> bool: ...
     def cleanup_prune_repo(
@@ -2023,12 +2027,13 @@ class SysrootUpgrader(GObject.Object, Gio.Initable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         flags: SysrootUpgraderFlags
         osname: str
         sysroot: Sysroot
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         flags: SysrootUpgraderFlags = ...,

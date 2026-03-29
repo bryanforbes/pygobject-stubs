@@ -72,7 +72,7 @@ class Indicator(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         attention_icon_desc: str
         attention_icon_name: str
         category: str
@@ -87,10 +87,11 @@ class Indicator(GObject.Object):
         status: str
         title: str
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     parent: GObject.Object = ...
-    priv: IndicatorPrivate = ...
-
+    @property
+    def priv(self) -> IndicatorPrivate: ...
     def __init__(
         self,
         attention_icon_desc: str = ...,

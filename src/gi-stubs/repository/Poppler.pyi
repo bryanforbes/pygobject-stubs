@@ -702,7 +702,7 @@ class Document(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         author: str
         creation_date: int
         creation_datetime: GLib.DateTime
@@ -730,7 +730,8 @@ class Document(GObject.Object):
         title: str
         viewer_preferences: ViewerPreferences
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self,
         author: str = ...,
@@ -1141,10 +1142,11 @@ class Page(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         label: str
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def add_annot(self, annot: Annot) -> None: ...
     def find_text(self, text: str) -> list[Rectangle]: ...
     def find_text_with_options(

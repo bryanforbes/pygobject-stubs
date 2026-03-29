@@ -46,7 +46,7 @@ class DimensionData(GObject.GPointer):
     ex: float = ...
 
 class Handle(GObject.Object):
-    class Props:
+    class Props(GObject.Object.Props):
         base_uri: str
         desc: str
         dpi_x: float
@@ -59,7 +59,8 @@ class Handle(GObject.Object):
         title: str
         width: int
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     parent: GObject.Object = ...
     _abi_padding: list[None] = ...
     def __init__(

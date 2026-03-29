@@ -56,12 +56,13 @@ class Class(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         name: str
         parent: Class
         context: Context
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(
         self, context: Context = ..., name: str = ..., parent: Class = ...
     ): ...
@@ -159,10 +160,11 @@ class Context(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         virtual_machine: VirtualMachine
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, virtual_machine: VirtualMachine = ...): ...
     def check_syntax(
         self, code: str, length: int, mode: CheckSyntaxMode, uri: str, line_number: int
@@ -289,10 +291,11 @@ class Value(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         context: Context
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, context: Context = ...): ...
     def array_buffer_get_data(self, size: int | None = None) -> None: ...
     def array_buffer_get_size(self) -> int: ...
@@ -471,10 +474,11 @@ class WeakValue(GObject.Object):
       notify (GParam)
     """
 
-    class Props:
+    class Props(GObject.Object.Props):
         value: Value
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     def __init__(self, value: Value = ...): ...
     def get_value(self) -> Value: ...
     @classmethod

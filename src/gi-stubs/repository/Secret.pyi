@@ -193,7 +193,7 @@ class Collection(Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initab
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         created: int
         flags: CollectionFlags
         label: str
@@ -210,7 +210,8 @@ class Collection(Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initab
         g_object_path: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     parent: Gio.DBusProxy = ...
     pv: CollectionPrivate = ...
     def __init__(
@@ -373,7 +374,7 @@ class Item(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         flags: ItemFlags
         locked: bool
         service: Service
@@ -391,8 +392,10 @@ class Item(
         modified: int
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
     pv: ItemPrivate = ...
     def __init__(
         self,
@@ -555,7 +558,7 @@ class Prompt(Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable):
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -566,8 +569,10 @@ class Prompt(Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable):
         g_object_path: str
         g_bus_type: Gio.BusType
 
-    props: Props = ...
-    parent_instance: Gio.DBusProxy = ...
+    @property
+    def props(self) -> Props: ...
+    @property
+    def parent_instance(self) -> Gio.DBusProxy: ...
     pv: PromptPrivate = ...
     def __init__(
         self,
@@ -730,7 +735,7 @@ class Service(
       notify (GParam)
     """
 
-    class Props:
+    class Props(Gio.DBusProxy.Props):
         g_connection: Gio.DBusConnection
         g_default_timeout: int
         g_flags: Gio.DBusProxyFlags
@@ -742,7 +747,8 @@ class Service(
         flags: ServiceFlags
         g_bus_type: Gio.BusType
 
-    props: Props = ...
+    @property
+    def props(self) -> Props: ...
     parent: Gio.DBusProxy = ...
     pv: ServicePrivate = ...
     def __init__(
