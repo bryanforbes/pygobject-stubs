@@ -1252,7 +1252,7 @@ def start(
     return stub.build()
 
 
-if __name__ == "__main__":
+def main() -> None:
     parser = argparse.ArgumentParser(description="Generate module stubs")
     parser.add_argument("module", type=str, help="Gdk, Gtk, ...")
     parser.add_argument("version", type=str, help="3.0, 4.0, ...")
@@ -1282,3 +1282,7 @@ if __name__ == "__main__":
             file.write(output)
     else:
         print(start(args.module, args.version, args.init, {}, []))
+
+
+if __name__ == "__main__":
+    main()
