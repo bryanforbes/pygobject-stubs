@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Callable
@@ -11,13 +12,13 @@ from gi.repository import GObject
 
 _SomeSurface = TypeVar("_SomeSurface", bound=cairo.Surface)
 
-MAJOR_VERSION: int = 2
-MICRO_VERSION: int = 5
-MINOR_VERSION: int = 54
-VERSION: str = "2.54.5"
+MAJOR_VERSION: Final[int]
+MICRO_VERSION: Final[int]
+MINOR_VERSION: Final[int]
+VERSION: Final = "2.54.5"
 _lock = ...  # FIXME Constant
-_namespace: str = "Rsvg"
-_version: str = "2.0"
+_namespace: Final = "Rsvg"
+_version: Final = "2.0"
 
 def cleanup() -> None: ...
 def error_quark() -> int: ...
@@ -40,10 +41,10 @@ def set_default_dpi_x_y(dpi_x: float, dpi_y: float) -> None: ...
 def term() -> None: ...
 
 class DimensionData(GObject.GPointer):
-    width: int = ...
-    height: int = ...
-    em: float = ...
-    ex: float = ...
+    width: int
+    height: int
+    em: float
+    ex: float
 
 class Handle(GObject.Object):
     class Props(GObject.Object.Props):
@@ -61,8 +62,8 @@ class Handle(GObject.Object):
 
     @property
     def props(self) -> Props: ...
-    parent: GObject.Object = ...
-    _abi_padding: list[None] = ...
+    parent: GObject.Object
+    _abi_padding: list[None]
     def __init__(
         self,
         base_uri: str = ...,
@@ -150,22 +151,22 @@ class Handle(GObject.Object):
     def write(self, buf: Sequence[int]) -> bool: ...
 
 class HandleClass(GObject.GPointer):
-    parent: GObject.ObjectClass = ...
-    _abi_padding: list[None] = ...
+    parent: GObject.ObjectClass
+    _abi_padding: list[None]
 
 class Length(GObject.GPointer):
-    length: float = ...
-    unit: Unit = ...
+    length: float
+    unit: Unit
 
 class PositionData(GObject.GPointer):
-    x: int = ...
-    y: int = ...
+    x: int
+    y: int
 
 class Rectangle(GObject.GPointer):
-    x: float = ...
-    y: float = ...
-    width: float = ...
-    height: float = ...
+    x: float
+    y: float
+    width: float
+    height: float
 
 class HandleFlags(GObject.GFlags):
     FLAGS_NONE = 0

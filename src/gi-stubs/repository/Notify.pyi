@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 
 from collections.abc import Callable
 from collections.abc import Sequence
@@ -7,14 +8,14 @@ from gi.repository import GdkPixbuf
 from gi.repository import GLib
 from gi.repository import GObject
 
-EXPIRES_DEFAULT: int = -1
-EXPIRES_NEVER: int = 0
-VERSION_MAJOR: int = 0
-VERSION_MICRO: int = 3
-VERSION_MINOR: int = 8
+EXPIRES_DEFAULT: Final[int]
+EXPIRES_NEVER: Final[int]
+VERSION_MAJOR: Final[int]
+VERSION_MICRO: Final[int]
+VERSION_MINOR: Final[int]
 _lock = ...  # FIXME Constant
-_namespace: str = "Notify"
-_version: str = "0.7"
+_namespace: Final = "Notify"
+_version: Final = "0.7"
 
 def get_app_name() -> str: ...
 def get_server_caps() -> list[str]: ...
@@ -66,7 +67,7 @@ class Notification(GObject.Object):
 
     @property
     def props(self) -> Props: ...
-    parent_object: GObject.Object = ...
+    parent_object: GObject.Object
     @property
     def priv(self) -> NotificationPrivate: ...
     def __init__(
@@ -117,8 +118,8 @@ class NotificationClass(GObject.GPointer):
         NotificationClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    closed: Callable[[Notification], None] = ...
+    parent_class: GObject.ObjectClass
+    closed: Callable[[Notification], None]
 
 class NotificationPrivate(GObject.GPointer): ...
 

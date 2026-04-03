@@ -1,9 +1,11 @@
+from typing import Final
+
 from gi.repository import Gio
 from gi.repository import GObject
 
 _lock = ...
-_namespace: str = ...
-_version: str = ...
+_namespace: Final[str]
+_version: Final[str]
 
 def get_resource() -> Gio.Resource: ...
 

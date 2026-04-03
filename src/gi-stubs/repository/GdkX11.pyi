@@ -1,3 +1,4 @@
+from typing import Final
 from typing import TypeVar
 
 from gi.repository import _Gdk4
@@ -8,8 +9,8 @@ from gi.repository import xlib
 T = TypeVar("T")
 
 _lock = ...  # FIXME Constant
-_namespace: str = "GdkX11"
-_version: str = "4.0"
+_namespace: Final = "GdkX11"
+_version: Final = "4.0"
 
 def x11_device_get_id(device: X11DeviceXI2) -> int: ...
 def x11_device_manager_lookup(

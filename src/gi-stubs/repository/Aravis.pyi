@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Callable
@@ -8,150 +9,150 @@ from gi.repository import GObject
 
 T = TypeVar("T")
 
-FAKE_CAMERA_ACQUISITION_FRAME_RATE_DEFAULT: float = 25.0
-FAKE_CAMERA_BINNING_HORIZONTAL_DEFAULT: int = 1
-FAKE_CAMERA_BINNING_VERTICAL_DEFAULT: int = 1
-FAKE_CAMERA_EXPOSURE_TIME_US_DEFAULT: float = 10000.0
-FAKE_CAMERA_HEIGHT_DEFAULT: int = 512
-FAKE_CAMERA_MEMORY_SIZE: int = 65536
-FAKE_CAMERA_REGISTER_ACQUISITION: int = 292
-FAKE_CAMERA_REGISTER_ACQUISITION_FRAME_PERIOD_US: int = 312
-FAKE_CAMERA_REGISTER_ACQUISITION_MODE: int = 300
-FAKE_CAMERA_REGISTER_ACQUISITION_START_OFFSET: int = 32
-FAKE_CAMERA_REGISTER_BINNING_HORIZONTAL: int = 264
-FAKE_CAMERA_REGISTER_BINNING_VERTICAL: int = 268
-FAKE_CAMERA_REGISTER_EXPOSURE_TIME_US: int = 288
-FAKE_CAMERA_REGISTER_FRAME_START_OFFSET: int = 0
-FAKE_CAMERA_REGISTER_GAIN_MODE: int = 276
-FAKE_CAMERA_REGISTER_GAIN_RAW: int = 272
-FAKE_CAMERA_REGISTER_HEIGHT: int = 260
-FAKE_CAMERA_REGISTER_PIXEL_FORMAT: int = 296
-FAKE_CAMERA_REGISTER_SENSOR_HEIGHT: int = 280
-FAKE_CAMERA_REGISTER_SENSOR_WIDTH: int = 284
-FAKE_CAMERA_REGISTER_TEST: int = 496
-FAKE_CAMERA_REGISTER_TRIGGER_ACTIVATION: int = 776
-FAKE_CAMERA_REGISTER_TRIGGER_MODE: int = 768
-FAKE_CAMERA_REGISTER_TRIGGER_SOFTWARE: int = 780
-FAKE_CAMERA_REGISTER_TRIGGER_SOURCE: int = 772
-FAKE_CAMERA_REGISTER_WIDTH: int = 256
-FAKE_CAMERA_REGISTER_X_OFFSET: int = 304
-FAKE_CAMERA_REGISTER_Y_OFFSET: int = 308
-FAKE_CAMERA_SENSOR_HEIGHT: int = 2048
-FAKE_CAMERA_SENSOR_WIDTH: int = 2048
-FAKE_CAMERA_TEST_REGISTER_DEFAULT: int = 305419896
-FAKE_CAMERA_WIDTH_DEFAULT: int = 512
-GV_FAKE_CAMERA_DEFAULT_INTERFACE: str = "127.0.0.1"
-GV_FAKE_CAMERA_DEFAULT_SERIAL_NUMBER: str = "GV01"
-PIXEL_FORMAT_BAYER_BG_10: int = 17825807
-PIXEL_FORMAT_BAYER_BG_10P: int = 17432658
-PIXEL_FORMAT_BAYER_BG_10_PACKED: int = 17563689
-PIXEL_FORMAT_BAYER_BG_12: int = 17825811
-PIXEL_FORMAT_BAYER_BG_12P: int = 17563731
-PIXEL_FORMAT_BAYER_BG_12_PACKED: int = 17563693
-PIXEL_FORMAT_BAYER_BG_16: int = 17825841
-PIXEL_FORMAT_BAYER_BG_8: int = 17301515
-PIXEL_FORMAT_BAYER_GB_10: int = 17825806
-PIXEL_FORMAT_BAYER_GB_10P: int = 17432660
-PIXEL_FORMAT_BAYER_GB_10_PACKED: int = 17563688
-PIXEL_FORMAT_BAYER_GB_12: int = 17825810
-PIXEL_FORMAT_BAYER_GB_12P: int = 17563733
-PIXEL_FORMAT_BAYER_GB_12_PACKED: int = 17563692
-PIXEL_FORMAT_BAYER_GB_16: int = 17825840
-PIXEL_FORMAT_BAYER_GB_8: int = 17301514
-PIXEL_FORMAT_BAYER_GR_10: int = 17825804
-PIXEL_FORMAT_BAYER_GR_10P: int = 17432662
-PIXEL_FORMAT_BAYER_GR_10_PACKED: int = 17563686
-PIXEL_FORMAT_BAYER_GR_12: int = 17825808
-PIXEL_FORMAT_BAYER_GR_12P: int = 17563735
-PIXEL_FORMAT_BAYER_GR_12_PACKED: int = 17563690
-PIXEL_FORMAT_BAYER_GR_16: int = 17825838
-PIXEL_FORMAT_BAYER_GR_8: int = 17301512
-PIXEL_FORMAT_BAYER_RG_10: int = 17825805
-PIXEL_FORMAT_BAYER_RG_10P: int = 17432664
-PIXEL_FORMAT_BAYER_RG_10_PACKED: int = 17563687
-PIXEL_FORMAT_BAYER_RG_12: int = 17825809
-PIXEL_FORMAT_BAYER_RG_12P: int = 17563737
-PIXEL_FORMAT_BAYER_RG_12_PACKED: int = 17563691
-PIXEL_FORMAT_BAYER_RG_16: int = 17825839
-PIXEL_FORMAT_BAYER_RG_8: int = 17301513
-PIXEL_FORMAT_BGRA_8_PACKED: int = 35651607
-PIXEL_FORMAT_BGR_10_PACKED: int = 36700185
-PIXEL_FORMAT_BGR_12_PACKED: int = 36700187
-PIXEL_FORMAT_BGR_8_PACKED: int = 35127317
-PIXEL_FORMAT_COORD3D_ABC_10P: int = 35520731
-PIXEL_FORMAT_COORD3D_ABC_10P_PLANAR: int = 35520732
-PIXEL_FORMAT_COORD3D_ABC_12P: int = 35913950
-PIXEL_FORMAT_COORD3D_ABC_12P_PLANAR: int = 35913951
-PIXEL_FORMAT_COORD3D_ABC_16: int = 36700345
-PIXEL_FORMAT_COORD3D_ABC_16_PLANAR: int = 36700346
-PIXEL_FORMAT_COORD3D_ABC_32F: int = 39846080
-PIXEL_FORMAT_COORD3D_ABC_32F_PLANAR: int = 39846081
-PIXEL_FORMAT_COORD3D_ABC_8: int = 35127474
-PIXEL_FORMAT_COORD3D_ABC_8_PLANAR: int = 35127475
-PIXEL_FORMAT_COORD3D_AC_10P: int = 34865392
-PIXEL_FORMAT_COORD3D_AC_10P_PLANAR: int = 34865393
-PIXEL_FORMAT_COORD3D_AC_12P: int = 35127538
-PIXEL_FORMAT_COORD3D_AC_12P_PLANAR: int = 35127539
-PIXEL_FORMAT_COORD3D_AC_16: int = 35651771
-PIXEL_FORMAT_COORD3D_AC_16_PLANAR: int = 35651772
-PIXEL_FORMAT_COORD3D_AC_32F: int = 37748930
-PIXEL_FORMAT_COORD3D_AC_32F_PLANAR: int = 37748931
-PIXEL_FORMAT_COORD3D_AC_8: int = 34603188
-PIXEL_FORMAT_COORD3D_AC_8_PLANAR: int = 34603189
-PIXEL_FORMAT_COORD3D_A_10P: int = 17432789
-PIXEL_FORMAT_COORD3D_A_12P: int = 17563864
-PIXEL_FORMAT_COORD3D_A_16: int = 17825974
-PIXEL_FORMAT_COORD3D_A_32F: int = 18874557
-PIXEL_FORMAT_COORD3D_A_8: int = 17301679
-PIXEL_FORMAT_COORD3D_B_10P: int = 17432790
-PIXEL_FORMAT_COORD3D_B_12P: int = 17563865
-PIXEL_FORMAT_COORD3D_B_16: int = 17825975
-PIXEL_FORMAT_COORD3D_B_32F: int = 18874558
-PIXEL_FORMAT_COORD3D_B_8: int = 17301680
-PIXEL_FORMAT_COORD3D_C_10P: int = 17432791
-PIXEL_FORMAT_COORD3D_C_12P: int = 17563866
-PIXEL_FORMAT_COORD3D_C_16: int = 17825976
-PIXEL_FORMAT_COORD3D_C_32F: int = 18874559
-PIXEL_FORMAT_COORD3D_C_8: int = 17301681
-PIXEL_FORMAT_CUSTOM_BAYER_BG_12_PACKED: int = 2165047300
-PIXEL_FORMAT_CUSTOM_BAYER_BG_16: int = 2165309449
-PIXEL_FORMAT_CUSTOM_BAYER_GB_12_PACKED: int = 2165047299
-PIXEL_FORMAT_CUSTOM_BAYER_GB_16: int = 2165309448
-PIXEL_FORMAT_CUSTOM_BAYER_GR_12_PACKED: int = 2165047297
-PIXEL_FORMAT_CUSTOM_BAYER_GR_16: int = 2165309446
-PIXEL_FORMAT_CUSTOM_BAYER_RG_12_PACKED: int = 2165047298
-PIXEL_FORMAT_CUSTOM_BAYER_RG_16: int = 2165309447
-PIXEL_FORMAT_CUSTOM_YUV_422_YUYV_PACKED: int = 2182086661
-PIXEL_FORMAT_DATA_16: int = 17826072
-PIXEL_FORMAT_DATA_16S: int = 17826073
-PIXEL_FORMAT_DATA_32: int = 18874650
-PIXEL_FORMAT_DATA_32F: int = 18874652
-PIXEL_FORMAT_DATA_32S: int = 18874651
-PIXEL_FORMAT_DATA_64: int = 20971805
-PIXEL_FORMAT_DATA_64F: int = 20971807
-PIXEL_FORMAT_DATA_64S: int = 20971806
-PIXEL_FORMAT_DATA_8: int = 17301782
-PIXEL_FORMAT_DATA_8S: int = 17301783
-PIXEL_FORMAT_MONO_10: int = 17825795
-PIXEL_FORMAT_MONO_10_PACKED: int = 17563652
-PIXEL_FORMAT_MONO_12: int = 17825797
-PIXEL_FORMAT_MONO_12_PACKED: int = 17563654
-PIXEL_FORMAT_MONO_14: int = 17825829
-PIXEL_FORMAT_MONO_16: int = 17825799
-PIXEL_FORMAT_MONO_8: int = 17301505
-PIXEL_FORMAT_MONO_8_SIGNED: int = 17301506
-PIXEL_FORMAT_RGBA_8_PACKED: int = 35651606
-PIXEL_FORMAT_RGB_10_PACKED: int = 36700184
-PIXEL_FORMAT_RGB_10_PLANAR: int = 36700194
-PIXEL_FORMAT_RGB_12_PACKED: int = 36700186
-PIXEL_FORMAT_RGB_12_PLANAR: int = 36700195
-PIXEL_FORMAT_RGB_16_PLANAR: int = 36700196
-PIXEL_FORMAT_RGB_8_PACKED: int = 35127316
-PIXEL_FORMAT_RGB_8_PLANAR: int = 35127329
-PIXEL_FORMAT_YUV_411_PACKED: int = 34340894
-PIXEL_FORMAT_YUV_422_PACKED: int = 34603039
-PIXEL_FORMAT_YUV_422_YUYV_PACKED: int = 34603058
-PIXEL_FORMAT_YUV_444_PACKED: int = 35127328
+FAKE_CAMERA_ACQUISITION_FRAME_RATE_DEFAULT: Final[float]
+FAKE_CAMERA_BINNING_HORIZONTAL_DEFAULT: Final[int]
+FAKE_CAMERA_BINNING_VERTICAL_DEFAULT: Final[int]
+FAKE_CAMERA_EXPOSURE_TIME_US_DEFAULT: Final[float]
+FAKE_CAMERA_HEIGHT_DEFAULT: Final[int]
+FAKE_CAMERA_MEMORY_SIZE: Final[int]
+FAKE_CAMERA_REGISTER_ACQUISITION: Final[int]
+FAKE_CAMERA_REGISTER_ACQUISITION_FRAME_PERIOD_US: Final[int]
+FAKE_CAMERA_REGISTER_ACQUISITION_MODE: Final[int]
+FAKE_CAMERA_REGISTER_ACQUISITION_START_OFFSET: Final[int]
+FAKE_CAMERA_REGISTER_BINNING_HORIZONTAL: Final[int]
+FAKE_CAMERA_REGISTER_BINNING_VERTICAL: Final[int]
+FAKE_CAMERA_REGISTER_EXPOSURE_TIME_US: Final[int]
+FAKE_CAMERA_REGISTER_FRAME_START_OFFSET: Final[int]
+FAKE_CAMERA_REGISTER_GAIN_MODE: Final[int]
+FAKE_CAMERA_REGISTER_GAIN_RAW: Final[int]
+FAKE_CAMERA_REGISTER_HEIGHT: Final[int]
+FAKE_CAMERA_REGISTER_PIXEL_FORMAT: Final[int]
+FAKE_CAMERA_REGISTER_SENSOR_HEIGHT: Final[int]
+FAKE_CAMERA_REGISTER_SENSOR_WIDTH: Final[int]
+FAKE_CAMERA_REGISTER_TEST: Final[int]
+FAKE_CAMERA_REGISTER_TRIGGER_ACTIVATION: Final[int]
+FAKE_CAMERA_REGISTER_TRIGGER_MODE: Final[int]
+FAKE_CAMERA_REGISTER_TRIGGER_SOFTWARE: Final[int]
+FAKE_CAMERA_REGISTER_TRIGGER_SOURCE: Final[int]
+FAKE_CAMERA_REGISTER_WIDTH: Final[int]
+FAKE_CAMERA_REGISTER_X_OFFSET: Final[int]
+FAKE_CAMERA_REGISTER_Y_OFFSET: Final[int]
+FAKE_CAMERA_SENSOR_HEIGHT: Final[int]
+FAKE_CAMERA_SENSOR_WIDTH: Final[int]
+FAKE_CAMERA_TEST_REGISTER_DEFAULT: Final[int]
+FAKE_CAMERA_WIDTH_DEFAULT: Final[int]
+GV_FAKE_CAMERA_DEFAULT_INTERFACE: Final = "127.0.0.1"
+GV_FAKE_CAMERA_DEFAULT_SERIAL_NUMBER: Final = "GV01"
+PIXEL_FORMAT_BAYER_BG_10: Final[int]
+PIXEL_FORMAT_BAYER_BG_10P: Final[int]
+PIXEL_FORMAT_BAYER_BG_10_PACKED: Final[int]
+PIXEL_FORMAT_BAYER_BG_12: Final[int]
+PIXEL_FORMAT_BAYER_BG_12P: Final[int]
+PIXEL_FORMAT_BAYER_BG_12_PACKED: Final[int]
+PIXEL_FORMAT_BAYER_BG_16: Final[int]
+PIXEL_FORMAT_BAYER_BG_8: Final[int]
+PIXEL_FORMAT_BAYER_GB_10: Final[int]
+PIXEL_FORMAT_BAYER_GB_10P: Final[int]
+PIXEL_FORMAT_BAYER_GB_10_PACKED: Final[int]
+PIXEL_FORMAT_BAYER_GB_12: Final[int]
+PIXEL_FORMAT_BAYER_GB_12P: Final[int]
+PIXEL_FORMAT_BAYER_GB_12_PACKED: Final[int]
+PIXEL_FORMAT_BAYER_GB_16: Final[int]
+PIXEL_FORMAT_BAYER_GB_8: Final[int]
+PIXEL_FORMAT_BAYER_GR_10: Final[int]
+PIXEL_FORMAT_BAYER_GR_10P: Final[int]
+PIXEL_FORMAT_BAYER_GR_10_PACKED: Final[int]
+PIXEL_FORMAT_BAYER_GR_12: Final[int]
+PIXEL_FORMAT_BAYER_GR_12P: Final[int]
+PIXEL_FORMAT_BAYER_GR_12_PACKED: Final[int]
+PIXEL_FORMAT_BAYER_GR_16: Final[int]
+PIXEL_FORMAT_BAYER_GR_8: Final[int]
+PIXEL_FORMAT_BAYER_RG_10: Final[int]
+PIXEL_FORMAT_BAYER_RG_10P: Final[int]
+PIXEL_FORMAT_BAYER_RG_10_PACKED: Final[int]
+PIXEL_FORMAT_BAYER_RG_12: Final[int]
+PIXEL_FORMAT_BAYER_RG_12P: Final[int]
+PIXEL_FORMAT_BAYER_RG_12_PACKED: Final[int]
+PIXEL_FORMAT_BAYER_RG_16: Final[int]
+PIXEL_FORMAT_BAYER_RG_8: Final[int]
+PIXEL_FORMAT_BGRA_8_PACKED: Final[int]
+PIXEL_FORMAT_BGR_10_PACKED: Final[int]
+PIXEL_FORMAT_BGR_12_PACKED: Final[int]
+PIXEL_FORMAT_BGR_8_PACKED: Final[int]
+PIXEL_FORMAT_COORD3D_ABC_10P: Final[int]
+PIXEL_FORMAT_COORD3D_ABC_10P_PLANAR: Final[int]
+PIXEL_FORMAT_COORD3D_ABC_12P: Final[int]
+PIXEL_FORMAT_COORD3D_ABC_12P_PLANAR: Final[int]
+PIXEL_FORMAT_COORD3D_ABC_16: Final[int]
+PIXEL_FORMAT_COORD3D_ABC_16_PLANAR: Final[int]
+PIXEL_FORMAT_COORD3D_ABC_32F: Final[int]
+PIXEL_FORMAT_COORD3D_ABC_32F_PLANAR: Final[int]
+PIXEL_FORMAT_COORD3D_ABC_8: Final[int]
+PIXEL_FORMAT_COORD3D_ABC_8_PLANAR: Final[int]
+PIXEL_FORMAT_COORD3D_AC_10P: Final[int]
+PIXEL_FORMAT_COORD3D_AC_10P_PLANAR: Final[int]
+PIXEL_FORMAT_COORD3D_AC_12P: Final[int]
+PIXEL_FORMAT_COORD3D_AC_12P_PLANAR: Final[int]
+PIXEL_FORMAT_COORD3D_AC_16: Final[int]
+PIXEL_FORMAT_COORD3D_AC_16_PLANAR: Final[int]
+PIXEL_FORMAT_COORD3D_AC_32F: Final[int]
+PIXEL_FORMAT_COORD3D_AC_32F_PLANAR: Final[int]
+PIXEL_FORMAT_COORD3D_AC_8: Final[int]
+PIXEL_FORMAT_COORD3D_AC_8_PLANAR: Final[int]
+PIXEL_FORMAT_COORD3D_A_10P: Final[int]
+PIXEL_FORMAT_COORD3D_A_12P: Final[int]
+PIXEL_FORMAT_COORD3D_A_16: Final[int]
+PIXEL_FORMAT_COORD3D_A_32F: Final[int]
+PIXEL_FORMAT_COORD3D_A_8: Final[int]
+PIXEL_FORMAT_COORD3D_B_10P: Final[int]
+PIXEL_FORMAT_COORD3D_B_12P: Final[int]
+PIXEL_FORMAT_COORD3D_B_16: Final[int]
+PIXEL_FORMAT_COORD3D_B_32F: Final[int]
+PIXEL_FORMAT_COORD3D_B_8: Final[int]
+PIXEL_FORMAT_COORD3D_C_10P: Final[int]
+PIXEL_FORMAT_COORD3D_C_12P: Final[int]
+PIXEL_FORMAT_COORD3D_C_16: Final[int]
+PIXEL_FORMAT_COORD3D_C_32F: Final[int]
+PIXEL_FORMAT_COORD3D_C_8: Final[int]
+PIXEL_FORMAT_CUSTOM_BAYER_BG_12_PACKED: Final[int]
+PIXEL_FORMAT_CUSTOM_BAYER_BG_16: Final[int]
+PIXEL_FORMAT_CUSTOM_BAYER_GB_12_PACKED: Final[int]
+PIXEL_FORMAT_CUSTOM_BAYER_GB_16: Final[int]
+PIXEL_FORMAT_CUSTOM_BAYER_GR_12_PACKED: Final[int]
+PIXEL_FORMAT_CUSTOM_BAYER_GR_16: Final[int]
+PIXEL_FORMAT_CUSTOM_BAYER_RG_12_PACKED: Final[int]
+PIXEL_FORMAT_CUSTOM_BAYER_RG_16: Final[int]
+PIXEL_FORMAT_CUSTOM_YUV_422_YUYV_PACKED: Final[int]
+PIXEL_FORMAT_DATA_16: Final[int]
+PIXEL_FORMAT_DATA_16S: Final[int]
+PIXEL_FORMAT_DATA_32: Final[int]
+PIXEL_FORMAT_DATA_32F: Final[int]
+PIXEL_FORMAT_DATA_32S: Final[int]
+PIXEL_FORMAT_DATA_64: Final[int]
+PIXEL_FORMAT_DATA_64F: Final[int]
+PIXEL_FORMAT_DATA_64S: Final[int]
+PIXEL_FORMAT_DATA_8: Final[int]
+PIXEL_FORMAT_DATA_8S: Final[int]
+PIXEL_FORMAT_MONO_10: Final[int]
+PIXEL_FORMAT_MONO_10_PACKED: Final[int]
+PIXEL_FORMAT_MONO_12: Final[int]
+PIXEL_FORMAT_MONO_12_PACKED: Final[int]
+PIXEL_FORMAT_MONO_14: Final[int]
+PIXEL_FORMAT_MONO_16: Final[int]
+PIXEL_FORMAT_MONO_8: Final[int]
+PIXEL_FORMAT_MONO_8_SIGNED: Final[int]
+PIXEL_FORMAT_RGBA_8_PACKED: Final[int]
+PIXEL_FORMAT_RGB_10_PACKED: Final[int]
+PIXEL_FORMAT_RGB_10_PLANAR: Final[int]
+PIXEL_FORMAT_RGB_12_PACKED: Final[int]
+PIXEL_FORMAT_RGB_12_PLANAR: Final[int]
+PIXEL_FORMAT_RGB_16_PLANAR: Final[int]
+PIXEL_FORMAT_RGB_8_PACKED: Final[int]
+PIXEL_FORMAT_RGB_8_PLANAR: Final[int]
+PIXEL_FORMAT_YUV_411_PACKED: Final[int]
+PIXEL_FORMAT_YUV_422_PACKED: Final[int]
+PIXEL_FORMAT_YUV_422_YUYV_PACKED: Final[int]
+PIXEL_FORMAT_YUV_444_PACKED: Final[int]
 
 def acquisition_mode_from_string(string: str) -> AcquisitionMode: ...
 def acquisition_mode_to_string(value: AcquisitionMode) -> str: ...
@@ -267,7 +268,7 @@ class BufferClass(GObject.GPointer):
         BufferClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Camera(GObject.Object, Gio.Initable):
     """
@@ -477,7 +478,7 @@ class CameraClass(GObject.GPointer):
         CameraClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ChunkParser(GObject.Object):
     """
@@ -519,7 +520,7 @@ class ChunkParserClass(GObject.GPointer):
         ChunkParserClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Device(GObject.Object, Gio.Initable):
     """
@@ -603,15 +604,15 @@ class DeviceClass(GObject.GPointer):
         DeviceClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    create_stream: None = ...
-    get_genicam_xml: Callable[[Device], tuple[str, int]] = ...
-    get_genicam: Callable[[Device], Gc] = ...
-    read_memory: Callable[[Device, int, int, None], bool] = ...
-    write_memory: Callable[[Device, int, int, None], bool] = ...
-    read_register: Callable[[Device, int], tuple[bool, int]] = ...
-    write_register: Callable[[Device, int, int], bool] = ...
-    control_lost: Callable[[Device], None] = ...
+    parent_class: GObject.ObjectClass
+    create_stream: None
+    get_genicam_xml: Callable[[Device], tuple[str, int]]
+    get_genicam: Callable[[Device], Gc]
+    read_memory: Callable[[Device, int, int, None], bool]
+    write_memory: Callable[[Device, int, int, None], bool]
+    read_register: Callable[[Device, int], tuple[bool, int]]
+    write_register: Callable[[Device, int, int], bool]
+    control_lost: Callable[[Device], None]
 
 class DomCharacterData(DomNode):
     """
@@ -641,7 +642,7 @@ class DomCharacterDataClass(GObject.GPointer):
         DomCharacterDataClass()
     """
 
-    parent_class: DomNodeClass = ...
+    parent_class: DomNodeClass
 
 class DomDocument(DomNode):
     """
@@ -689,10 +690,10 @@ class DomDocumentClass(GObject.GPointer):
         DomDocumentClass()
     """
 
-    parent_class: DomNodeClass = ...
-    get_document_element: Callable[[DomDocument], DomElement] = ...
-    create_element: Callable[[DomDocument, str], DomElement] = ...
-    create_text_node: Callable[[DomDocument, str], DomText] = ...
+    parent_class: DomNodeClass
+    get_document_element: Callable[[DomDocument], DomElement]
+    create_element: Callable[[DomDocument, str], DomElement]
+    create_text_node: Callable[[DomDocument, str], DomText]
 
 class DomDocumentFragment(DomNode):
     """
@@ -723,7 +724,7 @@ class DomDocumentFragmentClass(GObject.GPointer):
         DomDocumentFragmentClass()
     """
 
-    parent_class: DomNodeClass = ...
+    parent_class: DomNodeClass
 
 class DomElement(DomNode):
     """
@@ -756,9 +757,9 @@ class DomElementClass(GObject.GPointer):
         DomElementClass()
     """
 
-    parent_class: DomNodeClass = ...
-    get_attribute: Callable[[DomElement, str], str] = ...
-    set_attribute: Callable[[DomElement, str, str], None] = ...
+    parent_class: DomNodeClass
+    get_attribute: Callable[[DomElement, str], str]
+    set_attribute: Callable[[DomElement, str, str], None]
 
 class DomNamedNodeMap(GObject.Object):
     """
@@ -793,12 +794,12 @@ class DomNamedNodeMapClass(GObject.GPointer):
         DomNamedNodeMapClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    get: None = ...
-    set: None = ...
-    remove: None = ...
-    get_item: Callable[[DomNamedNodeMap, int], DomNode] = ...
-    get_length: Callable[[DomNamedNodeMap], int] = ...
+    parent_class: GObject.ObjectClass
+    get: None
+    set: None
+    remove: None
+    get_item: Callable[[DomNamedNodeMap, int], DomNode]
+    get_length: Callable[[DomNamedNodeMap], int]
 
 class DomNode(GObject.Object):
     """
@@ -869,7 +870,7 @@ class DomNodeChildListClass(GObject.GPointer):
         DomNodeChildListClass()
     """
 
-    parent_class: DomNodeListClass = ...
+    parent_class: DomNodeListClass
 
 class DomNodeClass(GObject.GPointer):
     """
@@ -880,16 +881,16 @@ class DomNodeClass(GObject.GPointer):
         DomNodeClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    get_node_name: Callable[[DomNode], str] = ...
-    get_node_value: Callable[[DomNode], str] = ...
-    set_node_value: Callable[[DomNode, str], None] = ...
-    get_node_type: Callable[[DomNode], DomNodeType] = ...
-    can_append_child: Callable[[DomNode, DomNode], bool] = ...
-    post_new_child: Callable[[DomNode, DomNode], None] = ...
-    pre_remove_child: Callable[[DomNode, DomNode], None] = ...
-    changed: Callable[[DomNode], None] = ...
-    child_changed: Callable[[DomNode, DomNode], bool] = ...
+    parent_class: GObject.ObjectClass
+    get_node_name: Callable[[DomNode], str]
+    get_node_value: Callable[[DomNode], str]
+    set_node_value: Callable[[DomNode, str], None]
+    get_node_type: Callable[[DomNode], DomNodeType]
+    can_append_child: Callable[[DomNode, DomNode], bool]
+    post_new_child: Callable[[DomNode, DomNode], None]
+    pre_remove_child: Callable[[DomNode, DomNode], None]
+    changed: Callable[[DomNode], None]
+    child_changed: Callable[[DomNode, DomNode], bool]
 
 class DomNodeList(GObject.Object):
     """
@@ -921,9 +922,9 @@ class DomNodeListClass(GObject.GPointer):
         DomNodeListClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    get_item: Callable[[DomNodeList, int], DomNode] = ...
-    get_length: Callable[[DomNodeList], int] = ...
+    parent_class: GObject.ObjectClass
+    get_item: Callable[[DomNodeList, int], DomNode]
+    get_length: Callable[[DomNodeList], int]
 
 class DomText(DomCharacterData):
     """
@@ -954,7 +955,7 @@ class DomTextClass(GObject.GPointer):
         DomTextClass()
     """
 
-    parent_class: DomCharacterDataClass = ...
+    parent_class: DomCharacterDataClass
 
 class Evaluator(GObject.Object):
     """
@@ -992,7 +993,7 @@ class EvaluatorClass(GObject.GPointer):
         EvaluatorClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class FakeCamera(GObject.Object):
     """
@@ -1048,7 +1049,7 @@ class FakeCameraClass(GObject.GPointer):
         FakeCameraClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class FakeDevice(Device, Gio.Initable):
     """
@@ -1090,7 +1091,7 @@ class FakeDeviceClass(GObject.GPointer):
         FakeDeviceClass()
     """
 
-    parent_class: DeviceClass = ...
+    parent_class: DeviceClass
 
 class FakeInterface(Interface):
     """
@@ -1117,7 +1118,7 @@ class FakeInterfaceClass(GObject.GPointer):
         FakeInterfaceClass()
     """
 
-    parent_class: InterfaceClass = ...
+    parent_class: InterfaceClass
 
 class FakeStream(Stream, Gio.Initable):
     """
@@ -1175,7 +1176,7 @@ class FakeStreamClass(GObject.GPointer):
         FakeStreamClass()
     """
 
-    parent_class: StreamClass = ...
+    parent_class: StreamClass
 
 class Gc(DomDocument):
     """
@@ -1238,7 +1239,7 @@ class GcBooleanClass(GObject.GPointer):
         GcBooleanClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcCategory(GcFeatureNode):
     """
@@ -1267,7 +1268,7 @@ class GcCategoryClass(GObject.GPointer):
         GcCategoryClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcClass(GObject.GPointer):
     """
@@ -1278,7 +1279,7 @@ class GcClass(GObject.GPointer):
         GcClass()
     """
 
-    parent_class: DomDocumentClass = ...
+    parent_class: DomDocumentClass
 
 class GcCommand(GcFeatureNode):
     """
@@ -1307,7 +1308,7 @@ class GcCommandClass(GObject.GPointer):
         GcCommandClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcConverter(GcFeatureNode):
     """
@@ -1335,7 +1336,7 @@ class GcConverterClass(GObject.GPointer):
         GcConverterClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcConverterNode(GcConverter, GcFloat):
     """
@@ -1363,7 +1364,7 @@ class GcConverterNodeClass(GObject.GPointer):
         GcConverterNodeClass()
     """
 
-    parent_class: GcConverterClass = ...
+    parent_class: GcConverterClass
 
 class GcEnumEntry(GcFeatureNode):
     """
@@ -1392,7 +1393,7 @@ class GcEnumEntryClass(GObject.GPointer):
         GcEnumEntryClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcEnumeration(GcFeatureNode, GcInteger, GcSelector, GcString):
     """
@@ -1428,7 +1429,7 @@ class GcEnumerationClass(GObject.GPointer):
         GcEnumerationClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcFeatureNode(GcNode):
     """
@@ -1470,10 +1471,10 @@ class GcFeatureNodeClass(GObject.GPointer):
         GcFeatureNodeClass()
     """
 
-    parent_class: GcNodeClass = ...
-    get_linked_feature: None = ...
-    get_access_mode: Callable[[GcFeatureNode], GcAccessMode] = ...
-    default_access_mode: GcAccessMode = ...
+    parent_class: GcNodeClass
+    get_linked_feature: None
+    get_access_mode: Callable[[GcFeatureNode], GcAccessMode]
+    default_access_mode: GcAccessMode
 
 class GcFloat(GObject.GInterface):
     """
@@ -1503,18 +1504,18 @@ class GcFloatInterface(GObject.GPointer):
         GcFloatInterface()
     """
 
-    parent: GObject.TypeInterface = ...
-    get_value: Callable[[GcFloat], float] = ...
-    set_value: Callable[[GcFloat, float], None] = ...
-    get_min: Callable[[GcFloat], float] = ...
-    get_max: Callable[[GcFloat], float] = ...
-    get_inc: Callable[[GcFloat], float] = ...
-    get_representation: Callable[[GcFloat], GcRepresentation] = ...
-    get_display_notation: Callable[[GcFloat], GcDisplayNotation] = ...
-    get_display_precision: Callable[[GcFloat], int] = ...
-    get_unit: Callable[[GcFloat], str] = ...
-    impose_min: Callable[[GcFloat, float], None] = ...
-    impose_max: Callable[[GcFloat, float], None] = ...
+    parent: GObject.TypeInterface
+    get_value: Callable[[GcFloat], float]
+    set_value: Callable[[GcFloat, float], None]
+    get_min: Callable[[GcFloat], float]
+    get_max: Callable[[GcFloat], float]
+    get_inc: Callable[[GcFloat], float]
+    get_representation: Callable[[GcFloat], GcRepresentation]
+    get_display_notation: Callable[[GcFloat], GcDisplayNotation]
+    get_display_precision: Callable[[GcFloat], int]
+    get_unit: Callable[[GcFloat], str]
+    impose_min: Callable[[GcFloat, float], None]
+    impose_max: Callable[[GcFloat, float], None]
 
 class GcFloatNode(GcFeatureNode, GcFloat):
     """
@@ -1542,7 +1543,7 @@ class GcFloatNodeClass(GObject.GPointer):
         GcFloatNodeClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcFloatRegNode(GcRegisterNode, GcFloat, GcRegister):
     """
@@ -1573,7 +1574,7 @@ class GcFloatRegNodeClass(GObject.GPointer):
         GcFloatRegNodeClass()
     """
 
-    parent_class: GcRegisterNodeClass = ...
+    parent_class: GcRegisterNodeClass
 
 class GcGroupNode(GcFeatureNode):
     """
@@ -1601,7 +1602,7 @@ class GcGroupNodeClass(GObject.GPointer):
         GcGroupNodeClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcIndexNode(GcPropertyNode):
     """
@@ -1640,7 +1641,7 @@ class GcIndexNodeClass(GObject.GPointer):
         GcIndexNodeClass()
     """
 
-    parent_class: GcPropertyNodeClass = ...
+    parent_class: GcPropertyNodeClass
 
 class GcIntConverterNode(GcConverter, GcInteger):
     """
@@ -1668,7 +1669,7 @@ class GcIntConverterNodeClass(GObject.GPointer):
         GcIntConverterNodeClass()
     """
 
-    parent_class: GcConverterClass = ...
+    parent_class: GcConverterClass
 
 class GcIntRegNode(GcRegisterNode, GcInteger, GcRegister, GcSelector):
     """
@@ -1699,7 +1700,7 @@ class GcIntRegNodeClass(GObject.GPointer):
         GcIntRegNodeClass()
     """
 
-    parent_class: GcRegisterNodeClass = ...
+    parent_class: GcRegisterNodeClass
 
 class GcIntSwissKnifeNode(GcSwissKnife, GcInteger):
     """
@@ -1730,7 +1731,7 @@ class GcIntSwissKnifeNodeClass(GObject.GPointer):
         GcIntSwissKnifeNodeClass()
     """
 
-    parent_class: GcSwissKnifeClass = ...
+    parent_class: GcSwissKnifeClass
 
 class GcInteger(GObject.GInterface):
     """
@@ -1758,16 +1759,16 @@ class GcIntegerInterface(GObject.GPointer):
         GcIntegerInterface()
     """
 
-    parent: GObject.TypeInterface = ...
-    get_value: Callable[[GcInteger], int] = ...
-    set_value: Callable[[GcInteger, int], None] = ...
-    get_min: Callable[[GcInteger], int] = ...
-    get_max: Callable[[GcInteger], int] = ...
-    get_inc: Callable[[GcInteger], int] = ...
-    get_representation: Callable[[GcInteger], GcRepresentation] = ...
-    get_unit: Callable[[GcInteger], str] = ...
-    impose_min: Callable[[GcInteger, int], None] = ...
-    impose_max: Callable[[GcInteger, int], None] = ...
+    parent: GObject.TypeInterface
+    get_value: Callable[[GcInteger], int]
+    set_value: Callable[[GcInteger, int], None]
+    get_min: Callable[[GcInteger], int]
+    get_max: Callable[[GcInteger], int]
+    get_inc: Callable[[GcInteger], int]
+    get_representation: Callable[[GcInteger], GcRepresentation]
+    get_unit: Callable[[GcInteger], str]
+    impose_min: Callable[[GcInteger, int], None]
+    impose_max: Callable[[GcInteger, int], None]
 
 class GcIntegerNode(GcFeatureNode, GcInteger, GcSelector):
     """
@@ -1795,7 +1796,7 @@ class GcIntegerNodeClass(GObject.GPointer):
         GcIntegerNodeClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcInvalidatorNode(GcPropertyNode):
     """
@@ -1833,7 +1834,7 @@ class GcInvalidatorNodeClass(GObject.GPointer):
         GcInvalidatorNodeClass()
     """
 
-    parent_class: GcPropertyNodeClass = ...
+    parent_class: GcPropertyNodeClass
 
 class GcMaskedIntRegNode(GcRegisterNode, GcInteger, GcRegister, GcSelector):
     """
@@ -1864,7 +1865,7 @@ class GcMaskedIntRegNodeClass(GObject.GPointer):
         GcMaskedIntRegNodeClass()
     """
 
-    parent_class: GcRegisterNodeClass = ...
+    parent_class: GcRegisterNodeClass
 
 class GcNode(DomElement):
     """
@@ -1893,7 +1894,7 @@ class GcNodeClass(GObject.GPointer):
         GcNodeClass()
     """
 
-    parent_class: DomElementClass = ...
+    parent_class: DomElementClass
 
 class GcPort(GcFeatureNode):
     """
@@ -1923,7 +1924,7 @@ class GcPortClass(GObject.GPointer):
         GcPortClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcPropertyNode(GcNode):
     """
@@ -2149,7 +2150,7 @@ class GcPropertyNodeClass(GObject.GPointer):
         GcPropertyNodeClass()
     """
 
-    parent_class: GcNodeClass = ...
+    parent_class: GcNodeClass
 
 class GcRegister(GObject.GInterface):
     """
@@ -2202,7 +2203,7 @@ class GcRegisterDescriptionNodeClass(GObject.GPointer):
         GcRegisterDescriptionNodeClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcRegisterInterface(GObject.GPointer):
     """
@@ -2213,11 +2214,11 @@ class GcRegisterInterface(GObject.GPointer):
         GcRegisterInterface()
     """
 
-    parent: GObject.TypeInterface = ...
-    get: Callable[[GcRegister, None, int], None] = ...
-    set: Callable[[GcRegister, None, int], None] = ...
-    get_address: Callable[[GcRegister], int] = ...
-    get_length: Callable[[GcRegister], int] = ...
+    parent: GObject.TypeInterface
+    get: Callable[[GcRegister, None, int], None]
+    set: Callable[[GcRegister, None, int], None]
+    get_address: Callable[[GcRegister], int]
+    get_length: Callable[[GcRegister], int]
 
 class GcRegisterNode(GcFeatureNode, GcRegister):
     """
@@ -2248,8 +2249,8 @@ class GcRegisterNodeClass(GObject.GPointer):
         GcRegisterNodeClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
-    default_cachable: GcCachable = ...
+    parent_class: GcFeatureNodeClass
+    default_cachable: GcCachable
 
 class GcSelector(GObject.GInterface):
     """
@@ -2270,8 +2271,8 @@ class GcSelectorInterface(GObject.GPointer):
         GcSelectorInterface()
     """
 
-    parent: GObject.TypeInterface = ...
-    get_selected_features: Callable[[GcSelector], list[GcFeatureNode]] = ...
+    parent: GObject.TypeInterface
+    get_selected_features: Callable[[GcSelector], list[GcFeatureNode]]
 
 class GcString(GObject.GInterface):
     """
@@ -2293,10 +2294,10 @@ class GcStringInterface(GObject.GPointer):
         GcStringInterface()
     """
 
-    parent: GObject.TypeInterface = ...
-    get_value: Callable[[GcString], str] = ...
-    set_value: Callable[[GcString, str], None] = ...
-    get_max_length: Callable[[GcString], int] = ...
+    parent: GObject.TypeInterface
+    get_value: Callable[[GcString], str]
+    set_value: Callable[[GcString, str], None]
+    get_max_length: Callable[[GcString], int]
 
 class GcStringNode(GcFeatureNode, GcString):
     """
@@ -2324,7 +2325,7 @@ class GcStringNodeClass(GObject.GPointer):
         GcStringNodeClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcStringRegNode(GcRegisterNode, GcRegister, GcString):
     """
@@ -2355,7 +2356,7 @@ class GcStringRegNodeClass(GObject.GPointer):
         GcStringRegNodeClass()
     """
 
-    parent_class: GcRegisterNodeClass = ...
+    parent_class: GcRegisterNodeClass
 
 class GcStructEntryNode(GcFeatureNode, GcInteger, GcRegister):
     """
@@ -2383,7 +2384,7 @@ class GcStructEntryNodeClass(GObject.GPointer):
         GcStructEntryNodeClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcStructRegNode(GcRegisterNode, GcRegister):
     """
@@ -2414,7 +2415,7 @@ class GcStructRegNodeClass(GObject.GPointer):
         GcStructRegNodeClass()
     """
 
-    parent_class: GcRegisterNodeClass = ...
+    parent_class: GcRegisterNodeClass
 
 class GcSwissKnife(GcFeatureNode):
     """
@@ -2442,7 +2443,7 @@ class GcSwissKnifeClass(GObject.GPointer):
         GcSwissKnifeClass()
     """
 
-    parent_class: GcFeatureNodeClass = ...
+    parent_class: GcFeatureNodeClass
 
 class GcSwissKnifeNode(GcSwissKnife, GcFloat):
     """
@@ -2473,7 +2474,7 @@ class GcSwissKnifeNodeClass(GObject.GPointer):
         GcSwissKnifeNodeClass()
     """
 
-    parent_class: GcSwissKnifeClass = ...
+    parent_class: GcSwissKnifeClass
 
 class GcValueIndexedNode(GcPropertyNode):
     """
@@ -2512,7 +2513,7 @@ class GcValueIndexedNodeClass(GObject.GPointer):
         GcValueIndexedNodeClass()
     """
 
-    parent_class: GcPropertyNodeClass = ...
+    parent_class: GcPropertyNodeClass
 
 class GvDevice(Device, Gio.Initable):
     """
@@ -2601,7 +2602,7 @@ class GvDeviceClass(GObject.GPointer):
         GvDeviceClass()
     """
 
-    parent_class: DeviceClass = ...
+    parent_class: DeviceClass
 
 class GvFakeCamera(GObject.Object):
     """
@@ -2669,7 +2670,7 @@ class GvFakeCameraClass(GObject.GPointer):
         GvFakeCameraClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class GvInterface(Interface):
     """
@@ -2700,7 +2701,7 @@ class GvInterfaceClass(GObject.GPointer):
         GvInterfaceClass()
     """
 
-    parent_class: InterfaceClass = ...
+    parent_class: InterfaceClass
 
 class GvStream(Stream, Gio.Initable):
     """
@@ -2790,7 +2791,7 @@ class GvStreamClass(GObject.GPointer):
         GvStreamClass()
     """
 
-    parent_class: StreamClass = ...
+    parent_class: StreamClass
 
 class Interface(GObject.Object):
     """
@@ -2830,10 +2831,10 @@ class InterfaceClass(GObject.GPointer):
         InterfaceClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    update_device_list: None = ...
-    open_device: Callable[[Interface, str | None], Device] = ...
-    protocol: str = ...
+    parent_class: GObject.ObjectClass
+    update_device_list: None
+    open_device: Callable[[Interface, str | None], Device]
+    protocol: str
 
 class Stream(GObject.Object, Gio.Initable):
     """
@@ -2913,10 +2914,10 @@ class StreamClass(GObject.GPointer):
         StreamClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    start_thread: Callable[[Stream], None] = ...
-    stop_thread: Callable[[Stream], None] = ...
-    new_buffer: Callable[[Stream], None] = ...
+    parent_class: GObject.ObjectClass
+    start_thread: Callable[[Stream], None]
+    stop_thread: Callable[[Stream], None]
+    new_buffer: Callable[[Stream], None]
 
 class UvDevice(Device, Gio.Initable):
     """
@@ -2977,7 +2978,7 @@ class UvDeviceClass(GObject.GPointer):
         UvDeviceClass()
     """
 
-    parent_class: DeviceClass = ...
+    parent_class: DeviceClass
 
 class UvInterface(Interface):
     """
@@ -3004,7 +3005,7 @@ class UvInterfaceClass(GObject.GPointer):
         UvInterfaceClass()
     """
 
-    parent_class: InterfaceClass = ...
+    parent_class: InterfaceClass
 
 class UvStream(Stream, Gio.Initable):
     """
@@ -3068,7 +3069,7 @@ class UvStreamClass(GObject.GPointer):
         UvStreamClass()
     """
 
-    parent_class: StreamClass = ...
+    parent_class: StreamClass
 
 class XmlSchema(GObject.Object):
     """
@@ -3103,7 +3104,7 @@ class XmlSchemaClass(GObject.GPointer):
         XmlSchemaClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Zip(GObject.GPointer): ...
 class ZipFile(GObject.GPointer): ...

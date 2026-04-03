@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Callable
@@ -8,14 +9,14 @@ from gi.repository import Gio
 from gi.repository import GLib
 from gi.repository import GObject
 
-BUILD_TYPE: str = "plain"
-MAJOR_VERSION: int = 1
-MINOR_VERSION: int = 1
-VERSION_S: str = "1.1.0"
+BUILD_TYPE: Final = "plain"
+MAJOR_VERSION: Final[int]
+MINOR_VERSION: Final[int]
+VERSION_S: Final = "1.1.0"
 _introspection_module = ...  # FIXME Constant
-_namespace: str = "Ggit"
+_namespace: Final = "Ggit"
 _overrides_module = ...  # FIXME Constant
-_version: str = "1.0"
+_version: Final = "1.0"
 
 def error_quark() -> int: ...
 def get_features() -> FeatureFlags: ...
@@ -46,7 +47,7 @@ class Blame(Native):
     def set_flags(blame_options: BlameOptions, flags: BlameFlags) -> None: ...
 
 class BlameClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class BlameHunk(GObject.GBoxed):
     def get_final_commit_id(self) -> OId | None: ...
@@ -88,7 +89,7 @@ class Blob(Object):
     def is_binary(self) -> bool: ...
 
 class BlobClass(GObject.GPointer):
-    parent_class: ObjectClass = ...
+    parent_class: ObjectClass
 
 class BlobOutputStream(Gio.OutputStream):
     class Props(Gio.OutputStream.Props):
@@ -102,7 +103,7 @@ class BlobOutputStream(Gio.OutputStream):
     def get_id(self) -> OId | None: ...
 
 class BlobOutputStreamClass(GObject.GPointer):
-    parent_class: Gio.OutputStreamClass = ...
+    parent_class: Gio.OutputStreamClass
 
 class Branch(Ref):
     class Props(Ref.Props):
@@ -121,7 +122,7 @@ class Branch(Ref):
     def set_upstream(self, upstream_branch_name: str) -> None: ...
 
 class BranchClass(GObject.GPointer):
-    parent_class: RefClass = ...
+    parent_class: RefClass
 
 class BranchEnumerator(GObject.GBoxed):
     def get(self) -> Ref | None: ...
@@ -201,11 +202,11 @@ class CheckoutOptions(GObject.Object):
     def set_their_label(self, label: str | None = None) -> None: ...
 
 class CheckoutOptionsClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
     notify: Callable[
         [CheckoutOptions, CheckoutNotifyFlags, str, DiffFile, DiffFile, DiffFile], int
-    ] = ...
-    progress: Callable[[CheckoutOptions, str, int, int], None] = ...
+    ]
+    progress: Callable[[CheckoutOptions, str, int, int], None]
 
 class CherryPickOptions(GObject.Object):
     class Props(GObject.Object.Props):
@@ -235,7 +236,7 @@ class CherryPickOptions(GObject.Object):
     def set_merge_options(self, merge_options: MergeOptions | None = None) -> None: ...
 
 class CherryPickOptionsClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class CloneOptions(GObject.Object):
     @property
@@ -256,9 +257,9 @@ class CloneOptions(GObject.Object):
     def set_local(self, local: CloneLocal) -> None: ...
 
 class CloneOptionsClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
-    create_repository: Callable[[CloneOptions, str, bool], Repository | None] = ...
-    create_remote: Callable[[CloneOptions, Repository, str, str], Remote | None] = ...
+    parent_class: GObject.ObjectClass
+    create_repository: Callable[[CloneOptions, str, bool], Repository | None]
+    create_remote: Callable[[CloneOptions, Repository, str, str], Remote | None]
 
 class Commit(Object):
     class Props(Object.Props):
@@ -289,7 +290,7 @@ class Commit(Object):
     def get_tree_id(self) -> OId | None: ...
 
 class CommitClass(GObject.GPointer):
-    parent_class: ObjectClass = ...
+    parent_class: ObjectClass
 
 class CommitParents(GObject.Object):
     class Props(GObject.Object.Props):
@@ -306,7 +307,7 @@ class CommitParents(GObject.Object):
     def new(cls, commit: Commit) -> CommitParents: ...
 
 class CommitParentsClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Config(Native):
     class Props(Native.Props):
@@ -345,7 +346,7 @@ class Config(Native):
     def snapshot(self) -> Config: ...
 
 class ConfigClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class ConfigEntry(GObject.GBoxed):
     def get_level(self) -> ConfigLevel: ...
@@ -365,7 +366,7 @@ class Cred(Native):
     def __init__(self, native: None = ...): ...
 
 class CredClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class CredPlaintext(Cred, Gio.Initable):
     class Props(Cred.Props):
@@ -386,7 +387,7 @@ class CredPlaintext(Cred, Gio.Initable):
     def new(cls, username: str, password: str) -> CredPlaintext: ...
 
 class CredPlaintextClass(GObject.GPointer):
-    parent_class: CredClass = ...
+    parent_class: CredClass
 
 class CredSshInteractive(Cred, Gio.Initable):
     class Props(Cred.Props):
@@ -404,10 +405,8 @@ class CredSshInteractive(Cred, Gio.Initable):
     def new(cls, username: str) -> CredSshInteractive: ...
 
 class CredSshInteractiveClass(GObject.GPointer):
-    parent_class: CredClass = ...
-    prompt: Callable[
-        [CredSshInteractive, Sequence[CredSshInteractivePrompt]], None
-    ] = ...
+    parent_class: CredClass
+    prompt: Callable[[CredSshInteractive, Sequence[CredSshInteractivePrompt]], None]
 
 class CredSshInteractivePrompt(GObject.GBoxed):
     def get_instruction(self) -> str: ...
@@ -436,7 +435,7 @@ class CredSshKeyFromAgent(Cred, Gio.Initable):
     def new(cls, username: str) -> CredSshKeyFromAgent | None: ...
 
 class CredSshKeyFromAgentClass(GObject.GPointer):
-    parent_class: CredClass = ...
+    parent_class: CredClass
 
 class Diff(Native):
     class Props(Native.Props):
@@ -544,7 +543,7 @@ class DiffBinaryFile(GObject.GBoxed):
     def unref(self) -> None: ...
 
 class DiffClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class DiffDelta(GObject.GBoxed):
     def get_flags(self) -> DiffFlag: ...
@@ -602,7 +601,7 @@ class DiffFindOptions(GObject.Object):
     def set_rename_threshold(self, threshold: int) -> None: ...
 
 class DiffFindOptionsClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class DiffFormatEmailOptions(GObject.Object):
     class Props(GObject.Object.Props):
@@ -646,7 +645,7 @@ class DiffFormatEmailOptions(GObject.Object):
     def set_total_patches(self, patches: int) -> None: ...
 
 class DiffFormatEmailOptionsClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class DiffHunk(GObject.GBoxed):
     def get_header(self) -> str: ...
@@ -705,7 +704,7 @@ class DiffOptions(GObject.Object):
     def set_pathspec(self, pathspec: Sequence[str] | None = None) -> None: ...
 
 class DiffOptionsClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class DiffSimilarityMetric(GObject.GBoxed):
     def copy(self) -> DiffSimilarityMetric | None: ...
@@ -756,7 +755,7 @@ class Index(Native, Gio.Initable):
     def write_tree_to(self, repository: Repository) -> OId | None: ...
 
 class IndexClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class IndexEntries(GObject.GBoxed):
     def get_by_index(self, idx: int) -> IndexEntry | None: ...
@@ -828,7 +827,7 @@ class Mailmap(Native):
     def resolve_signature(self, signature: Signature) -> Signature | None: ...
 
 class MailmapClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class MergeOptions(GObject.GBoxed):
     def copy(self) -> MergeOptions | None: ...
@@ -859,7 +858,7 @@ class Native(ObjectFactoryBase):
     def __init__(self, native: None = ...): ...
 
 class NativeClass(GObject.GPointer):
-    parent_class: ObjectFactoryBaseClass = ...
+    parent_class: ObjectFactoryBaseClass
 
 class Note(GObject.GBoxed):
     def get_id(self) -> OId | None: ...
@@ -896,7 +895,7 @@ class Object(Native):
     def get_owner(self) -> Repository | None: ...
 
 class ObjectClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class ObjectFactory(GObject.Object):
     def construct(
@@ -916,10 +915,10 @@ class ObjectFactoryBase(GObject.Object):
     def parent_instance(self) -> GObject.Object: ...
 
 class ObjectFactoryBaseClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ObjectFactoryClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Patch(GObject.GBoxed):
     def get_delta(self) -> DiffDelta | None: ...
@@ -950,7 +949,7 @@ class ProxyOptions(GObject.Object):
     def new(cls) -> ProxyOptions | None: ...
 
 class ProxyOptionsClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class PushOptions(GObject.Object):
     class Props(GObject.Object.Props):
@@ -970,7 +969,7 @@ class PushOptions(GObject.Object):
     def set_remote_callbacks(self, callbacks: RemoteCallbacks) -> None: ...
 
 class PushOptionsClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Rebase(Native):
     class Props(Native.Props):
@@ -993,7 +992,7 @@ class Rebase(Native):
     def next(self) -> RebaseOperation | None: ...
 
 class RebaseClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class RebaseOperation(GObject.GBoxed):
     def get_exec(self) -> str | None: ...
@@ -1047,7 +1046,7 @@ class Ref(Native):
     def to_string(self) -> str | None: ...
 
 class RefClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class RefSpec(GObject.GBoxed):
     def get_destination(self) -> str | None: ...
@@ -1129,17 +1128,15 @@ class RemoteCallbacks(GObject.Object):
     def do_update_tips(self, refname: str, a: OId, b: OId) -> None: ...
 
 class RemoteCallbacksClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
-    progress: Callable[[RemoteCallbacks, str], None] = ...
-    transfer_progress: Callable[[RemoteCallbacks, TransferProgress], None] = ...
-    update_tips: Callable[[RemoteCallbacks, str, OId, OId], None] = ...
-    completion: Callable[[RemoteCallbacks, RemoteCompletionType], None] = ...
-    credentials: Callable[
-        [RemoteCallbacks, str, str | None, Credtype], Cred | None
-    ] = ...
+    parent_class: GObject.ObjectClass
+    progress: Callable[[RemoteCallbacks, str], None]
+    transfer_progress: Callable[[RemoteCallbacks, TransferProgress], None]
+    update_tips: Callable[[RemoteCallbacks, str, OId, OId], None]
+    completion: Callable[[RemoteCallbacks, RemoteCompletionType], None]
+    credentials: Callable[[RemoteCallbacks, str, str | None, Credtype], Cred | None]
 
 class RemoteClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class RemoteHead(GObject.GBoxed):
     def get_local_oid(self) -> OId | None: ...
@@ -1162,7 +1159,7 @@ class Repository(Native, Gio.Initable):
 
     @property
     def props(self) -> Props: ...
-    parent: Native = ...
+    parent: Native
     def __init__(
         self,
         clone_options: CloneOptions = ...,
@@ -1386,7 +1383,7 @@ class Repository(Native, Gio.Initable):
     def tag_foreach(self, callback: Callable[..., int], *user_data: Any) -> bool: ...
 
 class RepositoryClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class RevertOptions(GObject.GBoxed):
     def copy(self) -> RevertOptions | None: ...
@@ -1426,7 +1423,7 @@ class RevisionWalker(Native, Gio.Initable):
     def set_sort_mode(self, sort_mode: SortMode) -> None: ...
 
 class RevisionWalkerClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class Signature(Native):
     class Props(Native.Props):
@@ -1449,7 +1446,7 @@ class Signature(Native):
     def new_now(cls, name: str, email: str) -> Signature | None: ...
 
 class SignatureClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class StatusOptions(GObject.GBoxed):
     def copy(self) -> StatusOptions | None: ...
@@ -1503,7 +1500,7 @@ class SubmoduleUpdateOptions(GObject.Object):
     def set_fetch_options(self, fetch_options: FetchOptions | None = None) -> None: ...
 
 class SubmoduleUpdateOptionsClass(GObject.GPointer):
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Tag(Object):
     class Props(Object.Props):
@@ -1523,7 +1520,7 @@ class Tag(Object):
     def peel(self) -> Object | None: ...
 
 class TagClass(GObject.GPointer):
-    parent_class: ObjectClass = ...
+    parent_class: ObjectClass
 
 class TransferProgress(GObject.GBoxed):
     def copy(self) -> TransferProgress | None: ...
@@ -1569,10 +1566,10 @@ class TreeBuilder(Native):
     def write(self) -> OId | None: ...
 
 class TreeBuilderClass(GObject.GPointer):
-    parent_class: NativeClass = ...
+    parent_class: NativeClass
 
 class TreeClass(GObject.GPointer):
-    parent_class: ObjectClass = ...
+    parent_class: ObjectClass
 
 class TreeEntry(GObject.GBoxed):
     def get_file_mode(self) -> FileMode: ...

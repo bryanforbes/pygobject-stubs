@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Callable
@@ -16,8 +17,8 @@ from gi.repository import GObject
 _SomeSurface = TypeVar("_SomeSurface", bound=cairo.Surface)
 
 _lock = ...  # FIXME Constant
-_namespace: str = "XApp"
-_version: str = "1.0"
+_namespace: Final = "XApp"
+_version: Final = "1.0"
 
 def get_tmp_dir() -> str: ...
 def pango_font_string_to_css(pango_font_string: str) -> str: ...
@@ -71,7 +72,7 @@ class DarkModeManagerClass(GObject.GPointer):
         DarkModeManagerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class FavoriteInfo(GObject.GBoxed):
     """
@@ -82,9 +83,9 @@ class FavoriteInfo(GObject.GBoxed):
         FavoriteInfo()
     """
 
-    uri: str = ...
-    display_name: str = ...
-    cached_mimetype: str = ...
+    uri: str
+    display_name: str
+    cached_mimetype: str
     def copy(self) -> FavoriteInfo: ...
     def free(self) -> None: ...
 
@@ -131,7 +132,7 @@ class FavoritesClass(GObject.GPointer):
         FavoritesClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class GpuInfo(GObject.GBoxed):
     """
@@ -142,10 +143,10 @@ class GpuInfo(GObject.GBoxed):
         GpuInfo()
     """
 
-    id: int = ...
-    is_default: bool = ...
-    display_name: str = ...
-    env_strv: list[str] = ...
+    id: int
+    is_default: bool
+    display_name: str
+    env_strv: list[str]
     def get_shell_env_prefix(self) -> str: ...
 
 class GpuOffloadHelper(GObject.Object):
@@ -185,7 +186,7 @@ class GpuOffloadHelperClass(GObject.GPointer):
         GpuOffloadHelperClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class GtkWindow(_Gtk3.Window, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -610,8 +611,8 @@ class GtkWindowClass(GObject.GPointer):
         GtkWindowClass()
     """
 
-    parent_class: _Gtk3.WindowClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk3.WindowClass
+    padding: list[None]
 
 class IconChooserButton(
     _Gtk3.Button,
@@ -975,7 +976,7 @@ class IconChooserButtonClass(GObject.GPointer):
         IconChooserButtonClass()
     """
 
-    parent_class: _Gtk3.ButtonClass = ...
+    parent_class: _Gtk3.ButtonClass
 
 class IconChooserDialog(GtkWindow, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -1425,7 +1426,7 @@ class IconChooserDialogClass(GObject.GPointer):
         IconChooserDialogClass()
     """
 
-    parent_class: GtkWindowClass = ...
+    parent_class: GtkWindowClass
 
 class KbdLayoutController(GObject.Object):
     """
@@ -1455,7 +1456,7 @@ class KbdLayoutController(GObject.Object):
 
     @property
     def props(self) -> Props: ...
-    parent_object: GObject.Object = ...
+    parent_object: GObject.Object
     @property
     def priv(self) -> KbdLayoutControllerPrivate: ...
     def get_all_names(self) -> list[str]: ...
@@ -1494,7 +1495,7 @@ class KbdLayoutControllerClass(GObject.GPointer):
         KbdLayoutControllerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class KbdLayoutControllerPrivate(GObject.GPointer): ...
 
@@ -1528,7 +1529,7 @@ class MonitorBlankerClass(GObject.GPointer):
         MonitorBlankerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Object(GObject.GInterface):
     """
@@ -1549,7 +1550,7 @@ class ObjectIface(GObject.GPointer):
         ObjectIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
+    parent_iface: GObject.TypeInterface
 
 class ObjectManagerClient(
     Gio.DBusObjectManagerClient, Gio.AsyncInitable, Gio.DBusObjectManager, Gio.Initable
@@ -1694,7 +1695,7 @@ class ObjectManagerClientClass(GObject.GPointer):
         ObjectManagerClientClass()
     """
 
-    parent_class: Gio.DBusObjectManagerClientClass = ...
+    parent_class: Gio.DBusObjectManagerClientClass
 
 class ObjectManagerClientPrivate(GObject.GPointer): ...
 
@@ -1756,7 +1757,7 @@ class ObjectProxyClass(GObject.GPointer):
         ObjectProxyClass()
     """
 
-    parent_class: Gio.DBusObjectProxyClass = ...
+    parent_class: Gio.DBusObjectProxyClass
 
 class ObjectProxyPrivate(GObject.GPointer): ...
 
@@ -1818,7 +1819,7 @@ class ObjectSkeletonClass(GObject.GPointer):
         ObjectSkeletonClass()
     """
 
-    parent_class: Gio.DBusObjectSkeletonClass = ...
+    parent_class: Gio.DBusObjectSkeletonClass
 
 class ObjectSkeletonPrivate(GObject.GPointer): ...
 
@@ -2247,8 +2248,8 @@ class PreferencesWindowClass(GObject.GPointer):
         PreferencesWindowClass()
     """
 
-    parent_class: _Gtk3.WindowClass = ...
-    close: Callable[[PreferencesWindow], None] = ...
+    parent_class: _Gtk3.WindowClass
+    close: Callable[[PreferencesWindow], None]
 
 class StackSidebar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -2538,7 +2539,7 @@ class StackSidebarClass(GObject.GPointer):
         StackSidebarClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
+    parent_class: _Gtk3.BinClass
 
 class StatusIcon(GObject.Object):
     """
@@ -2625,7 +2626,7 @@ class StatusIconClass(GObject.GPointer):
         StatusIconClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class StatusIconInterface(GObject.GInterface):
     """
@@ -2713,25 +2714,25 @@ class StatusIconInterfaceIface(GObject.GPointer):
         StatusIconInterfaceIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
+    parent_iface: GObject.TypeInterface
     handle_button_press: Callable[
         [StatusIconInterface, Gio.DBusMethodInvocation, int, int, int, int, int], bool
-    ] = ...
+    ]
     handle_button_release: Callable[
         [StatusIconInterface, Gio.DBusMethodInvocation, int, int, int, int, int], bool
-    ] = ...
+    ]
     handle_scroll: Callable[
         [StatusIconInterface, Gio.DBusMethodInvocation, int, int, int], bool
-    ] = ...
-    get_icon_name: Callable[[StatusIconInterface], str | None] = ...
-    get_icon_size: Callable[[StatusIconInterface], int] = ...
-    get_label: Callable[[StatusIconInterface], str | None] = ...
-    get_metadata: Callable[[StatusIconInterface], str | None] = ...
-    get_name: Callable[[StatusIconInterface], str | None] = ...
-    get_primary_menu_is_open: Callable[[StatusIconInterface], bool] = ...
-    get_secondary_menu_is_open: Callable[[StatusIconInterface], bool] = ...
-    get_tooltip_text: Callable[[StatusIconInterface], str | None] = ...
-    get_visible: Callable[[StatusIconInterface], bool] = ...
+    ]
+    get_icon_name: Callable[[StatusIconInterface], str | None]
+    get_icon_size: Callable[[StatusIconInterface], int]
+    get_label: Callable[[StatusIconInterface], str | None]
+    get_metadata: Callable[[StatusIconInterface], str | None]
+    get_name: Callable[[StatusIconInterface], str | None]
+    get_primary_menu_is_open: Callable[[StatusIconInterface], bool]
+    get_secondary_menu_is_open: Callable[[StatusIconInterface], bool]
+    get_tooltip_text: Callable[[StatusIconInterface], str | None]
+    get_visible: Callable[[StatusIconInterface], bool]
 
 class StatusIconInterfaceProxy(
     Gio.DBusProxy,
@@ -2884,7 +2885,7 @@ class StatusIconInterfaceProxyClass(GObject.GPointer):
         StatusIconInterfaceProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class StatusIconInterfaceProxyPrivate(GObject.GPointer): ...
 
@@ -2960,7 +2961,7 @@ class StatusIconInterfaceSkeletonClass(GObject.GPointer):
         StatusIconInterfaceSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class StatusIconInterfaceSkeletonPrivate(GObject.GPointer): ...
 
@@ -2996,7 +2997,7 @@ class StatusIconMonitorClass(GObject.GPointer):
         StatusIconMonitorClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class StyleManager(GObject.Object):
     """
@@ -3040,7 +3041,7 @@ class StyleManagerClass(GObject.GPointer):
         StyleManagerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class SwitcherooControl(GObject.GInterface):
     """
@@ -3066,10 +3067,10 @@ class SwitcherooControlIface(GObject.GPointer):
         SwitcherooControlIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    get_gpus: Callable[[SwitcherooControl], GLib.Variant | None] = ...
-    get_has_dual_gpu: Callable[[SwitcherooControl], bool] = ...
-    get_num_gpus: Callable[[SwitcherooControl], int] = ...
+    parent_iface: GObject.TypeInterface
+    get_gpus: Callable[[SwitcherooControl], GLib.Variant | None]
+    get_has_dual_gpu: Callable[[SwitcherooControl], bool]
+    get_num_gpus: Callable[[SwitcherooControl], int]
 
 class SwitcherooControlProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, SwitcherooControl
@@ -3201,7 +3202,7 @@ class SwitcherooControlProxyClass(GObject.GPointer):
         SwitcherooControlProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class SwitcherooControlProxyPrivate(GObject.GPointer): ...
 
@@ -3260,7 +3261,7 @@ class SwitcherooControlSkeletonClass(GObject.GPointer):
         SwitcherooControlSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class SwitcherooControlSkeletonPrivate(GObject.GPointer): ...
 
@@ -3274,9 +3275,9 @@ class VisibilityGroup(GObject.GBoxed):
         new(visible:bool, sensitive:bool, widgets:list=None) -> XApp.VisibilityGroup
     """
 
-    widgets: list[_Gtk3.Widget] = ...
-    visible: bool = ...
-    sensitive: bool = ...
+    widgets: list[_Gtk3.Widget]
+    visible: bool
+    sensitive: bool
     def add_widget(self, widget: _Gtk3.Widget) -> None: ...
     def get_sensitive(self) -> bool: ...
     def get_visible(self) -> bool: ...

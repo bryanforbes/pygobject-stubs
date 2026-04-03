@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Callable
@@ -9,8 +10,8 @@ from gi.repository import GObject
 T = TypeVar("T")
 
 _lock = ...  # FIXME Constant
-_namespace: str = "GdkWin32"
-_version: str = "4.0"
+_namespace: Final = "GdkWin32"
+_version: Final = "4.0"
 
 def win32_handle_table_lookup(handle: int) -> None: ...
 
@@ -199,4 +200,4 @@ class _Win32HCursorFake(GObject.GPointer):
 
     @property
     def parent_instance(self) -> GObject.Object: ...
-    readonly_handle: int = ...
+    readonly_handle: int

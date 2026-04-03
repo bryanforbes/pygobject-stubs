@@ -1,3 +1,4 @@
+from typing import Final
 from typing import TypeVar
 
 from gi.repository import _Gtk4
@@ -8,8 +9,8 @@ from gi.repository import GObject
 T = TypeVar("T")
 
 _lock = ...  # FIXME Constant
-_namespace: str = "Spelling"
-_version: str = "1"
+_namespace: Final = "Spelling"
+_version: Final = "1"
 
 def init() -> None: ...
 
@@ -64,7 +65,7 @@ class CheckerClass(GObject.GPointer):
         CheckerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Dictionary(GObject.Object):
     """
@@ -136,7 +137,7 @@ class LanguageClass(GObject.GPointer):
         LanguageClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Provider(GObject.Object):
     """
@@ -235,4 +236,4 @@ class TextBufferAdapterClass(GObject.GPointer):
         TextBufferAdapterClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass

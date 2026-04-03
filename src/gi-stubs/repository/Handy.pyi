@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 
 from collections.abc import Callable
 
@@ -12,8 +13,8 @@ from gi.repository import GObject
 from gi.repository import Pango
 
 _lock = ...  # FIXME Constant
-_namespace: str = "Handy"
-_version: str = "1"
+_namespace: Final = "Handy"
+_version: Final = "1"
 
 def ease_out_cubic(t: float) -> float: ...
 def enum_value_row_name(value: EnumValueObject, user_data: None) -> str: ...
@@ -372,9 +373,9 @@ class ActionRowClass(GObject.GPointer):
         ActionRowClass()
     """
 
-    parent_class: _Gtk3.ListBoxRowClass = ...
-    activate: Callable[[ActionRow], None] = ...
-    padding: list[None] = ...
+    parent_class: _Gtk3.ListBoxRowClass
+    activate: Callable[[ActionRow], None]
+    padding: list[None]
 
 class ApplicationWindow(
     _Gtk3.ApplicationWindow,
@@ -819,8 +820,8 @@ class ApplicationWindowClass(GObject.GPointer):
         ApplicationWindowClass()
     """
 
-    parent_class: _Gtk3.ApplicationWindowClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk3.ApplicationWindowClass
+    padding: list[None]
 
 class Avatar(_Gtk3.DrawingArea, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -1131,7 +1132,7 @@ class AvatarClass(GObject.GPointer):
         AvatarClass()
     """
 
-    parent_class: _Gtk3.DrawingAreaClass = ...
+    parent_class: _Gtk3.DrawingAreaClass
 
 class Carousel(
     _Gtk3.EventBox, Atk.ImplementorIface, _Gtk3.Buildable, _Gtk3.Orientable, Swipeable
@@ -1490,7 +1491,7 @@ class CarouselClass(GObject.GPointer):
         CarouselClass()
     """
 
-    parent_class: _Gtk3.EventBoxClass = ...
+    parent_class: _Gtk3.EventBoxClass
 
 class CarouselIndicatorDots(
     _Gtk3.DrawingArea, Atk.ImplementorIface, _Gtk3.Buildable, _Gtk3.Orientable
@@ -1764,7 +1765,7 @@ class CarouselIndicatorDotsClass(GObject.GPointer):
         CarouselIndicatorDotsClass()
     """
 
-    parent_class: _Gtk3.DrawingAreaClass = ...
+    parent_class: _Gtk3.DrawingAreaClass
 
 class CarouselIndicatorLines(
     _Gtk3.DrawingArea, Atk.ImplementorIface, _Gtk3.Buildable, _Gtk3.Orientable
@@ -2038,7 +2039,7 @@ class CarouselIndicatorLinesClass(GObject.GPointer):
         CarouselIndicatorLinesClass()
     """
 
-    parent_class: _Gtk3.DrawingAreaClass = ...
+    parent_class: _Gtk3.DrawingAreaClass
 
 class Clamp(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable, _Gtk3.Orientable):
     """
@@ -2336,7 +2337,7 @@ class ClampClass(GObject.GPointer):
         ClampClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
+    parent_class: _Gtk3.BinClass
 
 class ComboRow(ActionRow, Atk.ImplementorIface, _Gtk3.Actionable, _Gtk3.Buildable):
     """
@@ -2711,8 +2712,8 @@ class ComboRowClass(GObject.GPointer):
         ComboRowClass()
     """
 
-    parent_class: ActionRowClass = ...
-    padding: list[None] = ...
+    parent_class: ActionRowClass
+    padding: list[None]
 
 class Deck(
     _Gtk3.Container, Atk.ImplementorIface, _Gtk3.Buildable, _Gtk3.Orientable, Swipeable
@@ -3075,8 +3076,8 @@ class DeckClass(GObject.GPointer):
         DeckClass()
     """
 
-    parent_class: _Gtk3.ContainerClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk3.ContainerClass
+    padding: list[None]
 
 class EnumValueObject(GObject.Object):
     """
@@ -3108,7 +3109,7 @@ class EnumValueObjectClass(GObject.GPointer):
         EnumValueObjectClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ExpanderRow(
     PreferencesRow, Atk.ImplementorIface, _Gtk3.Actionable, _Gtk3.Buildable
@@ -3459,8 +3460,8 @@ class ExpanderRowClass(GObject.GPointer):
         ExpanderRowClass()
     """
 
-    parent_class: PreferencesRowClass = ...
-    padding: list[None] = ...
+    parent_class: PreferencesRowClass
+    padding: list[None]
 
 class Flap(
     _Gtk3.Container, Atk.ImplementorIface, _Gtk3.Buildable, _Gtk3.Orientable, Swipeable
@@ -3837,7 +3838,7 @@ class FlapClass(GObject.GPointer):
         FlapClass()
     """
 
-    parent_class: _Gtk3.ContainerClass = ...
+    parent_class: _Gtk3.ContainerClass
 
 class HeaderBar(_Gtk3.Container, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -4191,8 +4192,8 @@ class HeaderBarClass(GObject.GPointer):
         HeaderBarClass()
     """
 
-    parent_class: _Gtk3.ContainerClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk3.ContainerClass
+    padding: list[None]
 
 class HeaderGroup(GObject.Object, _Gtk3.Buildable):
     """
@@ -4263,7 +4264,7 @@ class HeaderGroupChildClass(GObject.GPointer):
         HeaderGroupChildClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class HeaderGroupClass(GObject.GPointer):
     """
@@ -4274,7 +4275,7 @@ class HeaderGroupClass(GObject.GPointer):
         HeaderGroupClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Keypad(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -4602,8 +4603,8 @@ class KeypadClass(GObject.GPointer):
         KeypadClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk3.BinClass
+    padding: list[None]
 
 class Leaflet(
     _Gtk3.Container, Atk.ImplementorIface, _Gtk3.Buildable, _Gtk3.Orientable, Swipeable
@@ -4984,8 +4985,8 @@ class LeafletClass(GObject.GPointer):
         LeafletClass()
     """
 
-    parent_class: _Gtk3.ContainerClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk3.ContainerClass
+    padding: list[None]
 
 class PreferencesGroup(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -5289,8 +5290,8 @@ class PreferencesGroupClass(GObject.GPointer):
         PreferencesGroupClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk3.BinClass
+    padding: list[None]
 
 class PreferencesPage(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -5588,8 +5589,8 @@ class PreferencesPageClass(GObject.GPointer):
         PreferencesPageClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk3.BinClass
+    padding: list[None]
 
 class PreferencesRow(
     _Gtk3.ListBoxRow, Atk.ImplementorIface, _Gtk3.Actionable, _Gtk3.Buildable
@@ -5906,8 +5907,8 @@ class PreferencesRowClass(GObject.GPointer):
         PreferencesRowClass()
     """
 
-    parent_class: _Gtk3.ListBoxRowClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk3.ListBoxRowClass
+    padding: list[None]
 
 class PreferencesWindow(Window, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -6344,8 +6345,8 @@ class PreferencesWindowClass(GObject.GPointer):
         PreferencesWindowClass()
     """
 
-    parent_class: WindowClass = ...
-    padding: list[None] = ...
+    parent_class: WindowClass
+    padding: list[None]
 
 class SearchBar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -6645,8 +6646,8 @@ class SearchBarClass(GObject.GPointer):
         SearchBarClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk3.BinClass
+    padding: list[None]
 
 class Squeezer(
     _Gtk3.Container, Atk.ImplementorIface, _Gtk3.Buildable, _Gtk3.Orientable
@@ -6980,7 +6981,7 @@ class SqueezerClass(GObject.GPointer):
         SqueezerClass()
     """
 
-    parent_class: _Gtk3.ContainerClass = ...
+    parent_class: _Gtk3.ContainerClass
 
 class StatusPage(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -7282,7 +7283,7 @@ class StatusPageClass(GObject.GPointer):
         StatusPageClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
+    parent_class: _Gtk3.BinClass
 
 class StyleManager(GObject.Object):
     """
@@ -7342,7 +7343,7 @@ class StyleManagerClass(GObject.GPointer):
         StyleManagerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class SwipeGroup(GObject.Object, _Gtk3.Buildable):
     """
@@ -7374,7 +7375,7 @@ class SwipeGroupClass(GObject.GPointer):
         SwipeGroupClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class SwipeTracker(GObject.Object, _Gtk3.Orientable):
     """
@@ -7449,7 +7450,7 @@ class SwipeTrackerClass(GObject.GPointer):
         SwipeTrackerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Swipeable(GObject.GInterface):
     """
@@ -7479,17 +7480,15 @@ class SwipeableInterface(GObject.GPointer):
         SwipeableInterface()
     """
 
-    parent: GObject.TypeInterface = ...
-    switch_child: Callable[[Swipeable, int, int], None] = ...
-    get_swipe_tracker: Callable[[Swipeable], SwipeTracker] = ...
-    get_distance: Callable[[Swipeable], float] = ...
-    get_snap_points: Callable[[Swipeable], list[float]] = ...
-    get_progress: Callable[[Swipeable], float] = ...
-    get_cancel_progress: Callable[[Swipeable], float] = ...
-    get_swipe_area: Callable[
-        [Swipeable, NavigationDirection, bool], _Gdk3.Rectangle
-    ] = ...
-    padding: list[None] = ...
+    parent: GObject.TypeInterface
+    switch_child: Callable[[Swipeable, int, int], None]
+    get_swipe_tracker: Callable[[Swipeable], SwipeTracker]
+    get_distance: Callable[[Swipeable], float]
+    get_snap_points: Callable[[Swipeable], list[float]]
+    get_progress: Callable[[Swipeable], float]
+    get_cancel_progress: Callable[[Swipeable], float]
+    get_swipe_area: Callable[[Swipeable, NavigationDirection, bool], _Gdk3.Rectangle]
+    padding: list[None]
 
 class TabBar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -7828,7 +7827,7 @@ class TabBarClass(GObject.GPointer):
         TabBarClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
+    parent_class: _Gtk3.BinClass
 
 class TabPage(GObject.Object):
     """
@@ -7923,7 +7922,7 @@ class TabPageClass(GObject.GPointer):
         TabPageClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class TabView(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -8281,7 +8280,7 @@ class TabViewClass(GObject.GPointer):
         TabViewClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
+    parent_class: _Gtk3.BinClass
 
 class TitleBar(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -8571,7 +8570,7 @@ class TitleBarClass(GObject.GPointer):
         TitleBarClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
+    parent_class: _Gtk3.BinClass
 
 class ValueObject(GObject.Object):
     """
@@ -8614,7 +8613,7 @@ class ValueObjectClass(GObject.GPointer):
         ValueObjectClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ViewSwitcher(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -9207,7 +9206,7 @@ class ViewSwitcherBarClass(GObject.GPointer):
         ViewSwitcherBarClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
+    parent_class: _Gtk3.BinClass
 
 class ViewSwitcherClass(GObject.GPointer):
     """
@@ -9218,7 +9217,7 @@ class ViewSwitcherClass(GObject.GPointer):
         ViewSwitcherClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
+    parent_class: _Gtk3.BinClass
 
 class ViewSwitcherTitle(_Gtk3.Bin, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -9536,7 +9535,7 @@ class ViewSwitcherTitleClass(GObject.GPointer):
         ViewSwitcherTitleClass()
     """
 
-    parent_class: _Gtk3.BinClass = ...
+    parent_class: _Gtk3.BinClass
 
 class Window(_Gtk3.Window, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -9957,8 +9956,8 @@ class WindowClass(GObject.GPointer):
         WindowClass()
     """
 
-    parent_class: _Gtk3.WindowClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk3.WindowClass
+    padding: list[None]
 
 class WindowHandle(_Gtk3.EventBox, Atk.ImplementorIface, _Gtk3.Buildable):
     """
@@ -10250,7 +10249,7 @@ class WindowHandleClass(GObject.GPointer):
         WindowHandleClass()
     """
 
-    parent_class: _Gtk3.EventBoxClass = ...
+    parent_class: _Gtk3.EventBoxClass
 
 class CenteringPolicy(GObject.GEnum):
     LOOSE = 0

@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Callable
@@ -10,9 +11,9 @@ from gi.repository import GObject
 
 T = TypeVar("T")
 
-MAJOR_VERSION: int = 1
-MICRO_VERSION: int = 1
-MINOR_VERSION: int = 16
+MAJOR_VERSION: Final[int]
+MICRO_VERSION: Final[int]
+MINOR_VERSION: Final[int]
 
 def error_quark() -> int: ...
 def get_default_arch() -> str: ...
@@ -66,7 +67,7 @@ class BundleRef(Ref):
 
     @property
     def props(self) -> Props: ...
-    parent: Ref = ...
+    parent: Ref
     def __init__(
         self,
         file: Gio.File = ...,
@@ -96,7 +97,7 @@ class BundleRefClass(GObject.GPointer):
         BundleRefClass()
     """
 
-    parent_class: RefClass = ...
+    parent_class: RefClass
 
 class Installation(GObject.Object):
     """
@@ -116,7 +117,7 @@ class Installation(GObject.Object):
       notify (GParam)
     """
 
-    parent: GObject.Object = ...
+    parent: GObject.Object
     def add_remote(
         self,
         remote: Remote,
@@ -414,7 +415,7 @@ class InstallationClass(GObject.GPointer):
         InstallationClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class InstalledRef(Ref):
     """
@@ -497,7 +498,7 @@ class InstalledRef(Ref):
 
     @property
     def props(self) -> Props: ...
-    parent: Ref = ...
+    parent: Ref
     def __init__(
         self,
         appdata_content_rating: dict[None, None] = ...,
@@ -551,7 +552,7 @@ class InstalledRefClass(GObject.GPointer):
         InstalledRefClass()
     """
 
-    parent_class: RefClass = ...
+    parent_class: RefClass
 
 class Instance(GObject.Object):
     """
@@ -567,7 +568,7 @@ class Instance(GObject.Object):
       notify (GParam)
     """
 
-    parent: GObject.Object = ...
+    parent: GObject.Object
     @staticmethod
     def get_all() -> list[Instance]: ...
     def get_app(self) -> str | None: ...
@@ -591,7 +592,7 @@ class InstanceClass(GObject.GPointer):
         InstanceClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Ref(GObject.Object):
     """
@@ -630,7 +631,7 @@ class Ref(GObject.Object):
 
     @property
     def props(self) -> Props: ...
-    parent: GObject.Object = ...
+    parent: GObject.Object
     def __init__(
         self,
         arch: str = ...,
@@ -660,7 +661,7 @@ class RefClass(GObject.GPointer):
         RefClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class RelatedRef(Ref):
     """
@@ -713,7 +714,7 @@ class RelatedRef(Ref):
 
     @property
     def props(self) -> Props: ...
-    parent: Ref = ...
+    parent: Ref
     def __init__(
         self,
         should_autoprune: bool = ...,
@@ -741,7 +742,7 @@ class RelatedRefClass(GObject.GPointer):
         RelatedRefClass()
     """
 
-    parent_class: RefClass = ...
+    parent_class: RefClass
 
 class Remote(GObject.Object):
     """
@@ -770,7 +771,7 @@ class Remote(GObject.Object):
 
     @property
     def props(self) -> Props: ...
-    parent: GObject.Object = ...
+    parent: GObject.Object
     def __init__(self, name: str = ..., type: RemoteType = ...) -> None: ...
     def get_appstream_dir(self, arch: str | None = None) -> Gio.File: ...
     def get_appstream_timestamp(self, arch: str | None = None) -> Gio.File: ...
@@ -821,7 +822,7 @@ class RemoteClass(GObject.GPointer):
         RemoteClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class RemoteRef(Ref):
     """
@@ -880,7 +881,7 @@ class RemoteRef(Ref):
 
     @property
     def props(self) -> Props: ...
-    parent: Ref = ...
+    parent: Ref
     def __init__(
         self,
         download_size: int = ...,
@@ -912,7 +913,7 @@ class RemoteRefClass(GObject.GPointer):
         RemoteRefClass()
     """
 
-    parent_class: RefClass = ...
+    parent_class: RefClass
 
 class Transaction(GObject.Object, Gio.Initable):
     """
@@ -1080,32 +1081,30 @@ class TransactionClass(GObject.GPointer):
         TransactionClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
     new_operation: Callable[
         [Transaction, TransactionOperation, TransactionProgress], None
-    ] = ...
+    ]
     operation_done: Callable[
         [Transaction, TransactionOperation, str, TransactionResult], None
-    ] = ...
+    ]
     operation_error: Callable[
         [Transaction, TransactionOperation, GLib.Error, TransactionErrorDetails], bool
-    ] = ...
-    choose_remote_for_ref: Callable[[Transaction, str, str, str], int] = ...
-    end_of_lifed: Callable[[Transaction, str, str, str], None] = ...
-    ready: Callable[[Transaction], bool] = ...
+    ]
+    choose_remote_for_ref: Callable[[Transaction, str, str, str], int]
+    end_of_lifed: Callable[[Transaction, str, str, str], None]
+    ready: Callable[[Transaction], bool]
     add_new_remote: Callable[
         [Transaction, TransactionRemoteReason, str, str, str], bool
-    ] = ...
-    run: Callable[[Transaction, Gio.Cancellable | None], bool] = ...
-    end_of_lifed_with_rebase: Callable[
-        [Transaction, str, str, str, str, str], bool
-    ] = ...
-    webflow_start: Callable[[Transaction, str, str, GLib.Variant, int], bool] = ...
-    webflow_done: Callable[[Transaction, GLib.Variant, int], None] = ...
-    basic_auth_start: Callable[[Transaction, str, str, GLib.Variant, int], bool] = ...
-    install_authenticator: Callable[[Transaction, str, str], None] = ...
-    ready_pre_auth: Callable[[Transaction], bool] = ...
-    padding: list[None] = ...
+    ]
+    run: Callable[[Transaction, Gio.Cancellable | None], bool]
+    end_of_lifed_with_rebase: Callable[[Transaction, str, str, str, str, str], bool]
+    webflow_start: Callable[[Transaction, str, str, GLib.Variant, int], bool]
+    webflow_done: Callable[[Transaction, GLib.Variant, int], None]
+    basic_auth_start: Callable[[Transaction, str, str, GLib.Variant, int], bool]
+    install_authenticator: Callable[[Transaction, str, str], None]
+    ready_pre_auth: Callable[[Transaction], bool]
+    padding: list[None]
 
 class TransactionOperation(GObject.Object):
     """
@@ -1143,7 +1142,7 @@ class TransactionOperationClass(GObject.GPointer):
         TransactionOperationClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class TransactionProgress(GObject.Object):
     """
@@ -1177,7 +1176,7 @@ class TransactionProgressClass(GObject.GPointer):
         TransactionProgressClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class InstallFlags(GObject.GFlags):
     NONE = 0

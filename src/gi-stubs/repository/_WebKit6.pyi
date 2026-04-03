@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 
 from collections.abc import Callable
 from collections.abc import Sequence
@@ -11,21 +12,21 @@ from gi.repository import Gio
 from gi.repository import GLib
 from gi.repository import GObject
 
-EDITING_COMMAND_COPY: str = "Copy"
-EDITING_COMMAND_CREATE_LINK: str = "CreateLink"
-EDITING_COMMAND_CUT: str = "Cut"
-EDITING_COMMAND_INSERT_IMAGE: str = "InsertImage"
-EDITING_COMMAND_PASTE: str = "Paste"
-EDITING_COMMAND_PASTE_AS_PLAIN_TEXT: str = "PasteAsPlainText"
-EDITING_COMMAND_REDO: str = "Redo"
-EDITING_COMMAND_SELECT_ALL: str = "SelectAll"
-EDITING_COMMAND_UNDO: str = "Undo"
-MAJOR_VERSION: int = 2
-MICRO_VERSION: int = 3
-MINOR_VERSION: int = 42
+EDITING_COMMAND_COPY: Final = "Copy"
+EDITING_COMMAND_CREATE_LINK: Final = "CreateLink"
+EDITING_COMMAND_CUT: Final = "Cut"
+EDITING_COMMAND_INSERT_IMAGE: Final = "InsertImage"
+EDITING_COMMAND_PASTE: Final = "Paste"
+EDITING_COMMAND_PASTE_AS_PLAIN_TEXT: Final = "PasteAsPlainText"
+EDITING_COMMAND_REDO: Final = "Redo"
+EDITING_COMMAND_SELECT_ALL: Final = "SelectAll"
+EDITING_COMMAND_UNDO: Final = "Undo"
+MAJOR_VERSION: Final[int]
+MICRO_VERSION: Final[int]
+MINOR_VERSION: Final[int]
 _lock = ...  # FIXME Constant
-_namespace: str = "WebKit"
-_version: str = "6.0"
+_namespace: Final = "WebKit"
+_version: Final = "6.0"
 
 def download_error_quark() -> int: ...
 def favicon_database_error_quark() -> int: ...
@@ -114,7 +115,7 @@ class AuthenticationRequestClass(GObject.GPointer):
         AuthenticationRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class AutomationSession(GObject.Object):
     """
@@ -155,7 +156,7 @@ class AutomationSessionClass(GObject.GPointer):
         AutomationSessionClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class BackForwardList(GObject.Object):
     """
@@ -193,7 +194,7 @@ class BackForwardListClass(GObject.GPointer):
         BackForwardListClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class BackForwardListItem(GObject.InitiallyUnowned):
     """
@@ -222,7 +223,7 @@ class BackForwardListItemClass(GObject.GPointer):
         BackForwardListItemClass()
     """
 
-    parent_class: GObject.InitiallyUnownedClass = ...
+    parent_class: GObject.InitiallyUnownedClass
 
 class ClipboardPermissionRequest(GObject.Object, PermissionRequest): ...
 
@@ -235,7 +236,7 @@ class ClipboardPermissionRequestClass(GObject.GPointer):
         ClipboardPermissionRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ColorChooserRequest(GObject.Object):
     """
@@ -278,7 +279,7 @@ class ColorChooserRequestClass(GObject.GPointer):
         ColorChooserRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ContextMenu(GObject.Object):
     """
@@ -324,7 +325,7 @@ class ContextMenuClass(GObject.GPointer):
         ContextMenuClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ContextMenuItem(GObject.InitiallyUnowned):
     """
@@ -374,7 +375,7 @@ class ContextMenuItemClass(GObject.GPointer):
         ContextMenuItemClass()
     """
 
-    parent_class: GObject.InitiallyUnownedClass = ...
+    parent_class: GObject.InitiallyUnownedClass
 
 class CookieManager(GObject.Object):
     """
@@ -457,7 +458,7 @@ class CookieManagerClass(GObject.GPointer):
         CookieManagerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Credential(GObject.GBoxed):
     """
@@ -503,7 +504,7 @@ class DeviceInfoPermissionRequestClass(GObject.GPointer):
         DeviceInfoPermissionRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Download(GObject.Object):
     """
@@ -562,7 +563,7 @@ class DownloadClass(GObject.GPointer):
         DownloadClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class EditorState(GObject.Object):
     """
@@ -602,7 +603,7 @@ class EditorStateClass(GObject.GPointer):
         EditorStateClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class FaviconDatabase(GObject.Object):
     """
@@ -641,7 +642,7 @@ class FaviconDatabaseClass(GObject.GPointer):
         FaviconDatabaseClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Feature(GObject.GBoxed):
     def get_category(self) -> str: ...
@@ -703,7 +704,7 @@ class FileChooserRequestClass(GObject.GPointer):
         FileChooserRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class FindController(GObject.Object):
     """
@@ -762,7 +763,7 @@ class FindControllerClass(GObject.GPointer):
         FindControllerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class FormSubmissionRequest(GObject.Object):
     """
@@ -790,7 +791,7 @@ class FormSubmissionRequestClass(GObject.GPointer):
         FormSubmissionRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class GeolocationManager(GObject.Object):
     """
@@ -831,7 +832,7 @@ class GeolocationManagerClass(GObject.GPointer):
         GeolocationManagerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class GeolocationPermissionRequest(GObject.Object, PermissionRequest): ...
 
@@ -844,7 +845,7 @@ class GeolocationPermissionRequestClass(GObject.GPointer):
         GeolocationPermissionRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class GeolocationPosition(GObject.GBoxed):
     """
@@ -930,7 +931,7 @@ class HitTestResultClass(GObject.GPointer):
         HitTestResultClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ITPFirstParty(GObject.GBoxed):
     def get_domain(self) -> str: ...
@@ -1024,38 +1025,38 @@ class InputMethodContextClass(GObject.GPointer):
         InputMethodContextClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    preedit_started: Callable[[InputMethodContext], None] = ...
-    preedit_changed: Callable[[InputMethodContext], None] = ...
-    preedit_finished: Callable[[InputMethodContext], None] = ...
-    committed: Callable[[InputMethodContext, str], None] = ...
-    delete_surrounding: Callable[[InputMethodContext, int, int], None] = ...
-    set_enable_preedit: Callable[[InputMethodContext, bool], None] = ...
+    parent_class: GObject.ObjectClass
+    preedit_started: Callable[[InputMethodContext], None]
+    preedit_changed: Callable[[InputMethodContext], None]
+    preedit_finished: Callable[[InputMethodContext], None]
+    committed: Callable[[InputMethodContext, str], None]
+    delete_surrounding: Callable[[InputMethodContext, int, int], None]
+    set_enable_preedit: Callable[[InputMethodContext, bool], None]
     get_preedit: Callable[
         [InputMethodContext], tuple[str, list[InputMethodUnderline], int]
-    ] = ...
-    filter_key_event: Callable[[InputMethodContext, _Gdk4.Event], bool] = ...
-    notify_focus_in: Callable[[InputMethodContext], None] = ...
-    notify_focus_out: Callable[[InputMethodContext], None] = ...
-    notify_cursor_area: Callable[[InputMethodContext, int, int, int, int], None] = ...
-    notify_surrounding: Callable[[InputMethodContext, str, int, int, int], None] = ...
-    reset: Callable[[InputMethodContext], None] = ...
-    _webkit_reserved0: None = ...
-    _webkit_reserved1: None = ...
-    _webkit_reserved2: None = ...
-    _webkit_reserved3: None = ...
-    _webkit_reserved4: None = ...
-    _webkit_reserved5: None = ...
-    _webkit_reserved6: None = ...
-    _webkit_reserved7: None = ...
-    _webkit_reserved8: None = ...
-    _webkit_reserved9: None = ...
-    _webkit_reserved10: None = ...
-    _webkit_reserved11: None = ...
-    _webkit_reserved12: None = ...
-    _webkit_reserved13: None = ...
-    _webkit_reserved14: None = ...
-    _webkit_reserved15: None = ...
+    ]
+    filter_key_event: Callable[[InputMethodContext, _Gdk4.Event], bool]
+    notify_focus_in: Callable[[InputMethodContext], None]
+    notify_focus_out: Callable[[InputMethodContext], None]
+    notify_cursor_area: Callable[[InputMethodContext, int, int, int, int], None]
+    notify_surrounding: Callable[[InputMethodContext, str, int, int, int], None]
+    reset: Callable[[InputMethodContext], None]
+    _webkit_reserved0: None
+    _webkit_reserved1: None
+    _webkit_reserved2: None
+    _webkit_reserved3: None
+    _webkit_reserved4: None
+    _webkit_reserved5: None
+    _webkit_reserved6: None
+    _webkit_reserved7: None
+    _webkit_reserved8: None
+    _webkit_reserved9: None
+    _webkit_reserved10: None
+    _webkit_reserved11: None
+    _webkit_reserved12: None
+    _webkit_reserved13: None
+    _webkit_reserved14: None
+    _webkit_reserved15: None
 
 class InputMethodContextPrivate(GObject.GPointer): ...
 
@@ -1085,7 +1086,7 @@ class MediaKeySystemPermissionRequestClass(GObject.GPointer):
         MediaKeySystemPermissionRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class MemoryPressureSettings(GObject.GBoxed):
     """
@@ -1155,7 +1156,7 @@ class NavigationPolicyDecisionClass(GObject.GPointer):
         NavigationPolicyDecisionClass()
     """
 
-    parent_class: PolicyDecisionClass = ...
+    parent_class: PolicyDecisionClass
 
 class NetworkProxySettings(GObject.GBoxed):
     """
@@ -1261,7 +1262,7 @@ class NetworkSessionClass(GObject.GPointer):
         NetworkSessionClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Notification(GObject.Object):
     """
@@ -1311,7 +1312,7 @@ class NotificationClass(GObject.GPointer):
         NotificationClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class NotificationPermissionRequest(GObject.Object, PermissionRequest): ...
 
@@ -1324,7 +1325,7 @@ class NotificationPermissionRequestClass(GObject.GPointer):
         NotificationPermissionRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class OptionMenu(GObject.Object):
     """
@@ -1359,7 +1360,7 @@ class OptionMenuClass(GObject.GPointer):
         OptionMenuClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class OptionMenuItem(GObject.GBoxed):
     def copy(self) -> OptionMenuItem: ...
@@ -1391,9 +1392,9 @@ class PermissionRequestInterface(GObject.GPointer):
         PermissionRequestInterface()
     """
 
-    parent_interface: GObject.TypeInterface = ...
-    allow: Callable[[PermissionRequest], None] = ...
-    deny: Callable[[PermissionRequest], None] = ...
+    parent_interface: GObject.TypeInterface
+    allow: Callable[[PermissionRequest], None]
+    deny: Callable[[PermissionRequest], None]
 
 class PermissionStateQuery(GObject.GBoxed):
     def finish(self, state: PermissionState) -> None: ...
@@ -1413,7 +1414,7 @@ class PointerLockPermissionRequestClass(GObject.GPointer):
         PointerLockPermissionRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class PolicyDecision(GObject.Object):
     """
@@ -1447,15 +1448,15 @@ class PolicyDecisionClass(GObject.GPointer):
         PolicyDecisionClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    _webkit_reserved0: None = ...
-    _webkit_reserved1: None = ...
-    _webkit_reserved2: None = ...
-    _webkit_reserved3: None = ...
-    _webkit_reserved4: None = ...
-    _webkit_reserved5: None = ...
-    _webkit_reserved6: None = ...
-    _webkit_reserved7: None = ...
+    parent_class: GObject.ObjectClass
+    _webkit_reserved0: None
+    _webkit_reserved1: None
+    _webkit_reserved2: None
+    _webkit_reserved3: None
+    _webkit_reserved4: None
+    _webkit_reserved5: None
+    _webkit_reserved6: None
+    _webkit_reserved7: None
 
 class PolicyDecisionPrivate(GObject.GPointer): ...
 
@@ -1516,7 +1517,7 @@ class PrintOperationClass(GObject.GPointer):
         PrintOperationClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ResponsePolicyDecision(PolicyDecision):
     """
@@ -1556,7 +1557,7 @@ class ResponsePolicyDecisionClass(GObject.GPointer):
         ResponsePolicyDecisionClass()
     """
 
-    parent_class: PolicyDecisionClass = ...
+    parent_class: PolicyDecisionClass
 
 class ScriptDialog(GObject.GBoxed):
     def close(self) -> None: ...
@@ -1610,7 +1611,7 @@ class SecurityManagerClass(GObject.GPointer):
         SecurityManagerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class SecurityOrigin(GObject.GBoxed):
     """
@@ -2020,7 +2021,7 @@ class SettingsClass(GObject.GPointer):
         SettingsClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class URIRequest(GObject.Object):
     """
@@ -2062,7 +2063,7 @@ class URIRequestClass(GObject.GPointer):
         URIRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class URIResponse(GObject.Object):
     """
@@ -2112,7 +2113,7 @@ class URIResponseClass(GObject.GPointer):
         URIResponseClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class URISchemeRequest(GObject.Object):
     """
@@ -2153,7 +2154,7 @@ class URISchemeRequestClass(GObject.GPointer):
         URISchemeRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class URISchemeResponse(GObject.Object):
     """
@@ -2200,7 +2201,7 @@ class URISchemeResponseClass(GObject.GPointer):
         URISchemeResponseClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class UserContentFilter(GObject.GBoxed):
     def get_identifier(self) -> str: ...
@@ -2285,7 +2286,7 @@ class UserContentFilterStoreClass(GObject.GPointer):
         UserContentFilterStoreClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class UserContentManager(GObject.Object):
     """
@@ -2337,7 +2338,7 @@ class UserContentManagerClass(GObject.GPointer):
         UserContentManagerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class UserMediaPermissionRequest(GObject.Object, PermissionRequest):
     """
@@ -2373,7 +2374,7 @@ class UserMediaPermissionRequestClass(GObject.GPointer):
         UserMediaPermissionRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class UserMessage(GObject.InitiallyUnowned):
     """
@@ -2432,7 +2433,7 @@ class UserMessageClass(GObject.GPointer):
         UserMessageClass()
     """
 
-    parent_class: GObject.InitiallyUnownedClass = ...
+    parent_class: GObject.InitiallyUnownedClass
 
 class UserScript(GObject.GBoxed):
     """
@@ -2577,7 +2578,7 @@ class WebContextClass(GObject.GPointer):
         WebContextClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class WebInspector(GObject.Object):
     """
@@ -2631,7 +2632,7 @@ class WebInspectorClass(GObject.GPointer):
         WebInspectorClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class WebResource(GObject.Object):
     """
@@ -2682,7 +2683,7 @@ class WebResourceClass(GObject.GPointer):
         WebResourceClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class WebView(WebViewBase, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -3274,11 +3275,11 @@ class WebViewBaseClass(GObject.GPointer):
         WebViewBaseClass()
     """
 
-    parentClass: _Gtk4.WidgetClass = ...
-    _webkit_reserved0: None = ...
-    _webkit_reserved1: None = ...
-    _webkit_reserved2: None = ...
-    _webkit_reserved3: None = ...
+    parentClass: _Gtk4.WidgetClass
+    _webkit_reserved0: None
+    _webkit_reserved1: None
+    _webkit_reserved2: None
+    _webkit_reserved3: None
 
 class WebViewBasePrivate(GObject.GPointer): ...
 
@@ -3291,68 +3292,68 @@ class WebViewClass(GObject.GPointer):
         WebViewClass()
     """
 
-    parent: WebViewBaseClass = ...
-    load_changed: Callable[[WebView, LoadEvent], None] = ...
-    load_failed: Callable[[WebView, LoadEvent, str, GLib.Error], bool] = ...
-    create: None = ...
-    ready_to_show: Callable[[WebView], None] = ...
-    run_as_modal: Callable[[WebView], None] = ...
-    close: Callable[[WebView], None] = ...
-    script_dialog: Callable[[WebView, ScriptDialog], bool] = ...
-    decide_policy: Callable[[WebView, PolicyDecision, PolicyDecisionType], bool] = ...
-    permission_request: Callable[[WebView, PermissionRequest], bool] = ...
-    mouse_target_changed: Callable[[WebView, HitTestResult, int], None] = ...
-    print_: Callable[[WebView, PrintOperation], bool] = ...
-    resource_load_started: Callable[[WebView, WebResource, URIRequest], None] = ...
-    enter_fullscreen: Callable[[WebView], bool] = ...
-    leave_fullscreen: Callable[[WebView], bool] = ...
-    run_file_chooser: Callable[[WebView, FileChooserRequest], bool] = ...
-    context_menu: Callable[[WebView, ContextMenu, HitTestResult], bool] = ...
-    context_menu_dismissed: Callable[[WebView], None] = ...
-    submit_form: Callable[[WebView, FormSubmissionRequest], None] = ...
-    insecure_content_detected: Callable[[WebView, InsecureContentEvent], None] = ...
-    web_process_crashed: Callable[[WebView], bool] = ...
-    authenticate: Callable[[WebView, AuthenticationRequest], bool] = ...
+    parent: WebViewBaseClass
+    load_changed: Callable[[WebView, LoadEvent], None]
+    load_failed: Callable[[WebView, LoadEvent, str, GLib.Error], bool]
+    create: None
+    ready_to_show: Callable[[WebView], None]
+    run_as_modal: Callable[[WebView], None]
+    close: Callable[[WebView], None]
+    script_dialog: Callable[[WebView, ScriptDialog], bool]
+    decide_policy: Callable[[WebView, PolicyDecision, PolicyDecisionType], bool]
+    permission_request: Callable[[WebView, PermissionRequest], bool]
+    mouse_target_changed: Callable[[WebView, HitTestResult, int], None]
+    print_: Callable[[WebView, PrintOperation], bool]
+    resource_load_started: Callable[[WebView, WebResource, URIRequest], None]
+    enter_fullscreen: Callable[[WebView], bool]
+    leave_fullscreen: Callable[[WebView], bool]
+    run_file_chooser: Callable[[WebView, FileChooserRequest], bool]
+    context_menu: Callable[[WebView, ContextMenu, HitTestResult], bool]
+    context_menu_dismissed: Callable[[WebView], None]
+    submit_form: Callable[[WebView, FormSubmissionRequest], None]
+    insecure_content_detected: Callable[[WebView, InsecureContentEvent], None]
+    web_process_crashed: Callable[[WebView], bool]
+    authenticate: Callable[[WebView, AuthenticationRequest], bool]
     load_failed_with_tls_errors: Callable[
         [WebView, str, Gio.TlsCertificate, Gio.TlsCertificateFlags], bool
-    ] = ...
-    show_notification: Callable[[WebView, Notification], bool] = ...
-    run_color_chooser: Callable[[WebView, ColorChooserRequest], bool] = ...
-    show_option_menu: Callable[[WebView, OptionMenu, _Gdk4.Rectangle], bool] = ...
-    web_process_terminated: Callable[[WebView, WebProcessTerminationReason], None] = ...
-    user_message_received: Callable[[WebView, UserMessage], bool] = ...
-    query_permission_state: Callable[[WebView, PermissionStateQuery], bool] = ...
-    _webkit_reserved0: None = ...
-    _webkit_reserved1: None = ...
-    _webkit_reserved2: None = ...
-    _webkit_reserved3: None = ...
-    _webkit_reserved4: None = ...
-    _webkit_reserved5: None = ...
-    _webkit_reserved6: None = ...
-    _webkit_reserved7: None = ...
-    _webkit_reserved8: None = ...
-    _webkit_reserved9: None = ...
-    _webkit_reserved10: None = ...
-    _webkit_reserved11: None = ...
-    _webkit_reserved12: None = ...
-    _webkit_reserved13: None = ...
-    _webkit_reserved14: None = ...
-    _webkit_reserved15: None = ...
-    _webkit_reserved16: None = ...
-    _webkit_reserved17: None = ...
-    _webkit_reserved18: None = ...
-    _webkit_reserved19: None = ...
-    _webkit_reserved20: None = ...
-    _webkit_reserved21: None = ...
-    _webkit_reserved22: None = ...
-    _webkit_reserved23: None = ...
-    _webkit_reserved24: None = ...
-    _webkit_reserved25: None = ...
-    _webkit_reserved26: None = ...
-    _webkit_reserved27: None = ...
-    _webkit_reserved28: None = ...
-    _webkit_reserved29: None = ...
-    _webkit_reserved30: None = ...
+    ]
+    show_notification: Callable[[WebView, Notification], bool]
+    run_color_chooser: Callable[[WebView, ColorChooserRequest], bool]
+    show_option_menu: Callable[[WebView, OptionMenu, _Gdk4.Rectangle], bool]
+    web_process_terminated: Callable[[WebView, WebProcessTerminationReason], None]
+    user_message_received: Callable[[WebView, UserMessage], bool]
+    query_permission_state: Callable[[WebView, PermissionStateQuery], bool]
+    _webkit_reserved0: None
+    _webkit_reserved1: None
+    _webkit_reserved2: None
+    _webkit_reserved3: None
+    _webkit_reserved4: None
+    _webkit_reserved5: None
+    _webkit_reserved6: None
+    _webkit_reserved7: None
+    _webkit_reserved8: None
+    _webkit_reserved9: None
+    _webkit_reserved10: None
+    _webkit_reserved11: None
+    _webkit_reserved12: None
+    _webkit_reserved13: None
+    _webkit_reserved14: None
+    _webkit_reserved15: None
+    _webkit_reserved16: None
+    _webkit_reserved17: None
+    _webkit_reserved18: None
+    _webkit_reserved19: None
+    _webkit_reserved20: None
+    _webkit_reserved21: None
+    _webkit_reserved22: None
+    _webkit_reserved23: None
+    _webkit_reserved24: None
+    _webkit_reserved25: None
+    _webkit_reserved26: None
+    _webkit_reserved27: None
+    _webkit_reserved28: None
+    _webkit_reserved29: None
+    _webkit_reserved30: None
 
 class WebViewPrivate(GObject.GPointer): ...
 
@@ -3404,7 +3405,7 @@ class WebsiteDataAccessPermissionRequestClass(GObject.GPointer):
         WebsiteDataAccessPermissionRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class WebsiteDataManager(GObject.Object):
     """
@@ -3495,7 +3496,7 @@ class WebsiteDataManagerClass(GObject.GPointer):
         WebsiteDataManagerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class WebsitePolicies(GObject.Object):
     """
@@ -3534,7 +3535,7 @@ class WebsitePoliciesClass(GObject.GPointer):
         WebsitePoliciesClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class WindowProperties(GObject.Object):
     """
@@ -3601,7 +3602,7 @@ class WindowPropertiesClass(GObject.GPointer):
         WindowPropertiesClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class EditorTypingAttributes(GObject.GFlags):
     BOLD = 4

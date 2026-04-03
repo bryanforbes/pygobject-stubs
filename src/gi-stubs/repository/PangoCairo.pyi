@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Callable
@@ -11,8 +12,8 @@ T = TypeVar("T")
 _SomeSurface = TypeVar("_SomeSurface", bound=cairo.Surface)
 
 _lock = ...  # FIXME Constant
-_namespace: str = "PangoCairo"
-_version: str = "1.0"
+_namespace: Final = "PangoCairo"
+_version: Final = "1.0"
 
 def context_get_font_options(
     context: Pango.Context,

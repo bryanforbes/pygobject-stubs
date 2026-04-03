@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Callable
@@ -11,14 +12,14 @@ from gi.repository import GObject
 
 T = TypeVar("T")
 
-PIXBUF_MAJOR: int = 2
-PIXBUF_MICRO: int = 12
-PIXBUF_MINOR: int = 42
-PIXBUF_VERSION: str = "2.42.12"
+PIXBUF_MAJOR: Final[int]
+PIXBUF_MICRO: Final[int]
+PIXBUF_MINOR: Final[int]
+PIXBUF_VERSION: Final = "2.42.12"
 _lock = ...  # FIXME Constant
-_namespace: str = "GdkPixbuf"
+_namespace: Final = "GdkPixbuf"
 _overrides_module = ...  # FIXME Constant
-_version: str = "2.0"
+_version: Final = "2.0"
 
 def pixbuf_error_quark() -> int: ...
 
@@ -413,13 +414,11 @@ class PixbufAnimationClass(GObject.GPointer):
         PixbufAnimationClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    is_static_image: Callable[[PixbufAnimation], bool] = ...
-    get_static_image: Callable[[PixbufAnimation], Pixbuf] = ...
-    get_size: Callable[[PixbufAnimation, int, int], None] = ...
-    get_iter: Callable[
-        [PixbufAnimation, GLib.TimeVal | None], PixbufAnimationIter
-    ] = ...
+    parent_class: GObject.ObjectClass
+    is_static_image: Callable[[PixbufAnimation], bool]
+    get_static_image: Callable[[PixbufAnimation], Pixbuf]
+    get_size: Callable[[PixbufAnimation, int, int], None]
+    get_iter: Callable[[PixbufAnimation, GLib.TimeVal | None], PixbufAnimationIter]
 
 class PixbufAnimationIter(GObject.Object):
     """
@@ -455,11 +454,11 @@ class PixbufAnimationIterClass(GObject.GPointer):
         PixbufAnimationIterClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    get_delay_time: Callable[[PixbufAnimationIter], int] = ...
-    get_pixbuf: Callable[[PixbufAnimationIter], Pixbuf] = ...
-    on_currently_loading_frame: Callable[[PixbufAnimationIter], bool] = ...
-    advance: Callable[[PixbufAnimationIter, GLib.TimeVal | None], bool] = ...
+    parent_class: GObject.ObjectClass
+    get_delay_time: Callable[[PixbufAnimationIter], int]
+    get_pixbuf: Callable[[PixbufAnimationIter], Pixbuf]
+    on_currently_loading_frame: Callable[[PixbufAnimationIter], bool]
+    advance: Callable[[PixbufAnimationIter, GLib.TimeVal | None], bool]
 
 class PixbufFormat(GObject.GBoxed):
     """
@@ -470,15 +469,15 @@ class PixbufFormat(GObject.GBoxed):
         PixbufFormat()
     """
 
-    name: str = ...
-    signature: PixbufModulePattern = ...
-    domain: str = ...
-    description: str = ...
-    mime_types: list[str] = ...
-    extensions: list[str] = ...
-    flags: int = ...
-    disabled: bool = ...
-    license: str = ...
+    name: str
+    signature: PixbufModulePattern
+    domain: str
+    description: str
+    mime_types: list[str]
+    extensions: list[str]
+    flags: int
+    disabled: bool
+    license: str
     def copy(self) -> PixbufFormat | None: ...
     def free(self) -> None: ...
     def get_description(self) -> str | None: ...
@@ -546,11 +545,11 @@ class PixbufLoaderClass(GObject.GPointer):
         PixbufLoaderClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    size_prepared: Callable[[PixbufLoader, int, int], None] = ...
-    area_prepared: Callable[[PixbufLoader], None] = ...
-    area_updated: Callable[[PixbufLoader, int, int, int, int], None] = ...
-    closed: Callable[[PixbufLoader], None] = ...
+    parent_class: GObject.ObjectClass
+    size_prepared: Callable[[PixbufLoader, int, int], None]
+    area_prepared: Callable[[PixbufLoader], None]
+    area_updated: Callable[[PixbufLoader, int, int, int, int], None]
+    closed: Callable[[PixbufLoader], None]
 
 class PixbufModule(GObject.GPointer):
     """
@@ -561,16 +560,16 @@ class PixbufModule(GObject.GPointer):
         PixbufModule()
     """
 
-    module_name: str = ...
-    module_path: str = ...
-    module: GModule.Module = ...
-    info: PixbufFormat = ...
-    load: Callable[[None], Pixbuf] = ...
-    load_xpm_data: Callable[[Sequence[str]], Pixbuf] = ...
-    begin_load: None = ...
-    stop_load: Callable[[None], bool] = ...
-    load_increment: Callable[[None, Sequence[int]], bool] = ...
-    load_animation: Callable[[None], PixbufAnimation] = ...
+    module_name: str
+    module_path: str
+    module: GModule.Module
+    info: PixbufFormat
+    load: Callable[[None], Pixbuf]
+    load_xpm_data: Callable[[Sequence[str]], Pixbuf]
+    begin_load: None
+    stop_load: Callable[[None], bool]
+    load_increment: Callable[[None, Sequence[int]], bool]
+    load_animation: Callable[[None], PixbufAnimation]
     save: Callable[
         [
             None,
@@ -579,13 +578,13 @@ class PixbufModule(GObject.GPointer):
             Sequence[str] | None,
         ],
         bool,
-    ] = ...
-    save_to_callback: None = ...
-    is_save_option_supported: Callable[[str], bool] = ...
-    _reserved1: None = ...
-    _reserved2: None = ...
-    _reserved3: None = ...
-    _reserved4: None = ...
+    ]
+    save_to_callback: None
+    is_save_option_supported: Callable[[str], bool]
+    _reserved1: None
+    _reserved2: None
+    _reserved3: None
+    _reserved4: None
 
 class PixbufModulePattern(GObject.GPointer):
     """
@@ -596,9 +595,9 @@ class PixbufModulePattern(GObject.GPointer):
         PixbufModulePattern()
     """
 
-    prefix: str = ...
-    mask: str = ...
-    relevance: int = ...
+    prefix: str
+    mask: str
+    relevance: int
 
 class PixbufNonAnim(PixbufAnimation):
     """

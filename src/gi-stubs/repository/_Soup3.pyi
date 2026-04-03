@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Callable
@@ -10,21 +11,21 @@ from gi.repository import GObject
 
 T = TypeVar("T")
 
-COOKIE_MAX_AGE_ONE_DAY: int = 0
-COOKIE_MAX_AGE_ONE_HOUR: int = 3600
-COOKIE_MAX_AGE_ONE_WEEK: int = 0
-COOKIE_MAX_AGE_ONE_YEAR: int = 0
-FORM_MIME_TYPE_MULTIPART: str = "multipart/form-data"
-FORM_MIME_TYPE_URLENCODED: str = "application/x-www-form-urlencoded"
-HSTS_POLICY_MAX_AGE_PAST: int = 0
-HTTP_URI_FLAGS: int = 482
-MAJOR_VERSION: int = 3
-MICRO_VERSION: int = 5
-MINOR_VERSION: int = 6
-VERSION_MIN_REQUIRED: int = 2
+COOKIE_MAX_AGE_ONE_DAY: Final[int]
+COOKIE_MAX_AGE_ONE_HOUR: Final[int]
+COOKIE_MAX_AGE_ONE_WEEK: Final[int]
+COOKIE_MAX_AGE_ONE_YEAR: Final[int]
+FORM_MIME_TYPE_MULTIPART: Final = "multipart/form-data"
+FORM_MIME_TYPE_URLENCODED: Final = "application/x-www-form-urlencoded"
+HSTS_POLICY_MAX_AGE_PAST: Final[int]
+HTTP_URI_FLAGS: Final[int]
+MAJOR_VERSION: Final[int]
+MICRO_VERSION: Final[int]
+MINOR_VERSION: Final[int]
+VERSION_MIN_REQUIRED: Final[int]
 _lock = ...  # FIXME Constant
-_namespace: str = "Soup"
-_version: str = "3.0"
+_namespace: Final = "Soup"
+_version: Final = "3.0"
 
 def check_version(major: int, minor: int, micro: int) -> bool: ...
 def cookie_parse(header: str, origin: GLib.Uri | None = None) -> Cookie | None: ...
@@ -228,17 +229,17 @@ class AuthClass(GObject.GPointer):
         AuthClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    scheme_name: str = ...
-    strength: int = ...
-    update: Callable[[Auth, Message, dict[None, None]], bool] = ...
-    get_protection_space: Callable[[Auth, GLib.Uri], list[str]] = ...
-    authenticate: Callable[[Auth, str, str], None] = ...
-    is_authenticated: Callable[[Auth], bool] = ...
-    get_authorization: Callable[[Auth, Message], str] = ...
-    is_ready: Callable[[Auth, Message], bool] = ...
-    can_authenticate: Callable[[Auth], bool] = ...
-    padding: list[None] = ...
+    parent_class: GObject.ObjectClass
+    scheme_name: str
+    strength: int
+    update: Callable[[Auth, Message, dict[None, None]], bool]
+    get_protection_space: Callable[[Auth, GLib.Uri], list[str]]
+    authenticate: Callable[[Auth, str, str], None]
+    is_authenticated: Callable[[Auth], bool]
+    get_authorization: Callable[[Auth, Message], str]
+    is_ready: Callable[[Auth, Message], bool]
+    can_authenticate: Callable[[Auth], bool]
+    padding: list[None]
 
 class AuthDigest(Auth):
     """
@@ -426,7 +427,7 @@ class AuthDomainBasicClass(GObject.GPointer):
         AuthDomainBasicClass()
     """
 
-    parent_class: AuthDomainClass = ...
+    parent_class: AuthDomainClass
 
 class AuthDomainClass(GObject.GPointer):
     """
@@ -437,11 +438,11 @@ class AuthDomainClass(GObject.GPointer):
         AuthDomainClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    accepts: Callable[[AuthDomain, ServerMessage, str], str] = ...
-    challenge: Callable[[AuthDomain, ServerMessage], str] = ...
-    check_password: Callable[[AuthDomain, ServerMessage, str, str], bool] = ...
-    padding: list[None] = ...
+    parent_class: GObject.ObjectClass
+    accepts: Callable[[AuthDomain, ServerMessage, str], str]
+    challenge: Callable[[AuthDomain, ServerMessage], str]
+    check_password: Callable[[AuthDomain, ServerMessage, str, str], bool]
+    padding: list[None]
 
 class AuthDomainDigest(AuthDomain):
     """
@@ -520,7 +521,7 @@ class AuthDomainDigestClass(GObject.GPointer):
         AuthDomainDigestClass()
     """
 
-    parent_class: AuthDomainClass = ...
+    parent_class: AuthDomainClass
 
 class AuthManager(GObject.Object, SessionFeature):
     """
@@ -548,7 +549,7 @@ class AuthManagerClass(GObject.GPointer):
         AuthManagerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class AuthNTLM(Auth):
     """
@@ -683,9 +684,9 @@ class CacheClass(GObject.GPointer):
         CacheClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    get_cacheability: Callable[[Cache, Message], Cacheability] = ...
-    padding: list[None] = ...
+    parent_class: GObject.ObjectClass
+    get_cacheability: Callable[[Cache, Message], Cacheability]
+    padding: list[None]
 
 class ContentDecoder(GObject.Object, SessionFeature): ...
 
@@ -698,7 +699,7 @@ class ContentDecoderClass(GObject.GPointer):
         ContentDecoderClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ContentSniffer(GObject.Object, SessionFeature):
     """
@@ -728,7 +729,7 @@ class ContentSnifferClass(GObject.GPointer):
         ContentSnifferClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Cookie(GObject.GBoxed):
     """
@@ -850,11 +851,11 @@ class CookieJarClass(GObject.GPointer):
         CookieJarClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    save: Callable[[CookieJar], None] = ...
-    is_persistent: Callable[[CookieJar], bool] = ...
-    changed: Callable[[CookieJar, Cookie, Cookie], None] = ...
-    padding: list[None] = ...
+    parent_class: GObject.ObjectClass
+    save: Callable[[CookieJar], None]
+    is_persistent: Callable[[CookieJar], bool]
+    changed: Callable[[CookieJar, Cookie, Cookie], None]
+    padding: list[None]
 
 class CookieJarDB(CookieJar, SessionFeature):
     """
@@ -909,7 +910,7 @@ class CookieJarDBClass(GObject.GPointer):
         CookieJarDBClass()
     """
 
-    parent_class: CookieJarClass = ...
+    parent_class: CookieJarClass
 
 class CookieJarText(CookieJar, SessionFeature):
     """
@@ -964,7 +965,7 @@ class CookieJarTextClass(GObject.GPointer):
         CookieJarTextClass()
     """
 
-    parent_class: CookieJarClass = ...
+    parent_class: CookieJarClass
 
 class HSTSEnforcer(GObject.Object, SessionFeature):
     """
@@ -1007,11 +1008,11 @@ class HSTSEnforcerClass(GObject.GPointer):
         HSTSEnforcerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    is_persistent: Callable[[HSTSEnforcer], bool] = ...
-    has_valid_policy: Callable[[HSTSEnforcer, str], bool] = ...
-    changed: Callable[[HSTSEnforcer, HSTSPolicy, HSTSPolicy], None] = ...
-    padding: list[None] = ...
+    parent_class: GObject.ObjectClass
+    is_persistent: Callable[[HSTSEnforcer], bool]
+    has_valid_policy: Callable[[HSTSEnforcer, str], bool]
+    changed: Callable[[HSTSEnforcer, HSTSPolicy, HSTSPolicy], None]
+    padding: list[None]
 
 class HSTSEnforcerDB(HSTSEnforcer, SessionFeature):
     """
@@ -1053,7 +1054,7 @@ class HSTSEnforcerDBClass(GObject.GPointer):
         HSTSEnforcerDBClass()
     """
 
-    parent_class: HSTSEnforcerClass = ...
+    parent_class: HSTSEnforcerClass
 
 class HSTSPolicy(GObject.GBoxed):
     """
@@ -1144,7 +1145,7 @@ class LoggerClass(GObject.GPointer):
         LoggerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Message(GObject.Object):
     """
@@ -1333,8 +1334,8 @@ class MessageBody(GObject.GBoxed):
         new() -> Soup.MessageBody
     """
 
-    data: bytes = ...
-    length: int = ...
+    data: bytes
+    length: int
     def append(self, data: Sequence[int]) -> None: ...
     def append_bytes(self, buffer: GLib.Bytes) -> None: ...
     def complete(self) -> None: ...
@@ -1359,7 +1360,7 @@ class MessageClass(GObject.GPointer):
         MessageClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class MessageHeaders(GObject.GBoxed):
     """
@@ -1417,7 +1418,7 @@ class MessageHeadersIter(GObject.GPointer):
         MessageHeadersIter()
     """
 
-    dummy: list[None] = ...
+    dummy: list[None]
     @staticmethod
     def init(hdrs: MessageHeaders) -> MessageHeadersIter: ...
     @staticmethod
@@ -1534,7 +1535,7 @@ class MultipartInputStreamClass(GObject.GPointer):
         MultipartInputStreamClass()
     """
 
-    parent_class: Gio.FilterInputStreamClass = ...
+    parent_class: Gio.FilterInputStreamClass
 
 class Range(GObject.GPointer):
     """
@@ -1545,8 +1546,8 @@ class Range(GObject.GPointer):
         Range()
     """
 
-    start: int = ...
-    end: int = ...
+    start: int
+    end: int
 
 class Server(GObject.Object):
     """
@@ -1664,12 +1665,12 @@ class ServerClass(GObject.GPointer):
         ServerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    request_started: Callable[[Server, ServerMessage], None] = ...
-    request_read: Callable[[Server, ServerMessage], None] = ...
-    request_finished: Callable[[Server, ServerMessage], None] = ...
-    request_aborted: Callable[[Server, ServerMessage], None] = ...
-    padding: list[None] = ...
+    parent_class: GObject.ObjectClass
+    request_started: Callable[[Server, ServerMessage], None]
+    request_read: Callable[[Server, ServerMessage], None]
+    request_finished: Callable[[Server, ServerMessage], None]
+    request_aborted: Callable[[Server, ServerMessage], None]
+    padding: list[None]
 
 class ServerMessage(GObject.Object):
     """
@@ -1751,7 +1752,7 @@ class ServerMessageClass(GObject.GPointer):
         ServerMessageClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Session(GObject.Object):
     """
@@ -1944,17 +1945,17 @@ class SessionClass(GObject.GPointer):
         SessionClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    request_queued: Callable[[Session, Message], None] = ...
-    request_unqueued: Callable[[Session, Message], None] = ...
-    _soup_reserved1: None = ...
-    _soup_reserved2: None = ...
-    _soup_reserved3: None = ...
-    _soup_reserved4: None = ...
-    _soup_reserved5: None = ...
-    _soup_reserved6: None = ...
-    _soup_reserved7: None = ...
-    _soup_reserved8: None = ...
+    parent_class: GObject.ObjectClass
+    request_queued: Callable[[Session, Message], None]
+    request_unqueued: Callable[[Session, Message], None]
+    _soup_reserved1: None
+    _soup_reserved2: None
+    _soup_reserved3: None
+    _soup_reserved4: None
+    _soup_reserved5: None
+    _soup_reserved6: None
+    _soup_reserved7: None
+    _soup_reserved8: None
 
 class SessionFeature(GObject.GInterface): ...
 class SessionFeatureInterface(GObject.GPointer): ...
@@ -2068,7 +2069,7 @@ class WebsocketConnectionClass(GObject.GPointer):
         WebsocketConnectionClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class WebsocketExtension(GObject.Object):
     """
@@ -2122,8 +2123,8 @@ class WebsocketExtensionClass(GObject.GPointer):
         WebsocketExtensionClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    name: str = ...
+    parent_class: GObject.ObjectClass
+    name: str
     configure: Callable[
         [
             WebsocketExtension,
@@ -2131,16 +2132,16 @@ class WebsocketExtensionClass(GObject.GPointer):
             dict[None, None] | None,
         ],
         bool,
-    ] = ...
-    get_request_params: Callable[[WebsocketExtension], str | None] = ...
-    get_response_params: Callable[[WebsocketExtension], str | None] = ...
+    ]
+    get_request_params: Callable[[WebsocketExtension], str | None]
+    get_response_params: Callable[[WebsocketExtension], str | None]
     process_outgoing_message: Callable[
         [WebsocketExtension, GLib.Bytes], tuple[GLib.Bytes, int]
-    ] = ...
+    ]
     process_incoming_message: Callable[
         [WebsocketExtension, GLib.Bytes], tuple[GLib.Bytes, int]
-    ] = ...
-    padding: list[None] = ...
+    ]
+    padding: list[None]
 
 class WebsocketExtensionDeflate(WebsocketExtension): ...
 
@@ -2153,7 +2154,7 @@ class WebsocketExtensionDeflateClass(GObject.GPointer):
         WebsocketExtensionDeflateClass()
     """
 
-    parent_class: WebsocketExtensionClass = ...
+    parent_class: WebsocketExtensionClass
 
 class WebsocketExtensionManager(GObject.Object, SessionFeature): ...
 
@@ -2166,7 +2167,7 @@ class WebsocketExtensionManagerClass(GObject.GPointer):
         WebsocketExtensionManagerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Cacheability(GObject.GFlags):
     CACHEABLE = 1

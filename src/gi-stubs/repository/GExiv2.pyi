@@ -1,3 +1,4 @@
+from typing import Final
 from typing import TypeVar
 
 import datetime
@@ -10,14 +11,14 @@ from gi.repository import GObject
 
 T = TypeVar("T")
 
-MAJOR_VERSION: int = 0
-MICRO_VERSION: int = 3
-MINOR_VERSION: int = 14
+MAJOR_VERSION: Final[int]
+MICRO_VERSION: Final[int]
+MINOR_VERSION: Final[int]
 _introspection_module = ...  # FIXME Constant
 _lock = ...  # FIXME Constant
-_namespace: str = "GExiv2"
+_namespace: Final = "GExiv2"
 _overrides_module = ...  # FIXME Constant
-_version: str = "0.10"
+_version: Final = "0.10"
 
 def get_version() -> int: ...
 def initialize() -> bool: ...
@@ -222,7 +223,7 @@ class MetadataClass(GObject.GPointer):
         MetadataClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class MetadataPrivate(GObject.GPointer): ...
 
@@ -262,7 +263,7 @@ class PreviewImageClass(GObject.GPointer):
         PreviewImageClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class PreviewImagePrivate(GObject.GPointer): ...
 
@@ -299,7 +300,7 @@ class PreviewPropertiesClass(GObject.GPointer):
         PreviewPropertiesClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class PreviewPropertiesPrivate(GObject.GPointer): ...
 

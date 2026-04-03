@@ -13,210 +13,210 @@ from gi.repository import GObject
 
 T = TypeVar("T")
 
-ALLOCATOR_LIST: int = 1
-ALLOCATOR_NODE: int = 3
-ALLOCATOR_SLIST: int = 2
-ALLOC_AND_FREE: int = 2
-ALLOC_ONLY: int = 1
-ANALYZER_ANALYZING: int = 1
-ASCII_DTOSTR_BUF_SIZE: int = 39
-ATOMIC_REF_COUNT_INIT: int = 1
-BIG_ENDIAN: int = 4321
-CSET_A_2_Z: str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-CSET_DIGITS: str = "0123456789"
-CSET_a_2_z: str = "abcdefghijklmnopqrstuvwxyz"
-C_STD_VERSION: int = 199000
-DATALIST_FLAGS_MASK: int = 3
-DATE_BAD_DAY: int = 0
-DATE_BAD_JULIAN: int = 0
-DATE_BAD_YEAR: int = 0
-DIR_SEPARATOR: int = 47
-DIR_SEPARATOR_S: str = "/"
-E: float = 2.718282
-GINT16_FORMAT: str = "hi"
-GINT16_MODIFIER: str = "h"
-GINT32_FORMAT: str = "i"
-GINT32_MODIFIER: str = ""
-GINT64_FORMAT: str = "li"
-GINT64_MODIFIER: str = "l"
-GINTPTR_FORMAT: str = "li"
-GINTPTR_MODIFIER: str = "l"
-GNUC_FUNCTION: str = ""
-GNUC_PRETTY_FUNCTION: str = ""
-GSIZE_FORMAT: str = "lu"
-GSIZE_MODIFIER: str = "l"
-GSSIZE_FORMAT: str = "li"
-GSSIZE_MODIFIER: str = "l"
-GUINT16_FORMAT: str = "hu"
-GUINT32_FORMAT: str = "u"
-GUINT64_FORMAT: str = "lu"
-GUINTPTR_FORMAT: str = "lu"
-HAVE_GINT64: int = 1
-HAVE_GNUC_VARARGS: int = 1
-HAVE_GNUC_VISIBILITY: int = 1
-HAVE_GROWING_STACK: int = 0
-HAVE_ISO_VARARGS: int = 1
-HOOK_FLAG_USER_SHIFT: int = 4
-IEEE754_DOUBLE_BIAS: int = 1023
-IEEE754_FLOAT_BIAS: int = 127
-IO_ERR: int = 8
-IO_FLAG_APPEND: int = 1
-IO_FLAG_GET_MASK: int = 31
-IO_FLAG_IS_READABLE: int = 4
-IO_FLAG_IS_SEEKABLE: int = 16
-IO_FLAG_IS_WRITEABLE: int = 8
-IO_FLAG_MASK: int = 31
-IO_FLAG_NONBLOCK: int = 2
-IO_FLAG_SET_MASK: int = 3
-IO_HUP: int = 16
-IO_IN: int = 1
-IO_NVAL: int = 32
-IO_OUT: int = 4
-IO_PRI: int = 2
-IO_STATUS_AGAIN: int = 3
-IO_STATUS_EOF: int = 2
-IO_STATUS_ERROR: int = 0
-IO_STATUS_NORMAL: int = 1
-KEY_FILE_DESKTOP_GROUP: str = "Desktop Entry"
-KEY_FILE_DESKTOP_KEY_ACTIONS: str = "Actions"
-KEY_FILE_DESKTOP_KEY_CATEGORIES: str = "Categories"
-KEY_FILE_DESKTOP_KEY_COMMENT: str = "Comment"
-KEY_FILE_DESKTOP_KEY_DBUS_ACTIVATABLE: str = "DBusActivatable"
-KEY_FILE_DESKTOP_KEY_EXEC: str = "Exec"
-KEY_FILE_DESKTOP_KEY_GENERIC_NAME: str = "GenericName"
-KEY_FILE_DESKTOP_KEY_HIDDEN: str = "Hidden"
-KEY_FILE_DESKTOP_KEY_ICON: str = "Icon"
-KEY_FILE_DESKTOP_KEY_MIME_TYPE: str = "MimeType"
-KEY_FILE_DESKTOP_KEY_NAME: str = "Name"
-KEY_FILE_DESKTOP_KEY_NOT_SHOW_IN: str = "NotShowIn"
-KEY_FILE_DESKTOP_KEY_NO_DISPLAY: str = "NoDisplay"
-KEY_FILE_DESKTOP_KEY_ONLY_SHOW_IN: str = "OnlyShowIn"
-KEY_FILE_DESKTOP_KEY_PATH: str = "Path"
-KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY: str = "StartupNotify"
-KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS: str = "StartupWMClass"
-KEY_FILE_DESKTOP_KEY_TERMINAL: str = "Terminal"
-KEY_FILE_DESKTOP_KEY_TRY_EXEC: str = "TryExec"
-KEY_FILE_DESKTOP_KEY_TYPE: str = "Type"
-KEY_FILE_DESKTOP_KEY_URL: str = "URL"
-KEY_FILE_DESKTOP_KEY_VERSION: str = "Version"
-KEY_FILE_DESKTOP_TYPE_APPLICATION: str = "Application"
-KEY_FILE_DESKTOP_TYPE_DIRECTORY: str = "Directory"
-KEY_FILE_DESKTOP_TYPE_LINK: str = "Link"
-LITTLE_ENDIAN: int = 1234
-LN10: float = 2.302585
-LN2: float = 0.693147
-LOG_2_BASE_10: float = 0.30103
-LOG_DOMAIN: int = 0
-LOG_FATAL_MASK: int = 5
-LOG_LEVEL_USER_SHIFT: int = 8
-MAJOR_VERSION: int = 2
-MAXDOUBLE: float = 1.7976931348623157e308
-MAXFLOAT: float = 3.4028234663852886e38
-MAXINT: int = 2147483647
-MAXINT16: int = 32767
-MAXINT32: int = 2147483647
-MAXINT64: int = 9223372036854775807
-MAXINT8: int = 127
-MAXLONG: int = 9223372036854775807
-MAXOFFSET: int = 9223372036854775807
-MAXSHORT: int = 32767
-MAXSIZE: int = 18446744073709551615
-MAXSSIZE: int = 9223372036854775807
-MAXUINT: int = 4294967295
-MAXUINT16: int = 65535
-MAXUINT32: int = 4294967295
-MAXUINT64: int = 18446744073709551615
-MAXUINT8: int = 255
-MAXULONG: int = 18446744073709551615
-MAXUSHORT: int = 65535
-MICRO_VERSION: int = 3
-MINDOUBLE: float = 2.2250738585072014e-308
-MINFLOAT: float = 1.1754943508222875e-38
-MININT: int = -2147483648
-MININT16: int = -32768
-MININT32: int = -2147483648
-MININT64: int = -9223372036854775808
-MININT8: int = -128
-MINLONG: int = -9223372036854775808
-MINOFFSET: int = -9223372036854775808
-MINOR_VERSION: int = 86
-MINSHORT: int = -32768
-MINSSIZE: int = -9223372036854775808
-MODULE_SUFFIX: str = "so"
-OPTION_ERROR_BAD_VALUE: int = 1
-OPTION_ERROR_FAILED: int = 2
-OPTION_ERROR_UNKNOWN_OPTION: int = 0
-OPTION_FLAG_FILENAME: int = 16
-OPTION_FLAG_HIDDEN: int = 1
-OPTION_FLAG_IN_MAIN: int = 2
-OPTION_FLAG_NOALIAS: int = 64
-OPTION_FLAG_NO_ARG: int = 8
-OPTION_FLAG_OPTIONAL_ARG: int = 32
-OPTION_FLAG_REVERSE: int = 4
-OPTION_REMAINING: str = ""
-PDP_ENDIAN: int = 3412
-PI: float = 3.141593
-PID_FORMAT: str = "i"
-PI_2: float = 1.570796
-PI_4: float = 0.785398
-POLLFD_FORMAT: str = "%d"
-PRIORITY_DEFAULT: int = 0
-PRIORITY_DEFAULT_IDLE: int = 200
-PRIORITY_HIGH: int = -100
-PRIORITY_HIGH_IDLE: int = 100
-PRIORITY_LOW: int = 300
-REF_COUNT_INIT: int = -1
-SEARCHPATH_SEPARATOR: int = 58
-SEARCHPATH_SEPARATOR_S: str = ":"
-SIZEOF_LONG: int = 8
-SIZEOF_SIZE_T: int = 8
-SIZEOF_SSIZE_T: int = 8
-SIZEOF_VOID_P: int = 8
-SOURCE_CONTINUE: bool = True
-SOURCE_REMOVE: bool = False
-SPAWN_CHILD_INHERITS_STDIN: int = 32
-SPAWN_DO_NOT_REAP_CHILD: int = 2
-SPAWN_FILE_AND_ARGV_ZERO: int = 64
-SPAWN_LEAVE_DESCRIPTORS_OPEN: int = 1
-SPAWN_SEARCH_PATH: int = 4
-SPAWN_STDERR_TO_DEV_NULL: int = 16
-SPAWN_STDOUT_TO_DEV_NULL: int = 8
-SQRT2: float = 1.414214
-STR_DELIMITERS: str = "_-|> <."
-SYSDEF_AF_INET: int = 2
-SYSDEF_AF_INET6: int = 10
-SYSDEF_AF_UNIX: int = 1
-SYSDEF_MSG_DONTROUTE: int = 4
-SYSDEF_MSG_OOB: int = 1
-SYSDEF_MSG_PEEK: int = 2
-TEST_OPTION_ISOLATE_DIRS: str = "isolate_dirs"
-TEST_OPTION_NONFATAL_ASSERTIONS: str = "nonfatal-assertions"
-TEST_OPTION_NO_PRGNAME: str = "no_g_set_prgname"
-TIME_SPAN_DAY: int = 86400000000
-TIME_SPAN_HOUR: int = 3600000000
-TIME_SPAN_MILLISECOND: int = 1000
-TIME_SPAN_MINUTE: int = 60000000
-TIME_SPAN_SECOND: int = 1000000
-UNICHAR_MAX_DECOMPOSITION_LENGTH: int = 18
-URI_RESERVED_CHARS_GENERIC_DELIMITERS: str = ":/?#[]@"
-URI_RESERVED_CHARS_SUBCOMPONENT_DELIMITERS: str = "!$&'()*+,;="
-USEC_PER_SEC: int = 1000000
-USER_DIRECTORY_DESKTOP: int = 0
-USER_DIRECTORY_DOCUMENTS: int = 1
-USER_DIRECTORY_DOWNLOAD: int = 2
-USER_DIRECTORY_MUSIC: int = 3
-USER_DIRECTORY_PICTURES: int = 4
-USER_DIRECTORY_PUBLIC_SHARE: int = 5
-USER_DIRECTORY_TEMPLATES: int = 6
-USER_DIRECTORY_VIDEOS: int = 7
-VA_COPY_AS_ARRAY: int = 1
-VERSION_MIN_REQUIRED: int = 2
-WIN32_MSG_HANDLE: int = 19981206
+ALLOCATOR_LIST: Final[int]
+ALLOCATOR_NODE: Final[int]
+ALLOCATOR_SLIST: Final[int]
+ALLOC_AND_FREE: Final[int]
+ALLOC_ONLY: Final[int]
+ANALYZER_ANALYZING: Final[int]
+ASCII_DTOSTR_BUF_SIZE: Final[int]
+ATOMIC_REF_COUNT_INIT: Final[int]
+BIG_ENDIAN: Final[int]
+CSET_A_2_Z: Final = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+CSET_DIGITS: Final = "0123456789"
+CSET_a_2_z: Final = "abcdefghijklmnopqrstuvwxyz"
+C_STD_VERSION: Final[int]
+DATALIST_FLAGS_MASK: Final[int]
+DATE_BAD_DAY: Final[int]
+DATE_BAD_JULIAN: Final[int]
+DATE_BAD_YEAR: Final[int]
+DIR_SEPARATOR: Final[int]
+DIR_SEPARATOR_S: Final = "/"
+E: Final[float]
+GINT16_FORMAT: Final = "hi"
+GINT16_MODIFIER: Final = "h"
+GINT32_FORMAT: Final = "i"
+GINT32_MODIFIER: Final = ""
+GINT64_FORMAT: Final = "li"
+GINT64_MODIFIER: Final = "l"
+GINTPTR_FORMAT: Final = "li"
+GINTPTR_MODIFIER: Final = "l"
+GNUC_FUNCTION: Final = ""
+GNUC_PRETTY_FUNCTION: Final = ""
+GSIZE_FORMAT: Final = "lu"
+GSIZE_MODIFIER: Final = "l"
+GSSIZE_FORMAT: Final = "li"
+GSSIZE_MODIFIER: Final = "l"
+GUINT16_FORMAT: Final = "hu"
+GUINT32_FORMAT: Final = "u"
+GUINT64_FORMAT: Final = "lu"
+GUINTPTR_FORMAT: Final = "lu"
+HAVE_GINT64: Final[int]
+HAVE_GNUC_VARARGS: Final[int]
+HAVE_GNUC_VISIBILITY: Final[int]
+HAVE_GROWING_STACK: Final[int]
+HAVE_ISO_VARARGS: Final[int]
+HOOK_FLAG_USER_SHIFT: Final[int]
+IEEE754_DOUBLE_BIAS: Final[int]
+IEEE754_FLOAT_BIAS: Final[int]
+IO_ERR: Final[int]
+IO_FLAG_APPEND: Final[int]
+IO_FLAG_GET_MASK: Final[int]
+IO_FLAG_IS_READABLE: Final[int]
+IO_FLAG_IS_SEEKABLE: Final[int]
+IO_FLAG_IS_WRITEABLE: Final[int]
+IO_FLAG_MASK: Final[int]
+IO_FLAG_NONBLOCK: Final[int]
+IO_FLAG_SET_MASK: Final[int]
+IO_HUP: Final[int]
+IO_IN: Final[int]
+IO_NVAL: Final[int]
+IO_OUT: Final[int]
+IO_PRI: Final[int]
+IO_STATUS_AGAIN: Final[int]
+IO_STATUS_EOF: Final[int]
+IO_STATUS_ERROR: Final[int]
+IO_STATUS_NORMAL: Final[int]
+KEY_FILE_DESKTOP_GROUP: Final = "Desktop Entry"
+KEY_FILE_DESKTOP_KEY_ACTIONS: Final = "Actions"
+KEY_FILE_DESKTOP_KEY_CATEGORIES: Final = "Categories"
+KEY_FILE_DESKTOP_KEY_COMMENT: Final = "Comment"
+KEY_FILE_DESKTOP_KEY_DBUS_ACTIVATABLE: Final = "DBusActivatable"
+KEY_FILE_DESKTOP_KEY_EXEC: Final = "Exec"
+KEY_FILE_DESKTOP_KEY_GENERIC_NAME: Final = "GenericName"
+KEY_FILE_DESKTOP_KEY_HIDDEN: Final = "Hidden"
+KEY_FILE_DESKTOP_KEY_ICON: Final = "Icon"
+KEY_FILE_DESKTOP_KEY_MIME_TYPE: Final = "MimeType"
+KEY_FILE_DESKTOP_KEY_NAME: Final = "Name"
+KEY_FILE_DESKTOP_KEY_NOT_SHOW_IN: Final = "NotShowIn"
+KEY_FILE_DESKTOP_KEY_NO_DISPLAY: Final = "NoDisplay"
+KEY_FILE_DESKTOP_KEY_ONLY_SHOW_IN: Final = "OnlyShowIn"
+KEY_FILE_DESKTOP_KEY_PATH: Final = "Path"
+KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY: Final = "StartupNotify"
+KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS: Final = "StartupWMClass"
+KEY_FILE_DESKTOP_KEY_TERMINAL: Final = "Terminal"
+KEY_FILE_DESKTOP_KEY_TRY_EXEC: Final = "TryExec"
+KEY_FILE_DESKTOP_KEY_TYPE: Final = "Type"
+KEY_FILE_DESKTOP_KEY_URL: Final = "URL"
+KEY_FILE_DESKTOP_KEY_VERSION: Final = "Version"
+KEY_FILE_DESKTOP_TYPE_APPLICATION: Final = "Application"
+KEY_FILE_DESKTOP_TYPE_DIRECTORY: Final = "Directory"
+KEY_FILE_DESKTOP_TYPE_LINK: Final = "Link"
+LITTLE_ENDIAN: Final[int]
+LN10: Final[float]
+LN2: Final[float]
+LOG_2_BASE_10: Final[float]
+LOG_DOMAIN: Final[int]
+LOG_FATAL_MASK: Final[int]
+LOG_LEVEL_USER_SHIFT: Final[int]
+MAJOR_VERSION: Final[int]
+MAXDOUBLE: Final[float]
+MAXFLOAT: Final[float]
+MAXINT: Final[int]
+MAXINT16: Final[int]
+MAXINT32: Final[int]
+MAXINT64: Final[int]
+MAXINT8: Final[int]
+MAXLONG: Final[int]
+MAXOFFSET: Final[int]
+MAXSHORT: Final[int]
+MAXSIZE: Final[int]
+MAXSSIZE: Final[int]
+MAXUINT: Final[int]
+MAXUINT16: Final[int]
+MAXUINT32: Final[int]
+MAXUINT64: Final[int]
+MAXUINT8: Final[int]
+MAXULONG: Final[int]
+MAXUSHORT: Final[int]
+MICRO_VERSION: Final[int]
+MINDOUBLE: Final[float]
+MINFLOAT: Final[float]
+MININT: Final[int]
+MININT16: Final[int]
+MININT32: Final[int]
+MININT64: Final[int]
+MININT8: Final[int]
+MINLONG: Final[int]
+MINOFFSET: Final[int]
+MINOR_VERSION: Final[int]
+MINSHORT: Final[int]
+MINSSIZE: Final[int]
+MODULE_SUFFIX: Final = "so"
+OPTION_ERROR_BAD_VALUE: Final[int]
+OPTION_ERROR_FAILED: Final[int]
+OPTION_ERROR_UNKNOWN_OPTION: Final[int]
+OPTION_FLAG_FILENAME: Final[int]
+OPTION_FLAG_HIDDEN: Final[int]
+OPTION_FLAG_IN_MAIN: Final[int]
+OPTION_FLAG_NOALIAS: Final[int]
+OPTION_FLAG_NO_ARG: Final[int]
+OPTION_FLAG_OPTIONAL_ARG: Final[int]
+OPTION_FLAG_REVERSE: Final[int]
+OPTION_REMAINING: Final = ""
+PDP_ENDIAN: Final[int]
+PI: Final[float]
+PID_FORMAT: Final = "i"
+PI_2: Final[float]
+PI_4: Final[float]
+POLLFD_FORMAT: Final = "%d"
+PRIORITY_DEFAULT: Final[int]
+PRIORITY_DEFAULT_IDLE: Final[int]
+PRIORITY_HIGH: Final[int]
+PRIORITY_HIGH_IDLE: Final[int]
+PRIORITY_LOW: Final[int]
+REF_COUNT_INIT: Final[int]
+SEARCHPATH_SEPARATOR: Final[int]
+SEARCHPATH_SEPARATOR_S: Final = ":"
+SIZEOF_LONG: Final[int]
+SIZEOF_SIZE_T: Final[int]
+SIZEOF_SSIZE_T: Final[int]
+SIZEOF_VOID_P: Final[int]
+SOURCE_CONTINUE: Final = True
+SOURCE_REMOVE: Final = False
+SPAWN_CHILD_INHERITS_STDIN: Final[int]
+SPAWN_DO_NOT_REAP_CHILD: Final[int]
+SPAWN_FILE_AND_ARGV_ZERO: Final[int]
+SPAWN_LEAVE_DESCRIPTORS_OPEN: Final[int]
+SPAWN_SEARCH_PATH: Final[int]
+SPAWN_STDERR_TO_DEV_NULL: Final[int]
+SPAWN_STDOUT_TO_DEV_NULL: Final[int]
+SQRT2: Final[float]
+STR_DELIMITERS: Final = "_-|> <."
+SYSDEF_AF_INET: Final[int]
+SYSDEF_AF_INET6: Final[int]
+SYSDEF_AF_UNIX: Final[int]
+SYSDEF_MSG_DONTROUTE: Final[int]
+SYSDEF_MSG_OOB: Final[int]
+SYSDEF_MSG_PEEK: Final[int]
+TEST_OPTION_ISOLATE_DIRS: Final = "isolate_dirs"
+TEST_OPTION_NONFATAL_ASSERTIONS: Final = "nonfatal-assertions"
+TEST_OPTION_NO_PRGNAME: Final = "no_g_set_prgname"
+TIME_SPAN_DAY: Final[int]
+TIME_SPAN_HOUR: Final[int]
+TIME_SPAN_MILLISECOND: Final[int]
+TIME_SPAN_MINUTE: Final[int]
+TIME_SPAN_SECOND: Final[int]
+UNICHAR_MAX_DECOMPOSITION_LENGTH: Final[int]
+URI_RESERVED_CHARS_GENERIC_DELIMITERS: Final = ":/?#[]@"
+URI_RESERVED_CHARS_SUBCOMPONENT_DELIMITERS: Final = "!$&'()*+,;="
+USEC_PER_SEC: Final[int]
+USER_DIRECTORY_DESKTOP: Final[int]
+USER_DIRECTORY_DOCUMENTS: Final[int]
+USER_DIRECTORY_DOWNLOAD: Final[int]
+USER_DIRECTORY_MUSIC: Final[int]
+USER_DIRECTORY_PICTURES: Final[int]
+USER_DIRECTORY_PUBLIC_SHARE: Final[int]
+USER_DIRECTORY_TEMPLATES: Final[int]
+USER_DIRECTORY_VIDEOS: Final[int]
+VA_COPY_AS_ARRAY: Final[int]
+VERSION_MIN_REQUIRED: Final[int]
+WIN32_MSG_HANDLE: Final[int]
 # override
 glib_version: tuple[int, int, int]
-macro__has_attribute___noreturn__: int = 0
-macro__has_attribute_ifunc: int = 0
-macro__has_attribute_no_sanitize_address: int = 0
+macro__has_attribute___noreturn__: Final[int]
+macro__has_attribute_ifunc: Final[int]
+macro__has_attribute_no_sanitize_address: Final[int]
 # override
 pyglib_version: Final = gi.version_info
 
@@ -1246,8 +1246,8 @@ class Array(GObject.GBoxed):
         Array()
     """
 
-    data: str = ...
-    len: int = ...
+    data: str
+    len: int
 
 class AsyncQueue(GObject.GPointer):
     def length(self) -> int: ...
@@ -1374,8 +1374,8 @@ class ByteArray(GObject.GBoxed):
         ByteArray()
     """
 
-    data: int = ...
-    len: int = ...
+    data: int
+    len: int
     @staticmethod
     def append(array: _Sequence[int], data: _Sequence[int]) -> bytes: ...
     @staticmethod
@@ -1478,11 +1478,11 @@ class Completion(GObject.GPointer):
         Completion()
     """
 
-    items: list[None] = ...
-    func: Callable[[None], str] = ...
-    prefix: str = ...
-    cache: list[None] = ...
-    strncmp_func: Callable[[str, str, int], int] = ...
+    items: list[None]
+    func: Callable[[None], str]
+    prefix: str
+    cache: list[None]
+    strncmp_func: Callable[[str, str, int], int]
     def clear_items(self) -> None: ...
     def complete_utf8(self, prefix: str, new_prefix: str) -> list[str]: ...
     def free(self) -> None: ...
@@ -1496,8 +1496,8 @@ class Cond(GObject.GPointer):
         Cond()
     """
 
-    p: None = ...
-    i: list[int] = ...
+    p: None
+    i: list[int]
     def broadcast(self) -> None: ...
     def clear(self) -> None: ...
     def init(self) -> None: ...
@@ -1519,12 +1519,12 @@ class Date(GObject.GBoxed):
         new_julian(julian_day:int) -> GLib.Date
     """
 
-    julian_days: int = ...
-    julian: int = ...
-    dmy: int = ...
-    day: int = ...
-    month: int = ...
-    year: int = ...
+    julian_days: int
+    julian: int
+    dmy: int
+    day: int
+    month: int
+    year: int
     @staticmethod
     def __new__(cls: type[Self]) -> Self: ...
     def add_days(self, n_days: int) -> None: ...
@@ -1724,8 +1724,8 @@ class DebugKey(GObject.GPointer):
         DebugKey()
     """
 
-    key: str = ...
-    value: int = ...
+    key: str
+    value: int
 
 class Dir(GObject.GBoxed):
     """
@@ -1839,12 +1839,12 @@ class HashTableIter(GObject.GPointer):
         HashTableIter()
     """
 
-    dummy1: None = ...
-    dummy2: None = ...
-    dummy3: None = ...
-    dummy4: int = ...
-    dummy5: bool = ...
-    dummy6: None = ...
+    dummy1: None
+    dummy2: None
+    dummy3: None
+    dummy4: int
+    dummy5: bool
+    dummy6: None
     def get_hash_table(self) -> dict[None, None]: ...
     def init(self, hash_table: dict[None, None]) -> None: ...
     def next(self) -> tuple[bool, None, None]: ...
@@ -1882,14 +1882,14 @@ class Hook(GObject.GPointer):
         Hook()
     """
 
-    data: None = ...
-    next: Hook = ...
-    prev: Hook = ...
+    data: None
+    next: Hook
+    prev: Hook
     @property
     def ref_count(self) -> int: ...
-    hook_id: int = ...
-    flags: int = ...
-    func: None = ...
+    hook_id: int
+    flags: int
+    func: None
     def compare_ids(self, sibling: Hook) -> int: ...
     @staticmethod
     def destroy(hook_list: HookList, hook_id: int) -> bool: ...
@@ -1919,13 +1919,13 @@ class HookList(GObject.GPointer):
         HookList()
     """
 
-    seq_id: int = ...
-    hook_size: int = ...
-    is_setup: int = ...
-    hooks: Hook = ...
-    dummy3: None = ...
-    finalize_hook: Callable[[HookList, Hook], None] = ...
-    dummy: list[None] = ...
+    seq_id: int
+    hook_size: int
+    is_setup: int
+    hooks: Hook
+    dummy3: None
+    finalize_hook: Callable[[HookList, Hook], None]
+    dummy: list[None]
     def clear(self) -> None: ...
     def init(self, hook_size: int) -> None: ...
     def invoke(self, may_recurse: bool) -> None: ...
@@ -1956,25 +1956,25 @@ class IOChannel(GObject.GBoxed):
 
     @property
     def ref_count(self) -> int: ...
-    funcs: IOFuncs = ...
-    encoding: str = ...
-    read_cd: None = ...
-    write_cd: None = ...
-    line_term: str = ...
-    line_term_len: int = ...
-    buf_size: int = ...
-    read_buf: String = ...
-    encoded_read_buf: String = ...
-    write_buf: String = ...
-    partial_write_buf: list[int] = ...
-    use_buffer: int = ...
-    do_encode: int = ...
-    close_on_unref: int = ...
-    is_readable: int = ...
-    is_writeable: int = ...
-    is_seekable: int = ...
-    reserved1: None = ...
-    reserved2: None = ...
+    funcs: IOFuncs
+    encoding: str
+    read_cd: None
+    write_cd: None
+    line_term: str
+    line_term_len: int
+    buf_size: int
+    read_buf: String
+    encoded_read_buf: String
+    write_buf: String
+    partial_write_buf: list[int]
+    use_buffer: int
+    do_encode: int
+    close_on_unref: int
+    is_readable: int
+    is_writeable: int
+    is_seekable: int
+    reserved1: None
+    reserved2: None
     def __iter__(self): ...  # FIXME: Override is missing typing annotation
     @staticmethod
     def __new__(
@@ -2051,14 +2051,14 @@ class IOFuncs(GObject.GPointer):
         IOFuncs()
     """
 
-    io_read: Callable[[IOChannel, str, int, int], IOStatus] = ...
-    io_write: Callable[[IOChannel, str, int, int], IOStatus] = ...
-    io_seek: Callable[[IOChannel, int, SeekType], IOStatus] = ...
-    io_close: Callable[[IOChannel], IOStatus] = ...
-    io_create_watch: Callable[[IOChannel, IOCondition], Source] = ...
-    io_free: Callable[[IOChannel], None] = ...
-    io_set_flags: Callable[[IOChannel, IOFlags], IOStatus] = ...
-    io_get_flags: Callable[[IOChannel], IOFlags] = ...
+    io_read: Callable[[IOChannel, str, int, int], IOStatus]
+    io_write: Callable[[IOChannel, str, int, int], IOStatus]
+    io_seek: Callable[[IOChannel, int, SeekType], IOStatus]
+    io_close: Callable[[IOChannel], IOStatus]
+    io_create_watch: Callable[[IOChannel, IOCondition], Source]
+    io_free: Callable[[IOChannel], None]
+    io_set_flags: Callable[[IOChannel, IOFlags], IOStatus]
+    io_get_flags: Callable[[IOChannel], IOFlags]
 
 class Idle(Source):
     """
@@ -2169,9 +2169,9 @@ class List(GObject.GPointer):
         List()
     """
 
-    data: None = ...
-    next: list[None] = ...
-    prev: list[None] = ...
+    data: None
+    next: list[None]
+    prev: list[None]
     @staticmethod
     def pop_allocator() -> None: ...
     @staticmethod
@@ -2186,9 +2186,9 @@ class LogField(GObject.GPointer):
         LogField()
     """
 
-    key: str = ...
-    value: None = ...
-    length: int = ...
+    key: str
+    value: None
+    length: int
 
 class MainContext(GObject.GBoxed):
     """
@@ -2335,11 +2335,11 @@ class MarkupParser(GObject.GPointer):
         MarkupParser()
     """
 
-    start_element: Callable[..., None] = ...
-    end_element: Callable[..., None] = ...
-    text: Callable[..., None] = ...
-    passthrough: Callable[..., None] = ...
-    error: Callable[..., None] = ...
+    start_element: Callable[..., None]
+    end_element: Callable[..., None]
+    text: Callable[..., None]
+    passthrough: Callable[..., None]
+    error: Callable[..., None]
 
 class MatchInfo(GObject.GBoxed):
     def expand_references(self, string_to_expand: str) -> str | None: ...
@@ -2378,12 +2378,12 @@ class MemVTable(GObject.GPointer):
         MemVTable()
     """
 
-    malloc: Callable[[int], None] = ...
-    realloc: Callable[[None, int], None] = ...
-    free: Callable[[None], None] = ...
-    calloc: Callable[[int, int], None] = ...
-    try_malloc: Callable[[int], None] = ...
-    try_realloc: Callable[[None, int], None] = ...
+    malloc: Callable[[int], None]
+    realloc: Callable[[None, int], None]
+    free: Callable[[None], None]
+    calloc: Callable[[int, int], None]
+    try_malloc: Callable[[int], None]
+    try_realloc: Callable[[None, int], None]
 
 class Mutex(GObject.GPointer):
     i = ...  # FIXME: Constant is missing typing annotation
@@ -2404,11 +2404,11 @@ class Node(GObject.GPointer):
         Node()
     """
 
-    data: None = ...
-    next: Node = ...
-    prev: Node = ...
-    parent: Node = ...
-    children: Node = ...
+    data: None
+    next: Node
+    prev: Node
+    parent: Node
+    children: Node
     def child_index(self, data: None) -> int: ...
     def child_position(self, child: Node) -> int: ...
     def children_foreach(
@@ -2444,8 +2444,8 @@ class Once(GObject.GPointer):
         Once()
     """
 
-    status: OnceStatus = ...
-    retval: None = ...
+    status: OnceStatus
+    retval: None
     @staticmethod
     def init_enter() -> tuple[bool, None]: ...
     @staticmethod
@@ -2494,13 +2494,13 @@ class OptionEntry(GObject.GPointer):
         OptionEntry()
     """
 
-    long_name: str = ...
-    short_name: int = ...
-    flags: int = ...
-    arg: OptionArg = ...
-    arg_data: None = ...
-    description: str = ...
-    arg_description: str = ...
+    long_name: str
+    short_name: int
+    flags: int
+    arg: OptionArg
+    arg_data: None
+    description: str
+    arg_description: str
 
 class OptionGroup(GObject.GBoxed):
     """
@@ -2546,7 +2546,7 @@ class PathBuf(GObject.GPointer):
         PathBuf()
     """
 
-    dummy: list[None] = ...
+    dummy: list[None]
     def clear(self) -> None: ...
     def clear_to_path(self) -> str | None: ...
     @staticmethod
@@ -2600,9 +2600,9 @@ class PollFD(GObject.GBoxed):
         PollFD()
     """
 
-    fd: int = ...
-    events: int = ...
-    revents: int = ...
+    fd: int
+    events: int
+    revents: int
     @staticmethod
     def __new__(cls: type[Self], fd: int, events: IOCondition) -> Self: ...
 
@@ -2615,9 +2615,9 @@ class Private(GObject.GPointer):
         Private()
     """
 
-    p: None = ...
-    notify: Callable[[None], None] = ...
-    future: list[None] = ...
+    p: None
+    notify: Callable[[None], None]
+    future: list[None]
     def get(self) -> None: ...
     def replace(self, value: None) -> None: ...
     def set(self, value: None) -> None: ...
@@ -2631,8 +2631,8 @@ class PtrArray(GObject.GBoxed):
         PtrArray()
     """
 
-    pdata: None = ...
-    len: int = ...
+    pdata: None
+    len: int
 
 class Queue(GObject.GPointer):
     """
@@ -2643,9 +2643,9 @@ class Queue(GObject.GPointer):
         Queue()
     """
 
-    head: list[None] = ...
-    tail: list[None] = ...
-    length: int = ...
+    head: list[None]
+    tail: list[None]
+    length: int
     def clear(self) -> None: ...
     def clear_full(self, free_func: Callable[[None], None] | None = None) -> None: ...
     def foreach(self, func: Callable[..., None], *user_data: Any) -> None: ...
@@ -2681,8 +2681,8 @@ class RWLock(GObject.GPointer):
         RWLock()
     """
 
-    p: None = ...
-    i: list[int] = ...
+    p: None
+    i: list[int]
     def clear(self) -> None: ...
     def init(self) -> None: ...
     def reader_lock(self) -> None: ...
@@ -2728,8 +2728,8 @@ class RecMutex(GObject.GPointer):
         RecMutex()
     """
 
-    p: None = ...
-    i: list[int] = ...
+    p: None
+    i: list[int]
     def clear(self) -> None: ...
     def init(self) -> None: ...
     def lock(self) -> None: ...
@@ -2854,8 +2854,8 @@ class SList(GObject.GPointer):
         SList()
     """
 
-    data: None = ...
-    next: list[None] = ...
+    data: None
+    next: list[None]
     @staticmethod
     def pop_allocator() -> None: ...
     @staticmethod
@@ -2870,28 +2870,28 @@ class Scanner(GObject.GPointer):
         Scanner()
     """
 
-    user_data: None = ...
-    max_parse_errors: int = ...
-    parse_errors: int = ...
-    input_name: str = ...
+    user_data: None
+    max_parse_errors: int
+    parse_errors: int
+    input_name: str
     @property
     def qdata(self) -> Data: ...
-    config: ScannerConfig = ...
-    token: TokenType = ...
-    value: TokenValue = ...
-    line: int = ...
-    position: int = ...
-    next_token: TokenType = ...
-    next_value: TokenValue = ...
-    next_line: int = ...
-    next_position: int = ...
-    symbol_table: dict[None, None] = ...
-    input_fd: int = ...
-    text: str = ...
-    text_end: str = ...
-    buffer: str = ...
-    scope_id: int = ...
-    msg_handler: Callable[[Scanner, str, bool], None] = ...
+    config: ScannerConfig
+    token: TokenType
+    value: TokenValue
+    line: int
+    position: int
+    next_token: TokenType
+    next_value: TokenValue
+    next_line: int
+    next_position: int
+    symbol_table: dict[None, None]
+    input_fd: int
+    text: str
+    text_end: str
+    buffer: str
+    scope_id: int
+    msg_handler: Callable[[Scanner, str, bool], None]
     def cur_line(self) -> int: ...
     def cur_position(self) -> int: ...
     def cur_token(self) -> TokenType: ...
@@ -2929,33 +2929,33 @@ class ScannerConfig(GObject.GPointer):
         ScannerConfig()
     """
 
-    cset_skip_characters: str = ...
-    cset_identifier_first: str = ...
-    cset_identifier_nth: str = ...
-    cpair_comment_single: str = ...
-    case_sensitive: int = ...
-    skip_comment_multi: int = ...
-    skip_comment_single: int = ...
-    scan_comment_multi: int = ...
-    scan_identifier: int = ...
-    scan_identifier_1char: int = ...
-    scan_identifier_NULL: int = ...
-    scan_symbols: int = ...
-    scan_binary: int = ...
-    scan_octal: int = ...
-    scan_float: int = ...
-    scan_hex: int = ...
-    scan_hex_dollar: int = ...
-    scan_string_sq: int = ...
-    scan_string_dq: int = ...
-    numbers_2_int: int = ...
-    int_2_float: int = ...
-    identifier_2_string: int = ...
-    char_2_token: int = ...
-    symbol_2_token: int = ...
-    scope_0_fallback: int = ...
-    store_int64: int = ...
-    padding_dummy: int = ...
+    cset_skip_characters: str
+    cset_identifier_first: str
+    cset_identifier_nth: str
+    cpair_comment_single: str
+    case_sensitive: int
+    skip_comment_multi: int
+    skip_comment_single: int
+    scan_comment_multi: int
+    scan_identifier: int
+    scan_identifier_1char: int
+    scan_identifier_NULL: int
+    scan_symbols: int
+    scan_binary: int
+    scan_octal: int
+    scan_float: int
+    scan_hex: int
+    scan_hex_dollar: int
+    scan_string_sq: int
+    scan_string_dq: int
+    numbers_2_int: int
+    int_2_float: int
+    identifier_2_string: int
+    char_2_token: int
+    symbol_2_token: int
+    scope_0_fallback: int
+    store_int64: int
+    padding_dummy: int
 
 class Sequence(GObject.GPointer):
     def append(self, data: None) -> SequenceIter: ...
@@ -3043,19 +3043,19 @@ class Source(GObject.GBoxed):
         new(source_funcs:GLib.SourceFuncs, struct_size:int) -> GLib.Source
     """
 
-    callback_data: None = ...
-    callback_funcs: SourceCallbackFuncs = ...
-    source_funcs: SourceFuncs = ...
+    callback_data: None
+    callback_funcs: SourceCallbackFuncs
+    source_funcs: SourceFuncs
     @property
     def ref_count(self) -> int: ...
-    context: MainContext = ...
-    priority: int = ...
-    flags: int = ...
-    source_id: int = ...
-    poll_fds: list[None] = ...
-    prev: Source = ...
-    next: Source = ...
-    name: str = ...
+    context: MainContext
+    priority: int
+    flags: int
+    source_id: int
+    poll_fds: list[None]
+    prev: Source
+    next: Source
+    name: str
     @property
     def priv(self) -> SourcePrivate: ...
     can_recurse = ...  # FIXME: Constant is missing typing annotation
@@ -3116,9 +3116,9 @@ class SourceCallbackFuncs(GObject.GPointer):
         SourceCallbackFuncs()
     """
 
-    ref: Callable[[None], None] = ...
-    unref: Callable[[None], None] = ...
-    get: None = ...
+    ref: Callable[[None], None]
+    unref: Callable[[None], None]
+    get: None
 
 class SourceFuncs(GObject.GPointer):
     """
@@ -3129,12 +3129,12 @@ class SourceFuncs(GObject.GPointer):
         SourceFuncs()
     """
 
-    prepare: Callable[[Source], tuple[bool, int]] = ...
-    check: Callable[[Source], bool] = ...
-    dispatch: None = ...
-    finalize: Callable[[Source], None] = ...
-    closure_callback: Callable[..., bool] = ...
-    closure_marshal: Callable[[], None] = ...
+    prepare: Callable[[Source], tuple[bool, int]]
+    check: Callable[[Source], bool]
+    dispatch: None
+    finalize: Callable[[Source], None]
+    closure_callback: Callable[..., bool]
+    closure_marshal: Callable[[], None]
 
 class SourcePrivate(GObject.GPointer): ...
 class StatBuf(GObject.GPointer): ...
@@ -3152,9 +3152,9 @@ class String(GObject.GBoxed):
         sized_new(dfl_size:int) -> GLib.String
     """
 
-    str: str = ...
-    len: int = ...
-    allocated_len: int = ...
+    str: str
+    len: int
+    allocated_len: int
     def append(self, val: str) -> String: ...
     def append_c(self, c: int) -> String: ...
     def append_len(self, val: str, len: int) -> String: ...
@@ -3235,12 +3235,12 @@ class TestConfig(GObject.GPointer):
         TestConfig()
     """
 
-    test_initialized: bool = ...
-    test_quick: bool = ...
-    test_perf: bool = ...
-    test_verbose: bool = ...
-    test_quiet: bool = ...
-    test_undefined: bool = ...
+    test_initialized: bool
+    test_quick: bool
+    test_perf: bool
+    test_verbose: bool
+    test_quiet: bool
+    test_undefined: bool
 
 class TestLogBuffer(GObject.GPointer):
     """
@@ -3251,8 +3251,8 @@ class TestLogBuffer(GObject.GPointer):
         TestLogBuffer()
     """
 
-    data: String = ...
-    msgs: list[None] = ...
+    data: String
+    msgs: list[None]
     def free(self) -> None: ...
     def push(self, n_bytes: int, bytes: int) -> None: ...
 
@@ -3265,11 +3265,11 @@ class TestLogMsg(GObject.GPointer):
         TestLogMsg()
     """
 
-    log_type: TestLogType = ...
-    n_strings: int = ...
-    strings: str = ...
-    n_nums: int = ...
-    nums: None = ...
+    log_type: TestLogType
+    n_strings: int
+    strings: str
+    n_nums: int
+    nums: None
     def free(self) -> None: ...
 
 class TestSuite(GObject.GPointer):
@@ -3288,10 +3288,10 @@ class Thread(GObject.GBoxed):
         try_new(name:str=None, func:GLib.ThreadFunc, data=None) -> GLib.Thread
     """
 
-    func: Callable[[None], None] = ...
-    data: None = ...
-    joinable: bool = ...
-    priority: None = ...
+    func: Callable[[None], None]
+    data: None
+    joinable: bool
+    priority: None
     @staticmethod
     def error_quark() -> int: ...
     @staticmethod
@@ -3328,9 +3328,9 @@ class ThreadPool(GObject.GPointer):
         ThreadPool()
     """
 
-    func: Callable[..., None] = ...
-    user_data: None = ...
-    exclusive: bool = ...
+    func: Callable[..., None]
+    user_data: None
+    exclusive: bool
     def free(self, immediate: bool, wait_: bool) -> None: ...
     @staticmethod
     def get_max_idle_time() -> int: ...
@@ -3360,8 +3360,8 @@ class TimeVal(GObject.GPointer):
         TimeVal()
     """
 
-    tv_sec: int = ...
-    tv_usec: int = ...
+    tv_sec: int
+    tv_usec: int
     def add(self, microseconds: int) -> None: ...
     @staticmethod
     def from_iso8601(iso_date: str) -> tuple[bool, TimeVal]: ...
@@ -3444,7 +3444,7 @@ class TrashStack(GObject.GPointer):
         TrashStack()
     """
 
-    next: TrashStack = ...
+    next: TrashStack
     @staticmethod
     def height(stack_p: TrashStack) -> int: ...
     @staticmethod
@@ -3516,7 +3516,7 @@ class Tuples(GObject.GPointer):
         Tuples()
     """
 
-    len: int = ...
+    len: int
     def destroy(self) -> None: ...
     def index(self, index_: int, field: int) -> None: ...
 
@@ -3652,10 +3652,10 @@ class UriParamsIter(GObject.GPointer):
         UriParamsIter()
     """
 
-    dummy0: int = ...
-    dummy1: None = ...
-    dummy2: None = ...
-    dummy3: bytes = ...
+    dummy0: int
+    dummy1: None
+    dummy2: None
+    dummy3: bytes
     def init(
         self, params: str, length: int, separators: str, flags: UriParamsFlags
     ) -> None: ...

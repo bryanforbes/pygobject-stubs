@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 
 from collections.abc import Callable
 
@@ -6,13 +7,13 @@ from gi.repository import Gio
 from gi.repository import GLib
 from gi.repository import GObject
 
-ERROR_NUM_ENTRIES: int = 6
-MAJOR_VERSION: int = 3
-MICRO_VERSION: int = 0
-MINOR_VERSION: int = 48
+ERROR_NUM_ENTRIES: Final[int]
+MAJOR_VERSION: Final[int]
+MICRO_VERSION: Final[int]
+MINOR_VERSION: Final[int]
 _lock = ...  # FIXME Constant
-_namespace: str = "Goa"
-_version: str = "1.0"
+_namespace: Final = "Goa"
+_version: Final = "1.0"
 
 def account_interface_info() -> Gio.DBusInterfaceInfo: ...
 def account_override_properties(
@@ -147,31 +148,31 @@ class AccountIface(GObject.GPointer):
         AccountIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    handle_ensure_credentials: Callable[[Account, Gio.DBusMethodInvocation], bool] = ...
-    handle_remove: Callable[[Account, Gio.DBusMethodInvocation], bool] = ...
-    get_attention_needed: Callable[[Account], bool] = ...
-    get_calendar_disabled: Callable[[Account], bool] = ...
-    get_chat_disabled: Callable[[Account], bool] = ...
-    get_contacts_disabled: Callable[[Account], bool] = ...
-    get_documents_disabled: Callable[[Account], bool] = ...
-    get_id: Callable[[Account], str | None] = ...
-    get_identity: Callable[[Account], str | None] = ...
-    get_is_temporary: Callable[[Account], bool] = ...
-    get_mail_disabled: Callable[[Account], bool] = ...
-    get_presentation_identity: Callable[[Account], str | None] = ...
-    get_provider_icon: Callable[[Account], str | None] = ...
-    get_provider_name: Callable[[Account], str | None] = ...
-    get_provider_type: Callable[[Account], str | None] = ...
-    get_ticketing_disabled: Callable[[Account], bool] = ...
-    get_files_disabled: Callable[[Account], bool] = ...
-    get_photos_disabled: Callable[[Account], bool] = ...
-    get_printers_disabled: Callable[[Account], bool] = ...
-    get_read_later_disabled: Callable[[Account], bool] = ...
-    get_maps_disabled: Callable[[Account], bool] = ...
-    get_is_locked: Callable[[Account], bool] = ...
-    get_music_disabled: Callable[[Account], bool] = ...
-    get_todo_disabled: Callable[[Account], bool] = ...
+    parent_iface: GObject.TypeInterface
+    handle_ensure_credentials: Callable[[Account, Gio.DBusMethodInvocation], bool]
+    handle_remove: Callable[[Account, Gio.DBusMethodInvocation], bool]
+    get_attention_needed: Callable[[Account], bool]
+    get_calendar_disabled: Callable[[Account], bool]
+    get_chat_disabled: Callable[[Account], bool]
+    get_contacts_disabled: Callable[[Account], bool]
+    get_documents_disabled: Callable[[Account], bool]
+    get_id: Callable[[Account], str | None]
+    get_identity: Callable[[Account], str | None]
+    get_is_temporary: Callable[[Account], bool]
+    get_mail_disabled: Callable[[Account], bool]
+    get_presentation_identity: Callable[[Account], str | None]
+    get_provider_icon: Callable[[Account], str | None]
+    get_provider_name: Callable[[Account], str | None]
+    get_provider_type: Callable[[Account], str | None]
+    get_ticketing_disabled: Callable[[Account], bool]
+    get_files_disabled: Callable[[Account], bool]
+    get_photos_disabled: Callable[[Account], bool]
+    get_printers_disabled: Callable[[Account], bool]
+    get_read_later_disabled: Callable[[Account], bool]
+    get_maps_disabled: Callable[[Account], bool]
+    get_is_locked: Callable[[Account], bool]
+    get_music_disabled: Callable[[Account], bool]
+    get_todo_disabled: Callable[[Account], bool]
 
 class AccountProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Account
@@ -345,7 +346,7 @@ class AccountProxyClass(GObject.GPointer):
         AccountProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class AccountProxyPrivate(GObject.GPointer): ...
 
@@ -444,7 +445,7 @@ class AccountSkeletonClass(GObject.GPointer):
         AccountSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class AccountSkeletonPrivate(GObject.GPointer): ...
 
@@ -472,9 +473,9 @@ class CalendarIface(GObject.GPointer):
         CalendarIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    get_accept_ssl_errors: Callable[[Calendar], bool] = ...
-    get_uri: Callable[[Calendar], str | None] = ...
+    parent_iface: GObject.TypeInterface
+    get_accept_ssl_errors: Callable[[Calendar], bool]
+    get_uri: Callable[[Calendar], str | None]
 
 class CalendarProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Calendar
@@ -604,7 +605,7 @@ class CalendarProxyClass(GObject.GPointer):
         CalendarProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class CalendarProxyPrivate(GObject.GPointer): ...
 
@@ -659,7 +660,7 @@ class CalendarSkeletonClass(GObject.GPointer):
         CalendarSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class CalendarSkeletonPrivate(GObject.GPointer): ...
 
@@ -687,7 +688,7 @@ class ChatIface(GObject.GPointer):
         ChatIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
+    parent_iface: GObject.TypeInterface
 
 class ChatProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Chat
@@ -813,7 +814,7 @@ class ChatProxyClass(GObject.GPointer):
         ChatProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class ChatProxyPrivate(GObject.GPointer): ...
 
@@ -861,7 +862,7 @@ class ChatSkeletonClass(GObject.GPointer):
         ChatSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class ChatSkeletonPrivate(GObject.GPointer): ...
 
@@ -919,7 +920,7 @@ class ClientClass(GObject.GPointer):
         ClientClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Contacts(GObject.GInterface):
     """
@@ -945,9 +946,9 @@ class ContactsIface(GObject.GPointer):
         ContactsIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    get_accept_ssl_errors: Callable[[Contacts], bool] = ...
-    get_uri: Callable[[Contacts], str | None] = ...
+    parent_iface: GObject.TypeInterface
+    get_accept_ssl_errors: Callable[[Contacts], bool]
+    get_uri: Callable[[Contacts], str | None]
 
 class ContactsProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Contacts
@@ -1077,7 +1078,7 @@ class ContactsProxyClass(GObject.GPointer):
         ContactsProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class ContactsProxyPrivate(GObject.GPointer): ...
 
@@ -1132,7 +1133,7 @@ class ContactsSkeletonClass(GObject.GPointer):
         ContactsSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class ContactsSkeletonPrivate(GObject.GPointer): ...
 
@@ -1160,7 +1161,7 @@ class DocumentsIface(GObject.GPointer):
         DocumentsIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
+    parent_iface: GObject.TypeInterface
 
 class DocumentsProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Documents
@@ -1286,7 +1287,7 @@ class DocumentsProxyClass(GObject.GPointer):
         DocumentsProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class DocumentsProxyPrivate(GObject.GPointer): ...
 
@@ -1334,7 +1335,7 @@ class DocumentsSkeletonClass(GObject.GPointer):
         DocumentsSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class DocumentsSkeletonPrivate(GObject.GPointer): ...
 
@@ -1362,9 +1363,9 @@ class ExchangeIface(GObject.GPointer):
         ExchangeIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    get_host: Callable[[Exchange], str | None] = ...
-    get_accept_ssl_errors: Callable[[Exchange], bool] = ...
+    parent_iface: GObject.TypeInterface
+    get_host: Callable[[Exchange], str | None]
+    get_accept_ssl_errors: Callable[[Exchange], bool]
 
 class ExchangeProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Exchange
@@ -1494,7 +1495,7 @@ class ExchangeProxyClass(GObject.GPointer):
         ExchangeProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class ExchangeProxyPrivate(GObject.GPointer): ...
 
@@ -1549,7 +1550,7 @@ class ExchangeSkeletonClass(GObject.GPointer):
         ExchangeSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class ExchangeSkeletonPrivate(GObject.GPointer): ...
 
@@ -1577,9 +1578,9 @@ class FilesIface(GObject.GPointer):
         FilesIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    get_accept_ssl_errors: Callable[[Files], bool] = ...
-    get_uri: Callable[[Files], str | None] = ...
+    parent_iface: GObject.TypeInterface
+    get_accept_ssl_errors: Callable[[Files], bool]
+    get_uri: Callable[[Files], str | None]
 
 class FilesProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Files
@@ -1709,7 +1710,7 @@ class FilesProxyClass(GObject.GPointer):
         FilesProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class FilesProxyPrivate(GObject.GPointer): ...
 
@@ -1764,7 +1765,7 @@ class FilesSkeletonClass(GObject.GPointer):
         FilesSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class FilesSkeletonPrivate(GObject.GPointer): ...
 
@@ -1792,25 +1793,25 @@ class MailIface(GObject.GPointer):
         MailIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    get_email_address: Callable[[Mail], str | None] = ...
-    get_imap_host: Callable[[Mail], str | None] = ...
-    get_imap_supported: Callable[[Mail], bool] = ...
-    get_imap_use_tls: Callable[[Mail], bool] = ...
-    get_imap_user_name: Callable[[Mail], str | None] = ...
-    get_smtp_host: Callable[[Mail], str | None] = ...
-    get_smtp_supported: Callable[[Mail], bool] = ...
-    get_smtp_use_tls: Callable[[Mail], bool] = ...
-    get_smtp_user_name: Callable[[Mail], str | None] = ...
-    get_imap_accept_ssl_errors: Callable[[Mail], bool] = ...
-    get_imap_use_ssl: Callable[[Mail], bool] = ...
-    get_name: Callable[[Mail], str | None] = ...
-    get_smtp_accept_ssl_errors: Callable[[Mail], bool] = ...
-    get_smtp_use_auth: Callable[[Mail], bool] = ...
-    get_smtp_use_ssl: Callable[[Mail], bool] = ...
-    get_smtp_auth_login: Callable[[Mail], bool] = ...
-    get_smtp_auth_plain: Callable[[Mail], bool] = ...
-    get_smtp_auth_xoauth2: Callable[[Mail], bool] = ...
+    parent_iface: GObject.TypeInterface
+    get_email_address: Callable[[Mail], str | None]
+    get_imap_host: Callable[[Mail], str | None]
+    get_imap_supported: Callable[[Mail], bool]
+    get_imap_use_tls: Callable[[Mail], bool]
+    get_imap_user_name: Callable[[Mail], str | None]
+    get_smtp_host: Callable[[Mail], str | None]
+    get_smtp_supported: Callable[[Mail], bool]
+    get_smtp_use_tls: Callable[[Mail], bool]
+    get_smtp_user_name: Callable[[Mail], str | None]
+    get_imap_accept_ssl_errors: Callable[[Mail], bool]
+    get_imap_use_ssl: Callable[[Mail], bool]
+    get_name: Callable[[Mail], str | None]
+    get_smtp_accept_ssl_errors: Callable[[Mail], bool]
+    get_smtp_use_auth: Callable[[Mail], bool]
+    get_smtp_use_ssl: Callable[[Mail], bool]
+    get_smtp_auth_login: Callable[[Mail], bool]
+    get_smtp_auth_plain: Callable[[Mail], bool]
+    get_smtp_auth_xoauth2: Callable[[Mail], bool]
 
 class MailProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Mail
@@ -1972,7 +1973,7 @@ class MailProxyClass(GObject.GPointer):
         MailProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class MailProxyPrivate(GObject.GPointer): ...
 
@@ -2059,7 +2060,7 @@ class MailSkeletonClass(GObject.GPointer):
         MailSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class MailSkeletonPrivate(GObject.GPointer): ...
 
@@ -2127,14 +2128,14 @@ class ManagerIface(GObject.GPointer):
         ManagerIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
+    parent_iface: GObject.TypeInterface
     handle_add_account: Callable[
         [Manager, Gio.DBusMethodInvocation, str, str, str, GLib.Variant, GLib.Variant],
         bool,
-    ] = ...
+    ]
     handle_is_supported_provider: Callable[
         [Manager, Gio.DBusMethodInvocation, str], bool
-    ] = ...
+    ]
 
 class ManagerProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Manager
@@ -2264,7 +2265,7 @@ class ManagerProxyClass(GObject.GPointer):
         ManagerProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class ManagerProxyPrivate(GObject.GPointer): ...
 
@@ -2316,7 +2317,7 @@ class ManagerSkeletonClass(GObject.GPointer):
         ManagerSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class ManagerSkeletonPrivate(GObject.GPointer): ...
 
@@ -2344,7 +2345,7 @@ class MapsIface(GObject.GPointer):
         MapsIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
+    parent_iface: GObject.TypeInterface
 
 class MapsProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Maps
@@ -2470,7 +2471,7 @@ class MapsProxyClass(GObject.GPointer):
         MapsProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class MapsProxyPrivate(GObject.GPointer): ...
 
@@ -2518,7 +2519,7 @@ class MapsSkeletonClass(GObject.GPointer):
         MapsSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class MapsSkeletonPrivate(GObject.GPointer): ...
 
@@ -2546,9 +2547,9 @@ class MediaServerIface(GObject.GPointer):
         MediaServerIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    get_dlna_supported: Callable[[MediaServer], bool] = ...
-    get_udn: Callable[[MediaServer], str | None] = ...
+    parent_iface: GObject.TypeInterface
+    get_dlna_supported: Callable[[MediaServer], bool]
+    get_udn: Callable[[MediaServer], str | None]
 
 class MediaServerProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, MediaServer
@@ -2678,7 +2679,7 @@ class MediaServerProxyClass(GObject.GPointer):
         MediaServerProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class MediaServerProxyPrivate(GObject.GPointer): ...
 
@@ -2733,7 +2734,7 @@ class MediaServerSkeletonClass(GObject.GPointer):
         MediaServerSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class MediaServerSkeletonPrivate(GObject.GPointer): ...
 
@@ -2761,7 +2762,7 @@ class MusicIface(GObject.GPointer):
         MusicIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
+    parent_iface: GObject.TypeInterface
 
 class MusicProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Music
@@ -2887,7 +2888,7 @@ class MusicProxyClass(GObject.GPointer):
         MusicProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class MusicProxyPrivate(GObject.GPointer): ...
 
@@ -2935,7 +2936,7 @@ class MusicSkeletonClass(GObject.GPointer):
         MusicSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class MusicSkeletonPrivate(GObject.GPointer): ...
 
@@ -2978,12 +2979,10 @@ class OAuth2BasedIface(GObject.GPointer):
         OAuth2BasedIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    handle_get_access_token: Callable[
-        [OAuth2Based, Gio.DBusMethodInvocation], bool
-    ] = ...
-    get_client_id: Callable[[OAuth2Based], str | None] = ...
-    get_client_secret: Callable[[OAuth2Based], str | None] = ...
+    parent_iface: GObject.TypeInterface
+    handle_get_access_token: Callable[[OAuth2Based, Gio.DBusMethodInvocation], bool]
+    get_client_id: Callable[[OAuth2Based], str | None]
+    get_client_secret: Callable[[OAuth2Based], str | None]
 
 class OAuth2BasedProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, OAuth2Based
@@ -3116,7 +3115,7 @@ class OAuth2BasedProxyClass(GObject.GPointer):
         OAuth2BasedProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class OAuth2BasedProxyPrivate(GObject.GPointer): ...
 
@@ -3174,7 +3173,7 @@ class OAuth2BasedSkeletonClass(GObject.GPointer):
         OAuth2BasedSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class OAuth2BasedSkeletonPrivate(GObject.GPointer): ...
 
@@ -3221,12 +3220,10 @@ class OAuthBasedIface(GObject.GPointer):
         OAuthBasedIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    handle_get_access_token: Callable[
-        [OAuthBased, Gio.DBusMethodInvocation], bool
-    ] = ...
-    get_consumer_key: Callable[[OAuthBased], str | None] = ...
-    get_consumer_secret: Callable[[OAuthBased], str | None] = ...
+    parent_iface: GObject.TypeInterface
+    handle_get_access_token: Callable[[OAuthBased, Gio.DBusMethodInvocation], bool]
+    get_consumer_key: Callable[[OAuthBased], str | None]
+    get_consumer_secret: Callable[[OAuthBased], str | None]
 
 class OAuthBasedProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, OAuthBased
@@ -3359,7 +3356,7 @@ class OAuthBasedProxyClass(GObject.GPointer):
         OAuthBasedProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class OAuthBasedProxyPrivate(GObject.GPointer): ...
 
@@ -3417,7 +3414,7 @@ class OAuthBasedSkeletonClass(GObject.GPointer):
         OAuthBasedSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class OAuthBasedSkeletonPrivate(GObject.GPointer): ...
 
@@ -3459,7 +3456,7 @@ class ObjectIface(GObject.GPointer):
         ObjectIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
+    parent_iface: GObject.TypeInterface
 
 class ObjectManagerClient(
     Gio.DBusObjectManagerClient, Gio.AsyncInitable, Gio.DBusObjectManager, Gio.Initable
@@ -3604,7 +3601,7 @@ class ObjectManagerClientClass(GObject.GPointer):
         ObjectManagerClientClass()
     """
 
-    parent_class: Gio.DBusObjectManagerClientClass = ...
+    parent_class: Gio.DBusObjectManagerClientClass
 
 class ObjectManagerClientPrivate(GObject.GPointer): ...
 
@@ -3704,7 +3701,7 @@ class ObjectProxyClass(GObject.GPointer):
         ObjectProxyClass()
     """
 
-    parent_class: Gio.DBusObjectProxyClass = ...
+    parent_class: Gio.DBusObjectProxyClass
 
 class ObjectProxyPrivate(GObject.GPointer): ...
 
@@ -3823,7 +3820,7 @@ class ObjectSkeletonClass(GObject.GPointer):
         ObjectSkeletonClass()
     """
 
-    parent_class: Gio.DBusObjectSkeletonClass = ...
+    parent_class: Gio.DBusObjectSkeletonClass
 
 class ObjectSkeletonPrivate(GObject.GPointer): ...
 
@@ -3865,10 +3862,8 @@ class PasswordBasedIface(GObject.GPointer):
         PasswordBasedIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    handle_get_password: Callable[
-        [PasswordBased, Gio.DBusMethodInvocation, str], bool
-    ] = ...
+    parent_iface: GObject.TypeInterface
+    handle_get_password: Callable[[PasswordBased, Gio.DBusMethodInvocation, str], bool]
 
 class PasswordBasedProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, PasswordBased
@@ -3997,7 +3992,7 @@ class PasswordBasedProxyClass(GObject.GPointer):
         PasswordBasedProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class PasswordBasedProxyPrivate(GObject.GPointer): ...
 
@@ -4050,7 +4045,7 @@ class PasswordBasedSkeletonClass(GObject.GPointer):
         PasswordBasedSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class PasswordBasedSkeletonPrivate(GObject.GPointer): ...
 
@@ -4078,7 +4073,7 @@ class PhotosIface(GObject.GPointer):
         PhotosIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
+    parent_iface: GObject.TypeInterface
 
 class PhotosProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Photos
@@ -4204,7 +4199,7 @@ class PhotosProxyClass(GObject.GPointer):
         PhotosProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class PhotosProxyPrivate(GObject.GPointer): ...
 
@@ -4252,7 +4247,7 @@ class PhotosSkeletonClass(GObject.GPointer):
         PhotosSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class PhotosSkeletonPrivate(GObject.GPointer): ...
 
@@ -4280,7 +4275,7 @@ class PrintersIface(GObject.GPointer):
         PrintersIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
+    parent_iface: GObject.TypeInterface
 
 class PrintersProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Printers
@@ -4406,7 +4401,7 @@ class PrintersProxyClass(GObject.GPointer):
         PrintersProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class PrintersProxyPrivate(GObject.GPointer): ...
 
@@ -4454,7 +4449,7 @@ class PrintersSkeletonClass(GObject.GPointer):
         PrintersSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class PrintersSkeletonPrivate(GObject.GPointer): ...
 
@@ -4482,7 +4477,7 @@ class ReadLaterIface(GObject.GPointer):
         ReadLaterIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
+    parent_iface: GObject.TypeInterface
 
 class ReadLaterProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, ReadLater
@@ -4608,7 +4603,7 @@ class ReadLaterProxyClass(GObject.GPointer):
         ReadLaterProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class ReadLaterProxyPrivate(GObject.GPointer): ...
 
@@ -4656,7 +4651,7 @@ class ReadLaterSkeletonClass(GObject.GPointer):
         ReadLaterSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class ReadLaterSkeletonPrivate(GObject.GPointer): ...
 
@@ -4695,9 +4690,9 @@ class TicketingIface(GObject.GPointer):
         TicketingIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    handle_get_ticket: Callable[[Ticketing, Gio.DBusMethodInvocation], bool] = ...
-    get_details: Callable[[Ticketing], GLib.Variant | None] = ...
+    parent_iface: GObject.TypeInterface
+    handle_get_ticket: Callable[[Ticketing, Gio.DBusMethodInvocation], bool]
+    get_details: Callable[[Ticketing], GLib.Variant | None]
 
 class TicketingProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Ticketing
@@ -4828,7 +4823,7 @@ class TicketingProxyClass(GObject.GPointer):
         TicketingProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class TicketingProxyPrivate(GObject.GPointer): ...
 
@@ -4882,7 +4877,7 @@ class TicketingSkeletonClass(GObject.GPointer):
         TicketingSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class TicketingSkeletonPrivate(GObject.GPointer): ...
 
@@ -4910,7 +4905,7 @@ class TodoIface(GObject.GPointer):
         TodoIface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
+    parent_iface: GObject.TypeInterface
 
 class TodoProxy(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Todo
@@ -5036,7 +5031,7 @@ class TodoProxyClass(GObject.GPointer):
         TodoProxyClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
+    parent_class: Gio.DBusProxyClass
 
 class TodoProxyPrivate(GObject.GPointer): ...
 
@@ -5084,7 +5079,7 @@ class TodoSkeletonClass(GObject.GPointer):
         TodoSkeletonClass()
     """
 
-    parent_class: Gio.DBusInterfaceSkeletonClass = ...
+    parent_class: Gio.DBusInterfaceSkeletonClass
 
 class TodoSkeletonPrivate(GObject.GPointer): ...
 

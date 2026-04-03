@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Callable
@@ -13,11 +14,11 @@ from gi.repository import Pango
 
 T = TypeVar("T")
 
-DURATION_INFINITE: int = 4294967295
-MAJOR_VERSION: int = 1
-MICRO_VERSION: int = 2
-MINOR_VERSION: int = 8
-VERSION_S: str = "1.8.2"
+DURATION_INFINITE: Final[int]
+MAJOR_VERSION: Final[int]
+MICRO_VERSION: Final[int]
+MINOR_VERSION: Final[int]
+VERSION_S: Final = "1.8.2"
 
 def accent_color_to_rgba(self: AccentColor) -> _Gdk4.RGBA: ...
 def accent_color_to_standalone_rgba(self: AccentColor, dark: bool) -> _Gdk4.RGBA: ...
@@ -354,7 +355,7 @@ class AboutDialogClass(GObject.GPointer):
         AboutDialogClass()
     """
 
-    parent_class: DialogClass = ...
+    parent_class: DialogClass
 
 class AboutWindow(
     Window,
@@ -737,7 +738,7 @@ class AboutWindowClass(GObject.GPointer):
         AboutWindowClass()
     """
 
-    parent_class: WindowClass = ...
+    parent_class: WindowClass
 
 class ActionRow(
     PreferencesRow,
@@ -970,9 +971,9 @@ class ActionRowClass(GObject.GPointer):
         ActionRowClass()
     """
 
-    parent_class: PreferencesRowClass = ...
-    activate: Callable[[ActionRow], None] = ...
-    padding: list[None] = ...
+    parent_class: PreferencesRowClass
+    activate: Callable[[ActionRow], None]
+    padding: list[None]
 
 class AlertDialog(
     Dialog,
@@ -1236,9 +1237,9 @@ class AlertDialogClass(GObject.GPointer):
         AlertDialogClass()
     """
 
-    parent_class: DialogClass = ...
-    response: Callable[[AlertDialog, str], None] = ...
-    padding: list[None] = ...
+    parent_class: DialogClass
+    response: Callable[[AlertDialog, str], None]
+    padding: list[None]
 
 class Animation(GObject.Object):
     """
@@ -1409,8 +1410,8 @@ class ApplicationClass(GObject.GPointer):
         ApplicationClass()
     """
 
-    parent_class: _Gtk4.ApplicationClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk4.ApplicationClass
+    padding: list[None]
 
 class ApplicationWindow(
     _Gtk4.ApplicationWindow,
@@ -1700,8 +1701,8 @@ class ApplicationWindowClass(GObject.GPointer):
         ApplicationWindowClass()
     """
 
-    parent_class: _Gtk4.ApplicationWindowClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk4.ApplicationWindowClass
+    padding: list[None]
 
 class Avatar(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -1883,7 +1884,7 @@ class AvatarClass(GObject.GPointer):
         AvatarClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Banner(
     _Gtk4.Widget,
@@ -2077,7 +2078,7 @@ class BannerClass(GObject.GPointer):
         BannerClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Bin(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -2240,7 +2241,7 @@ class BinClass(GObject.GPointer):
         BinClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class BottomSheet(
     _Gtk4.Widget, Swipeable, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -2462,7 +2463,7 @@ class BottomSheetClass(GObject.GPointer):
         BottomSheetClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Breakpoint(GObject.Object, _Gtk4.Buildable):
     """
@@ -2676,8 +2677,8 @@ class BreakpointBinClass(GObject.GPointer):
         BreakpointBinClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk4.WidgetClass
+    padding: list[None]
 
 class BreakpointClass(GObject.GPointer):
     """
@@ -2688,7 +2689,7 @@ class BreakpointClass(GObject.GPointer):
         BreakpointClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class BreakpointCondition(GObject.GBoxed):
     """
@@ -2899,7 +2900,7 @@ class ButtonContentClass(GObject.GPointer):
         ButtonContentClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class ButtonRow(
     PreferencesRow,
@@ -3106,7 +3107,7 @@ class ButtonRowClass(GObject.GPointer):
         ButtonRowClass()
     """
 
-    parent_class: PreferencesRowClass = ...
+    parent_class: PreferencesRowClass
 
 class CallbackAnimationTarget(AnimationTarget):
     """
@@ -3343,7 +3344,7 @@ class CarouselClass(GObject.GPointer):
         CarouselClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class CarouselIndicatorDots(
     _Gtk4.Widget,
@@ -3512,7 +3513,7 @@ class CarouselIndicatorDotsClass(GObject.GPointer):
         CarouselIndicatorDotsClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class CarouselIndicatorLines(
     _Gtk4.Widget,
@@ -3681,7 +3682,7 @@ class CarouselIndicatorLinesClass(GObject.GPointer):
         CarouselIndicatorLinesClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Clamp(
     _Gtk4.Widget,
@@ -3865,7 +3866,7 @@ class ClampClass(GObject.GPointer):
         ClampClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class ClampLayout(_Gtk4.LayoutManager, _Gtk4.Orientable):
     """
@@ -3919,7 +3920,7 @@ class ClampLayoutClass(GObject.GPointer):
         ClampLayoutClass()
     """
 
-    parent_class: _Gtk4.LayoutManagerClass = ...
+    parent_class: _Gtk4.LayoutManagerClass
 
 class ClampScrollable(
     _Gtk4.Widget,
@@ -4112,7 +4113,7 @@ class ClampScrollableClass(GObject.GPointer):
         ClampScrollableClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class ComboRow(
     ActionRow,
@@ -4386,8 +4387,8 @@ class ComboRowClass(GObject.GPointer):
         ComboRowClass()
     """
 
-    parent_class: ActionRowClass = ...
-    padding: list[None] = ...
+    parent_class: ActionRowClass
+    padding: list[None]
 
 class Dialog(
     _Gtk4.Widget,
@@ -4613,10 +4614,10 @@ class DialogClass(GObject.GPointer):
         DialogClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
-    close_attempt: Callable[[Dialog], None] = ...
-    closed: Callable[[Dialog], None] = ...
-    padding: list[None] = ...
+    parent_class: _Gtk4.WidgetClass
+    close_attempt: Callable[[Dialog], None]
+    closed: Callable[[Dialog], None]
+    padding: list[None]
 
 class EntryRow(
     PreferencesRow,
@@ -4878,7 +4879,7 @@ class EntryRowClass(GObject.GPointer):
         EntryRowClass()
     """
 
-    parent_class: PreferencesRowClass = ...
+    parent_class: PreferencesRowClass
 
 class EnumListItem(GObject.Object):
     """
@@ -4918,7 +4919,7 @@ class EnumListItemClass(GObject.GPointer):
         EnumListItemClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class EnumListModel(GObject.Object, Gio.ListModel):
     """
@@ -4960,7 +4961,7 @@ class EnumListModelClass(GObject.GPointer):
         EnumListModelClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ExpanderRow(
     PreferencesRow,
@@ -5196,8 +5197,8 @@ class ExpanderRowClass(GObject.GPointer):
         ExpanderRowClass()
     """
 
-    parent_class: PreferencesRowClass = ...
-    padding: list[None] = ...
+    parent_class: PreferencesRowClass
+    padding: list[None]
 
 class Flap(
     _Gtk4.Widget,
@@ -5438,7 +5439,7 @@ class FlapClass(GObject.GPointer):
         FlapClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class HeaderBar(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -5634,7 +5635,7 @@ class HeaderBarClass(GObject.GPointer):
         HeaderBarClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class InlineViewSwitcher(
     _Gtk4.Widget,
@@ -5818,7 +5819,7 @@ class InlineViewSwitcherClass(GObject.GPointer):
         InlineViewSwitcherClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Layout(GObject.Object, _Gtk4.Buildable):
     """
@@ -5860,7 +5861,7 @@ class LayoutClass(GObject.GPointer):
         LayoutClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class LayoutSlot(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -6022,7 +6023,7 @@ class LayoutSlotClass(GObject.GPointer):
         LayoutSlotClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Leaflet(
     _Gtk4.Widget,
@@ -6261,7 +6262,7 @@ class LeafletClass(GObject.GPointer):
         LeafletClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class LeafletPage(GObject.Object):
     """
@@ -6309,7 +6310,7 @@ class LeafletPageClass(GObject.GPointer):
         LeafletPageClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class MessageDialog(
     _Gtk4.Window,
@@ -6623,9 +6624,9 @@ class MessageDialogClass(GObject.GPointer):
         MessageDialogClass()
     """
 
-    parent_class: _Gtk4.WindowClass = ...
-    response: Callable[[MessageDialog, str], None] = ...
-    padding: list[None] = ...
+    parent_class: _Gtk4.WindowClass
+    response: Callable[[MessageDialog, str], None]
+    padding: list[None]
 
 class MultiLayoutView(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -6798,7 +6799,7 @@ class MultiLayoutViewClass(GObject.GPointer):
         MultiLayoutViewClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class NavigationPage(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -6993,12 +6994,12 @@ class NavigationPageClass(GObject.GPointer):
         NavigationPageClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
-    showing: Callable[[NavigationPage], None] = ...
-    shown: Callable[[NavigationPage], None] = ...
-    hiding: Callable[[NavigationPage], None] = ...
-    hidden: Callable[[NavigationPage], None] = ...
-    padding: list[None] = ...
+    parent_class: _Gtk4.WidgetClass
+    showing: Callable[[NavigationPage], None]
+    shown: Callable[[NavigationPage], None]
+    hiding: Callable[[NavigationPage], None]
+    hidden: Callable[[NavigationPage], None]
+    padding: list[None]
 
 class NavigationSplitView(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -7201,7 +7202,7 @@ class NavigationSplitViewClass(GObject.GPointer):
         NavigationSplitViewClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class NavigationView(
     _Gtk4.Widget, Swipeable, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -7406,7 +7407,7 @@ class NavigationViewClass(GObject.GPointer):
         NavigationViewClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class OverlaySplitView(
     _Gtk4.Widget, Swipeable, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -7624,7 +7625,7 @@ class OverlaySplitViewClass(GObject.GPointer):
         OverlaySplitViewClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class PasswordEntryRow(
     EntryRow,
@@ -7870,7 +7871,7 @@ class PasswordEntryRowClass(GObject.GPointer):
         PasswordEntryRowClass()
     """
 
-    parent_class: EntryRowClass = ...
+    parent_class: EntryRowClass
 
 class PreferencesDialog(
     Dialog,
@@ -8089,8 +8090,8 @@ class PreferencesDialogClass(GObject.GPointer):
         PreferencesDialogClass()
     """
 
-    parent_class: DialogClass = ...
-    padding: list[None] = ...
+    parent_class: DialogClass
+    padding: list[None]
 
 class PreferencesGroup(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -8279,8 +8280,8 @@ class PreferencesGroupClass(GObject.GPointer):
         PreferencesGroupClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk4.WidgetClass
+    padding: list[None]
 
 class PreferencesPage(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -8478,8 +8479,8 @@ class PreferencesPageClass(GObject.GPointer):
         PreferencesPageClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk4.WidgetClass
+    padding: list[None]
 
 class PreferencesRow(
     _Gtk4.ListBoxRow,
@@ -8681,8 +8682,8 @@ class PreferencesRowClass(GObject.GPointer):
         PreferencesRowClass()
     """
 
-    parent_class: _Gtk4.ListBoxRowClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk4.ListBoxRowClass
+    padding: list[None]
 
 class PreferencesWindow(
     Window,
@@ -8974,8 +8975,8 @@ class PreferencesWindowClass(GObject.GPointer):
         PreferencesWindowClass()
     """
 
-    parent_class: WindowClass = ...
-    padding: list[None] = ...
+    parent_class: WindowClass
+    padding: list[None]
 
 class PropertyAnimationTarget(AnimationTarget):
     """
@@ -9184,7 +9185,7 @@ class ShortcutLabelClass(GObject.GPointer):
         ShortcutLabelClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class ShortcutsDialog(
     Dialog,
@@ -9380,7 +9381,7 @@ class ShortcutsDialogClass(GObject.GPointer):
         ShortcutsDialogClass()
     """
 
-    parent_class: DialogClass = ...
+    parent_class: DialogClass
 
 class ShortcutsItem(GObject.Object):
     """
@@ -9445,7 +9446,7 @@ class ShortcutsItemClass(GObject.GPointer):
         ShortcutsItemClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ShortcutsSection(GObject.Object, Gio.ListModel, _Gtk4.Buildable):
     """
@@ -9488,7 +9489,7 @@ class ShortcutsSectionClass(GObject.GPointer):
         ShortcutsSectionClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class SpinRow(
     ActionRow,
@@ -9783,7 +9784,7 @@ class SpinRowClass(GObject.GPointer):
         SpinRowClass()
     """
 
-    parent_class: ActionRowClass = ...
+    parent_class: ActionRowClass
 
 class Spinner(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -9937,7 +9938,7 @@ class SpinnerClass(GObject.GPointer):
         SpinnerClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class SpinnerPaintable(GObject.Object, _Gdk4.Paintable, _Gtk4.SymbolicPaintable):
     """
@@ -9980,7 +9981,7 @@ class SpinnerPaintableClass(GObject.GPointer):
         SpinnerPaintableClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class SplitButton(
     _Gtk4.Widget,
@@ -10197,7 +10198,7 @@ class SplitButtonClass(GObject.GPointer):
         SplitButtonClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class SpringAnimation(Animation):
     """
@@ -10528,7 +10529,7 @@ class SqueezerClass(GObject.GPointer):
         SqueezerClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class SqueezerPage(GObject.Object):
     """
@@ -10567,7 +10568,7 @@ class SqueezerPageClass(GObject.GPointer):
         SqueezerPageClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class StatusPage(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -10750,7 +10751,7 @@ class StatusPageClass(GObject.GPointer):
         StatusPageClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class StyleManager(GObject.Object):
     """
@@ -10819,7 +10820,7 @@ class StyleManagerClass(GObject.GPointer):
         StyleManagerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class SwipeTracker(GObject.Object, _Gtk4.Orientable):
     """
@@ -10904,7 +10905,7 @@ class SwipeTrackerClass(GObject.GPointer):
         SwipeTrackerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Swipeable(GObject.GInterface):
     """
@@ -10930,15 +10931,13 @@ class SwipeableInterface(GObject.GPointer):
         SwipeableInterface()
     """
 
-    parent: GObject.TypeInterface = ...
-    get_distance: Callable[[Swipeable], float] = ...
-    get_snap_points: Callable[[Swipeable], list[float]] = ...
-    get_progress: Callable[[Swipeable], float] = ...
-    get_cancel_progress: Callable[[Swipeable], float] = ...
-    get_swipe_area: Callable[
-        [Swipeable, NavigationDirection, bool], _Gdk4.Rectangle
-    ] = ...
-    padding: list[None] = ...
+    parent: GObject.TypeInterface
+    get_distance: Callable[[Swipeable], float]
+    get_snap_points: Callable[[Swipeable], list[float]]
+    get_progress: Callable[[Swipeable], float]
+    get_cancel_progress: Callable[[Swipeable], float]
+    get_swipe_area: Callable[[Swipeable, NavigationDirection, bool], _Gdk4.Rectangle]
+    padding: list[None]
 
 class SwitchRow(
     ActionRow,
@@ -11160,7 +11159,7 @@ class SwitchRowClass(GObject.GPointer):
         SwitchRowClass()
     """
 
-    parent_class: ActionRowClass = ...
+    parent_class: ActionRowClass
 
 class TabBar(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -11369,7 +11368,7 @@ class TabBarClass(GObject.GPointer):
         TabBarClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class TabButton(
     _Gtk4.Widget,
@@ -11544,7 +11543,7 @@ class TabButtonClass(GObject.GPointer):
         TabButtonClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class TabOverview(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -11770,7 +11769,7 @@ class TabOverviewClass(GObject.GPointer):
         TabOverviewClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class TabPage(GObject.Object, _Gtk4.Accessible):
     """
@@ -11881,7 +11880,7 @@ class TabPageClass(GObject.GPointer):
         TabPageClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class TabView(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -12109,7 +12108,7 @@ class TabViewClass(GObject.GPointer):
         TabViewClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class TimedAnimation(Animation):
     """
@@ -12284,7 +12283,7 @@ class ToastClass(GObject.GPointer):
         ToastClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ToastOverlay(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -12449,7 +12448,7 @@ class ToastOverlayClass(GObject.GPointer):
         ToastOverlayClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Toggle(GObject.Object):
     """
@@ -12522,7 +12521,7 @@ class ToggleClass(GObject.GPointer):
         ToggleClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ToggleGroup(
     _Gtk4.Widget,
@@ -12717,7 +12716,7 @@ class ToggleGroupClass(GObject.GPointer):
         ToggleGroupClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class ToolbarView(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -12919,7 +12918,7 @@ class ToolbarViewClass(GObject.GPointer):
         ToolbarViewClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class ViewStack(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -13126,7 +13125,7 @@ class ViewStackClass(GObject.GPointer):
         ViewStackClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class ViewStackPage(GObject.Object, _Gtk4.Accessible):
     """
@@ -13201,7 +13200,7 @@ class ViewStackPageClass(GObject.GPointer):
         ViewStackPageClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ViewStackPages(GObject.Object, Gio.ListModel, _Gtk4.SelectionModel):
     """
@@ -13243,7 +13242,7 @@ class ViewStackPagesClass(GObject.GPointer):
         ViewStackPagesClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class ViewSwitcher(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -13568,7 +13567,7 @@ class ViewSwitcherBarClass(GObject.GPointer):
         ViewSwitcherBarClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class ViewSwitcherClass(GObject.GPointer):
     """
@@ -13579,7 +13578,7 @@ class ViewSwitcherClass(GObject.GPointer):
         ViewSwitcherClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class ViewSwitcherTitle(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -13760,7 +13759,7 @@ class ViewSwitcherTitleClass(GObject.GPointer):
         ViewSwitcherTitleClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Window(
     _Gtk4.Window,
@@ -14031,8 +14030,8 @@ class WindowClass(GObject.GPointer):
         WindowClass()
     """
 
-    parent_class: _Gtk4.WindowClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk4.WindowClass
+    padding: list[None]
 
 class WindowTitle(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -14200,7 +14199,7 @@ class WindowTitleClass(GObject.GPointer):
         WindowTitleClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class WrapBox(
     _Gtk4.Widget,
@@ -14439,7 +14438,7 @@ class WrapBoxClass(GObject.GPointer):
         WrapBoxClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class WrapLayout(_Gtk4.LayoutManager, _Gtk4.Orientable):
     """
@@ -14543,7 +14542,7 @@ class WrapLayoutClass(GObject.GPointer):
         WrapLayoutClass()
     """
 
-    parent_class: _Gtk4.LayoutManagerClass = ...
+    parent_class: _Gtk4.LayoutManagerClass
 
 class TabViewShortcuts(GObject.GFlags):
     ALL_SHORTCUTS = 4095

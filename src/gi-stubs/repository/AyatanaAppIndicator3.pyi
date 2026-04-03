@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 
 from collections.abc import Callable
 
@@ -6,16 +7,16 @@ from gi.repository import _Gdk3
 from gi.repository import _Gtk3
 from gi.repository import GObject
 
-INDICATOR_SIGNAL_CONNECTION_CHANGED: str = "connection-changed"
-INDICATOR_SIGNAL_NEW_ATTENTION_ICON: str = "new-attention-icon"
-INDICATOR_SIGNAL_NEW_ICON: str = "new-icon"
-INDICATOR_SIGNAL_NEW_ICON_THEME_PATH: str = "new-icon-theme-path"
-INDICATOR_SIGNAL_NEW_LABEL: str = "new-label"
-INDICATOR_SIGNAL_NEW_STATUS: str = "new-status"
-INDICATOR_SIGNAL_SCROLL_EVENT: str = "scroll-event"
+INDICATOR_SIGNAL_CONNECTION_CHANGED: Final = "connection-changed"
+INDICATOR_SIGNAL_NEW_ATTENTION_ICON: Final = "new-attention-icon"
+INDICATOR_SIGNAL_NEW_ICON: Final = "new-icon"
+INDICATOR_SIGNAL_NEW_ICON_THEME_PATH: Final = "new-icon-theme-path"
+INDICATOR_SIGNAL_NEW_LABEL: Final = "new-label"
+INDICATOR_SIGNAL_NEW_STATUS: Final = "new-status"
+INDICATOR_SIGNAL_SCROLL_EVENT: Final = "scroll-event"
 _lock = ...  # FIXME Constant
-_namespace: str = "AyatanaAppIndicator3"
-_version: str = "0.1"
+_namespace: Final = "AyatanaAppIndicator3"
+_version: Final = "0.1"
 
 class Indicator(GObject.Object):
     """
@@ -89,7 +90,7 @@ class Indicator(GObject.Object):
 
     @property
     def props(self) -> Props: ...
-    parent: GObject.Object = ...
+    parent: GObject.Object
 
     def __init__(
         self,
@@ -162,23 +163,23 @@ class IndicatorClass(GObject.GPointer):
         IndicatorClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    new_icon: Callable[..., None] = ...
-    new_attention_icon: Callable[..., None] = ...
-    new_status: Callable[..., None] = ...
-    new_icon_theme_path: Callable[..., None] = ...
-    new_label: Callable[..., None] = ...
-    connection_changed: Callable[..., None] = ...
-    scroll_event: Callable[..., None] = ...
-    app_indicator_reserved_ats: Callable[[], None] = ...
-    fallback: None = ...
-    unfallback: Callable[[Indicator, _Gtk3.StatusIcon], None] = ...
-    app_indicator_reserved_1: Callable[[], None] = ...
-    app_indicator_reserved_2: Callable[[], None] = ...
-    app_indicator_reserved_3: Callable[[], None] = ...
-    app_indicator_reserved_4: Callable[[], None] = ...
-    app_indicator_reserved_5: Callable[[], None] = ...
-    app_indicator_reserved_6: Callable[[], None] = ...
+    parent_class: GObject.ObjectClass
+    new_icon: Callable[..., None]
+    new_attention_icon: Callable[..., None]
+    new_status: Callable[..., None]
+    new_icon_theme_path: Callable[..., None]
+    new_label: Callable[..., None]
+    connection_changed: Callable[..., None]
+    scroll_event: Callable[..., None]
+    app_indicator_reserved_ats: Callable[[], None]
+    fallback: None
+    unfallback: Callable[[Indicator, _Gtk3.StatusIcon], None]
+    app_indicator_reserved_1: Callable[[], None]
+    app_indicator_reserved_2: Callable[[], None]
+    app_indicator_reserved_3: Callable[[], None]
+    app_indicator_reserved_4: Callable[[], None]
+    app_indicator_reserved_5: Callable[[], None]
+    app_indicator_reserved_6: Callable[[], None]
 
 class IndicatorCategory(GObject.GEnum):
     APPLICATION_STATUS = 0

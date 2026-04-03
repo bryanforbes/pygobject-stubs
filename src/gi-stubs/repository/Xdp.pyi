@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 
 from collections.abc import Callable
 from collections.abc import Sequence
@@ -7,10 +8,10 @@ from gi.repository import Gio
 from gi.repository import GLib
 from gi.repository import GObject
 
-WALLPAPER_TARGET_BOTH: int = 0
+WALLPAPER_TARGET_BOTH: Final[int]
 _lock = ...  # FIXME Constant
-_namespace: str = "Xdp"
-_version: str = "1.0"
+_namespace: Final = "Xdp"
+_version: Final = "1.0"
 
 class Parent(GObject.GBoxed):
     def copy(self) -> Parent: ...
@@ -375,7 +376,7 @@ class PortalClass(GObject.GPointer):
         PortalClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Session(GObject.Object):
     """
@@ -430,7 +431,7 @@ class SessionClass(GObject.GPointer):
         SessionClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class BackgroundFlags(GObject.GFlags):
     ACTIVATABLE = 2

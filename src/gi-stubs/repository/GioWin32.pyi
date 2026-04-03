@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from gi.repository import Gio
@@ -7,8 +8,8 @@ from gi.repository import GObject
 T = TypeVar("T")
 
 _lock = ...  # FIXME Constant
-_namespace: str = "GioWin32"
-_version: str = "2.0"
+_namespace: Final = "GioWin32"
+_version: Final = "2.0"
 
 def registry_settings_backend_new(
     registry_key: str | None = None,
@@ -54,12 +55,12 @@ class InputStreamClass(GObject.GPointer):
         InputStreamClass()
     """
 
-    parent_class: Gio.InputStreamClass = ...
-    _g_reserved1: None = ...
-    _g_reserved2: None = ...
-    _g_reserved3: None = ...
-    _g_reserved4: None = ...
-    _g_reserved5: None = ...
+    parent_class: Gio.InputStreamClass
+    _g_reserved1: None
+    _g_reserved2: None
+    _g_reserved3: None
+    _g_reserved4: None
+    _g_reserved5: None
 
 class InputStreamPrivate(GObject.GPointer): ...
 
@@ -86,7 +87,7 @@ class NetworkMonitorClass(GObject.GPointer):
         NetworkMonitorClass()
     """
 
-    parent_class: None = ...
+    parent_class: None
 
 class NetworkMonitorPrivate(GObject.GPointer): ...
 
@@ -130,11 +131,11 @@ class OutputStreamClass(GObject.GPointer):
         OutputStreamClass()
     """
 
-    parent_class: Gio.OutputStreamClass = ...
-    _g_reserved1: None = ...
-    _g_reserved2: None = ...
-    _g_reserved3: None = ...
-    _g_reserved4: None = ...
-    _g_reserved5: None = ...
+    parent_class: Gio.OutputStreamClass
+    _g_reserved1: None
+    _g_reserved2: None
+    _g_reserved3: None
+    _g_reserved4: None
+    _g_reserved5: None
 
 class OutputStreamPrivate(GObject.GPointer): ...

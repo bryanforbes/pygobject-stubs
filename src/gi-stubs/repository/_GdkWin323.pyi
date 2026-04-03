@@ -1,3 +1,4 @@
+from typing import Final
 from typing import TypeVar
 
 from gi.repository import _Gdk3
@@ -6,8 +7,8 @@ from gi.repository import GObject
 T = TypeVar("T")
 
 _lock = ...  # FIXME Constant
-_namespace: str = "GdkWin32"
-_version: str = "3.0"
+_namespace: Final = "GdkWin32"
+_version: Final = "3.0"
 
 def win32_selection_add_targets(
     owner: _Gdk3.Window, selection: _Gdk3.Atom, n_targets: int, targets: _Gdk3.Atom

@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Sequence
@@ -9,7 +10,7 @@ from gi.repository import GObject
 
 T = TypeVar("T")
 
-TYPE_TAG_N_TYPES: int = 22
+TYPE_TAG_N_TYPES: Final[int]
 
 def invoke_error_quark() -> int: ...
 def type_tag_argument_from_hash_pointer(
@@ -29,8 +30,8 @@ class ArgInfo(BaseInfo):
         ArgInfo(**properties)
     """
 
-    parent: BaseInfoStack = ...
-    padding: list[None] = ...
+    parent: BaseInfoStack
+    padding: list[None]
     def get_closure_index(self) -> tuple[bool, int]: ...
     def get_destroy_index(self) -> tuple[bool, int]: ...
     def get_direction(self) -> Direction: ...
@@ -76,7 +77,7 @@ class AttributeIter(GObject.GPointer):
         AttributeIter()
     """
 
-    data: None = ...
+    data: None
 
 class BaseInfo(_gi.Fundamental):
     """
@@ -111,10 +112,10 @@ class BaseInfoStack(GObject.GPointer):
 
     @property
     def parent_instance(self) -> GObject.TypeInstance: ...
-    dummy0: int = ...
-    dummy1: list[None] = ...
-    dummy2: list[int] = ...
-    dummy3: list[None] = ...
+    dummy0: int
+    dummy1: list[None]
+    dummy2: list[int]
+    dummy3: list[None]
 
 class CallableInfo(BaseInfo):
     """
@@ -364,7 +365,7 @@ class RepositoryClass(GObject.GPointer):
         RepositoryClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class SignalInfo(CallableInfo):
     """
@@ -408,8 +409,8 @@ class TypeInfo(BaseInfo):
         TypeInfo(**properties)
     """
 
-    parent: BaseInfoStack = ...
-    padding: list[None] = ...
+    parent: BaseInfoStack
+    padding: list[None]
     def argument_from_hash_pointer(self, hash_pointer: None) -> Argument: ...
     def get_array_fixed_size(self) -> tuple[bool, int]: ...
     def get_array_length_index(self) -> tuple[bool, int]: ...

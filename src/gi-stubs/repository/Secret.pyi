@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Callable
@@ -9,15 +10,15 @@ from gi.repository import GObject
 
 T = TypeVar("T")
 
-BACKEND_EXTENSION_POINT_NAME: str = "secret-backend"
-COLLECTION_DEFAULT: str = "default"
-COLLECTION_SESSION: str = "session"
-MAJOR_VERSION: int = 0
-MICRO_VERSION: int = 7
-MINOR_VERSION: int = 21
+BACKEND_EXTENSION_POINT_NAME: Final = "secret-backend"
+COLLECTION_DEFAULT: Final = "default"
+COLLECTION_SESSION: Final = "session"
+MAJOR_VERSION: Final[int]
+MICRO_VERSION: Final[int]
+MINOR_VERSION: Final[int]
 _lock = ...  # FIXME Constant
-_namespace: str = "Secret"
-_version: str = "1"
+_namespace: Final = "Secret"
+_version: Final = "1"
 
 def attributes_validate(schema: Schema, attributes: dict[None, None]) -> bool: ...
 def backend_get(
@@ -136,17 +137,17 @@ class BackendInterface(GObject.GPointer):
         BackendInterface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    ensure_for_flags: Callable[..., None] = ...
-    ensure_for_flags_finish: Callable[[Backend, Gio.AsyncResult], bool] = ...
-    store: Callable[..., None] = ...
-    store_finish: Callable[[Backend, Gio.AsyncResult], bool] = ...
-    lookup: Callable[..., None] = ...
-    lookup_finish: Callable[[Backend, Gio.AsyncResult], Value] = ...
-    clear: Callable[..., None] = ...
-    clear_finish: Callable[[Backend, Gio.AsyncResult], bool] = ...
-    search: Callable[..., None] = ...
-    search_finish: None = ...
+    parent_iface: GObject.TypeInterface
+    ensure_for_flags: Callable[..., None]
+    ensure_for_flags_finish: Callable[[Backend, Gio.AsyncResult], bool]
+    store: Callable[..., None]
+    store_finish: Callable[[Backend, Gio.AsyncResult], bool]
+    lookup: Callable[..., None]
+    lookup_finish: Callable[[Backend, Gio.AsyncResult], Value]
+    clear: Callable[..., None]
+    clear_finish: Callable[[Backend, Gio.AsyncResult], bool]
+    search: Callable[..., None]
+    search_finish: None
 
 class Collection(Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable):
     """
@@ -212,8 +213,8 @@ class Collection(Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initab
 
     @property
     def props(self) -> Props: ...
-    parent: Gio.DBusProxy = ...
-    pv: CollectionPrivate = ...
+    parent: Gio.DBusProxy
+    pv: CollectionPrivate
     def __init__(
         self,
         created: int = ...,
@@ -330,8 +331,8 @@ class CollectionClass(GObject.GPointer):
         CollectionClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
-    padding: list[None] = ...
+    parent_class: Gio.DBusProxyClass
+    padding: list[None]
 
 class CollectionPrivate(GObject.GPointer): ...
 
@@ -524,8 +525,8 @@ class ItemClass(GObject.GPointer):
         ItemClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
-    padding: list[None] = ...
+    parent_class: Gio.DBusProxyClass
+    padding: list[None]
 
 class ItemPrivate(GObject.GPointer): ...
 
@@ -573,7 +574,7 @@ class Prompt(Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable):
     def props(self) -> Props: ...
     @property
     def parent_instance(self) -> Gio.DBusProxy: ...
-    pv: PromptPrivate = ...
+    pv: PromptPrivate
     def __init__(
         self,
         g_bus_type: Gio.BusType = ...,
@@ -616,8 +617,8 @@ class PromptClass(GObject.GPointer):
         PromptClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
-    padding: list[None] = ...
+    parent_class: Gio.DBusProxyClass
+    padding: list[None]
 
 class PromptPrivate(GObject.GPointer): ...
 
@@ -653,9 +654,9 @@ class RetrievableInterface(GObject.GPointer):
         RetrievableInterface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    retrieve_secret: Callable[..., None] = ...
-    retrieve_secret_finish: Callable[[Retrievable, Gio.AsyncResult], Value] = ...
+    parent_iface: GObject.TypeInterface
+    retrieve_secret: Callable[..., None]
+    retrieve_secret_finish: Callable[[Retrievable, Gio.AsyncResult], Value]
 
 class Schema(GObject.GBoxed):
     """
@@ -667,17 +668,17 @@ class Schema(GObject.GBoxed):
         new(name:str, flags:Secret.SchemaFlags, attribute_names_and_types:dict) -> Secret.Schema
     """
 
-    name: str = ...
-    flags: SchemaFlags = ...
-    attributes: list[SchemaAttribute] = ...
-    reserved: int = ...
-    reserved1: None = ...
-    reserved2: None = ...
-    reserved3: None = ...
-    reserved4: None = ...
-    reserved5: None = ...
-    reserved6: None = ...
-    reserved7: None = ...
+    name: str
+    flags: SchemaFlags
+    attributes: list[SchemaAttribute]
+    reserved: int
+    reserved1: None
+    reserved2: None
+    reserved3: None
+    reserved4: None
+    reserved5: None
+    reserved6: None
+    reserved7: None
     @classmethod
     def new(
         cls,
@@ -697,8 +698,8 @@ class SchemaAttribute(GObject.GBoxed):
         SchemaAttribute()
     """
 
-    name: str = ...
-    type: SchemaAttributeType = ...
+    name: str
+    type: SchemaAttributeType
 
 class Service(
     Gio.DBusProxy, Gio.AsyncInitable, Gio.DBusInterface, Gio.Initable, Backend
@@ -987,18 +988,18 @@ class ServiceClass(GObject.GPointer):
         ServiceClass()
     """
 
-    parent_class: Gio.DBusProxyClass = ...
-    collection_gtype: type[Any] = ...
-    item_gtype: type[Any] = ...
+    parent_class: Gio.DBusProxyClass
+    collection_gtype: type[Any]
+    item_gtype: type[Any]
     prompt_sync: Callable[
         [Service, Prompt, Gio.Cancellable | None, GLib.VariantType],
         GLib.Variant,
-    ] = ...
-    prompt_async: Callable[..., None] = ...
-    prompt_finish: Callable[[Service, Gio.AsyncResult], GLib.Variant] = ...
-    get_collection_gtype: Callable[[Service], type[Any]] = ...
-    get_item_gtype: Callable[[Service], type[Any]] = ...
-    padding: list[None] = ...
+    ]
+    prompt_async: Callable[..., None]
+    prompt_finish: Callable[[Service, Gio.AsyncResult], GLib.Variant]
+    get_collection_gtype: Callable[[Service], type[Any]]
+    get_item_gtype: Callable[[Service], type[Any]]
+    padding: list[None]
 
 class ServicePrivate(GObject.GPointer): ...
 

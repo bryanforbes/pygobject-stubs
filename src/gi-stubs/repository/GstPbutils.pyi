@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 from typing_extensions import Self
 
@@ -13,15 +14,15 @@ from gi.repository import GstVideo
 
 T = TypeVar("T")
 
-ENCODING_CATEGORY_CAPTURE: str = "capture"
-ENCODING_CATEGORY_DEVICE: str = "device"
-ENCODING_CATEGORY_FILE_EXTENSION: str = "file-extension"
-ENCODING_CATEGORY_ONLINE_SERVICE: str = "online-service"
-ENCODING_CATEGORY_STORAGE_EDITING: str = "storage-editing"
-PLUGINS_BASE_VERSION_MAJOR: int = 1
-PLUGINS_BASE_VERSION_MICRO: int = 11
-PLUGINS_BASE_VERSION_MINOR: int = 26
-PLUGINS_BASE_VERSION_NANO: int = 1
+ENCODING_CATEGORY_CAPTURE: Final = "capture"
+ENCODING_CATEGORY_DEVICE: Final = "device"
+ENCODING_CATEGORY_FILE_EXTENSION: Final = "file-extension"
+ENCODING_CATEGORY_ONLINE_SERVICE: Final = "online-service"
+ENCODING_CATEGORY_STORAGE_EDITING: Final = "storage-editing"
+PLUGINS_BASE_VERSION_MAJOR: Final[int]
+PLUGINS_BASE_VERSION_MICRO: Final[int]
+PLUGINS_BASE_VERSION_MINOR: Final[int]
+PLUGINS_BASE_VERSION_NANO: Final[int]
 
 def codec_utils_aac_caps_set_level_and_profile(
     caps: Gst.Caps, audio_config: Sequence[int]
@@ -221,10 +222,10 @@ class AudioVisualizer(Gst.Element):
 
     @property
     def props(self) -> Props: ...
-    parent: Gst.Element = ...
-    req_spf: int = ...
-    vinfo: GstVideo.VideoInfo = ...
-    ainfo: GstAudio.AudioInfo = ...
+    parent: Gst.Element
+    req_spf: int
+    vinfo: GstVideo.VideoInfo
+    ainfo: GstAudio.AudioInfo
     @property
     def priv(self) -> AudioVisualizerPrivate: ...
     def __init__(
@@ -248,10 +249,10 @@ class AudioVisualizerClass(GObject.GPointer):
         AudioVisualizerClass()
     """
 
-    parent_class: Gst.ElementClass = ...
-    setup: Callable[[AudioVisualizer], bool] = ...
-    render: Callable[[AudioVisualizer, Gst.Buffer, GstVideo.VideoFrame], bool] = ...
-    decide_allocation: Callable[[AudioVisualizer, Gst.Query], bool] = ...
+    parent_class: Gst.ElementClass
+    setup: Callable[[AudioVisualizer], bool]
+    render: Callable[[AudioVisualizer, Gst.Buffer, GstVideo.VideoFrame], bool]
+    decide_allocation: Callable[[AudioVisualizer, Gst.Query], bool]
 
 class AudioVisualizerPrivate(GObject.GPointer): ...
 
@@ -288,7 +289,7 @@ class Discoverer(GObject.Object):
 
     @property
     def props(self) -> Props: ...
-    parent: GObject.Object = ...
+    parent: GObject.Object
     @property
     def priv(self) -> DiscovererPrivate: ...
     def __init__(self, *, timeout: int = ..., use_cache: bool = ...) -> None: ...
@@ -334,12 +335,12 @@ class DiscovererClass(GObject.GPointer):
         DiscovererClass()
     """
 
-    parentclass: GObject.ObjectClass = ...
-    finished: Callable[[Discoverer], None] = ...
-    starting: Callable[[Discoverer], None] = ...
-    discovered: Callable[[Discoverer, DiscovererInfo, GLib.Error], None] = ...
-    source_setup: Callable[[Discoverer, Gst.Element], None] = ...
-    load_serialize_info: Callable[[Discoverer, str], DiscovererInfo] = ...
+    parentclass: GObject.ObjectClass
+    finished: Callable[[Discoverer], None]
+    starting: Callable[[Discoverer], None]
+    discovered: Callable[[Discoverer, DiscovererInfo, GLib.Error], None]
+    source_setup: Callable[[Discoverer, Gst.Element], None]
+    load_serialize_info: Callable[[Discoverer, str], DiscovererInfo]
 
 class DiscovererContainerInfo(DiscovererStreamInfo):
     """

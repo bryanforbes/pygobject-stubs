@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 from collections.abc import Callable
@@ -13,25 +14,25 @@ from gi.repository import GObject
 
 T = TypeVar("T")
 
-MAJOR_VERSION: int = 1
-MAP_SOURCE_MFF_RELIEF: str = "mff-relief"
-MAP_SOURCE_OSM_CYCLE_MAP: str = "osm-cyclemap"
-MAP_SOURCE_OSM_MAPNIK: str = "osm-mapnik"
-MAP_SOURCE_OSM_TRANSPORT_MAP: str = "osm-transportmap"
-MAP_SOURCE_OWM_CLOUDS: str = "owm-clouds"
-MAP_SOURCE_OWM_PRECIPITATION: str = "owm-precipitation"
-MAP_SOURCE_OWM_PRESSURE: str = "owm-pressure"
-MAP_SOURCE_OWM_TEMPERATURE: str = "owm-temperature"
-MAP_SOURCE_OWM_WIND: str = "owm-wind"
-MAX_LATITUDE: float = 85.0511287798
-MAX_LONGITUDE: float = 180.0
-MICRO_VERSION: int = 2
-MINOR_VERSION: int = 2
-MIN_LATITUDE: float = -85.0511287798
-MIN_LONGITUDE: float = -180.0
+MAJOR_VERSION: Final[int]
+MAP_SOURCE_MFF_RELIEF: Final = "mff-relief"
+MAP_SOURCE_OSM_CYCLE_MAP: Final = "osm-cyclemap"
+MAP_SOURCE_OSM_MAPNIK: Final = "osm-mapnik"
+MAP_SOURCE_OSM_TRANSPORT_MAP: Final = "osm-transportmap"
+MAP_SOURCE_OWM_CLOUDS: Final = "owm-clouds"
+MAP_SOURCE_OWM_PRECIPITATION: Final = "owm-precipitation"
+MAP_SOURCE_OWM_PRESSURE: Final = "owm-pressure"
+MAP_SOURCE_OWM_TEMPERATURE: Final = "owm-temperature"
+MAP_SOURCE_OWM_WIND: Final = "owm-wind"
+MAX_LATITUDE: Final[float]
+MAX_LONGITUDE: Final[float]
+MICRO_VERSION: Final[int]
+MINOR_VERSION: Final[int]
+MIN_LATITUDE: Final[float]
+MIN_LONGITUDE: Final[float]
 _lock = ...  # FIXME Constant
-_namespace: str = "Shumate"
-_version: str = "1.0"
+_namespace: Final = "Shumate"
+_version: Final = "1.0"
 
 def file_cache_error_quark() -> int: ...
 def get_user_agent() -> str: ...
@@ -197,7 +198,7 @@ class CompassClass(GObject.GPointer):
         CompassClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Coordinate(GObject.InitiallyUnowned, Location):
     """
@@ -238,8 +239,8 @@ class CoordinateClass(GObject.GPointer):
         CoordinateClass()
     """
 
-    parent_class: GObject.InitiallyUnownedClass = ...
-    padding: list[None] = ...
+    parent_class: GObject.InitiallyUnownedClass
+    padding: list[None]
 
 class DataSource(GObject.Object):
     """
@@ -323,13 +324,13 @@ class DataSourceClass(GObject.GPointer):
         DataSourceClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    get_tile_data_async: Callable[..., None] = ...
-    get_tile_data_finish: Callable[[DataSource, Gio.AsyncResult], GLib.Bytes] = ...
+    parent_class: GObject.ObjectClass
+    get_tile_data_async: Callable[..., None]
+    get_tile_data_finish: Callable[[DataSource, Gio.AsyncResult], GLib.Bytes]
     start_request: Callable[
         [DataSource, int, int, int, Gio.Cancellable | None], DataSourceRequest
-    ] = ...
-    padding: list[None] = ...
+    ]
+    padding: list[None]
 
 class DataSourceRequest(GObject.Object):
     """
@@ -394,8 +395,8 @@ class DataSourceRequestClass(GObject.GPointer):
         DataSourceRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    padding: list[None] = ...
+    parent_class: GObject.ObjectClass
+    padding: list[None]
 
 class FileCache(GObject.Object):
     """
@@ -480,7 +481,7 @@ class FileCacheClass(GObject.GPointer):
         FileCacheClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Layer(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -639,9 +640,9 @@ class LayerClass(GObject.GPointer):
         LayerClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
-    get_debug_text: Callable[[Layer], str | None] = ...
-    padding: list[None] = ...
+    parent_class: _Gtk4.WidgetClass
+    get_debug_text: Callable[[Layer], str | None]
+    padding: list[None]
 
 class License(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -810,7 +811,7 @@ class LicenseClass(GObject.GPointer):
         LicenseClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Location(GObject.GInterface):
     """
@@ -834,10 +835,10 @@ class LocationInterface(GObject.GPointer):
         LocationInterface()
     """
 
-    g_iface: GObject.TypeInterface = ...
-    get_latitude: Callable[[Location], float] = ...
-    get_longitude: Callable[[Location], float] = ...
-    set_location: Callable[[Location, float, float], None] = ...
+    g_iface: GObject.TypeInterface
+    get_latitude: Callable[[Location], float]
+    get_longitude: Callable[[Location], float]
+    set_location: Callable[[Location, float, float], None]
 
 class Map(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -1043,7 +1044,7 @@ class MapClass(GObject.GPointer):
         MapClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class MapLayer(Layer, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -1210,7 +1211,7 @@ class MapLayerClass(GObject.GPointer):
         MapLayerClass()
     """
 
-    parent_class: LayerClass = ...
+    parent_class: LayerClass
 
 class MapSource(GObject.Object):
     """
@@ -1321,10 +1322,10 @@ class MapSourceClass(GObject.GPointer):
         MapSourceClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    fill_tile_async: Callable[..., None] = ...
-    fill_tile_finish: Callable[[MapSource, Gio.AsyncResult], bool] = ...
-    padding: list[None] = ...
+    parent_class: GObject.ObjectClass
+    fill_tile_async: Callable[..., None]
+    fill_tile_finish: Callable[[MapSource, Gio.AsyncResult], bool]
+    padding: list[None]
 
 class MapSourceRegistry(GObject.Object, Gio.ListModel):
     """
@@ -1363,7 +1364,7 @@ class MapSourceRegistryClass(GObject.GPointer):
         MapSourceRegistryClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Marker(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget, Location
@@ -1544,8 +1545,8 @@ class MarkerClass(GObject.GPointer):
         MarkerClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
-    padding: list[None] = ...
+    parent_class: _Gtk4.WidgetClass
+    padding: list[None]
 
 class MarkerLayer(Layer, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -1727,7 +1728,7 @@ class MarkerLayerClass(GObject.GPointer):
         MarkerLayerClass()
     """
 
-    parent_class: LayerClass = ...
+    parent_class: LayerClass
 
 class PathLayer(Layer, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -1942,7 +1943,7 @@ class PathLayerClass(GObject.GPointer):
         PathLayerClass()
     """
 
-    parent_class: LayerClass = ...
+    parent_class: LayerClass
 
 class Point(
     Marker, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget, Location
@@ -2110,7 +2111,7 @@ class PointClass(GObject.GPointer):
         PointClass()
     """
 
-    parent_class: MarkerClass = ...
+    parent_class: MarkerClass
 
 class RasterRenderer(MapSource):
     """
@@ -2217,7 +2218,7 @@ class RasterRendererClass(GObject.GPointer):
         RasterRendererClass()
     """
 
-    parent_class: MapSourceClass = ...
+    parent_class: MapSourceClass
 
 class Scale(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -2389,7 +2390,7 @@ class ScaleClass(GObject.GPointer):
         ScaleClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class SimpleMap(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -2583,7 +2584,7 @@ class SimpleMapClass(GObject.GPointer):
         SimpleMapClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class SymbolEvent(GObject.Object, Location):
     """
@@ -2632,7 +2633,7 @@ class SymbolEventClass(GObject.GPointer):
         SymbolEventClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Tile(GObject.Object):
     """
@@ -2721,7 +2722,7 @@ class TileClass(GObject.GPointer):
         TileClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class TileDownloader(DataSource):
     """
@@ -2776,7 +2777,7 @@ class TileDownloaderClass(GObject.GPointer):
         TileDownloaderClass()
     """
 
-    parent_class: DataSourceClass = ...
+    parent_class: DataSourceClass
 
 class VectorReader(GObject.Object):
     """
@@ -2806,7 +2807,7 @@ class VectorReaderClass(GObject.GPointer):
         VectorReaderClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class VectorReaderIter(GObject.Object):
     """
@@ -2857,7 +2858,7 @@ class VectorReaderIterClass(GObject.GPointer):
         VectorReaderIterClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class VectorRenderer(MapSource, Gio.Initable):
     """
@@ -2945,7 +2946,7 @@ class VectorRendererClass(GObject.GPointer):
         VectorRendererClass()
     """
 
-    parent_class: MapSourceClass = ...
+    parent_class: MapSourceClass
 
 class VectorSprite(GObject.Object, _Gdk4.Paintable, _Gtk4.SymbolicPaintable):
     """
@@ -3022,7 +3023,7 @@ class VectorSpriteClass(GObject.GPointer):
         VectorSpriteClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class VectorSpriteSheet(GObject.Object):
     """
@@ -3061,7 +3062,7 @@ class VectorSpriteSheetClass(GObject.GPointer):
         VectorSpriteSheetClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Viewport(GObject.Object, Location):
     """
@@ -3139,7 +3140,7 @@ class ViewportClass(GObject.GPointer):
         ViewportClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class FileCacheError(GObject.GEnum):
     FAILED = 0

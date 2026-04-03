@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 
 from collections.abc import Callable
 from collections.abc import Sequence
@@ -7,39 +8,39 @@ from gi.repository import Gio
 from gi.repository import GLib
 from gi.repository import GObject
 
-COMMIT_GVARIANT_STRING: str = "(a{sv}aya(say)sstayay)"
-COMMIT_META_KEY_ARCHITECTURE: str = "ostree.architecture"
-COMMIT_META_KEY_COLLECTION_BINDING: str = "ostree.collection-binding"
-COMMIT_META_KEY_ENDOFLIFE: str = "ostree.endoflife"
-COMMIT_META_KEY_ENDOFLIFE_REBASE: str = "ostree.endoflife-rebase"
-COMMIT_META_KEY_REF_BINDING: str = "ostree.ref-binding"
-COMMIT_META_KEY_SOURCE_TITLE: str = "ostree.source-title"
-COMMIT_META_KEY_VERSION: str = "version"
-DIRMETA_GVARIANT_STRING: str = "(uuua(ayay))"
-FILEMETA_GVARIANT_STRING: str = "(uuua(ayay))"
-GPG_KEY_GVARIANT_STRING: str = "(aa{sv}aa{sv}a{sv})"
-MAX_METADATA_SIZE: int = 134217728
-MAX_METADATA_WARN_SIZE: int = 7340032
-METADATA_KEY_BOOTABLE: str = "ostree.bootable"
-METADATA_KEY_LINUX: str = "ostree.linux"
-META_KEY_DEPLOY_COLLECTION_ID: str = "ostree.deploy-collection-id"
-ORIGIN_TRANSIENT_GROUP: str = "libostree-transient"
-PATH_BOOTED: str = "/run/ostree-booted"
-RELEASE_VERSION: int = 4
-REPO_METADATA_REF: str = "ostree-metadata"
-SHA256_DIGEST_LEN: int = 32
-SHA256_STRING_LEN: int = 64
-SIGN_NAME_ED25519: str = "ed25519"
-SUMMARY_GVARIANT_STRING: str = "(a(s(taya{sv}))a{sv})"
-SUMMARY_SIG_GVARIANT_STRING: str = "a{sv}"
-TIMESTAMP: int = 0
-TREE_GVARIANT_STRING: str = "(a(say)a(sayay))"
-VERSION: float = 2023.4
-VERSION_S: str = "2023.4"
-YEAR_VERSION: int = 2023
+COMMIT_GVARIANT_STRING: Final = "(a{sv}aya(say)sstayay)"
+COMMIT_META_KEY_ARCHITECTURE: Final = "ostree.architecture"
+COMMIT_META_KEY_COLLECTION_BINDING: Final = "ostree.collection-binding"
+COMMIT_META_KEY_ENDOFLIFE: Final = "ostree.endoflife"
+COMMIT_META_KEY_ENDOFLIFE_REBASE: Final = "ostree.endoflife-rebase"
+COMMIT_META_KEY_REF_BINDING: Final = "ostree.ref-binding"
+COMMIT_META_KEY_SOURCE_TITLE: Final = "ostree.source-title"
+COMMIT_META_KEY_VERSION: Final = "version"
+DIRMETA_GVARIANT_STRING: Final = "(uuua(ayay))"
+FILEMETA_GVARIANT_STRING: Final = "(uuua(ayay))"
+GPG_KEY_GVARIANT_STRING: Final = "(aa{sv}aa{sv}a{sv})"
+MAX_METADATA_SIZE: Final[int]
+MAX_METADATA_WARN_SIZE: Final[int]
+METADATA_KEY_BOOTABLE: Final = "ostree.bootable"
+METADATA_KEY_LINUX: Final = "ostree.linux"
+META_KEY_DEPLOY_COLLECTION_ID: Final = "ostree.deploy-collection-id"
+ORIGIN_TRANSIENT_GROUP: Final = "libostree-transient"
+PATH_BOOTED: Final = "/run/ostree-booted"
+RELEASE_VERSION: Final[int]
+REPO_METADATA_REF: Final = "ostree-metadata"
+SHA256_DIGEST_LEN: Final[int]
+SHA256_STRING_LEN: Final[int]
+SIGN_NAME_ED25519: Final = "ed25519"
+SUMMARY_GVARIANT_STRING: Final = "(a(s(taya{sv}))a{sv})"
+SUMMARY_SIG_GVARIANT_STRING: Final = "a{sv}"
+TIMESTAMP: Final[int]
+TREE_GVARIANT_STRING: Final = "(a(say)a(sayay))"
+VERSION: Final[float]
+VERSION_S: Final = "2023.4"
+YEAR_VERSION: Final[int]
 _lock = ...  # FIXME Constant
-_namespace: str = "OSTree"
-_version: str = "1.0"
+_namespace: Final = "OSTree"
+_version: Final = "1.0"
 
 def break_hardlink(
     dfd: int,
@@ -254,8 +255,8 @@ class AsyncProgressClass(GObject.GPointer):
         AsyncProgressClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    changed: Callable[..., None] = ...
+    parent_class: GObject.ObjectClass
+    changed: Callable[..., None]
 
 class BootconfigParser(GObject.Object):
     """
@@ -302,8 +303,8 @@ class CollectionRef(GObject.GBoxed):
         new(collection_id:str=None, ref_name:str) -> OSTree.CollectionRef
     """
 
-    collection_id: str = ...
-    ref_name: str = ...
+    collection_id: str
+    ref_name: str
     def dup(self) -> CollectionRef: ...
     @staticmethod
     def dupv(refs: Sequence[CollectionRef]) -> list[CollectionRef]: ...
@@ -325,10 +326,10 @@ class CommitSizesEntry(GObject.GBoxed):
         new(checksum:str, objtype:OSTree.ObjectType, unpacked:int, archived:int) -> OSTree.CommitSizesEntry or None
     """
 
-    checksum: str = ...
-    objtype: ObjectType = ...
-    unpacked: int = ...
-    archived: int = ...
+    checksum: str
+    objtype: ObjectType
+    unpacked: int
+    archived: int
     def copy(self) -> CommitSizesEntry | None: ...
     def free(self) -> None: ...
     @classmethod
@@ -361,7 +362,7 @@ class ContentWriterClass(GObject.GPointer):
         ContentWriterClass()
     """
 
-    parent_class: Gio.OutputStreamClass = ...
+    parent_class: Gio.OutputStreamClass
 
 class Deployment(GObject.Object):
     """
@@ -421,12 +422,12 @@ class DiffDirsOptions(GObject.GPointer):
         DiffDirsOptions()
     """
 
-    owner_uid: int = ...
-    owner_gid: int = ...
-    devino_to_csum_cache: RepoDevInoCache = ...
-    unused_bools: list[bool] = ...
-    unused_ints: list[int] = ...
-    unused_ptrs: list[None] = ...
+    owner_uid: int
+    owner_gid: int
+    devino_to_csum_cache: RepoDevInoCache
+    unused_bools: list[bool]
+    unused_ints: list[int]
+    unused_ptrs: list[None]
 
 class DiffItem(GObject.GBoxed):
     """
@@ -437,13 +438,13 @@ class DiffItem(GObject.GBoxed):
         DiffItem()
     """
 
-    refcount: int = ...
-    src: Gio.File = ...
-    target: Gio.File = ...
-    src_info: Gio.FileInfo = ...
-    target_info: Gio.FileInfo = ...
-    src_checksum: str = ...
-    target_checksum: str = ...
+    refcount: int
+    src: Gio.File
+    target: Gio.File
+    src_info: Gio.FileInfo
+    target_info: Gio.FileInfo
+    src_checksum: str
+    target_checksum: str
     def ref(self) -> DiffItem: ...
     def unref(self) -> None: ...
 
@@ -567,7 +568,7 @@ class MutableTreeClass(GObject.GPointer):
         MutableTreeClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class MutableTreeIter(GObject.GPointer):
     """
@@ -578,8 +579,8 @@ class MutableTreeIter(GObject.GPointer):
         MutableTreeIter()
     """
 
-    in_files: bool = ...
-    iter: dict[None, None] = ...
+    in_files: bool
+    iter: dict[None, None]
 
 class Remote(GObject.GBoxed):
     def get_name(self) -> str: ...
@@ -1272,25 +1273,25 @@ class RepoCheckoutAtOptions(GObject.GPointer):
         RepoCheckoutAtOptions()
     """
 
-    mode: RepoCheckoutMode = ...
-    overwrite_mode: RepoCheckoutOverwriteMode = ...
-    enable_uncompressed_cache: bool = ...
-    enable_fsync: bool = ...
-    process_whiteouts: bool = ...
-    no_copy_fallback: bool = ...
-    force_copy: bool = ...
-    bareuseronly_dirs: bool = ...
-    force_copy_zerosized: bool = ...
-    process_passthrough_whiteouts: bool = ...
-    unused_bools: list[bool] = ...
-    subpath: str = ...
-    devino_to_csum_cache: RepoDevInoCache = ...
-    unused_ints: list[int] = ...
-    unused_ptrs: list[None] = ...
-    filter: Callable[..., RepoCheckoutFilterResult] = ...
-    filter_user_data: None = ...
-    sepolicy: SePolicy = ...
-    sepolicy_prefix: str = ...
+    mode: RepoCheckoutMode
+    overwrite_mode: RepoCheckoutOverwriteMode
+    enable_uncompressed_cache: bool
+    enable_fsync: bool
+    process_whiteouts: bool
+    no_copy_fallback: bool
+    force_copy: bool
+    bareuseronly_dirs: bool
+    force_copy_zerosized: bool
+    process_passthrough_whiteouts: bool
+    unused_bools: list[bool]
+    subpath: str
+    devino_to_csum_cache: RepoDevInoCache
+    unused_ints: list[int]
+    unused_ptrs: list[None]
+    filter: Callable[..., RepoCheckoutFilterResult]
+    filter_user_data: None
+    sepolicy: SePolicy
+    sepolicy_prefix: str
     def set_devino(self, cache: RepoDevInoCache | None = None) -> None: ...
 
 class RepoCommitModifier(GObject.GBoxed):
@@ -1329,9 +1330,9 @@ class RepoCommitTraverseIter(GObject.GPointer):
         RepoCommitTraverseIter()
     """
 
-    initialized: bool = ...
-    dummy: list[None] = ...
-    dummy_checksum_data: list[int] = ...
+    initialized: bool
+    dummy: list[None]
+    dummy_checksum_data: list[int]
     @staticmethod
     def cleanup(p: None) -> None: ...
     def clear(self) -> None: ...
@@ -1405,7 +1406,7 @@ class RepoFileClass(GObject.GPointer):
         RepoFileClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class RepoFinder(GObject.GInterface):
     """
@@ -1465,7 +1466,7 @@ class RepoFinderAvahiClass(GObject.GPointer):
         RepoFinderAvahiClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class RepoFinderConfig(GObject.Object, RepoFinder):
     """
@@ -1494,7 +1495,7 @@ class RepoFinderConfigClass(GObject.GPointer):
         RepoFinderConfigClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class RepoFinderInterface(GObject.GPointer):
     """
@@ -1505,11 +1506,9 @@ class RepoFinderInterface(GObject.GPointer):
         RepoFinderInterface()
     """
 
-    g_iface: GObject.TypeInterface = ...
-    resolve_async: Callable[..., None] = ...
-    resolve_finish: Callable[
-        [RepoFinder, Gio.AsyncResult], list[RepoFinderResult]
-    ] = ...
+    g_iface: GObject.TypeInterface
+    resolve_async: Callable[..., None]
+    resolve_finish: Callable[[RepoFinder, Gio.AsyncResult], list[RepoFinderResult]]
 
 class RepoFinderMount(GObject.Object, RepoFinder):
     """
@@ -1548,7 +1547,7 @@ class RepoFinderMountClass(GObject.GPointer):
         RepoFinderMountClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class RepoFinderOverride(GObject.Object, RepoFinder):
     """
@@ -1578,7 +1577,7 @@ class RepoFinderOverrideClass(GObject.GPointer):
         RepoFinderOverrideClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class RepoFinderResult(GObject.GBoxed):
     """
@@ -1590,13 +1589,13 @@ class RepoFinderResult(GObject.GBoxed):
         new(remote:OSTree.Remote, finder:OSTree.RepoFinder, priority:int, ref_to_checksum:dict, ref_to_timestamp:dict=None, summary_last_modified:int) -> OSTree.RepoFinderResult
     """
 
-    remote: Remote = ...
-    finder: RepoFinder = ...
-    priority: int = ...
-    ref_to_checksum: dict[CollectionRef, str] = ...
-    summary_last_modified: int = ...
-    ref_to_timestamp: dict[CollectionRef, int] = ...
-    padding: list[None] = ...
+    remote: Remote
+    finder: RepoFinder
+    priority: int
+    ref_to_checksum: dict[CollectionRef, str]
+    summary_last_modified: int
+    ref_to_timestamp: dict[CollectionRef, int]
+    padding: list[None]
     def compare(self, b: RepoFinderResult) -> int: ...
     def dup(self) -> RepoFinderResult: ...
     def free(self) -> None: ...
@@ -1622,11 +1621,11 @@ class RepoPruneOptions(GObject.GPointer):
         RepoPruneOptions()
     """
 
-    flags: RepoPruneFlags = ...
-    reachable: dict[None, None] = ...
-    unused_bools: list[bool] = ...
-    unused_ints: list[int] = ...
-    unused_ptrs: list[None] = ...
+    flags: RepoPruneFlags
+    reachable: dict[None, None]
+    unused_bools: list[bool]
+    unused_ints: list[int]
+    unused_ptrs: list[None]
 
 class RepoTransactionStats(GObject.GBoxed):
     """
@@ -1637,16 +1636,16 @@ class RepoTransactionStats(GObject.GBoxed):
         RepoTransactionStats()
     """
 
-    metadata_objects_total: int = ...
-    metadata_objects_written: int = ...
-    content_objects_total: int = ...
-    content_objects_written: int = ...
-    content_bytes_written: int = ...
-    devino_cache_hits: int = ...
-    padding1: int = ...
-    padding2: int = ...
-    padding3: int = ...
-    padding4: int = ...
+    metadata_objects_total: int
+    metadata_objects_written: int
+    content_objects_total: int
+    content_objects_written: int
+    content_bytes_written: int
+    devino_cache_hits: int
+    padding1: int
+    padding2: int
+    padding3: int
+    padding4: int
 
 class SePolicy(GObject.Object, Gio.Initable):
     """
@@ -1784,7 +1783,7 @@ class SignEd25519Class(GObject.GPointer):
         SignEd25519Class()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class SignInterface(GObject.GPointer):
     """
@@ -1795,19 +1794,17 @@ class SignInterface(GObject.GPointer):
         SignInterface()
     """
 
-    g_iface: GObject.TypeInterface = ...
-    get_name: Callable[[Sign], str] = ...
-    data: Callable[
-        [Sign, GLib.Bytes, Gio.Cancellable | None], tuple[bool, GLib.Bytes]
-    ] = ...
-    data_verify: Callable[[Sign, GLib.Bytes, GLib.Variant], tuple[bool, str]] = ...
-    metadata_key: Callable[[Sign], str] = ...
-    metadata_format: Callable[[Sign], str] = ...
-    clear_keys: Callable[[Sign], bool] = ...
-    set_sk: Callable[[Sign, GLib.Variant], bool] = ...
-    set_pk: Callable[[Sign, GLib.Variant], bool] = ...
-    add_pk: Callable[[Sign, GLib.Variant], bool] = ...
-    load_pk: Callable[[Sign, GLib.Variant], bool] = ...
+    g_iface: GObject.TypeInterface
+    get_name: Callable[[Sign], str]
+    data: Callable[[Sign, GLib.Bytes, Gio.Cancellable | None], tuple[bool, GLib.Bytes]]
+    data_verify: Callable[[Sign, GLib.Bytes, GLib.Variant], tuple[bool, str]]
+    metadata_key: Callable[[Sign], str]
+    metadata_format: Callable[[Sign], str]
+    clear_keys: Callable[[Sign], bool]
+    set_sk: Callable[[Sign, GLib.Variant], bool]
+    set_pk: Callable[[Sign, GLib.Variant], bool]
+    add_pk: Callable[[Sign, GLib.Variant], bool]
+    load_pk: Callable[[Sign, GLib.Variant], bool]
 
 class Sysroot(GObject.Object):
     """
@@ -1996,11 +1993,11 @@ class SysrootDeployTreeOpts(GObject.GPointer):
         SysrootDeployTreeOpts()
     """
 
-    unused_bools: list[bool] = ...
-    unused_ints: list[int] = ...
-    override_kernel_argv: str = ...
-    overlay_initrds: str = ...
-    unused_ptrs: list[None] = ...
+    unused_bools: list[bool]
+    unused_ints: list[int]
+    override_kernel_argv: str
+    overlay_initrds: str
+    unused_ptrs: list[None]
 
 class SysrootUpgrader(GObject.Object, Gio.Initable):
     """
@@ -2095,11 +2092,11 @@ class SysrootWriteDeploymentsOpts(GObject.GPointer):
         SysrootWriteDeploymentsOpts()
     """
 
-    do_postclean: bool = ...
-    disable_auto_early_prune: bool = ...
-    unused_bools: list[bool] = ...
-    unused_ints: list[int] = ...
-    unused_ptrs: list[None] = ...
+    do_postclean: bool
+    disable_auto_early_prune: bool
+    unused_bools: list[bool]
+    unused_ints: list[int]
+    unused_ptrs: list[None]
 
 class ChecksumFlags(GObject.GFlags):
     CANONICAL_PERMISSIONS = 2

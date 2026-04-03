@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 
 from collections.abc import Callable
 from collections.abc import Sequence
@@ -10,17 +11,17 @@ from gi.repository import Gio
 from gi.repository import GLib
 from gi.repository import GObject
 
-MAJOR_VERSION: int = 1
-MICRO_VERSION: int = 1
-MINOR_VERSION: int = 4
-VERSION_S: str = "1.4.1"
-WIDGET_KIND_ANY: str = "*"
-WIDGET_KIND_DOCUMENT: str = "document"
-WIDGET_KIND_UNKNOWN: str = "unknown"
-WIDGET_KIND_UTILITY: str = "utility"
+MAJOR_VERSION: Final[int]
+MICRO_VERSION: Final[int]
+MINOR_VERSION: Final[int]
+VERSION_S: Final = "1.4.1"
+WIDGET_KIND_ANY: Final = "*"
+WIDGET_KIND_DOCUMENT: Final = "document"
+WIDGET_KIND_UNKNOWN: Final = "unknown"
+WIDGET_KIND_UTILITY: Final = "utility"
 _lock = ...  # FIXME Constant
-_namespace: str = "Panel"
-_version: str = "1"
+_namespace: Final = "Panel"
+_version: Final = "1"
 
 def check_version(major: int, minor: int, micro: int) -> bool: ...
 def finalize() -> None: ...
@@ -88,7 +89,7 @@ class ActionMuxerClass(GObject.GPointer):
         ActionMuxerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Application(Adw.Application, Gio.ActionGroup, Gio.ActionMap):
     """
@@ -211,8 +212,8 @@ class ApplicationClass(GObject.GPointer):
         ApplicationClass()
     """
 
-    parent_class: Adw.ApplicationClass = ...
-    _reserved: list[None] = ...
+    parent_class: Adw.ApplicationClass
+    _reserved: list[None]
 
 class Dock(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -441,9 +442,9 @@ class DockClass(GObject.GPointer):
         DockClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
-    panel_drag_begin: Callable[[Dock, Widget], None] = ...
-    panel_drag_end: Callable[[Dock, Widget], None] = ...
+    parent_class: _Gtk4.WidgetClass
+    panel_drag_begin: Callable[[Dock, Widget], None]
+    panel_drag_end: Callable[[Dock, Widget], None]
 
 class DocumentWorkspace(
     Workspace,
@@ -751,10 +752,10 @@ class DocumentWorkspaceClass(GObject.GPointer):
         DocumentWorkspaceClass()
     """
 
-    parent_class: WorkspaceClass = ...
-    create_frame: None = ...
-    add_widget: Callable[[DocumentWorkspace, Widget, Position | None], bool] = ...
-    _reserved: list[None] = ...
+    parent_class: WorkspaceClass
+    create_frame: None
+    add_widget: Callable[[DocumentWorkspace, Widget, Position | None], bool]
+    _reserved: list[None]
 
 class Frame(
     _Gtk4.Widget,
@@ -956,10 +957,10 @@ class FrameClass(GObject.GPointer):
         FrameClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
-    page_closed: Callable[[Frame, Widget], None] = ...
-    adopt_widget: Callable[[Frame, Widget], bool] = ...
-    _reserved: list[None] = ...
+    parent_class: _Gtk4.WidgetClass
+    page_closed: Callable[[Frame, Widget], None]
+    adopt_widget: Callable[[Frame, Widget], bool]
+    _reserved: list[None]
 
 class FrameHeader(GObject.GInterface):
     """
@@ -1139,7 +1140,7 @@ class FrameHeaderBarClass(GObject.GPointer):
         FrameHeaderBarClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class FrameHeaderInterface(GObject.GPointer):
     """
@@ -1150,11 +1151,11 @@ class FrameHeaderInterface(GObject.GPointer):
         FrameHeaderInterface()
     """
 
-    parent_iface: GObject.TypeInterface = ...
-    page_changed: Callable[[FrameHeader, Widget | None], None] = ...
-    can_drop: Callable[[FrameHeader, Widget], bool] = ...
-    add_prefix: Callable[[FrameHeader, int, _Gtk4.Widget], None] = ...
-    add_suffix: Callable[[FrameHeader, int, _Gtk4.Widget], None] = ...
+    parent_iface: GObject.TypeInterface
+    page_changed: Callable[[FrameHeader, Widget | None], None]
+    can_drop: Callable[[FrameHeader, Widget], bool]
+    add_prefix: Callable[[FrameHeader, int, _Gtk4.Widget], None]
+    add_suffix: Callable[[FrameHeader, int, _Gtk4.Widget], None]
 
 class FrameSwitcher(
     _Gtk4.Widget,
@@ -1317,7 +1318,7 @@ class FrameSwitcherClass(GObject.GPointer):
         FrameSwitcherClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class FrameTabBar(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget, FrameHeader
@@ -1493,7 +1494,7 @@ class FrameTabBarClass(GObject.GPointer):
         FrameTabBarClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class GSettingsActionGroup(GObject.Object, Gio.ActionGroup):
     """
@@ -1536,7 +1537,7 @@ class GSettingsActionGroupClass(GObject.GPointer):
         GSettingsActionGroupClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Grid(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -1707,9 +1708,9 @@ class GridClass(GObject.GPointer):
         GridClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
-    create_frame: None = ...
-    _reserved: list[None] = ...
+    parent_class: _Gtk4.WidgetClass
+    create_frame: None
+    _reserved: list[None]
 
 class GridColumn(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -1868,7 +1869,7 @@ class GridColumnClass(GObject.GPointer):
         GridColumnClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Inhibitor(GObject.Object):
     """
@@ -1895,7 +1896,7 @@ class InhibitorClass(GObject.GPointer):
         InhibitorClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class LayeredSettings(GObject.Object):
     """
@@ -1971,7 +1972,7 @@ class LayeredSettingsClass(GObject.GPointer):
         LayeredSettingsClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class MenuManager(GObject.Object):
     """
@@ -2010,7 +2011,7 @@ class MenuManagerClass(GObject.GPointer):
         MenuManagerClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class OmniBar(
     _Gtk4.Widget,
@@ -2204,8 +2205,8 @@ class OmniBarClass(GObject.GPointer):
         OmniBarClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
-    _reserved: list[None] = ...
+    parent_class: _Gtk4.WidgetClass
+    _reserved: list[None]
 
 class Paned(
     _Gtk4.Widget,
@@ -2372,7 +2373,7 @@ class PanedClass(GObject.GPointer):
         PanedClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Position(GObject.Object):
     """
@@ -2456,7 +2457,7 @@ class PositionClass(GObject.GPointer):
         PositionClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class SaveDelegate(GObject.Object):
     """
@@ -2556,13 +2557,13 @@ class SaveDelegateClass(GObject.GPointer):
         SaveDelegateClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
-    save_async: Callable[..., None] = ...
-    save_finish: Callable[[SaveDelegate, Gio.AsyncResult], bool] = ...
-    save: Callable[[SaveDelegate, Gio.Task], bool] = ...
-    discard: Callable[[SaveDelegate], None] = ...
-    close: Callable[[SaveDelegate], None] = ...
-    _reserved: list[None] = ...
+    parent_class: GObject.ObjectClass
+    save_async: Callable[..., None]
+    save_finish: Callable[[SaveDelegate, Gio.AsyncResult], bool]
+    save: Callable[[SaveDelegate, Gio.Task], bool]
+    discard: Callable[[SaveDelegate], None]
+    close: Callable[[SaveDelegate], None]
+    _reserved: list[None]
 
 class SaveDialog(
     Adw.MessageDialog,
@@ -2845,7 +2846,7 @@ class SaveDialogClass(GObject.GPointer):
         SaveDialogClass()
     """
 
-    parent_class: Adw.MessageDialogClass = ...
+    parent_class: Adw.MessageDialogClass
 
 class Session(GObject.Object):
     """
@@ -2886,7 +2887,7 @@ class SessionClass(GObject.GPointer):
         SessionClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class SessionItem(GObject.Object):
     """
@@ -2959,7 +2960,7 @@ class SessionItemClass(GObject.GPointer):
         SessionItemClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Settings(GObject.Object, Gio.ActionGroup):
     """
@@ -3080,7 +3081,7 @@ class SettingsClass(GObject.GPointer):
         SettingsClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Statusbar(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -3237,7 +3238,7 @@ class StatusbarClass(GObject.GPointer):
         StatusbarClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class ThemeSelector(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -3399,7 +3400,7 @@ class ThemeSelectorClass(GObject.GPointer):
         ThemeSelectorClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class ToggleButton(
     _Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget
@@ -3561,7 +3562,7 @@ class ToggleButtonClass(GObject.GPointer):
         ToggleButtonClass()
     """
 
-    parent_class: _Gtk4.WidgetClass = ...
+    parent_class: _Gtk4.WidgetClass
 
 class Widget(_Gtk4.Widget, _Gtk4.Accessible, _Gtk4.Buildable, _Gtk4.ConstraintTarget):
     """
@@ -3818,9 +3819,9 @@ class WidgetClass(GObject.GPointer):
 
     @property
     def parent_instance(self) -> _Gtk4.WidgetClass: ...
-    get_default_focus: Callable[[Widget], _Gtk4.Widget | None] = ...
-    presented: Callable[[Widget], None] = ...
-    _reserved: list[None] = ...
+    get_default_focus: Callable[[Widget], _Gtk4.Widget | None]
+    presented: Callable[[Widget], None]
+    _reserved: list[None]
     def install_action(
         self,
         action_name: str,
@@ -3898,11 +3899,11 @@ class WorkbenchClass(GObject.GPointer):
         WorkbenchClass()
     """
 
-    parent_class: _Gtk4.WindowGroupClass = ...
-    activate: Callable[[Workbench], None] = ...
-    unload_async: Callable[..., None] = ...
-    unload_finish: Callable[[Workbench, Gio.AsyncResult], bool] = ...
-    _reserved: list[None] = ...
+    parent_class: _Gtk4.WindowGroupClass
+    activate: Callable[[Workbench], None]
+    unload_async: Callable[..., None]
+    unload_finish: Callable[[Workbench, Gio.AsyncResult], bool]
+    _reserved: list[None]
     def install_action(
         self,
         action_name: str,
@@ -4196,8 +4197,8 @@ class WorkspaceClass(GObject.GPointer):
         WorkspaceClass()
     """
 
-    parent_class: Adw.ApplicationWindowClass = ...
-    _reserved: list[None] = ...
+    parent_class: Adw.ApplicationWindowClass
+    _reserved: list[None]
     def install_action(
         self,
         action_name: str,

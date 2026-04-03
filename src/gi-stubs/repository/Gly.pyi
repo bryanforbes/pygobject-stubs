@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Final
 from typing import TypeVar
 
 import enum
@@ -11,8 +12,8 @@ from gi.repository import GObject
 T = TypeVar("T")
 
 _lock = ...  # FIXME Constant
-_namespace: str = "Gly"
-_version: str = "2"
+_namespace: Final = "Gly"
+_version: Final = "2"
 
 def loader_error_quark() -> int: ...
 def memory_format_has_alpha(memory_format: MemoryFormat) -> bool: ...
@@ -27,10 +28,10 @@ class Cicp(GObject.GBoxed):
         Cicp()
     """
 
-    color_primaries: int = ...
-    transfer_characteristics: int = ...
-    matrix_coefficients: int = ...
-    video_full_range_flag: int = ...
+    color_primaries: int
+    transfer_characteristics: int
+    matrix_coefficients: int
+    video_full_range_flag: int
     def copy(self) -> Cicp: ...
     def free(self) -> None: ...
 
@@ -96,7 +97,7 @@ class CreatorClass(GObject.GPointer):
         CreatorClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class EncodedImage(GObject.Object):
     """
@@ -130,7 +131,7 @@ class EncodedImageClass(GObject.GPointer):
         EncodedImageClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Frame(GObject.Object):
     """
@@ -162,7 +163,7 @@ class FrameClass(GObject.GPointer):
         FrameClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class FrameRequest(GObject.Object):
     """
@@ -205,7 +206,7 @@ class FrameRequestClass(GObject.GPointer):
         FrameRequestClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Image(GObject.Object):
     """
@@ -253,7 +254,7 @@ class ImageClass(GObject.GPointer):
         ImageClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class Loader(GObject.Object):
     """
@@ -340,7 +341,7 @@ class LoaderClass(GObject.GPointer):
         LoaderClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class NewFrame(GObject.Object):
     """
@@ -366,7 +367,7 @@ class NewFrameClass(GObject.GPointer):
         NewFrameClass()
     """
 
-    parent_class: GObject.ObjectClass = ...
+    parent_class: GObject.ObjectClass
 
 class MemoryFormatSelection(enum.IntFlag):
     A8B8G8R8 = 64
