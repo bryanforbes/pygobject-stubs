@@ -478,15 +478,9 @@ def _build_function(
 
         return _build_function_info(stub, name, function, in_class)
 
-    if in_class is None and function.__module__.startswith(
-        ("gi.overrides.", "gi.repository.")
-    ):
-        _, func_namespace = function.__module__.rsplit(".", 1)
-        if func_namespace != stub.namespace:
-            # Set up a constant for functions that are aliases
-            return f"{name}: {stub.get_final()} = {
-                stub.get_namespace_member(func_namespace, function.__name__)
-            }\n"
+    if in_class is None and (alias := stub.get_alias(name, function)) is not None:
+        # Set up a constant for functions that are aliases
+        return f"{name}: {stub.get_final()} = {alias}\n"
 
     signature_string: str
     missing_annotation = False
@@ -695,6 +689,19 @@ class Stub:
     ) -> str:
         property_symbol = self.get_import("builtins", "property")
         return f"{indent}@{property_symbol}\n{indent}def {name}(self) -> {return_annotation}: ...\n"
+
+    def get_alias(self, name: str, obj: object, /) -> str | None:
+        if obj.__module__.startswith(("gi.overrides.", "gi.repository.")):
+            namespace = obj.__module__.rsplit(".", 1)[1]
+        elif obj.__module__ == "gobject" or obj.__module__ == "gi._gi":
+            namespace = "_gi"
+        else:
+            return None
+
+        if namespace != self.namespace or name != obj.__qualname__:
+            return self.get_namespace_member(namespace, obj.__qualname__)
+
+        return None
 
     def __replace_typing(self, match: re.Match[str]) -> str:
         match match.group("name"):
@@ -922,19 +929,13 @@ def _gi_build_stub_parts(
 
     # Classes
     for name, obj in sorted(classes.items()):
-        if in_class is None and obj.__module__.startswith(
-            ("gi.overrides.", "gi.repository.")
-        ):
-            _, class_namespace = obj.__module__.rsplit(".", 1)
-            if class_namespace != stub.namespace:
-                ret += f"{name}: {stub.get_final()} = {
-                    stub.get_namespace_member(class_namespace, obj.__qualname__)
-                }\n"
-                continue
-
         override = stub.check_override(prefix_name, name)
         if override:
             ret += override + "\n\n"
+            continue
+
+        if in_class is None and (alias := stub.get_alias(name, obj)) is not None:
+            ret += f"{name} = {alias}\n"
             continue
 
         full_name = _generate_full_name(prefix_name, name)
@@ -984,11 +985,7 @@ def _gi_build_stub_parts(
                 writable_props.extend(wp)
 
             elif isinstance(object_info, GI.InterfaceInfo):
-                parents.append(
-                    stub.get_namespace_member(
-                        "GObject", "GInterface", current_namespace_member="Object"
-                    )
-                )
+                parents.append(stub.get_namespace_member("GObject", "GInterface"))
 
             elif gtype and issubclass(b, GObject.GBoxed):
                 parents.append(stub.get_namespace_member("GObject", "GBoxed"))
@@ -1142,6 +1139,10 @@ def _gi_build_stub_parts(
             ret += override + "\n\n"
             continue
 
+        if in_class is None and (alias := stub.get_alias(name, obj)) is not None:
+            ret += f"{name} = {alias}\n"
+            continue
+
         full_name = _generate_full_name(prefix_name, name)
         flag_base = (
             stub.get_namespace_member("GObject", "GFlags")
@@ -1180,6 +1181,10 @@ def _gi_build_stub_parts(
         override = stub.check_override(prefix_name, name)
         if override:
             ret += override + "\n\n"
+            continue
+
+        if in_class is None and (alias := stub.get_alias(name, obj)) is not None:
+            ret += f"{name} = {alias}\n"
             continue
 
         full_name = _generate_full_name(prefix_name, name)

@@ -6,8 +6,11 @@ from typing_extensions import Self
 from collections.abc import Callable
 from collections.abc import Iterable
 from collections.abc import Sequence as _Sequence
+from enum import IntEnum
+from enum import IntFlag
 
 import gi
+from gi._error import GError as _GError
 from gi.repository import GLibUnix
 from gi.repository import GObject
 
@@ -143,6 +146,7 @@ MINOR_VERSION: Final[int]
 MINSHORT: Final[int]
 MINSSIZE: Final[int]
 MODULE_SUFFIX: Final = "so"
+NSEC_PER_SEC: Final[int]
 OPTION_ERROR_BAD_VALUE: Final[int]
 OPTION_ERROR_FAILED: Final[int]
 OPTION_ERROR_UNKNOWN_OPTION: Final[int]
@@ -209,7 +213,6 @@ USER_DIRECTORY_PICTURES: Final[int]
 USER_DIRECTORY_PUBLIC_SHARE: Final[int]
 USER_DIRECTORY_TEMPLATES: Final[int]
 USER_DIRECTORY_VIDEOS: Final[int]
-VA_COPY_AS_ARRAY: Final[int]
 VERSION_MIN_REQUIRED: Final[int]
 WIN32_MSG_HANDLE: Final[int]
 # override
@@ -376,9 +379,7 @@ def byte_array_sort(
     array: _Sequence[int], compare_func: Callable[[None, None], int]
 ) -> None: ...
 def byte_array_sort_with_data(
-    array: _Sequence[int],
-    compare_func: Callable[..., int],
-    *user_data: Any,
+    array: _Sequence[int], compare_func: Callable[..., int], *user_data: Any
 ) -> None: ...
 def byte_array_steal(array: _Sequence[int]) -> bytes: ...
 def byte_array_unref(array: _Sequence[int]) -> None: ...
@@ -464,10 +465,7 @@ def dpgettext(domain: str | None, msgctxtid: str, msgidoffset: int) -> str: ...
 def dpgettext2(domain: str | None, context: str, msgid: str) -> str: ...
 def environ_getenv(envp: _Sequence[str] | None, variable: str) -> str | None: ...
 def environ_setenv(
-    envp: _Sequence[str] | None,
-    variable: str,
-    value: str,
-    overwrite: bool,
+    envp: _Sequence[str] | None, variable: str, value: str, overwrite: bool
 ) -> list[str]: ...
 def environ_unsetenv(envp: _Sequence[str] | None, variable: str) -> list[str]: ...
 def error_domain_register(
@@ -494,10 +492,7 @@ def file_open_tmp(tmpl: str | None = None) -> tuple[int, str]: ...
 def file_read_link(filename: str) -> str: ...
 def file_set_contents(filename: str, contents: _Sequence[int]) -> bool: ...
 def file_set_contents_full(
-    filename: str,
-    contents: _Sequence[int],
-    flags: FileSetContentsFlags,
-    mode: int,
+    filename: str, contents: _Sequence[int], flags: FileSetContentsFlags, mode: int
 ) -> bool: ...
 def file_test(filename: str, test: FileTest) -> bool: ...
 def filename_display_basename(filename: str) -> str: ...
@@ -529,6 +524,7 @@ def get_language_names() -> list[str]: ...
 def get_language_names_with_category(category_name: str) -> list[str]: ...
 def get_locale_variants(locale: str) -> list[str]: ...
 def get_monotonic_time() -> int: ...
+def get_monotonic_time_ns() -> int: ...
 def get_num_processors() -> int: ...
 def get_os_info(key_name: str) -> str | None: ...
 def get_prgname() -> str | None: ...
@@ -549,24 +545,16 @@ def hash_table_add(hash_table: dict[None, None], key: None) -> bool: ...
 def hash_table_contains(hash_table: dict[None, None], key: None) -> bool: ...
 def hash_table_destroy(hash_table: dict[None, None]) -> None: ...
 def hash_table_find(
-    hash_table: dict[None, None],
-    predicate: Callable[..., bool],
-    *user_data: Any,
+    hash_table: dict[None, None], predicate: Callable[..., bool], *user_data: Any
 ) -> None: ...
 def hash_table_foreach(
-    hash_table: dict[None, None],
-    func: Callable[..., None],
-    *user_data: Any,
+    hash_table: dict[None, None], func: Callable[..., None], *user_data: Any
 ) -> None: ...
 def hash_table_foreach_remove(
-    hash_table: dict[None, None],
-    func: Callable[..., bool],
-    *user_data: Any,
+    hash_table: dict[None, None], func: Callable[..., bool], *user_data: Any
 ) -> int: ...
 def hash_table_foreach_steal(
-    hash_table: dict[None, None],
-    func: Callable[..., bool],
-    *user_data: Any,
+    hash_table: dict[None, None], func: Callable[..., bool], *user_data: Any
 ) -> int: ...
 def hash_table_insert(hash_table: dict[None, None], key: None, value: None) -> bool: ...
 def hash_table_lookup(hash_table: dict[None, None], key: None) -> None: ...
@@ -604,9 +592,7 @@ def hostname_is_non_ascii(hostname: str) -> bool: ...
 def hostname_to_ascii(hostname: str) -> str | None: ...
 def hostname_to_unicode(hostname: str) -> str | None: ...
 def idle_add(
-    function: Callable[..., bool | None],
-    *user_data: Any,
-    priority: int = 200,
+    function: Callable[..., bool | None], *user_data: Any, priority: int = 200
 ) -> int: ...
 def idle_remove_by_data(data: None) -> bool: ...
 def idle_source_new() -> Source: ...
@@ -629,9 +615,7 @@ def list_pop_allocator() -> None: ...
 def list_push_allocator(allocator: Allocator) -> None: ...
 def listenv() -> list[str]: ...
 def locale_from_utf8(utf8string: str, len: int) -> tuple[bytes, int]: ...
-def locale_to_utf8(
-    opsysstring: _Sequence[int],
-) -> tuple[str, int, int]: ...
+def locale_to_utf8(opsysstring: _Sequence[int]) -> tuple[str, int, int]: ...
 def log_default_handler(
     log_domain: str | None,
     log_level: LogLevelFlags,
@@ -662,9 +646,7 @@ def log_variant(
 def log_writer_default(
     log_level: LogLevelFlags, fields: _Sequence[LogField], user_data: None
 ) -> LogWriterOutput: ...
-def log_writer_default_set_debug_domains(
-    domains: str | None = None,
-) -> None: ...
+def log_writer_default_set_debug_domains(domains: str | None = None) -> None: ...
 def log_writer_default_set_use_stderr(use_stderr: bool) -> None: ...
 def log_writer_default_would_drop(
     log_level: LogLevelFlags, log_domain: str | None = None
@@ -795,10 +777,7 @@ def remove(filename: str) -> int: ...
 def rename(oldfilename: str, newfilename: str) -> int: ...
 def rmdir(filename: str) -> int: ...
 def sequence_foreach_range(
-    begin: SequenceIter,
-    end: SequenceIter,
-    func: Callable[..., None],
-    *user_data: Any,
+    begin: SequenceIter, end: SequenceIter, func: Callable[..., None], *user_data: Any
 ) -> None: ...
 def sequence_get(iter: SequenceIter) -> None: ...
 def sequence_insert_before(iter: SequenceIter, data: None) -> SequenceIter: ...
@@ -844,15 +823,19 @@ def source_remove_by_funcs_user_data(funcs: SourceFuncs, user_data: None) -> boo
 def source_remove_by_user_data(user_data: None) -> bool: ...
 def source_set_name_by_id(tag: int, name: str) -> None: ...
 def spaced_primes_closest(num: int) -> int: ...
-def spawn_async(*args, **kwargs):
+def spawn_async(
+    argv,
+    envp=None,
+    working_directory=None,
+    flags=0,
+    child_setup=None,
+    user_data=None,
+    standard_input=False,
+    standard_output=False,
+    standard_error=False,
+):
     """
-    spawn_async(argv, envp=None, working_directory=None,
-                flags=0, child_setup=None, user_data=None,
-                standard_input=None, standard_output=None,
-                standard_error=None) -> (pid, stdin, stdout, stderr)
-
-    Execute a child program asynchronously within a glib.MainLoop()
-    See the reference manual for a complete reference.
+    spawn_async_with_pipes(working_directory:str=None, argv:list, envp:list=None, flags:GLib.SpawnFlags, child_setup:GLib.SpawnChildSetupFunc=None, user_data=None) -> bool, child_pid:int, standard_input:int, standard_output:int, standard_error:int
     """  # FIXME: Override is missing typing annotation
 
 def spawn_async_with_fds(
@@ -891,9 +874,7 @@ def spawn_check_exit_status(wait_status: int) -> bool: ...
 def spawn_check_wait_status(wait_status: int) -> bool: ...
 def spawn_close_pid(pid: int) -> None: ...
 def spawn_command_line_async(command_line: str) -> bool: ...
-def spawn_command_line_sync(
-    command_line: str,
-) -> tuple[bool, bytes, bytes, int]: ...
+def spawn_command_line_sync(command_line: str) -> tuple[bool, bytes, bytes, int]: ...
 def spawn_error_quark() -> int: ...
 def spawn_exit_error_quark() -> int: ...
 def spawn_sync(
@@ -927,9 +908,7 @@ def strcompress(source: str) -> str: ...
 def strdelimit(string: str, delimiters: str | None, new_delimiter: int) -> str: ...
 def strdown(string: str) -> str: ...
 def strdup(str: str | None = None) -> str: ...
-def strdupv(
-    str_array: _Sequence[str] | None = None,
-) -> list[str] | None: ...
+def strdupv(str_array: _Sequence[str] | None = None) -> list[str] | None: ...
 def strerror(errnum: int) -> str: ...
 def strescape(source: str, exceptions: str | None = None) -> str: ...
 def strfreev(str_array: _Sequence[str] | None = None) -> None: ...
@@ -945,7 +924,9 @@ def strrstr(haystack: str, needle: str) -> str | None: ...
 def strrstr_len(haystack: str, haystack_len: int, needle: str) -> str | None: ...
 def strsignal(signum: int) -> str: ...
 def strsplit(string: str, delimiter: str, max_tokens: int) -> list[str]: ...
-def strsplit_set(string: str, delimiters: str, max_tokens: int) -> list[str]: ...
+def strsplit_set(
+    string: str, delimiters: _Sequence[int], max_tokens: int
+) -> list[str]: ...
 def strstr_len(haystack: str, haystack_len: int, needle: str) -> str | None: ...
 def strtod(nptr: str) -> tuple[float, str]: ...
 def strup(string: str) -> str: ...
@@ -1000,6 +981,7 @@ def test_trap_assertions(
 ) -> None: ...
 def test_trap_fork(usec_timeout: int, test_trap_flags: TestTrapFlags) -> bool: ...
 def test_trap_has_passed() -> bool: ...
+def test_trap_has_skipped() -> bool: ...
 def test_trap_reached_timeout() -> bool: ...
 def test_trap_subprocess(
     test_path: str | None, usec_timeout: int, test_flags: TestSubprocessFlags
@@ -1298,10 +1280,7 @@ class BookmarkFile(GObject.GBoxed):
     @staticmethod
     def __new__(cls: type[Self]) -> Self: ...
     def add_application(
-        self,
-        uri: str,
-        name: str | None = None,
-        exec: str | None = None,
+        self, uri: str, name: str | None = None, exec: str | None = None
     ) -> None: ...
     def add_group(self, uri: str, group: str) -> None: ...
     def copy(self) -> BookmarkFile: ...
@@ -1345,12 +1324,7 @@ class BookmarkFile(GObject.GBoxed):
         self, uri: str, name: str, exec: str, count: int, stamp: int
     ) -> bool: ...
     def set_application_info(
-        self,
-        uri: str,
-        name: str,
-        exec: str,
-        count: int,
-        stamp: DateTime | None = None,
+        self, uri: str, name: str, exec: str, count: int, stamp: DateTime | None = None
     ) -> bool: ...
     def set_description(self, uri: str | None, description: str) -> None: ...
     def set_groups(self, uri: str, groups: _Sequence[str] | None = None) -> None: ...
@@ -1406,9 +1380,7 @@ class ByteArray(GObject.GBoxed):
     ) -> None: ...
     @staticmethod
     def sort_with_data(
-        array: _Sequence[int],
-        compare_func: Callable[..., int],
-        *user_data: Any,
+        array: _Sequence[int], compare_func: Callable[..., int], *user_data: Any
     ) -> None: ...
     @staticmethod
     def steal(array: _Sequence[int]) -> bytes: ...
@@ -1422,6 +1394,7 @@ class Bytes(GObject.GBoxed):
     ::
 
         new(data:list=None) -> GLib.Bytes
+        new_from_bytes(bytes:GLib.Bytes, offset:int, length:int) -> GLib.Bytes
         new_take(data:list=None) -> GLib.Bytes
     """
     @staticmethod
@@ -1434,7 +1407,8 @@ class Bytes(GObject.GBoxed):
     def hash(self) -> int: ...
     @classmethod
     def new(cls, data: _Sequence[int] | None = None) -> Bytes: ...
-    def new_from_bytes(self, offset: int, length: int) -> Bytes: ...
+    @classmethod
+    def new_from_bytes(cls, bytes: Bytes, offset: int, length: int) -> Bytes: ...
     @classmethod
     def new_take(cls, data: _Sequence[int] | None = None) -> Bytes: ...
     def ref(self) -> Bytes: ...
@@ -1495,9 +1469,10 @@ class Cond(GObject.GPointer):
 
         Cond()
     """
-
-    p: None
-    i: list[int]
+    @property
+    def p(self) -> None: ...
+    @property
+    def i(self) -> list[int]: ...
     def broadcast(self) -> None: ...
     def clear(self) -> None: ...
     def init(self) -> None: ...
@@ -1749,24 +1724,13 @@ class DoubleIEEE754(GObject.GPointer):
     v_double = ...  # FIXME: Constant is missing typing annotation
 
 # override
-Error = GError
+Error = _GError
 
 class FloatIEEE754(GObject.GPointer):
     v_float = ...  # FIXME: Constant is missing typing annotation
 
-class GError(RuntimeError):
-    code: int
-    domain: str
-    message: str
-
-    def __init__(
-        self, message: str = "unknown error", domain: str = "pygi-error", code: int = 0
-    ) -> None: ...
-    def copy(self) -> Self: ...
-    def matches(self, domain: str | int, code: int) -> bool: ...
-    # override
-    @staticmethod
-    def new_literal(domain: int, message: str, code: int) -> Self: ...
+# override
+GError = _GError
 
 class HashTable(GObject.GBoxed):
     @staticmethod
@@ -1777,27 +1741,19 @@ class HashTable(GObject.GBoxed):
     def destroy(hash_table: dict[None, None]) -> None: ...
     @staticmethod
     def find(
-        hash_table: dict[None, None],
-        predicate: Callable[..., bool],
-        *user_data: Any,
+        hash_table: dict[None, None], predicate: Callable[..., bool], *user_data: Any
     ) -> None: ...
     @staticmethod
     def foreach(
-        hash_table: dict[None, None],
-        func: Callable[..., None],
-        *user_data: Any,
+        hash_table: dict[None, None], func: Callable[..., None], *user_data: Any
     ) -> None: ...
     @staticmethod
     def foreach_remove(
-        hash_table: dict[None, None],
-        func: Callable[..., bool],
-        *user_data: Any,
+        hash_table: dict[None, None], func: Callable[..., bool], *user_data: Any
     ) -> int: ...
     @staticmethod
     def foreach_steal(
-        hash_table: dict[None, None],
-        func: Callable[..., bool],
-        *user_data: Any,
+        hash_table: dict[None, None], func: Callable[..., bool], *user_data: Any
     ) -> int: ...
     @staticmethod
     def insert(hash_table: dict[None, None], key: None, value: None) -> bool: ...
@@ -1838,13 +1794,18 @@ class HashTableIter(GObject.GPointer):
 
         HashTableIter()
     """
-
-    dummy1: None
-    dummy2: None
-    dummy3: None
-    dummy4: int
-    dummy5: bool
-    dummy6: None
+    @property
+    def dummy1(self) -> None: ...
+    @property
+    def dummy2(self) -> None: ...
+    @property
+    def dummy3(self) -> None: ...
+    @property
+    def dummy4(self) -> int: ...
+    @property
+    def dummy5(self) -> bool: ...
+    @property
+    def dummy6(self) -> None: ...
     def get_hash_table(self) -> dict[None, None]: ...
     def init(self, hash_table: dict[None, None]) -> None: ...
     def next(self) -> tuple[bool, None, None]: ...
@@ -1885,8 +1846,7 @@ class Hook(GObject.GPointer):
     data: None
     next: Hook
     prev: Hook
-    @property
-    def ref_count(self) -> int: ...
+    ref_count: int
     hook_id: int
     flags: int
     func: None
@@ -1931,16 +1891,10 @@ class HookList(GObject.GPointer):
     def invoke(self, may_recurse: bool) -> None: ...
     def invoke_check(self, may_recurse: bool) -> None: ...
     def marshal(
-        self,
-        may_recurse: bool,
-        marshaller: Callable[..., None],
-        *marshal_data: Any,
+        self, may_recurse: bool, marshaller: Callable[..., None], *marshal_data: Any
     ) -> None: ...
     def marshal_check(
-        self,
-        may_recurse: bool,
-        marshaller: Callable[..., bool],
-        *marshal_data: Any,
+        self, may_recurse: bool, marshaller: Callable[..., bool], *marshal_data: Any
     ) -> None: ...
 
 class IOChannel(GObject.GBoxed):
@@ -1953,28 +1907,46 @@ class IOChannel(GObject.GBoxed):
         new_file(filename:str, mode:str) -> GLib.IOChannel
         unix_new(fd:int) -> GLib.IOChannel
     """
-
     @property
     def ref_count(self) -> int: ...
-    funcs: IOFuncs
-    encoding: str
-    read_cd: None
-    write_cd: None
-    line_term: str
-    line_term_len: int
-    buf_size: int
-    read_buf: String
-    encoded_read_buf: String
-    write_buf: String
-    partial_write_buf: list[int]
-    use_buffer: int
-    do_encode: int
-    close_on_unref: int
-    is_readable: int
-    is_writeable: int
-    is_seekable: int
-    reserved1: None
-    reserved2: None
+    @property
+    def funcs(self) -> IOFuncs: ...
+    @property
+    def encoding(self) -> str: ...
+    @property
+    def read_cd(self) -> None: ...
+    @property
+    def write_cd(self) -> None: ...
+    @property
+    def line_term(self) -> str: ...
+    @property
+    def line_term_len(self) -> int: ...
+    @property
+    def buf_size(self) -> int: ...
+    @property
+    def read_buf(self) -> String: ...
+    @property
+    def encoded_read_buf(self) -> String: ...
+    @property
+    def write_buf(self) -> String: ...
+    @property
+    def partial_write_buf(self) -> list[int]: ...
+    @property
+    def use_buffer(self) -> int: ...
+    @property
+    def do_encode(self) -> int: ...
+    @property
+    def close_on_unref(self) -> int: ...
+    @property
+    def is_readable(self) -> int: ...
+    @property
+    def is_writeable(self) -> int: ...
+    @property
+    def is_seekable(self) -> int: ...
+    @property
+    def reserved1(self) -> None: ...
+    @property
+    def reserved2(self) -> None: ...
     def __iter__(self): ...  # FIXME: Override is missing typing annotation
     @staticmethod
     def __new__(
@@ -2050,15 +2022,22 @@ class IOFuncs(GObject.GPointer):
 
         IOFuncs()
     """
-
-    io_read: Callable[[IOChannel, str, int, int], IOStatus]
-    io_write: Callable[[IOChannel, str, int, int], IOStatus]
-    io_seek: Callable[[IOChannel, int, SeekType], IOStatus]
-    io_close: Callable[[IOChannel], IOStatus]
-    io_create_watch: Callable[[IOChannel, IOCondition], Source]
-    io_free: Callable[[IOChannel], None]
-    io_set_flags: Callable[[IOChannel, IOFlags], IOStatus]
-    io_get_flags: Callable[[IOChannel], IOFlags]
+    @property
+    def io_read(self) -> Callable[[IOChannel, str, int, int], IOStatus]: ...
+    @property
+    def io_write(self) -> Callable[[IOChannel, str, int, int], IOStatus]: ...
+    @property
+    def io_seek(self) -> Callable[[IOChannel, int, SeekType], IOStatus]: ...
+    @property
+    def io_close(self) -> Callable[[IOChannel], IOStatus]: ...
+    @property
+    def io_create_watch(self) -> Callable[[IOChannel, IOCondition], Source]: ...
+    @property
+    def io_free(self) -> Callable[[IOChannel], None]: ...
+    @property
+    def io_set_flags(self) -> Callable[[IOChannel, IOFlags], IOStatus]: ...
+    @property
+    def io_get_flags(self) -> Callable[[IOChannel], IOFlags]: ...
 
 class Idle(Source):
     """
@@ -2310,7 +2289,9 @@ class MarkupParseContext(GObject.GBoxed):
     def free(self) -> None: ...
     def get_element(self) -> str: ...
     def get_element_stack(self) -> list[str]: ...
+    def get_offset(self) -> int: ...
     def get_position(self) -> tuple[int, int]: ...
+    def get_tag_start(self) -> tuple[int, int, int]: ...
     def get_user_data(self) -> None: ...
     @classmethod
     def new(
@@ -2334,12 +2315,16 @@ class MarkupParser(GObject.GPointer):
 
         MarkupParser()
     """
-
-    start_element: Callable[..., None]
-    end_element: Callable[..., None]
-    text: Callable[..., None]
-    passthrough: Callable[..., None]
-    error: Callable[..., None]
+    @property
+    def start_element(self) -> Callable[..., None]: ...
+    @property
+    def end_element(self) -> Callable[..., None]: ...
+    @property
+    def text(self) -> Callable[..., None]: ...
+    @property
+    def passthrough(self) -> Callable[..., None]: ...
+    @property
+    def error(self) -> Callable[..., None]: ...
 
 class MatchInfo(GObject.GBoxed):
     def expand_references(self, string_to_expand: str) -> str | None: ...
@@ -2377,13 +2362,18 @@ class MemVTable(GObject.GPointer):
 
         MemVTable()
     """
-
-    malloc: Callable[[int], None]
-    realloc: Callable[[None, int], None]
-    free: Callable[[None], None]
-    calloc: Callable[[int, int], None]
-    try_malloc: Callable[[int], None]
-    try_realloc: Callable[[None, int], None]
+    @property
+    def malloc(self) -> Callable[[int], None]: ...
+    @property
+    def realloc(self) -> Callable[[None, int], None]: ...
+    @property
+    def free(self) -> Callable[[None], None]: ...
+    @property
+    def calloc(self) -> Callable[[int, int], None]: ...
+    @property
+    def try_malloc(self) -> Callable[[int], None]: ...
+    @property
+    def try_realloc(self) -> Callable[[None, int], None]: ...
 
 class Mutex(GObject.GPointer):
     i = ...  # FIXME: Constant is missing typing annotation
@@ -2460,9 +2450,7 @@ class Once(GObject.GPointer):
 class OptionContext(GObject.GPointer):
     def add_group(self, group: OptionGroup) -> None: ...
     def add_main_entries(
-        self,
-        entries: _Sequence[OptionEntry],
-        translation_domain: str | None = None,
+        self, entries: _Sequence[OptionEntry], translation_domain: str | None = None
     ) -> None: ...
     def free(self) -> None: ...
     def get_description(self) -> str: ...
@@ -2545,8 +2533,8 @@ class PathBuf(GObject.GPointer):
 
         PathBuf()
     """
-
-    dummy: list[None]
+    @property
+    def dummy(self) -> list[None]: ...
     def clear(self) -> None: ...
     def clear_to_path(self) -> str | None: ...
     @staticmethod
@@ -2575,21 +2563,17 @@ class PatternSpec(GObject.GBoxed):
     def equal(self, pspec2: PatternSpec) -> bool: ...
     def free(self) -> None: ...
     def match(
-        self,
-        string_length: int,
-        string: str,
-        string_reversed: str | None = None,
+        self, string_length: int, string: str, string_reversed: str | None = None
     ) -> bool: ...
     def match_string(self, string: str) -> bool: ...
     @classmethod
     def new(cls, pattern: str) -> PatternSpec: ...
 
-class Pid(int):
-    def __new__(*args, **kwargs):
-        """
-        Create and return a new object.  See help(type) for accurate signature.
-        """  # FIXME: Override is missing typing annotation
-    def close(self, /): ...  # FIXME: Override is missing typing annotation
+# override
+class Pid:
+    def __init__(self, pid: int) -> None: ...
+    def __int__(self) -> int: ...
+    def close(self) -> None: ...
 
 class PollFD(GObject.GBoxed):
     """
@@ -2614,10 +2598,12 @@ class Private(GObject.GPointer):
 
         Private()
     """
-
-    p: None
-    notify: Callable[[None], None]
-    future: list[None]
+    @property
+    def p(self) -> None: ...
+    @property
+    def notify(self) -> Callable[[None], None]: ...
+    @property
+    def future(self) -> list[None]: ...
     def get(self) -> None: ...
     def replace(self, value: None) -> None: ...
     def set(self, value: None) -> None: ...
@@ -2680,9 +2666,10 @@ class RWLock(GObject.GPointer):
 
         RWLock()
     """
-
-    p: None
-    i: list[int]
+    @property
+    def p(self) -> None: ...
+    @property
+    def i(self) -> list[int]: ...
     def clear(self) -> None: ...
     def init(self) -> None: ...
     def reader_lock(self) -> None: ...
@@ -2727,9 +2714,10 @@ class RecMutex(GObject.GPointer):
 
         RecMutex()
     """
-
-    p: None
-    i: list[int]
+    @property
+    def p(self) -> None: ...
+    @property
+    def i(self) -> list[int]: ...
     def clear(self) -> None: ...
     def init(self) -> None: ...
     def lock(self) -> None: ...
@@ -2874,8 +2862,7 @@ class Scanner(GObject.GPointer):
     max_parse_errors: int
     parse_errors: int
     input_name: str
-    @property
-    def qdata(self) -> Data: ...
+    qdata: Data
     config: ScannerConfig
     token: TokenType
     value: TokenValue
@@ -2885,12 +2872,18 @@ class Scanner(GObject.GPointer):
     next_value: TokenValue
     next_line: int
     next_position: int
-    symbol_table: dict[None, None]
-    input_fd: int
-    text: str
-    text_end: str
-    buffer: str
-    scope_id: int
+    @property
+    def symbol_table(self) -> dict[None, None]: ...
+    @property
+    def input_fd(self) -> int: ...
+    @property
+    def text(self) -> str: ...
+    @property
+    def text_end(self) -> str: ...
+    @property
+    def buffer(self) -> str: ...
+    @property
+    def scope_id(self) -> int: ...
     msg_handler: Callable[[Scanner, str, bool], None]
     def cur_line(self) -> int: ...
     def cur_position(self) -> int: ...
@@ -2955,7 +2948,8 @@ class ScannerConfig(GObject.GPointer):
     symbol_2_token: int
     scope_0_fallback: int
     store_int64: int
-    padding_dummy: int
+    @property
+    def padding_dummy(self) -> int: ...
 
 class Sequence(GObject.GPointer):
     def append(self, data: None) -> SequenceIter: ...
@@ -3042,20 +3036,30 @@ class Source(GObject.GBoxed):
         Source()
         new(source_funcs:GLib.SourceFuncs, struct_size:int) -> GLib.Source
     """
-
-    callback_data: None
-    callback_funcs: SourceCallbackFuncs
-    source_funcs: SourceFuncs
+    @property
+    def callback_data(self) -> None: ...
+    @property
+    def callback_funcs(self) -> SourceCallbackFuncs: ...
+    @property
+    def source_funcs(self) -> SourceFuncs: ...
     @property
     def ref_count(self) -> int: ...
-    context: MainContext
-    priority: int
-    flags: int
-    source_id: int
-    poll_fds: list[None]
-    prev: Source
-    next: Source
-    name: str
+    @property
+    def context(self) -> MainContext: ...
+    @property
+    def priority(self) -> int: ...
+    @property
+    def flags(self) -> int: ...
+    @property
+    def source_id(self) -> int: ...
+    @property
+    def poll_fds(self) -> list[None]: ...
+    @property
+    def prev(self) -> Source: ...
+    @property
+    def next(self) -> Source: ...
+    @property
+    def name(self) -> str: ...
     @property
     def priv(self) -> SourcePrivate: ...
     can_recurse = ...  # FIXME: Constant is missing typing annotation
@@ -3115,10 +3119,12 @@ class SourceCallbackFuncs(GObject.GPointer):
 
         SourceCallbackFuncs()
     """
-
-    ref: Callable[[None], None]
-    unref: Callable[[None], None]
-    get: None
+    @property
+    def ref(self) -> Callable[[None], None]: ...
+    @property
+    def unref(self) -> Callable[[None], None]: ...
+    @property
+    def get(self) -> None: ...
 
 class SourceFuncs(GObject.GPointer):
     """
@@ -3133,8 +3139,10 @@ class SourceFuncs(GObject.GPointer):
     check: Callable[[Source], bool]
     dispatch: None
     finalize: Callable[[Source], None]
-    closure_callback: Callable[..., bool]
-    closure_marshal: Callable[[], None]
+    @property
+    def closure_callback(self) -> Callable[..., bool]: ...
+    @property
+    def closure_marshal(self) -> Callable[[], None]: ...
 
 class SourcePrivate(GObject.GPointer): ...
 class StatBuf(GObject.GPointer): ...
@@ -3250,9 +3258,10 @@ class TestLogBuffer(GObject.GPointer):
 
         TestLogBuffer()
     """
-
-    data: String
-    msgs: list[None]
+    @property
+    def data(self) -> String: ...
+    @property
+    def msgs(self) -> list[None]: ...
     def free(self) -> None: ...
     def push(self, n_bytes: int, bytes: int) -> None: ...
 
@@ -3287,11 +3296,14 @@ class Thread(GObject.GBoxed):
         new(name:str=None, func:GLib.ThreadFunc, data=None) -> GLib.Thread
         try_new(name:str=None, func:GLib.ThreadFunc, data=None) -> GLib.Thread
     """
-
-    func: Callable[[None], None]
-    data: None
-    joinable: bool
-    priority: None
+    @property
+    def func(self) -> Callable[[None], None]: ...
+    @property
+    def data(self) -> None: ...
+    @property
+    def joinable(self) -> bool: ...
+    @property
+    def priority(self) -> None: ...
     @staticmethod
     def error_quark() -> int: ...
     @staticmethod
@@ -3299,21 +3311,13 @@ class Thread(GObject.GBoxed):
     def get_name(self) -> str: ...
     def join(self) -> None: ...
     @classmethod
-    def new(
-        cls,
-        name: str | None,
-        func: Callable[..., None],
-        *data: Any,
-    ) -> Thread: ...
+    def new(cls, name: str | None, func: Callable[..., None], *data: Any) -> Thread: ...
     def ref(self) -> Thread: ...
     @staticmethod
     def self() -> Thread: ...
     @classmethod
     def try_new(
-        cls,
-        name: str | None,
-        func: Callable[..., None],
-        *data: Any,
+        cls, name: str | None, func: Callable[..., None], *data: Any
     ) -> Thread: ...
     def unref(self) -> None: ...
     @staticmethod
@@ -3520,7 +3524,7 @@ class Tuples(GObject.GPointer):
     def destroy(self) -> None: ...
     def index(self, index_: int, field: int) -> None: ...
 
-UnixPipe: Final = GLibUnix.Pipe
+UnixPipe = GLibUnix.Pipe
 
 class Uri(GObject.GBoxed):
     @staticmethod
@@ -3551,8 +3555,7 @@ class Uri(GObject.GBoxed):
     def error_quark() -> int: ...
     @staticmethod
     def escape_bytes(
-        unescaped: _Sequence[int],
-        reserved_chars_allowed: str | None = None,
+        unescaped: _Sequence[int], reserved_chars_allowed: str | None = None
     ) -> str: ...
     @staticmethod
     def escape_string(
@@ -3628,9 +3631,7 @@ class Uri(GObject.GBoxed):
     def to_string_partial(self, flags: UriHideFlags) -> str: ...
     @staticmethod
     def unescape_bytes(
-        escaped_string: str,
-        length: int,
-        illegal_characters: str | None = None,
+        escaped_string: str, length: int, illegal_characters: str | None = None
     ) -> Bytes: ...
     @staticmethod
     def unescape_segment(
@@ -3651,11 +3652,14 @@ class UriParamsIter(GObject.GPointer):
 
         UriParamsIter()
     """
-
-    dummy0: int
-    dummy1: None
-    dummy2: None
-    dummy3: bytes
+    @property
+    def dummy0(self) -> int: ...
+    @property
+    def dummy1(self) -> None: ...
+    @property
+    def dummy2(self) -> None: ...
+    @property
+    def dummy3(self) -> bytes: ...
     def init(
         self, params: str, length: int, separators: str, flags: UriParamsFlags
     ) -> None: ...
@@ -3807,9 +3811,7 @@ class Variant(GObject.GPointer):
     def new_int64(cls, value: int) -> Variant: ...
     @classmethod
     def new_maybe(
-        cls,
-        child_type: VariantType | None = None,
-        child: Variant | None = None,
+        cls, child_type: VariantType | None = None, child: Variant | None = None
     ) -> Variant: ...
     @classmethod
     def new_object_path(cls, object_path: str) -> Variant: ...
@@ -3961,7 +3963,7 @@ class VariantType(GObject.GBoxed):
     def string_scan(string: str, limit: str | None = None) -> tuple[bool, str]: ...
     def value(self) -> VariantType: ...
 
-class AsciiType(GObject.GFlags):
+class AsciiType(IntFlag):
     ALNUM = 1
     ALPHA = 2
     CNTRL = 4
@@ -3974,20 +3976,20 @@ class AsciiType(GObject.GFlags):
     UPPER = 512
     XDIGIT = 1024
 
-class FileSetContentsFlags(GObject.GFlags):
+class FileSetContentsFlags(IntFlag):
     CONSISTENT = 1
     DURABLE = 2
     NONE = 0
     ONLY_EXISTING = 4
 
-class FileTest(GObject.GFlags):
+class FileTest(IntFlag):
     EXISTS = 16
     IS_DIR = 4
     IS_EXECUTABLE = 8
     IS_REGULAR = 1
     IS_SYMLINK = 2
 
-class FormatSizeFlags(GObject.GFlags):
+class FormatSizeFlags(IntFlag):
     BITS = 4
     DEFAULT = 0
     IEC_UNITS = 2
@@ -3995,10 +3997,10 @@ class FormatSizeFlags(GObject.GFlags):
     ONLY_UNIT = 16
     ONLY_VALUE = 8
 
-class HookFlagMask(GObject.GFlags):
+class HookFlagMask(IntFlag):
     ACTIVE = 1
     IN_CALL = 2
-    MASK = 15
+    RESERVED1 = 4
 
 class IOCondition(GObject.GFlags):
     ERR = 8
@@ -4008,7 +4010,7 @@ class IOCondition(GObject.GFlags):
     OUT = 4
     PRI = 2
 
-class IOFlags(GObject.GFlags):
+class IOFlags(IntFlag):
     APPEND = 1
     GET_MASK = 31
     IS_READABLE = 4
@@ -4020,12 +4022,12 @@ class IOFlags(GObject.GFlags):
     NONE = 0
     SET_MASK = 3
 
-class KeyFileFlags(GObject.GFlags):
+class KeyFileFlags(IntFlag):
     KEEP_COMMENTS = 1
     KEEP_TRANSLATIONS = 2
     NONE = 0
 
-class LogLevelFlags(GObject.GFlags):
+class LogLevelFlags(IntFlag):
     FLAG_FATAL = 2
     FLAG_RECURSION = 1
     LEVEL_CRITICAL = 8
@@ -4036,11 +4038,11 @@ class LogLevelFlags(GObject.GFlags):
     LEVEL_MESSAGE = 32
     LEVEL_WARNING = 16
 
-class MainContextFlags(GObject.GFlags):
+class MainContextFlags(IntFlag):
     NONE = 0
     OWNERLESS_POLLING = 1
 
-class MarkupCollectType(GObject.GFlags):
+class MarkupCollectType(IntFlag):
     BOOLEAN = 3
     INVALID = 0
     OPTIONAL = 65536
@@ -4048,14 +4050,14 @@ class MarkupCollectType(GObject.GFlags):
     STRING = 1
     TRISTATE = 4
 
-class MarkupParseFlags(GObject.GFlags):
+class MarkupParseFlags(IntFlag):
     DEFAULT_FLAGS = 0
     DO_NOT_USE_THIS_UNSUPPORTED_FLAG = 1
     IGNORE_QUALIFIED = 8
     PREFIX_ERROR_POSITION = 4
     TREAT_CDATA_AS_TEXT = 2
 
-class OptionFlags(GObject.GFlags):
+class OptionFlags(IntFlag):
     DEPRECATED = 128
     FILENAME = 16
     HIDDEN = 1
@@ -4066,9 +4068,8 @@ class OptionFlags(GObject.GFlags):
     OPTIONAL_ARG = 32
     REVERSE = 4
 
-class RegexCompileFlags(GObject.GFlags):
+class RegexCompileFlags(IntFlag):
     ANCHORED = 16
-    BSR_ANYCRLF = 8388608
     CASELESS = 1
     DEFAULT = 0
     DOLLAR_ENDONLY = 32
@@ -4076,18 +4077,16 @@ class RegexCompileFlags(GObject.GFlags):
     DUPNAMES = 524288
     EXTENDED = 8
     FIRSTLINE = 262144
-    JAVASCRIPT_COMPAT = 33554432
     MULTILINE = 2
-    NEWLINE_ANYCRLF = 5242880
     NEWLINE_CR = 1048576
-    NEWLINE_CRLF = 3145728
     NEWLINE_LF = 2097152
+    NEWLINE_RESERVED1 = 4194304
     NO_AUTO_CAPTURE = 4096
     OPTIMIZE = 8192
     RAW = 2048
     UNGREEDY = 512
 
-class RegexMatchFlags(GObject.GFlags):
+class RegexMatchFlags(IntFlag):
     ANCHORED = 16
     BSR_ANY = 16777216
     BSR_ANYCRLF = 8388608
@@ -4105,7 +4104,7 @@ class RegexMatchFlags(GObject.GFlags):
     PARTIAL_HARD = 134217728
     PARTIAL_SOFT = 32768
 
-class SpawnFlags(GObject.GFlags):
+class SpawnFlags(IntFlag):
     CHILD_INHERITS_STDERR = 1024
     CHILD_INHERITS_STDIN = 32
     CHILD_INHERITS_STDOUT = 512
@@ -4120,19 +4119,20 @@ class SpawnFlags(GObject.GFlags):
     STDIN_FROM_DEV_NULL = 2048
     STDOUT_TO_DEV_NULL = 8
 
-class TestSubprocessFlags(GObject.GFlags):
+class TestSubprocessFlags(IntFlag):
     DEFAULT = 0
+    INHERIT_DESCRIPTORS = 8
     INHERIT_STDERR = 4
     INHERIT_STDIN = 1
     INHERIT_STDOUT = 2
 
-class TestTrapFlags(GObject.GFlags):
+class TestTrapFlags(IntFlag):
     DEFAULT = 0
     INHERIT_STDIN = 512
     SILENCE_STDERR = 256
     SILENCE_STDOUT = 128
 
-class TraverseFlags(GObject.GFlags):
+class TraverseFlags(IntFlag):
     ALL = 3
     LEAFS = 1
     LEAVES = 1
@@ -4140,7 +4140,7 @@ class TraverseFlags(GObject.GFlags):
     NON_LEAFS = 2
     NON_LEAVES = 2
 
-class UriFlags(GObject.GFlags):
+class UriFlags(IntFlag):
     ENCODED = 8
     ENCODED_FRAGMENT = 128
     ENCODED_PATH = 64
@@ -4152,7 +4152,7 @@ class UriFlags(GObject.GFlags):
     PARSE_RELAXED = 1
     SCHEME_NORMALIZE = 256
 
-class UriHideFlags(GObject.GFlags):
+class UriHideFlags(IntFlag):
     AUTH_PARAMS = 4
     FRAGMENT = 16
     NONE = 0
@@ -4160,13 +4160,13 @@ class UriHideFlags(GObject.GFlags):
     QUERY = 8
     USERINFO = 1
 
-class UriParamsFlags(GObject.GFlags):
+class UriParamsFlags(IntFlag):
     CASE_INSENSITIVE = 1
     NONE = 0
     PARSE_RELAXED = 4
     WWW_FORM = 2
 
-class BookmarkFileError(GObject.GEnum):
+class BookmarkFileError(IntEnum):
     APP_NOT_REGISTERED = 2
     FILE_NOT_FOUND = 7
     INVALID_URI = 0
@@ -4176,14 +4176,14 @@ class BookmarkFileError(GObject.GEnum):
     URI_NOT_FOUND = 3
     WRITE = 6
 
-class ChecksumType(GObject.GEnum):
+class ChecksumType(IntEnum):
     MD5 = 0
     SHA1 = 1
     SHA256 = 2
     SHA384 = 4
     SHA512 = 3
 
-class ConvertError(GObject.GEnum):
+class ConvertError(IntEnum):
     BAD_URI = 4
     EMBEDDED_NUL = 7
     FAILED = 2
@@ -4193,12 +4193,12 @@ class ConvertError(GObject.GEnum):
     NO_MEMORY = 6
     PARTIAL_INPUT = 3
 
-class DateDMY(GObject.GEnum):
+class DateDMY(IntEnum):
     DAY = 0
     MONTH = 1
     YEAR = 2
 
-class DateMonth(GObject.GEnum):
+class DateMonth(IntEnum):
     APRIL = 4
     AUGUST = 8
     BAD_MONTH = 0
@@ -4213,7 +4213,7 @@ class DateMonth(GObject.GEnum):
     OCTOBER = 10
     SEPTEMBER = 9
 
-class DateWeekday(GObject.GEnum):
+class DateWeekday(IntEnum):
     BAD_WEEKDAY = 0
     FRIDAY = 5
     MONDAY = 1
@@ -4223,7 +4223,7 @@ class DateWeekday(GObject.GEnum):
     TUESDAY = 2
     WEDNESDAY = 3
 
-class ErrorType(GObject.GEnum):
+class ErrorType(IntEnum):
     DIGIT_RADIX = 5
     FLOAT_MALFORMED = 7
     FLOAT_RADIX = 6
@@ -4233,7 +4233,7 @@ class ErrorType(GObject.GEnum):
     UNEXP_EOF_IN_STRING = 2
     UNKNOWN = 0
 
-class FileError(GObject.GEnum):
+class FileError(IntEnum):
     ACCES = 2
     AGAIN = 19
     BADF = 16
@@ -4260,7 +4260,7 @@ class FileError(GObject.GEnum):
     ROFS = 8
     TXTBSY = 9
 
-class IOChannelError(GObject.GEnum):
+class IOChannelError(IntEnum):
     FAILED = 8
     FBIG = 0
     INVAL = 1
@@ -4271,19 +4271,19 @@ class IOChannelError(GObject.GEnum):
     OVERFLOW = 6
     PIPE = 7
 
-class IOError(GObject.GEnum):
+class IOError(IntEnum):
     AGAIN = 1
     INVAL = 2
     NONE = 0
     UNKNOWN = 3
 
-class IOStatus(GObject.GEnum):
+class IOStatus(IntEnum):
     AGAIN = 3
     EOF = 2
     ERROR = 0
     NORMAL = 1
 
-class KeyFileError(GObject.GEnum):
+class KeyFileError(IntEnum):
     GROUP_NOT_FOUND = 4
     INVALID_VALUE = 5
     KEY_NOT_FOUND = 3
@@ -4291,11 +4291,11 @@ class KeyFileError(GObject.GEnum):
     PARSE = 1
     UNKNOWN_ENCODING = 0
 
-class LogWriterOutput(GObject.GEnum):
+class LogWriterOutput(IntEnum):
     HANDLED = 1
     UNHANDLED = 0
 
-class MarkupError(GObject.GEnum):
+class MarkupError(IntEnum):
     BAD_UTF8 = 0
     EMPTY = 1
     INVALID_CONTENT = 5
@@ -4314,16 +4314,16 @@ class NormalizeMode(GObject.GEnum):
     NFKC = 3
     NFKD = 2
 
-class NumberParserError(GObject.GEnum):
+class NumberParserError(IntEnum):
     INVALID = 0
     OUT_OF_BOUNDS = 1
 
-class OnceStatus(GObject.GEnum):
+class OnceStatus(IntEnum):
     NOTCALLED = 0
     PROGRESS = 1
     READY = 2
 
-class OptionArg(GObject.GEnum):
+class OptionArg(IntEnum):
     CALLBACK = 3
     DOUBLE = 7
     FILENAME = 4
@@ -4334,12 +4334,12 @@ class OptionArg(GObject.GEnum):
     STRING = 1
     STRING_ARRAY = 5
 
-class OptionError(GObject.GEnum):
+class OptionError(IntEnum):
     BAD_VALUE = 1
     FAILED = 2
     UNKNOWN_OPTION = 0
 
-class RegexError(GObject.GEnum):
+class RegexError(IntEnum):
     ASSERTION_EXPECTED = 128
     BACKTRACKING_CONTROL_VERB_ARGUMENT_FORBIDDEN = 159
     BACKTRACKING_CONTROL_VERB_ARGUMENT_REQUIRED = 166
@@ -4398,17 +4398,17 @@ class RegexError(GObject.GEnum):
     UNTERMINATED_COMMENT = 118
     VARIABLE_LENGTH_LOOKBEHIND = 125
 
-class SeekType(GObject.GEnum):
+class SeekType(IntEnum):
     CUR = 0
     END = 2
     SET = 1
 
-class ShellError(GObject.GEnum):
+class ShellError(IntEnum):
     BAD_QUOTING = 0
     EMPTY_STRING = 1
     FAILED = 2
 
-class SliceConfig(GObject.GEnum):
+class SliceConfig(IntEnum):
     ALWAYS_MALLOC = 1
     BYPASS_MAGAZINES = 2
     CHUNK_SIZES = 5
@@ -4416,7 +4416,7 @@ class SliceConfig(GObject.GEnum):
     CONTENTION_COUNTER = 6
     WORKING_SET_MSECS = 3
 
-class SpawnError(GObject.GEnum):
+class SpawnError(IntEnum):
     ACCES = 3
     CHDIR = 2
     FAILED = 19
@@ -4438,11 +4438,11 @@ class SpawnError(GObject.GEnum):
     TOO_BIG = 5
     TXTBUSY = 12
 
-class TestFileType(GObject.GEnum):
+class TestFileType(IntEnum):
     BUILT = 1
     DIST = 0
 
-class TestLogType(GObject.GEnum):
+class TestLogType(IntEnum):
     ERROR = 1
     LIST_CASE = 3
     MAX_RESULT = 8
@@ -4456,21 +4456,21 @@ class TestLogType(GObject.GEnum):
     STOP_CASE = 6
     STOP_SUITE = 11
 
-class TestResult(GObject.GEnum):
+class TestResult(IntEnum):
     FAILURE = 2
     INCOMPLETE = 3
     SKIPPED = 1
     SUCCESS = 0
 
-class ThreadError(GObject.GEnum):
+class ThreadError(IntEnum):
     THREAD_ERROR_AGAIN = 0
 
-class TimeType(GObject.GEnum):
+class TimeType(IntEnum):
     DAYLIGHT = 1
     STANDARD = 0
     UNIVERSAL = 2
 
-class TokenType(GObject.GEnum):
+class TokenType(IntEnum):
     BINARY = 259
     CHAR = 258
     COMMA = 44
@@ -4495,7 +4495,7 @@ class TokenType(GObject.GEnum):
     STRING = 264
     SYMBOL = 265
 
-class TraverseType(GObject.GEnum):
+class TraverseType(IntEnum):
     IN_ORDER = 0
     LEVEL_ORDER = 3
     POST_ORDER = 2
@@ -4545,6 +4545,7 @@ class UnicodeBreakType(GObject.GEnum):
     SPACE = 9
     SURROGATE = 4
     SYMBOL = 22
+    UNAMBIGUOUS_HYPHEN = 48
     UNKNOWN = 28
     VIRAMA = 47
     VIRAMA_FINAL = 46
@@ -4564,6 +4565,7 @@ class UnicodeScript(GObject.GEnum):
     BASSA_VAH = 103
     BATAK = 93
     BENGALI = 4
+    BERIA_ERFE = 175
     BHAIKSUKI = 133
     BOPOMOFO = 5
     BRAHMI = 94
@@ -4690,6 +4692,7 @@ class UnicodeScript(GObject.GEnum):
     SHARADA = 100
     SHAVIAN = 50
     SIDDHAM = 123
+    SIDETIC = 172
     SIGNWRITING = 131
     SINHALA = 33
     SOGDIAN = 148
@@ -4704,6 +4707,7 @@ class UnicodeScript(GObject.GEnum):
     TAI_LE = 52
     TAI_THAM = 91
     TAI_VIET = 92
+    TAI_YO = 174
     TAKRI = 102
     TAMIL = 35
     TANGSA = 159
@@ -4715,6 +4719,7 @@ class UnicodeScript(GObject.GEnum):
     TIFINAGH = 57
     TIRHUTA = 124
     TODHRI = 165
+    TOLONG_SIKI = 173
     TOTO = 160
     TULU_TIGALARI = 167
     UGARITIC = 53
@@ -4763,11 +4768,9 @@ class UnicodeType(GObject.GEnum):
     UNASSIGNED = 2
     UPPERCASE_LETTER = 9
 
-class UnixPipeEnd(GObject.GEnum):
-    READ = 0
-    WRITE = 1
+UnixPipeEnd = GLibUnix.PipeEnd
 
-class UriError(GObject.GEnum):
+class UriError(IntEnum):
     BAD_AUTH_PARAMS = 4
     BAD_FRAGMENT = 9
     BAD_HOST = 5
@@ -4779,7 +4782,7 @@ class UriError(GObject.GEnum):
     BAD_USER = 2
     FAILED = 0
 
-class UserDirectory(GObject.GEnum):
+class UserDirectory(IntEnum):
     DIRECTORY_DESKTOP = 0
     DIRECTORY_DOCUMENTS = 1
     DIRECTORY_DOWNLOAD = 2
@@ -4790,7 +4793,7 @@ class UserDirectory(GObject.GEnum):
     DIRECTORY_VIDEOS = 7
     N_DIRECTORIES = 8
 
-class VariantClass(GObject.GEnum):
+class VariantClass(IntEnum):
     ARRAY = 97
     BOOLEAN = 98
     BYTE = 121
@@ -4810,7 +4813,7 @@ class VariantClass(GObject.GEnum):
     UINT64 = 116
     VARIANT = 118
 
-class VariantParseError(GObject.GEnum):
+class VariantParseError(IntEnum):
     BASIC_TYPE_EXPECTED = 1
     CANNOT_INFER_TYPE = 2
     DEFINITE_TYPE_EXPECTED = 3

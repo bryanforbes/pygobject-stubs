@@ -4,6 +4,7 @@ from typing import TypeVar
 
 from collections.abc import Callable
 from collections.abc import Sequence
+from enum import IntFlag
 
 from gi.repository import Gio
 from gi.repository import GLib
@@ -15,11 +16,7 @@ T = TypeVar("T")
 PIXBUF_MAJOR: Final[int]
 PIXBUF_MICRO: Final[int]
 PIXBUF_MINOR: Final[int]
-PIXBUF_VERSION: Final = "2.42.12"
-_lock = ...  # FIXME Constant
-_namespace: Final = "GdkPixbuf"
-_overrides_module = ...  # FIXME Constant
-_version: Final = "2.0"
+PIXBUF_VERSION: Final = "2.44.5"
 
 def pixbuf_error_quark() -> int: ...
 
@@ -84,6 +81,7 @@ class Pixbuf(GObject.Object, Gio.Icon, Gio.LoadableIcon):
     def props(self) -> Props: ...
     def __init__(
         self,
+        *,
         bits_per_sample: int = ...,
         colorspace: Colorspace = ...,
         has_alpha: bool = ...,
@@ -167,9 +165,7 @@ class Pixbuf(GObject.Object, Gio.Icon, Gio.LoadableIcon):
     def get_byte_length(self) -> int: ...
     def get_colorspace(self) -> Colorspace: ...
     @staticmethod
-    def get_file_info(
-        filename: str,
-    ) -> tuple[PixbufFormat | None, int, int]: ...
+    def get_file_info(filename: str) -> tuple[PixbufFormat | None, int, int]: ...
     @staticmethod
     def get_file_info_async(
         filename: str,
@@ -247,9 +243,7 @@ class Pixbuf(GObject.Object, Gio.Icon, Gio.LoadableIcon):
     ) -> Pixbuf | None: ...
     @classmethod
     def new_from_stream(
-        cls,
-        stream: Gio.InputStream,
-        cancellable: Gio.Cancellable | None = None,
+        cls, stream: Gio.InputStream, cancellable: Gio.Cancellable | None = None
     ) -> Pixbuf | None: ...
     @staticmethod
     def new_from_stream_async(
@@ -367,7 +361,6 @@ class PixbufAnimation(GObject.Object):
     Signals from GObject:
       notify (GParam)
     """
-
     @property
     def parent_instance(self) -> GObject.Object: ...
     def do_get_iter(
@@ -389,9 +382,7 @@ class PixbufAnimation(GObject.Object):
     def new_from_resource(cls, resource_path: str) -> PixbufAnimation | None: ...
     @classmethod
     def new_from_stream(
-        cls,
-        stream: Gio.InputStream,
-        cancellable: Gio.Cancellable | None = None,
+        cls, stream: Gio.InputStream, cancellable: Gio.Cancellable | None = None
     ) -> PixbufAnimation | None: ...
     @staticmethod
     def new_from_stream_async(
@@ -413,12 +404,18 @@ class PixbufAnimationClass(GObject.GPointer):
 
         PixbufAnimationClass()
     """
-
-    parent_class: GObject.ObjectClass
-    is_static_image: Callable[[PixbufAnimation], bool]
-    get_static_image: Callable[[PixbufAnimation], Pixbuf]
-    get_size: Callable[[PixbufAnimation, int, int], None]
-    get_iter: Callable[[PixbufAnimation, GLib.TimeVal | None], PixbufAnimationIter]
+    @property
+    def parent_class(self) -> GObject.ObjectClass: ...
+    @property
+    def is_static_image(self) -> Callable[[PixbufAnimation], bool]: ...
+    @property
+    def get_static_image(self) -> Callable[[PixbufAnimation], Pixbuf]: ...
+    @property
+    def get_size(self) -> Callable[[PixbufAnimation, int, int], None]: ...
+    @property
+    def get_iter(
+        self,
+    ) -> Callable[[PixbufAnimation, GLib.TimeVal | None], PixbufAnimationIter]: ...
 
 class PixbufAnimationIter(GObject.Object):
     """
@@ -433,7 +430,6 @@ class PixbufAnimationIter(GObject.Object):
     Signals from GObject:
       notify (GParam)
     """
-
     @property
     def parent_instance(self) -> GObject.Object: ...
     def advance(self, current_time: GLib.TimeVal | None = None) -> bool: ...
@@ -453,12 +449,16 @@ class PixbufAnimationIterClass(GObject.GPointer):
 
         PixbufAnimationIterClass()
     """
-
-    parent_class: GObject.ObjectClass
-    get_delay_time: Callable[[PixbufAnimationIter], int]
-    get_pixbuf: Callable[[PixbufAnimationIter], Pixbuf]
-    on_currently_loading_frame: Callable[[PixbufAnimationIter], bool]
-    advance: Callable[[PixbufAnimationIter, GLib.TimeVal | None], bool]
+    @property
+    def parent_class(self) -> GObject.ObjectClass: ...
+    @property
+    def get_delay_time(self) -> Callable[[PixbufAnimationIter], int]: ...
+    @property
+    def get_pixbuf(self) -> Callable[[PixbufAnimationIter], Pixbuf]: ...
+    @property
+    def on_currently_loading_frame(self) -> Callable[[PixbufAnimationIter], bool]: ...
+    @property
+    def advance(self) -> Callable[[PixbufAnimationIter, GLib.TimeVal | None], bool]: ...
 
 class PixbufFormat(GObject.GBoxed):
     """
@@ -513,7 +513,6 @@ class PixbufLoader(GObject.Object):
     Signals from GObject:
       notify (GParam)
     """
-
     @property
     def parent_instance(self) -> GObject.Object: ...
     @property
@@ -544,12 +543,16 @@ class PixbufLoaderClass(GObject.GPointer):
 
         PixbufLoaderClass()
     """
-
-    parent_class: GObject.ObjectClass
-    size_prepared: Callable[[PixbufLoader, int, int], None]
-    area_prepared: Callable[[PixbufLoader], None]
-    area_updated: Callable[[PixbufLoader, int, int, int, int], None]
-    closed: Callable[[PixbufLoader], None]
+    @property
+    def parent_class(self) -> GObject.ObjectClass: ...
+    @property
+    def size_prepared(self) -> Callable[[PixbufLoader, int, int], None]: ...
+    @property
+    def area_prepared(self) -> Callable[[PixbufLoader], None]: ...
+    @property
+    def area_updated(self) -> Callable[[PixbufLoader, int, int, int, int], None]: ...
+    @property
+    def closed(self) -> Callable[[PixbufLoader], None]: ...
 
 class PixbufModule(GObject.GPointer):
     """
@@ -570,21 +573,9 @@ class PixbufModule(GObject.GPointer):
     stop_load: Callable[[None], bool]
     load_increment: Callable[[None, Sequence[int]], bool]
     load_animation: Callable[[None], PixbufAnimation]
-    save: Callable[
-        [
-            None,
-            Pixbuf,
-            Sequence[str] | None,
-            Sequence[str] | None,
-        ],
-        bool,
-    ]
+    save: Callable[[None, Pixbuf, Sequence[str] | None, Sequence[str] | None], bool]
     save_to_callback: None
     is_save_option_supported: Callable[[str], bool]
-    _reserved1: None
-    _reserved2: None
-    _reserved3: None
-    _reserved4: None
 
 class PixbufModulePattern(GObject.GPointer):
     """
@@ -639,7 +630,7 @@ class PixbufSimpleAnim(PixbufAnimation):
 
     @property
     def props(self) -> Props: ...
-    def __init__(self, loop: bool = ...) -> None: ...
+    def __init__(self, *, loop: bool = ...) -> None: ...
     def add_frame(self, pixbuf: Pixbuf) -> None: ...
     def get_loop(self) -> bool: ...
     @classmethod
@@ -649,7 +640,7 @@ class PixbufSimpleAnim(PixbufAnimation):
 class PixbufSimpleAnimClass(GObject.GPointer): ...
 class PixbufSimpleAnimIter(PixbufAnimationIter): ...
 
-class PixbufFormatFlags(GObject.GFlags):
+class PixbufFormatFlags(IntFlag):
     SCALABLE = 2
     THREADSAFE = 4
     WRITABLE = 1

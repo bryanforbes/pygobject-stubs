@@ -2,6 +2,7 @@ from typing import Final
 from typing import TypeVar
 
 from collections.abc import Sequence
+from enum import IntEnum
 
 from gi.repository import GObject
 
@@ -12,9 +13,6 @@ PI_2: Final[float]
 VEC2_LEN: Final[int]
 VEC3_LEN: Final[int]
 VEC4_LEN: Final[int]
-_lock = ...  # FIXME Constant
-_namespace: Final = "Graphene"
-_version: Final = "1.0"
 
 def box_empty() -> Box: ...
 def box_infinite() -> Box: ...
@@ -52,9 +50,10 @@ class Box(GObject.GBoxed):
         Box()
         alloc() -> Graphene.Box
     """
-
-    min: Vec3
-    max: Vec3
+    @property
+    def min(self) -> Vec3: ...
+    @property
+    def max(self) -> Vec3: ...
     @classmethod
     def alloc(cls) -> Box: ...
     def contains_box(self, b: Box) -> bool: ...
@@ -104,9 +103,10 @@ class Euler(GObject.GBoxed):
         Euler()
         alloc() -> Graphene.Euler
     """
-
-    angles: Vec3
-    order: EulerOrder
+    @property
+    def angles(self) -> Vec3: ...
+    @property
+    def order(self) -> EulerOrder: ...
     @classmethod
     def alloc(cls) -> Euler: ...
     def equal(self, b: Euler) -> bool: ...
@@ -145,8 +145,8 @@ class Frustum(GObject.GBoxed):
         Frustum()
         alloc() -> Graphene.Frustum
     """
-
-    planes: list[Plane]
+    @property
+    def planes(self) -> list[Plane]: ...
     @classmethod
     def alloc(cls) -> Frustum: ...
     def contains_point(self, point: Point3D) -> bool: ...
@@ -170,8 +170,8 @@ class Matrix(GObject.GBoxed):
         Matrix()
         alloc() -> Graphene.Matrix
     """
-
-    value: Simd4X4F
+    @property
+    def value(self) -> Simd4X4F: ...
     @classmethod
     def alloc(cls) -> Matrix: ...
     def decompose(self) -> tuple[bool, Vec3, Vec3, Quaternion, Vec3, Vec4]: ...
@@ -270,9 +270,10 @@ class Plane(GObject.GBoxed):
         Plane()
         alloc() -> Graphene.Plane
     """
-
-    normal: Vec3
-    constant: float
+    @property
+    def normal(self) -> Vec3: ...
+    @property
+    def constant(self) -> float: ...
     @classmethod
     def alloc(cls) -> Plane: ...
     def distance(self, point: Point3D) -> float: ...
@@ -361,8 +362,8 @@ class Quad(GObject.GBoxed):
         Quad()
         alloc() -> Graphene.Quad
     """
-
-    points: list[Point]
+    @property
+    def points(self) -> list[Point]: ...
     @classmethod
     def alloc(cls) -> Quad: ...
     def bounds(self) -> Rect: ...
@@ -382,11 +383,14 @@ class Quaternion(GObject.GBoxed):
         Quaternion()
         alloc() -> Graphene.Quaternion
     """
-
-    x: float
-    y: float
-    z: float
-    w: float
+    @property
+    def x(self) -> float: ...
+    @property
+    def y(self) -> float: ...
+    @property
+    def z(self) -> float: ...
+    @property
+    def w(self) -> float: ...
     def add(self, b: Quaternion) -> Quaternion: ...
     @classmethod
     def alloc(cls) -> Quaternion: ...
@@ -426,9 +430,10 @@ class Ray(GObject.GBoxed):
         Ray()
         alloc() -> Graphene.Ray
     """
-
-    origin: Vec3
-    direction: Vec3
+    @property
+    def origin(self) -> Vec3: ...
+    @property
+    def direction(self) -> Vec3: ...
     @classmethod
     def alloc(cls) -> Ray: ...
     def equal(self, b: Ray) -> bool: ...
@@ -440,15 +445,11 @@ class Ray(GObject.GBoxed):
     def get_origin(self) -> Point3D: ...
     def get_position_at(self, t: float) -> Point3D: ...
     def init(
-        self,
-        origin: Point3D | None = None,
-        direction: Vec3 | None = None,
+        self, origin: Point3D | None = None, direction: Vec3 | None = None
     ) -> Ray: ...
     def init_from_ray(self, src: Ray) -> Ray: ...
     def init_from_vec3(
-        self,
-        origin: Vec3 | None = None,
-        direction: Vec3 | None = None,
+        self, origin: Vec3 | None = None, direction: Vec3 | None = None
     ) -> Ray: ...
     def intersect_box(self, b: Box) -> tuple[RayIntersectionKind, float]: ...
     def intersect_sphere(self, s: Sphere) -> tuple[RayIntersectionKind, float]: ...
@@ -512,11 +513,14 @@ class Simd4F(GObject.GPointer):
 
         Simd4F()
     """
-
-    x: float
-    y: float
-    z: float
-    w: float
+    @property
+    def x(self) -> float: ...
+    @property
+    def y(self) -> float: ...
+    @property
+    def z(self) -> float: ...
+    @property
+    def w(self) -> float: ...
 
 class Simd4X4F(GObject.GPointer):
     """
@@ -526,11 +530,14 @@ class Simd4X4F(GObject.GPointer):
 
         Simd4X4F()
     """
-
-    x: Simd4F
-    y: Simd4F
-    z: Simd4F
-    w: Simd4F
+    @property
+    def x(self) -> Simd4F: ...
+    @property
+    def y(self) -> Simd4F: ...
+    @property
+    def z(self) -> Simd4F: ...
+    @property
+    def w(self) -> Simd4F: ...
 
 class Size(GObject.GBoxed):
     """
@@ -564,9 +571,10 @@ class Sphere(GObject.GBoxed):
         Sphere()
         alloc() -> Graphene.Sphere
     """
-
-    center: Vec3
-    radius: float
+    @property
+    def center(self) -> Vec3: ...
+    @property
+    def radius(self) -> float: ...
     @classmethod
     def alloc(cls) -> Sphere: ...
     def contains_point(self, point: Point3D) -> bool: ...
@@ -595,10 +603,12 @@ class Triangle(GObject.GBoxed):
         Triangle()
         alloc() -> Graphene.Triangle
     """
-
-    a: Vec3
-    b: Vec3
-    c: Vec3
+    @property
+    def a(self) -> Vec3: ...
+    @property
+    def b(self) -> Vec3: ...
+    @property
+    def c(self) -> Vec3: ...
     @classmethod
     def alloc(cls) -> Triangle: ...
     def contains_point(self, p: Point3D) -> bool: ...
@@ -616,10 +626,7 @@ class Triangle(GObject.GBoxed):
     ) -> tuple[bool, Vec2]: ...
     def get_vertices(self) -> tuple[Vec3, Vec3, Vec3]: ...
     def init_from_float(
-        self,
-        a: Sequence[float],
-        b: Sequence[float],
-        c: Sequence[float],
+        self, a: Sequence[float], b: Sequence[float], c: Sequence[float]
     ) -> Triangle: ...
     def init_from_point3d(
         self,
@@ -628,10 +635,7 @@ class Triangle(GObject.GBoxed):
         c: Point3D | None = None,
     ) -> Triangle: ...
     def init_from_vec3(
-        self,
-        a: Vec3 | None = None,
-        b: Vec3 | None = None,
-        c: Vec3 | None = None,
+        self, a: Vec3 | None = None, b: Vec3 | None = None, c: Vec3 | None = None
     ) -> Triangle: ...
 
 class Vec2(GObject.GBoxed):
@@ -643,8 +647,8 @@ class Vec2(GObject.GBoxed):
         Vec2()
         alloc() -> Graphene.Vec2
     """
-
-    value: Simd4F
+    @property
+    def value(self) -> Simd4F: ...
     def add(self, b: Vec2) -> Vec2: ...
     @classmethod
     def alloc(cls) -> Vec2: ...
@@ -686,8 +690,8 @@ class Vec3(GObject.GBoxed):
         Vec3()
         alloc() -> Graphene.Vec3
     """
-
-    value: Simd4F
+    @property
+    def value(self) -> Simd4F: ...
     def add(self, b: Vec3) -> Vec3: ...
     @classmethod
     def alloc(cls) -> Vec3: ...
@@ -738,8 +742,8 @@ class Vec4(GObject.GBoxed):
         Vec4()
         alloc() -> Graphene.Vec4
     """
-
-    value: Simd4F
+    @property
+    def value(self) -> Simd4F: ...
     def add(self, b: Vec4) -> Vec4: ...
     @classmethod
     def alloc(cls) -> Vec4: ...
@@ -782,7 +786,7 @@ class Vec4(GObject.GBoxed):
     @staticmethod
     def zero() -> Vec4: ...
 
-class EulerOrder(GObject.GEnum):
+class EulerOrder(IntEnum):
     DEFAULT = -1
     RXYX = 19
     RXYZ = 28
@@ -815,7 +819,7 @@ class EulerOrder(GObject.GEnum):
     ZXY = 2
     ZYX = 5
 
-class RayIntersectionKind(GObject.GEnum):
+class RayIntersectionKind(IntEnum):
     ENTER = 1
     LEAVE = 2
     NONE = 0

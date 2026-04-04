@@ -50,7 +50,7 @@ FILE_ATTRIBUTE_MOUNTABLE_CAN_START_DEGRADED: Final = "mountable::can-start-degra
 FILE_ATTRIBUTE_MOUNTABLE_CAN_STOP: Final = "mountable::can-stop"
 FILE_ATTRIBUTE_MOUNTABLE_CAN_UNMOUNT: Final = "mountable::can-unmount"
 FILE_ATTRIBUTE_MOUNTABLE_HAL_UDI: Final = "mountable::hal-udi"
-FILE_ATTRIBUTE_MOUNTABLE_IS_MEDIA_CHECK_AUTOMATIC: str = (
+FILE_ATTRIBUTE_MOUNTABLE_IS_MEDIA_CHECK_AUTOMATIC: Final = (
     "mountable::is-media-check-automatic"
 )
 FILE_ATTRIBUTE_MOUNTABLE_START_STOP_TYPE: Final = "mountable::start-stop-type"
@@ -4595,7 +4595,7 @@ class FileAttributeMatcher(GObject.GBoxed):
     def to_string(self) -> str: ...
     def unref(self) -> None: ...
 
-FileDescriptorBased: Final = GioUnix.FileDescriptorBased
+FileDescriptorBased = GioUnix.FileDescriptorBased
 
 class FileEnumerator(GObject.Object):
     """
@@ -11396,20 +11396,20 @@ class UnixFDListClass(GObject.GPointer):
 
 class UnixFDListPrivate(GObject.GPointer): ...
 
-UnixFDMessage: Final = GioUnix.FDMessage
-UnixFDMessageClass: Final = GioUnix.FDMessageClass
-UnixFDMessagePrivate: Final = GioUnix.FDMessagePrivate
-UnixFileDescriptorBasedIface: Final = GioUnix.FileDescriptorBasedIface
-UnixInputStream: Final = GioUnix.InputStream
-UnixInputStreamClass: Final = GioUnix.InputStreamClass
-UnixInputStreamPrivate: Final = GioUnix.InputStreamPrivate
-UnixMountEntry: Final = GioUnix.MountEntry
-UnixMountMonitor: Final = GioUnix.MountMonitor
-UnixMountMonitorClass: Final = GioUnix.MountMonitorClass
-UnixMountPoint: Final = GioUnix.MountPoint
-UnixOutputStream: Final = GioUnix.OutputStream
-UnixOutputStreamClass: Final = GioUnix.OutputStreamClass
-UnixOutputStreamPrivate: Final = GioUnix.OutputStreamPrivate
+UnixFDMessage = GioUnix.FDMessage
+UnixFDMessageClass = GioUnix.FDMessageClass
+UnixFDMessagePrivate = GioUnix.FDMessagePrivate
+UnixFileDescriptorBasedIface = GioUnix.FileDescriptorBasedIface
+UnixInputStream = GioUnix.InputStream
+UnixInputStreamClass = GioUnix.InputStreamClass
+UnixInputStreamPrivate = GioUnix.InputStreamPrivate
+UnixMountEntry = GioUnix.MountEntry
+UnixMountMonitor = GioUnix.MountMonitor
+UnixMountMonitorClass = GioUnix.MountMonitorClass
+UnixMountPoint = GioUnix.MountPoint
+UnixOutputStream = GioUnix.OutputStream
+UnixOutputStreamClass = GioUnix.OutputStreamClass
+UnixOutputStreamPrivate = GioUnix.OutputStreamPrivate
 
 class UnixSocketAddress(SocketAddress, SocketConnectable):
     """
