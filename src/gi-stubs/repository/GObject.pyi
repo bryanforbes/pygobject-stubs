@@ -2,7 +2,9 @@ from typing import Any
 from typing import Final
 from typing import Protocol
 from typing import type_check_only
-from typing import TypeVar
+from typing import TypeAlias
+from typing_extensions import TypeVarTuple
+from typing_extensions import Unpack
 
 from builtins import property as _property
 from collections.abc import Callable
@@ -16,9 +18,56 @@ from gi._signalhelper import Signal as _Signal
 from gi._signalhelper import SignalOverride as _SignalOverride
 from gi.repository import GLib
 
-T = TypeVar("T")
+_DataTs = TypeVarTuple("_DataTs", default=Unpack[tuple[()]])
+
 # override
 ObjectProtocol = _gi.ObjectProtocol
+
+BaseFinalizeFunc: TypeAlias = Callable[[TypeClass], None]
+BaseInitFunc: TypeAlias = Callable[[TypeClass], None]
+BindingTransformFunc: TypeAlias = Callable[
+    [Binding, Value, Value, Unpack[_DataTs]], bool
+]
+BoxedCopyFunc: TypeAlias = Callable[[Any], Any]
+BoxedFreeFunc: TypeAlias = Callable[[Any], None]
+# override
+Callback: TypeAlias = Callable[[Unpack[_DataTs]], None]
+ClassFinalizeFunc: TypeAlias = Callable[[TypeClass, Any], None]
+ClassInitFunc: TypeAlias = Callable[[TypeClass, Any], None]
+ClosureMarshal: TypeAlias = Callable[
+    [Closure, Value | None, list[Value], Any, Any], None
+]
+ClosureNotify: TypeAlias = Callable[[Any, Closure], None]
+InstanceInitFunc: TypeAlias = Callable[[TypeInstance, TypeClass], None]
+InterfaceFinalizeFunc: TypeAlias = Callable[[TypeInterface, Any], None]
+InterfaceInitFunc: TypeAlias = Callable[[TypeInterface, Any], None]
+ObjectFinalizeFunc: TypeAlias = Callable[[Object], None]
+ObjectGetPropertyFunc: TypeAlias = Callable[[Object, int, Value, ParamSpec], None]
+ObjectSetPropertyFunc: TypeAlias = Callable[[Object, int, Value, ParamSpec], None]
+SignalAccumulator: TypeAlias = Callable[[SignalInvocationHint, Value, Value, Any], bool]
+# override
+SignalEmissionHook: TypeAlias = Callable[
+    [SignalInvocationHint, list[Value], Unpack[_DataTs]], bool
+]
+ToggleNotify: TypeAlias = Callable[[Any, Object, bool], None]
+TypeClassCacheFunc: TypeAlias = Callable[[Any, TypeClass], bool]
+TypeInterfaceCheckFunc: TypeAlias = Callable[[Any, TypeInterface], None]
+TypePluginCompleteInterfaceInfo: TypeAlias = Callable[
+    [TypePlugin, GType, GType, InterfaceInfo], None
+]
+TypePluginCompleteTypeInfo: TypeAlias = Callable[
+    [TypePlugin, GType, TypeInfo, TypeValueTable], None
+]
+TypePluginUnuse: TypeAlias = Callable[[TypePlugin], None]
+TypePluginUse: TypeAlias = Callable[[TypePlugin], None]
+TypeValueCollectFunc: TypeAlias = Callable[[Value, list[TypeCValue], int], str | None]
+TypeValueCopyFunc: TypeAlias = Callable[[Value], Value]
+TypeValueFreeFunc: TypeAlias = Callable[[Value], None]
+TypeValueInitFunc: TypeAlias = Callable[[Value], None]
+TypeValueLCopyFunc: TypeAlias = Callable[[Value, list[TypeCValue], int], str | None]
+TypeValuePeekPointerFunc: TypeAlias = Callable[[Value], Any | None]
+ValueTransform: TypeAlias = Callable[[Value, Value], None]
+WeakNotify: TypeAlias = Callable[[Any, Object], None]
 
 G_MAXDOUBLE: Final[float]
 G_MAXFLOAT: Final[float]
@@ -156,194 +205,196 @@ pygobject_version: Final = _gi.pygobject_version
 # override
 add_emission_hook: Final = _gi.add_emission_hook
 
-def boxed_copy(boxed_type: type[Any], src_boxed: None) -> None: ...
-def boxed_free(boxed_type: type[Any], boxed: None) -> None: ...
+def boxed_copy(
+    boxed_type: type[Any], src_boxed: int | Any | None
+) -> int | Any | None: ...
+def boxed_free(boxed_type: type[Any], boxed: int | Any | None) -> None: ...
 def boxed_type_register_static(
-    name: str, boxed_copy: Callable[[None], None], boxed_free: Callable[[None], None]
+    name: str, boxed_copy: BoxedCopyFunc, boxed_free: BoxedFreeFunc
 ) -> type[Any]: ...
 def cclosure_marshal_BOOLEAN__BOXED_BOXED(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_BOOLEAN__FLAGS(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_STRING__OBJECT_POINTER(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__BOOLEAN(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__BOXED(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__CHAR(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__DOUBLE(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__ENUM(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__FLAGS(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__FLOAT(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__INT(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__LONG(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__OBJECT(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__PARAM(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__POINTER(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__STRING(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__UCHAR(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__UINT(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__UINT_POINTER(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__ULONG(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__VARIANT(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_VOID__VOID(
     closure: Callable[..., Any],
     return_value: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 def cclosure_marshal_generic(
     closure: Callable[..., Any],
     return_gvalue: Any,
     n_param_values: int,
     param_values: Any,
-    invocation_hint: None,
-    marshal_data: None,
+    invocation_hint: int | Any | None = ...,
+    marshal_data: int | Any | None = ...,
 ) -> None: ...
 
 child_watch_add: Final = GLib.child_watch_add
@@ -583,7 +634,7 @@ def signal_accumulator_true_handled(
     ihint, return_accu, handler_return, user_data=None
 ): ...  # FIXME: Override is missing typing annotation
 def signal_add_emission_hook(
-    signal_id: int, detail: int, hook_func: Callable[..., bool], *hook_data: Any
+    signal_id: int, detail: int, hook_func: SignalEmissionHook
 ) -> int: ...
 def signal_chain_from_overridden(
     instance_and_params: Sequence[Any], return_value: Any
@@ -599,7 +650,7 @@ def signal_connect_closure_by_id(
     after: bool,
 ) -> int: ...
 def signal_emitv(
-    instance_and_params: Sequence[Any], signal_id: int, detail: int
+    instance_and_params: Sequence[Any], signal_id: int, detail: int, return_value: Any
 ) -> Any: ...
 def signal_get_invocation_hint(instance: Object) -> SignalInvocationHint | None: ...
 def signal_handler_block(obj: Object, handler_id: int) -> AbstractContextManager[None]:
@@ -622,56 +673,44 @@ def signal_handler_block(obj: Object, handler_id: int) -> AbstractContextManager
     """
 
 def signal_handler_disconnect(instance: Object, handler_id: int) -> None: ...
-
-# override
 def signal_handler_find(
     instance: Object,
     mask: SignalMatchType,
     signal_id: int,
     detail: int,
-    _closure: Callable[..., Any] | None,
-    func: None,
-    data: None,
-    *closure: Any,
+    closure: Callable[..., Any] | None = ...,
+    func: int | Any | None = ...,
+    data: int | Any | None = ...,
 ) -> int: ...
 def signal_handler_is_connected(instance: Object, handler_id: int) -> bool: ...
 def signal_handler_unblock(instance: Object, handler_id: int) -> None: ...
-
-# override
 def signal_handlers_block_matched(
     instance: Object,
     mask: SignalMatchType,
     signal_id: int,
     detail: int,
-    _closure: Callable[..., Any] | None,
-    func: None,
-    data: None,
-    *closure: Any,
+    closure: Callable[..., Any] | None = ...,
+    func: int | Any | None = ...,
+    data: int | Any | None = ...,
 ) -> int: ...
 def signal_handlers_destroy(instance: Object) -> None: ...
-
-# override
 def signal_handlers_disconnect_matched(
     instance: Object,
     mask: SignalMatchType,
     signal_id: int,
     detail: int,
-    _closure: Callable[..., Any] | None,
-    func: None,
-    data: None,
-    *closure: Any,
+    closure: Callable[..., Any] | None = ...,
+    func: int | Any | None = ...,
+    data: int | Any | None = ...,
 ) -> int: ...
-
-# override
 def signal_handlers_unblock_matched(
     instance: Object,
     mask: SignalMatchType,
     signal_id: int,
     detail: int,
-    _closure: Callable[..., Any] | None,
-    func: None,
-    data: None,
-    *closure: Any,
+    closure: Callable[..., Any] | None = ...,
+    func: int | Any | None = ...,
+    data: int | Any | None = ...,
 ) -> int: ...
 def signal_has_handler_pending(
     instance: Object, signal_id: int, detail: int, may_be_blocked: bool
@@ -688,7 +727,7 @@ def signal_override_class_closure(
     signal_id: int, instance_type: type[Any], class_closure: Callable[..., Any]
 ) -> None: ...
 def signal_override_class_handler(
-    signal_name: str, instance_type: type[Any], class_handler: Callable[[], None]
+    signal_name: str, instance_type: type[Any], class_handler: Callback
 ) -> None: ...
 def signal_parse_name(
     detailed_signal: str, itype: GType | Object, force_detail_quark: bool
@@ -747,7 +786,7 @@ def type_check_value(value: Any) -> bool: ...
 def type_check_value_holds(value: Any, type: type[Any]) -> bool: ...
 def type_children(type: type[Any]) -> list[type[Any]]: ...
 def type_class_adjust_private_offset(
-    g_class: None, private_size_or_offset: int
+    g_class: int | Any | None, private_size_or_offset: int
 ) -> None: ...
 def type_class_get(type: type[Any]) -> TypeClass: ...
 def type_class_peek(type: type[Any]) -> TypeClass | None: ...
@@ -765,7 +804,7 @@ def type_fundamental(type_id: type[Any]) -> type[Any]: ...
 def type_fundamental_next() -> type[Any]: ...
 def type_get_instance_count(type: type[Any]) -> int: ...
 def type_get_plugin(type: type[Any]) -> TypePlugin: ...
-def type_get_qdata(type: type[Any], quark: int) -> None: ...
+def type_get_qdata(type: type[Any], quark: int) -> int | Any | None: ...
 def type_get_type_registration_serial() -> int: ...
 def type_init() -> None: ...
 def type_init_with_debug_flags(debug_flags: TypeDebugFlags) -> None: ...
@@ -807,7 +846,9 @@ def type_register_fundamental(
 def type_register_static(
     parent_type: type[Any], type_name: str, info: TypeInfo, flags: TypeFlags
 ) -> type[Any]: ...
-def type_set_qdata(type: type[Any], quark: int, data: None) -> None: ...
+def type_set_qdata(
+    type: type[Any], quark: int, data: int | Any | None = ...
+) -> None: ...
 def type_test_flags(type: type[Any], flags: int) -> bool: ...
 
 uri_list_extract_uris: Final = GLib.uri_list_extract_uris
@@ -908,13 +949,13 @@ class BindingGroup(Object):
         target: Object,
         target_property: str,
         flags: BindingFlags,
-        transform_to: Callable[..., Any] | None = None,
-        transform_from: Callable[..., Any] | None = None,
+        transform_to: Callable[..., Any] | None = ...,
+        transform_from: Callable[..., Any] | None = ...,
     ) -> None: ...
     def dup_source(self) -> Object | None: ...
     @classmethod
     def new(cls) -> BindingGroup: ...
-    def set_source(self, source: Object | None = None) -> None: ...
+    def set_source(self, source: Object | None = ...) -> None: ...
 
 class BookmarkFile(GBoxed): ...
 class ByteArray(GBoxed): ...
@@ -930,15 +971,15 @@ class CClosure(_gi.Struct):
     """
 
     closure: Callable[..., Any]
-    callback: None
+    callback: int | Any | None
     @staticmethod
     def marshal_BOOLEAN__BOXED_BOXED(
         closure: Callable[..., Any],
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_BOOLEAN__FLAGS(
@@ -946,8 +987,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_STRING__OBJECT_POINTER(
@@ -955,8 +996,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__BOOLEAN(
@@ -964,8 +1005,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__BOXED(
@@ -973,8 +1014,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__CHAR(
@@ -982,8 +1023,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__DOUBLE(
@@ -991,8 +1032,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__ENUM(
@@ -1000,8 +1041,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__FLAGS(
@@ -1009,8 +1050,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__FLOAT(
@@ -1018,8 +1059,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__INT(
@@ -1027,8 +1068,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__LONG(
@@ -1036,8 +1077,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__OBJECT(
@@ -1045,8 +1086,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__PARAM(
@@ -1054,8 +1095,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__POINTER(
@@ -1063,8 +1104,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__STRING(
@@ -1072,8 +1113,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__UCHAR(
@@ -1081,8 +1122,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__UINT(
@@ -1090,8 +1131,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__UINT_POINTER(
@@ -1099,8 +1140,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__ULONG(
@@ -1108,8 +1149,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__VARIANT(
@@ -1117,8 +1158,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_VOID__VOID(
@@ -1126,8 +1167,8 @@ class CClosure(_gi.Struct):
         return_value: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
     @staticmethod
     def marshal_generic(
@@ -1135,8 +1176,8 @@ class CClosure(_gi.Struct):
         return_gvalue: Any,
         n_param_values: int,
         param_values: Any,
-        invocation_hint: None,
-        marshal_data: None,
+        invocation_hint: int | Any | None = ...,
+        marshal_data: int | Any | None = ...,
     ) -> None: ...
 
 class Checksum(GBoxed): ...
@@ -1172,17 +1213,23 @@ class Closure(GBoxed):
     @_property
     def marshal(
         self,
-    ) -> Callable[[Callable[..., Any], Any, int, Any, None, None], None]: ...
+    ) -> Callable[
+        [Callable[..., Any], Any, int, Any, int | Any | None, int | Any | None], None
+    ]: ...
     @_property
-    def data(self) -> None: ...
+    def data(self) -> int | Any | None: ...
     @_property
     def notifiers(self) -> ClosureNotifyData: ...
     def invalidate(self) -> None: ...
-    def invoke(self, param_values: Sequence[Any], invocation_hint: None) -> Any: ...
+    def invoke(
+        self, param_values: Sequence[Any], invocation_hint: int | Any | None = ...
+    ) -> Any: ...
     @classmethod
     def new_object(cls, sizeof_closure: int, object: Object) -> Closure: ...
     @classmethod
-    def new_simple(cls, sizeof_closure: int, data: None) -> Closure: ...
+    def new_simple(
+        cls, sizeof_closure: int, data: int | Any | None = ...
+    ) -> Closure: ...
     def ref(self) -> Callable[..., Any]: ...
     def sink(self) -> None: ...
     def unref(self) -> None: ...
@@ -1196,8 +1243,8 @@ class ClosureNotifyData(_gi.Struct):
         ClosureNotifyData()
     """
 
-    data: None
-    notify: Callable[[None, Callable[..., Any]], None]
+    data: int | Any | None
+    notify: ClosureNotify
 
 class Date(GBoxed): ...
 class DateTime(GBoxed): ...
@@ -1312,9 +1359,9 @@ class InitiallyUnownedClass(_gi.Struct):
     @_property
     def g_type_class(self) -> TypeClass: ...
     @_property
-    def construct_properties(self) -> list[None]: ...
+    def construct_properties(self) -> list[int | Any | None]: ...
     @_property
-    def constructor(self) -> None: ...
+    def constructor(self) -> int | Any | None: ...
     @_property
     def set_property(self) -> Callable[[Object, int, Any, ParamSpec], None]: ...
     @_property
@@ -1336,11 +1383,11 @@ class InitiallyUnownedClass(_gi.Struct):
     @_property
     def n_construct_properties(self) -> int: ...
     @_property
-    def pspecs(self) -> None: ...
+    def pspecs(self) -> int | Any | None: ...
     @_property
     def n_pspecs(self) -> int: ...
     @_property
-    def pdummy(self) -> list[None]: ...
+    def pdummy(self) -> list[int | Any | None]: ...
 
 class InterfaceInfo(_gi.Struct):
     """
@@ -1351,9 +1398,9 @@ class InterfaceInfo(_gi.Struct):
         InterfaceInfo()
     """
 
-    interface_init: Callable[[TypeInterface, None], None]
-    interface_finalize: Callable[[TypeInterface, None], None]
-    interface_data: None
+    interface_init: InterfaceInitFunc
+    interface_finalize: InterfaceFinalizeFunc
+    interface_data: int | Any | None
 
 class KeyFile(GBoxed): ...
 
@@ -1391,9 +1438,9 @@ class ObjectClass(_gi.Struct):
     @_property
     def g_type_class(self) -> TypeClass: ...
     @_property
-    def construct_properties(self) -> list[None]: ...
+    def construct_properties(self) -> list[int | Any | None]: ...
     @_property
-    def constructor(self) -> None: ...
+    def constructor(self) -> int | Any | None: ...
     @_property
     def set_property(self) -> Callable[[Object, int, Any, ParamSpec], None]: ...
     @_property
@@ -1415,11 +1462,11 @@ class ObjectClass(_gi.Struct):
     @_property
     def n_construct_properties(self) -> int: ...
     @_property
-    def pspecs(self) -> None: ...
+    def pspecs(self) -> int | Any | None: ...
     @_property
     def n_pspecs(self) -> int: ...
     @_property
-    def pdummy(self) -> list[None]: ...
+    def pdummy(self) -> list[int | Any | None]: ...
     def find_property(self, property_name: str) -> ParamSpec: ...
     def install_properties(self, pspecs: Sequence[ParamSpec]) -> None: ...
     def install_property(self, property_id: int, pspec: ParamSpec) -> None: ...
@@ -1483,15 +1530,15 @@ class ParamSpec(_gi.Fundamental):
     def get_name(self) -> str: ...
     def get_name_quark(self) -> int: ...
     def get_nick(self) -> str: ...
-    def get_qdata(self, quark: int) -> None: ...
+    def get_qdata(self, quark: int) -> int | Any | None: ...
     def get_redirect_target(self) -> ParamSpec | None: ...
     @staticmethod
     def is_valid_name(name: str) -> bool: ...
     # override
     nick: str
-    def set_qdata(self, quark: int, data: None) -> None: ...
+    def set_qdata(self, quark: int, data: int | Any | None = ...) -> None: ...
     def sink(self) -> None: ...
-    def steal_qdata(self, quark: int) -> None: ...
+    def steal_qdata(self, quark: int) -> int | Any | None: ...
 
 class ParamSpecBoolean(ParamSpec):
     """
@@ -1557,7 +1604,7 @@ class ParamSpecClass(_gi.Struct):
     @_property
     def value_is_valid(self) -> Callable[[ParamSpec, Any], bool]: ...
     @_property
-    def dummy(self) -> list[None]: ...
+    def dummy(self) -> list[int | Any | None]: ...
 
 class ParamSpecDouble(ParamSpec):
     """
@@ -1918,7 +1965,7 @@ class ParamSpecVariant(ParamSpec):
     @_property
     def default_value(self) -> GLib.Variant: ...
     @_property
-    def padding(self) -> list[None]: ...
+    def padding(self) -> list[int | Any | None]: ...
 
 class Parameter(_gi.Struct):
     """
@@ -1986,17 +2033,20 @@ class SignalGroup(Object):
     def connect_data(
         self,
         detailed_signal: str,
-        c_handler: Callable[..., None],
+        c_handler: Callback[Unpack[_DataTs]],
         flags: ConnectFlags,
-        *data: Any,
+        *data: Unpack[_DataTs],
     ) -> None: ...
     def connect_swapped(
-        self, detailed_signal: str, c_handler: Callable[..., None], *data: Any
+        self,
+        detailed_signal: str,
+        c_handler: Callback[Unpack[_DataTs]],
+        *data: Unpack[_DataTs],
     ) -> None: ...
     def dup_target(self) -> Object | None: ...
     @classmethod
     def new(cls, target_type: type[Any]) -> SignalGroup: ...
-    def set_target(self, target: Object | None = None) -> None: ...
+    def set_target(self, target: Object | None = ...) -> None: ...
     def unblock(self) -> None: ...
 
 class SignalInvocationHint(_gi.Struct):
@@ -2063,10 +2113,12 @@ class TypeClass(_gi.Struct):
     def g_type(self) -> type[Any]: ...
     def add_private(self, private_size: int) -> None: ...
     @staticmethod
-    def adjust_private_offset(g_class: None, private_size_or_offset: int) -> None: ...
+    def adjust_private_offset(
+        g_class: int | Any | None, private_size_or_offset: int
+    ) -> None: ...
     @staticmethod
     def get(type: type[Any]) -> TypeClass: ...
-    def get_private(self, private_type: type[Any]) -> None: ...
+    def get_private(self, private_type: type[Any]) -> int | Any | None: ...
     @staticmethod
     def peek(type: type[Any]) -> TypeClass | None: ...
     def peek_parent(self) -> TypeClass: ...
@@ -2097,14 +2149,14 @@ class TypeInfo(_gi.Struct):
     """
 
     class_size: int
-    base_init: Callable[[TypeClass], None]
-    base_finalize: Callable[[TypeClass], None]
-    class_init: Callable[[TypeClass, None], None]
-    class_finalize: Callable[[TypeClass, None], None]
-    class_data: None
+    base_init: BaseInitFunc
+    base_finalize: BaseFinalizeFunc
+    class_init: ClassInitFunc
+    class_finalize: ClassFinalizeFunc
+    class_data: int | Any | None
     instance_size: int
     n_preallocs: int
-    instance_init: Callable[[TypeInstance, TypeClass], None]
+    instance_init: InstanceInitFunc
     value_table: TypeValueTable
 
 class TypeInstance(_gi.Struct):
@@ -2117,7 +2169,7 @@ class TypeInstance(_gi.Struct):
     """
     @_property
     def g_class(self) -> TypeClass: ...
-    def get_private(self, private_type: type[Any]) -> None: ...
+    def get_private(self, private_type: type[Any]) -> int | Any | None: ...
 
 class TypeInterface(_gi.Struct):
     """
@@ -2167,9 +2219,9 @@ class TypeModule(Object, TypePlugin):
     @_property
     def use_count(self) -> int: ...
     @_property
-    def type_infos(self) -> list[None]: ...
+    def type_infos(self) -> list[int | Any | None]: ...
     @_property
-    def interface_infos(self) -> list[None]: ...
+    def interface_infos(self) -> list[int | Any | None]: ...
     @_property
     def name(self) -> str: ...
     def add_interface(
@@ -2243,14 +2295,10 @@ class TypePluginClass(_gi.Struct):
     """
     @_property
     def base_iface(self) -> TypeInterface: ...
-    use_plugin: Callable[[TypePlugin], None]
-    unuse_plugin: Callable[[TypePlugin], None]
-    complete_type_info: Callable[
-        [TypePlugin, type[Any], TypeInfo, TypeValueTable], None
-    ]
-    complete_interface_info: Callable[
-        [TypePlugin, type[Any], type[Any], InterfaceInfo], None
-    ]
+    use_plugin: TypePluginUse
+    unuse_plugin: TypePluginUnuse
+    complete_type_info: TypePluginCompleteTypeInfo
+    complete_interface_info: TypePluginCompleteInterfaceInfo
 
 class TypeQuery(_gi.Struct):
     """
@@ -2275,14 +2323,14 @@ class TypeValueTable(_gi.Struct):
         TypeValueTable()
     """
 
-    value_init: Callable[[Any], None]
-    value_free: Callable[[Any], None]
-    value_copy: Callable[[Any], Any]
-    value_peek_pointer: Callable[[Any], None]
+    value_init: TypeValueInitFunc
+    value_free: TypeValueFreeFunc
+    value_copy: TypeValueCopyFunc
+    value_peek_pointer: TypeValuePeekPointerFunc
     collect_format: str
-    collect_value: Callable[[Any, Sequence[TypeCValue], int], str | None]
+    collect_value: TypeValueCollectFunc
     lcopy_format: str
-    lcopy_value: Callable[[Any, Sequence[TypeCValue], int], str | None]
+    lcopy_value: TypeValueLCopyFunc
 
 class Uri(GBoxed): ...
 
@@ -2318,7 +2366,7 @@ class Value(GBoxed):
     def get_long(self) -> int: ...
     def get_object(self) -> Object | None: ...
     def get_param(self) -> ParamSpec: ...
-    def get_pointer(self) -> None: ...
+    def get_pointer(self) -> int | Any | None: ...
     def get_schar(self) -> int: ...
     def get_string(self) -> str | None: ...
     def get_uchar(self) -> int: ...
@@ -2329,41 +2377,41 @@ class Value(GBoxed):
     def get_variant(self) -> GLib.Variant | None: ...
     def init(self, g_type: type[Any]) -> Any: ...
     def init_from_instance(self, instance: TypeInstance) -> None: ...
-    def peek_pointer(self) -> None: ...
+    def peek_pointer(self) -> int | Any | None: ...
     def reset(self) -> Any: ...
     def set_boolean(self, v_boolean: bool) -> None: ...
     # override
     def set_boxed(self, boxed: GBoxed) -> None: ...
-    def set_boxed_take_ownership(self, v_boxed: None) -> None: ...
+    def set_boxed_take_ownership(self, v_boxed: int | Any | None = ...) -> None: ...
     def set_char(self, v_char: int) -> None: ...
     def set_double(self, v_double: float) -> None: ...
     def set_enum(self, v_enum: int) -> None: ...
     def set_flags(self, v_flags: int) -> None: ...
     def set_float(self, v_float: float) -> None: ...
     def set_gtype(self, v_gtype: type[Any]) -> None: ...
-    def set_instance(self, instance: None) -> None: ...
+    def set_instance(self, instance: int | Any | None = ...) -> None: ...
     def set_int(self, v_int: int) -> None: ...
     def set_int64(self, v_int64: int) -> None: ...
-    def set_interned_string(self, v_string: str | None = None) -> None: ...
+    def set_interned_string(self, v_string: str | None = ...) -> None: ...
     def set_long(self, v_long: int) -> None: ...
-    def set_object(self, v_object: Object | None = None) -> None: ...
-    def set_param(self, param: ParamSpec | None = None) -> None: ...
-    def set_pointer(self, v_pointer: None) -> None: ...
+    def set_object(self, v_object: Object | None = ...) -> None: ...
+    def set_param(self, param: ParamSpec | None = ...) -> None: ...
+    def set_pointer(self, v_pointer: int | Any | None = ...) -> None: ...
     def set_schar(self, v_char: int) -> None: ...
-    def set_static_boxed(self, v_boxed: None) -> None: ...
-    def set_static_string(self, v_string: str | None = None) -> None: ...
-    def set_string(self, v_string: str | None = None) -> None: ...
-    def set_string_take_ownership(self, v_string: str | None = None) -> None: ...
+    def set_static_boxed(self, v_boxed: int | Any | None = ...) -> None: ...
+    def set_static_string(self, v_string: str | None = ...) -> None: ...
+    def set_string(self, v_string: str | None = ...) -> None: ...
+    def set_string_take_ownership(self, v_string: str | None = ...) -> None: ...
     def set_uchar(self, v_uchar: int) -> None: ...
     def set_uint(self, v_uint: int) -> None: ...
     def set_uint64(self, v_uint64: int) -> None: ...
     def set_ulong(self, v_ulong: int) -> None: ...
     def set_value(self, py_value: Any) -> None: ...
-    def set_variant(self, variant: GLib.Variant | None = None) -> None: ...
+    def set_variant(self, variant: GLib.Variant | None = ...) -> None: ...
     def steal_string(self) -> str | None: ...
-    def take_boxed(self, v_boxed: None) -> None: ...
-    def take_string(self, v_string: str | None = None) -> None: ...
-    def take_variant(self, variant: GLib.Variant | None = None) -> None: ...
+    def take_boxed(self, v_boxed: int | Any | None = ...) -> None: ...
+    def take_string(self, v_string: str | None = ...) -> None: ...
+    def take_variant(self, variant: GLib.Variant | None = ...) -> None: ...
     def transform(self, dest_value: Any) -> bool: ...
     @staticmethod
     def type_compatible(src_type: type[Any], dest_type: type[Any]) -> bool: ...
@@ -2385,15 +2433,20 @@ class ValueArray(GBoxed):
     values: Any
     @_property
     def n_prealloced(self) -> int: ...
-    def append(self, value: Any | None = None) -> ValueArray: ...
+    def append(self, value: Any | None = ...) -> ValueArray: ...
     def copy(self) -> ValueArray: ...
     def get_nth(self, index_: int) -> Any: ...
-    def insert(self, index_: int, value: Any | None = None) -> ValueArray: ...
+    def insert(self, index_: int, value: Any | None = ...) -> ValueArray: ...
     @classmethod
     def new(cls, n_prealloced: int) -> ValueArray: ...
-    def prepend(self, value: Any | None = None) -> ValueArray: ...
+    def prepend(self, value: Any | None = ...) -> ValueArray: ...
     def remove(self, index_: int) -> ValueArray: ...
-    def sort(self, compare_func: Callable[..., int], *user_data: Any) -> ValueArray: ...
+    # override
+    def sort(
+        self,
+        compare_func: GLib.CompareDataFunc[Any, Unpack[_DataTs]],
+        *user_data: Unpack[_DataTs],
+    ) -> ValueArray: ...
 
 class VariantBuilder(GBoxed): ...
 class VariantDict(GBoxed): ...

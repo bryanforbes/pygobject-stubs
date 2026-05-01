@@ -1,5 +1,5 @@
+from typing import Any
 from typing import Final
-from typing import TypeVar
 
 from collections.abc import Sequence
 from enum import IntEnum
@@ -8,8 +8,6 @@ from gi import _gi
 from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import Gst
-
-T = TypeVar("T")
 
 MIKEY_VERSION: Final[int]
 SDP_BWTYPE_AS: Final = "AS"
@@ -70,8 +68,8 @@ class MIKEYMessage(GObject.GBoxed):
     prf_func: MIKEYPRFFunc
     CSB_id: int
     map_type: MIKEYMapType
-    map_info: list[None]
-    payloads: list[None]
+    map_info: list[int | Any | None]
+    payloads: list[int | Any | None]
     def __init__(self) -> None: ...
     def add_cs_srtp(self, policy: int, ssrc: int, roc: int) -> bool: ...
     def add_payload(self, payload: MIKEYPayload) -> bool: ...
@@ -140,7 +138,7 @@ class MIKEYPayload(GObject.GBoxed):
     def key_data_set_key(
         self, key_type: MIKEYKeyDataType, key_data: Sequence[int]
     ) -> bool: ...
-    def key_data_set_salt(self, salt_data: Sequence[int] | None = None) -> bool: ...
+    def key_data_set_salt(self, salt_data: Sequence[int] | None = ...) -> bool: ...
     def key_data_set_spi(self, spi_data: Sequence[int]) -> bool: ...
     @classmethod
     def new(cls, type: MIKEYPayloadType) -> MIKEYPayload | None: ...
@@ -165,7 +163,7 @@ class MIKEYPayloadKEMAC(_gi.Struct):
     pt: MIKEYPayload
     enc_alg: MIKEYEncAlg
     mac_alg: MIKEYMacAlg
-    subpayloads: list[None]
+    subpayloads: list[int | Any | None]
 
 class MIKEYPayloadKeyData(_gi.Struct):
     """
@@ -225,7 +223,7 @@ class MIKEYPayloadSP(_gi.Struct):
     pt: MIKEYPayload
     policy: int
     proto: MIKEYSecProto
-    params: list[None]
+    params: list[int | Any | None]
 
 class MIKEYPayloadSPParam(_gi.Struct):
     """
@@ -265,7 +263,7 @@ class SDPAttribute(_gi.Struct):
     key: str
     value: str
     def clear(self) -> SDPResult: ...
-    def set(self, key: str, value: str | None = None) -> SDPResult: ...
+    def set(self, key: str, value: str | None = ...) -> SDPResult: ...
 
 class SDPBandwidth(_gi.Struct):
     """
@@ -325,13 +323,13 @@ class SDPMedia(_gi.Struct):
     port: int
     num_ports: int
     proto: str
-    fmts: list[None]
+    fmts: list[int | Any | None]
     information: str
-    connections: list[None]
-    bandwidths: list[None]
+    connections: list[int | Any | None]
+    bandwidths: list[int | Any | None]
     key: SDPKey
-    attributes: list[None]
-    def add_attribute(self, key: str, value: str | None = None) -> SDPResult: ...
+    attributes: list[int | Any | None]
+    def add_attribute(self, key: str, value: str | None = ...) -> SDPResult: ...
     def add_bandwidth(self, bwtype: str, bandwidth: int) -> SDPResult: ...
     def add_connection(
         self, nettype: str, addrtype: str, address: str, ttl: int, addr_number: int
@@ -402,16 +400,16 @@ class SDPMessage(GObject.GBoxed):
     session_name: str
     information: str
     uri: str
-    emails: list[None]
-    phones: list[None]
+    emails: list[int | Any | None]
+    phones: list[int | Any | None]
     connection: SDPConnection
-    bandwidths: list[None]
-    times: list[None]
-    zones: list[None]
+    bandwidths: list[int | Any | None]
+    times: list[int | Any | None]
+    zones: list[int | Any | None]
     key: SDPKey
-    attributes: list[None]
-    medias: list[None]
-    def add_attribute(self, key: str, value: str | None = None) -> SDPResult: ...
+    attributes: list[int | Any | None]
+    medias: list[int | Any | None]
+    def add_attribute(self, key: str, value: str | None = ...) -> SDPResult: ...
     def add_bandwidth(self, bwtype: str, bandwidth: int) -> SDPResult: ...
     def add_email(self, email: str) -> SDPResult: ...
     def add_media(self, media: SDPMedia) -> SDPResult: ...
@@ -524,7 +522,7 @@ class SDPTime(_gi.Struct):
 
     start: str
     stop: str
-    repeat: list[None]
+    repeat: list[int | Any | None]
     def clear(self) -> SDPResult: ...
     def set(self, start: str, stop: str, repeat: Sequence[str]) -> SDPResult: ...
 

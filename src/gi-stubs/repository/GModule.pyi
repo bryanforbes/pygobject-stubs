@@ -1,12 +1,15 @@
+from typing import Any
 from typing import Final
-from typing import TypeVar
+from typing import TypeAlias
 
+from collections.abc import Callable
 from enum import IntEnum
 from enum import IntFlag
 
 from gi import _gi
 
-T = TypeVar("T")
+ModuleCheckInit: TypeAlias = Callable[[Module], str]
+ModuleUnload: TypeAlias = Callable[[Module], None]
 
 MODULE_IMPL_AR: Final[int]
 MODULE_IMPL_DL: Final[int]
@@ -30,7 +33,7 @@ class Module(_gi.Struct):
     def name(self) -> str: ...
     @staticmethod
     def supported() -> bool: ...
-    def symbol(self, symbol_name: str) -> tuple[bool, None]: ...
+    def symbol(self, symbol_name: str) -> tuple[bool, int | Any | None]: ...
 
 class ModuleFlags(IntFlag):
     LAZY = 1

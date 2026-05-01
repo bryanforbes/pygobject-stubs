@@ -2,17 +2,22 @@ from typing import Any
 from typing import Final
 from typing import Protocol
 from typing import type_check_only
-from typing import TypeVar
+from typing import TypeAlias
+from typing_extensions import TypeVarTuple
+from typing_extensions import Unpack
 
 from collections.abc import Callable
-from collections.abc import Sequence
 
 from gi import _gi
 from gi.repository import Gio
 from gi.repository import GLib
 from gi.repository import GObject
 
-T = TypeVar("T")
+_DataTs = TypeVarTuple("_DataTs", default=Unpack[tuple[()]])
+
+DesktopAppLaunchCallback: TypeAlias = Callable[
+    [DesktopAppInfo, int, Unpack[_DataTs]], None
+]
 
 DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME: Final = "gio-desktop-app-info-lookup"
 
@@ -91,34 +96,36 @@ class DesktopAppInfo(GObject.Object, Gio.AppInfo):
     def get_keywords(self) -> list[str]: ...
     def get_locale_string(self, key: str) -> str | None: ...
     def get_nodisplay(self) -> bool: ...
-    def get_show_in(self, desktop_env: str | None = None) -> bool: ...
+    def get_show_in(self, desktop_env: str | None = ...) -> bool: ...
     def get_startup_wm_class(self) -> str | None: ...
     def get_string(self, key: str) -> str | None: ...
     def get_string_list(self, key: str) -> list[str]: ...
     def has_key(self, key: str) -> bool: ...
     def launch_action(
-        self, action_name: str, launch_context: Gio.AppLaunchContext | None = None
+        self, action_name: str, launch_context: Gio.AppLaunchContext | None = ...
     ) -> None: ...
     def launch_uris_as_manager(
         self,
         uris: list[str],
         launch_context: Gio.AppLaunchContext | None,
         spawn_flags: GLib.SpawnFlags,
-        user_setup: Callable[..., None] | None = None,
-        pid_callback: Callable[..., None] | None = None,
-        *pid_callback_data: Any,
+        user_setup: GLib.SpawnChildSetupFunc | None = ...,
+        user_setup_data: int | Any | None = ...,
+        pid_callback: DesktopAppLaunchCallback[Unpack[_DataTs]] | None = ...,
+        *pid_callback_data: Unpack[_DataTs],
     ) -> bool: ...
     def launch_uris_as_manager_with_fds(
         self,
         uris: list[str],
         launch_context: Gio.AppLaunchContext | None,
         spawn_flags: GLib.SpawnFlags,
-        user_setup: Callable[..., None] | None,
-        pid_callback: Callable[..., None] | None,
+        user_setup: GLib.SpawnChildSetupFunc | None,
+        user_setup_data: int | Any | None,
+        pid_callback: DesktopAppLaunchCallback[Unpack[_DataTs]] | None,
         stdin_fd: int,
         stdout_fd: int,
         stderr_fd: int,
-        *pid_callback_data: Any,
+        *pid_callback_data: Unpack[_DataTs],
     ) -> bool: ...
     def list_actions(self) -> list[str]: ...
     @classmethod
@@ -128,7 +135,7 @@ class DesktopAppInfo(GObject.Object, Gio.AppInfo):
     @classmethod
     def new_from_keyfile(cls, key_file: GLib.KeyFile) -> DesktopAppInfo | None: ...
     @staticmethod
-    def search(search_string: str) -> list[Sequence[str]]: ...
+    def search(search_string: str) -> list[list[str]]: ...
     @staticmethod
     def set_desktop_env(desktop_env: str) -> None: ...
 
