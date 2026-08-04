@@ -7,9 +7,12 @@ from typing import get_args
 from typing import get_origin
 from typing import Literal
 from typing import overload
+from typing import Protocol
 from typing import TYPE_CHECKING
 from typing import TypeAlias
+from typing import TypeVar
 from typing_extensions import get_overloads
+from typing_extensions import ParamSpec
 
 import inspect
 import re
@@ -20,10 +23,24 @@ from dataclasses import InitVar
 from dataclasses import replace
 from enum import IntEnum
 from enum import IntFlag
+from functools import wraps
 from types import ModuleType
 
 import gi
 import gi._gi as GI
+
+from pygobject_stub_generator.info import Callback
+from pygobject_stub_generator.info import Class
+from pygobject_stub_generator.info import Constant
+from pygobject_stub_generator.info import DiscoveryContext
+from pygobject_stub_generator.info import Enum
+from pygobject_stub_generator.info import Field
+from pygobject_stub_generator.info import GIFunction
+from pygobject_stub_generator.info import GObjectInit
+from pygobject_stub_generator.info import Module
+from pygobject_stub_generator.info import Param
+from pygobject_stub_generator.info import PyFunction
+from pygobject_stub_generator.info import Return
 
 from .arguments import Arguments
 from .arguments import VisibleArgument
@@ -32,6 +49,7 @@ from .import_info import FromImportInfo
 from .import_info import ImportInfo
 from .type_var_info import TypeVarInfo
 from .type_var_info import TypeVarTupleInfo
+from .utils import fix_python_identifier
 from .utils import generate_full_name
 from .utils import get_finish_func
 from .utils import get_return_type
@@ -59,6 +77,8 @@ _Object: TypeAlias = ModuleType | type[Any]
 _FunctionMode: TypeAlias = Literal[
     "sync", "awaitable", "async_callback", "async_callback_kwargs"
 ]
+_P = ParamSpec("_P")
+_R = TypeVar("_R")
 
 _identifier_re: Final = re.compile(r"^[A-Za-z_]\w*$")
 _typing_re: Final = re.compile(r"(?:typing\.)(?P<name>\w+)\b")
@@ -72,7 +92,6 @@ _import_re: Final = re.compile(
 _type_vars_re: Final = re.compile(r"(?<!\w)[~+-](?P<name>[A-Za-z_]\w*)\b")
 _strip_boolean_result_re: Final = re.compile(r"\bstrip_boolean_result\b")
 
-_RESERVED_KEYWORDS: Final = {"async"}
 _ALLOWED_FUNCTIONS: Final = {
     "__new__",
     "__init__",
@@ -161,6 +180,27 @@ def _replace_union(formatted: str) -> str:
     return formatted
 
 
+class _Named(Protocol):
+    @property
+    def full_name(self) -> str: ...
+
+
+_F = TypeVar("_F", bound="Callable[..., str]")
+
+
+def _check_override(
+    func: _F,
+) -> _F:
+    @wraps(func)
+    def wrapper(self: Stub, node: _Named, /, *args: object, **kwargs: object) -> str:
+        if (override := self.check_override(node)) is not None:
+            return override
+
+        return func(self, node, *args, **kwargs)
+
+    return cast("_F", wrapper)
+
+
 @dataclass(slots=True)
 class Stub:
     repo: GIRepository.Repository
@@ -210,8 +250,23 @@ class Stub:
         if self.namespace == "Gtk":
             self.get_import("os")
 
-    def check_override(self, prefix: str, name: str) -> str | None:
-        full_name = generate_full_name(prefix, name)
+    @overload
+    def check_override(self, prefix: _Named) -> str | None: ...
+    @overload
+    def check_override(self, prefix: str, name: str) -> str | None: ...
+    def check_override(
+        self, prefix: str | _Named, name: str | None = None
+    ) -> str | None:
+        full_name = (
+            (
+                prefix.full_name
+                if not prefix.full_name.startswith(f"{self.namespace}.")
+                else prefix.full_name[len(f"{self.namespace}.") :]
+            )
+            if not isinstance(prefix, str)
+            else generate_full_name(prefix, cast("str", name))
+        )
+
         if full_name in self.overrides:
             return "# override\n" + self.__fix_annotations(self.overrides[full_name])
         return None
@@ -450,12 +505,7 @@ class Stub:
         return f"{self.get_import(module, name)}{args}"
 
     def fix_argument_name(self, name: str | None, /) -> str:
-        if name is None:
-            raise ValueError("Argument name cannot be None")
-
-        if name in _RESERVED_KEYWORDS:
-            name = f"_{name}"
-        return name.replace("-", "_")
+        return fix_python_identifier(name)
 
     def get_callable_arguments(
         self,
@@ -1564,3 +1614,746 @@ class Stub:
             + "\n\n"
             + ret
         )
+
+    @_check_override
+    def render_constant(self, node: Constant, /) -> str:
+        value = node.value
+        if str(value.__class__).startswith(("<flag", "<enum")):
+            value = cast("Any", value).real
+
+        if (isinstance(value, str) and len(value) <= 50) or isinstance(value, bool):
+            return f"{node.name}: {self.get_final()} = {value!r}"
+
+        in_class = not isinstance(node.parent, Module)
+
+        if (
+            isinstance(node.value, (str, float, int))
+            or node.annotation is not None
+            or not in_class
+        ):
+            annotation_string = (
+                self.format_annotation(node.annotation)
+                if node.annotation is not None
+                else value.__class__.__name__
+            )
+            return f"{node.name}: {self.get_final(annotation_string)}"
+
+        constant_annotation = "" if in_class else f": {self.get_final()}"
+        return f"{node.name}{
+            constant_annotation
+        } = ...  # FIXME: Constant is missing typing annotation\n"
+
+    @_check_override
+    def render_field(self, node: Field, /) -> str:
+        py_type = self.render_type_info(node)
+        flags = node.info.get_flags()
+        if not (flags & GI.FieldInfoFlags.IS_WRITABLE):
+            return self.get_property(node.name, (py_type, None))
+
+        return f"{node.name}: {py_type}"
+
+    @_check_override
+    def render_enum(self, node: Enum, /) -> str:
+        if (
+            isinstance(node.parent, Module)
+            and (alias := self.get_alias(node.name, node.cls)) is not None
+        ):
+            return f"{node.name} = {alias}"
+
+        enum_base = (
+            self.get_namespace_member("GObject", "GFlags" if node.is_flags else "GEnum")
+            if node.is_gobject
+            else self.get_import("enum", "IntFlag" if node.is_flags else "IntEnum")
+        )
+
+        body: list[str] = []
+        names: set[str] = set()
+
+        for key in sorted(vars(node.cls)):
+            if key.startswith(("__", "_")) or key[0].isdigit():
+                continue
+
+            enum_attr = getattr(node.cls, key)
+
+            if override := self.check_override(node.full_name, key):
+                body.append(override)
+                continue
+
+            if isinstance(enum_attr, GI.FunctionInfo):
+                body.append(
+                    self.render_function(PyFunction.for_function(key, enum_attr, node))
+                )
+            elif hasattr(enum_attr, "real"):
+                value = enum_attr.real
+                body.append(f"{key} = {value}")
+
+                if node.is_gobject:
+                    names.update(
+                        (*enum_attr.value_names, *enum_attr.value_nicks)
+                        if node.is_flags
+                        else (enum_attr.value_name, enum_attr.value_nick)
+                    )
+            else:
+                body.append(
+                    f"{key} = ...  # FIXME: {'Flags' if node.is_flags else 'Enum'}"
+                )
+
+        if not body:
+            # No attributes were found
+            body = ["..."]
+
+        body_string = textwrap.indent("\n".join(body), "    ")
+        cls_definition = f"class {node.name}({enum_base}):\n{body_string}"
+
+        if names:
+            literal_type_name = f"_{node.name}LiteralType"
+            literal_type_symbol = self.get_type_alias(literal_type_name)
+            value_type_symbol = self.get_type_alias(f"_{node.name}ValueType")
+
+            names_joined = ", ".join(repr(n) for n in sorted(names))
+            value_type = f"{node.name} | {literal_type_name}"
+
+            if node.is_flags:
+                value_type = f"{value_type} | tuple[{literal_type_name}, ...]"
+
+            cls_definition = f"""{cls_definition}
+{literal_type_symbol} = {self.get_literal(names_joined)}
+{value_type_symbol} = {value_type}"""
+
+        return cls_definition
+
+    def render_props_property(
+        self, node: Class, /, has_props_class: bool = False
+    ) -> str:
+        if override := self.check_override(node.full_name, "props"):
+            return override
+
+        if node.is_gobject and has_props_class:
+            return self.get_property("props", ("Props", None))
+
+        return ""
+
+    def render_props_class(self, node: Class, /) -> str:
+        if override := self.check_override(node.full_name, "Props"):
+            return override
+
+        if (
+            not isinstance(node.info, (GI.ObjectInfo, GI.InterfaceInfo))
+            or not node.properties
+        ):
+            return ""
+
+        lines: list[str] = [
+            prop_definition
+            for name, prop_info in node.properties.items()
+            if (
+                prop_definition := self.get_property(
+                    name,
+                    (
+                        self.render_type_info(
+                            prop_info.type_info,
+                            nullable=prop_info.read_nullable,
+                            out=True,
+                        )
+                        if prop_info.readable
+                        else None,
+                        self.render_type_info(
+                            prop_info.type_info,
+                            nullable=prop_info.write_nullable,
+                        )
+                        if prop_info.writable and not prop_info.construct_only
+                        else None,
+                    ),
+                )
+            )
+        ]
+
+        props_string = "\n".join(lines) if lines else "..."
+        parents_string = ""
+        if isinstance(node.info, GI.ObjectInfo) and (parent := node.info.get_parent()):
+            parent_name = f"{parent.get_name()}"
+            parents_string = f"({
+                self.get_namespace_member(parent.get_namespace(), parent_name)
+            }.Props)"
+
+        return f"""@{self.get_import("typing", "type_check_only")}
+class Props{parents_string}:
+{textwrap.indent(props_string, "    ")}"""
+
+    def render_props(self, node: Class, /) -> str:
+        lines: list[str] = []
+
+        if props_class := self.render_props_class(node):
+            lines.append(props_class)
+
+        if props_property := self.render_props_property(
+            node, has_props_class=bool(props_class)
+        ):
+            lines.append(props_property)
+
+        return "\n".join(lines).strip()
+
+    def render_type_info(
+        self,
+        node: Param | Return | Field | GI.TypeInfo,
+        /,
+        *,
+        out: bool = False,
+        nullable: bool = False,
+        closure_target: bool = False,
+    ) -> str:
+        if isinstance(node, GI.TypeInfo):
+            info = node
+        elif isinstance(node, Field):
+            info = node.info.get_type_info()
+            out = True
+        else:
+            info = node.info
+            out = isinstance(node, Return)
+            nullable = (
+                node.nullable if isinstance(node, Return) else node.default_is_none
+            )
+            closure_target = node.closure_target if isinstance(node, Param) else False
+
+        if isinstance(info, Callback):
+            return self.render_callback(info)
+
+        py_type: str | None = None
+
+        match info.get_tag():
+            case GI.TypeTag.BOOLEAN:
+                py_type = "bool"
+            case (
+                GI.TypeTag.INT8
+                | GI.TypeTag.INT16
+                | GI.TypeTag.INT32
+                | GI.TypeTag.INT64
+                | GI.TypeTag.UINT8
+                | GI.TypeTag.UINT16
+                | GI.TypeTag.UINT32
+                | GI.TypeTag.UINT64
+            ):
+                py_type = "int"
+            case GI.TypeTag.DOUBLE | GI.TypeTag.FLOAT:
+                py_type = "float"
+            case GI.TypeTag.UTF8 | GI.TypeTag.FILENAME | GI.TypeTag.UNICHAR:
+                py_type = "str"
+            case (GI.TypeTag.ARRAY | GI.TypeTag.GLIST | GI.TypeTag.GSLIST) as tag:
+                value_info = info.get_param_type(0)
+
+                if TYPE_CHECKING:
+                    assert value_info is not None
+
+                value_type = self.render_type_info(value_info, out=out)
+
+                if tag == GI.TypeTag.ARRAY:
+                    if out:
+                        # As output argument array of type uint8 are returned as bytes
+                        if value_info.get_tag() == GI.TypeTag.UINT8:
+                            py_type = "bytes"
+                        else:
+                            py_type = f"list[{value_type}]"
+                    else:
+                        # As input arguments array can be generated by any sequence
+                        py_type = f"{self.get_import('collections.abc', 'Sequence')}[{
+                            value_type
+                        }]"
+                else:
+                    py_type = f"list[{value_type}]"
+
+                # All return/out/inout arrays/lists get marshalled as a list, regardless
+                # of nullable
+                nullable = nullable and not out
+            case GI.TypeTag.GHASH:
+                key_info = info.get_param_type(0)
+                value_info = info.get_param_type(1)
+
+                if TYPE_CHECKING:
+                    assert key_info is not None
+                    assert value_info is not None
+
+                key_type = self.render_type_info(key_info, out=out)
+                value_type = self.render_type_info(value_info, out=out)
+                collection_type = (
+                    "dict" if out else self.get_import("collections.abc", "Mapping")
+                )
+
+                py_type = f"{collection_type}[{key_type}, {value_type}]"
+            case GI.TypeTag.INTERFACE:
+                interface_info = info.get_interface()
+                if isinstance(interface_info, GI.CallbackInfo):
+                    py_type = self.render_callback(
+                        Callback.for_callback(interface_info)
+                    )
+                elif (
+                    isinstance(interface_info, GI.EnumInfo)
+                    and interface_info.get_g_type() != GObject.TYPE_NONE
+                ):
+                    interface_namespace = interface_info.get_namespace()
+                    interface_name = f"{interface_info.get_name()}"
+
+                    # cairo doesn't use the `_<iface>ValueType` convention
+                    if not out and interface_namespace != "cairo":
+                        interface_name = f"_{interface_name}ValueType"
+
+                    py_type = self.get_namespace_member(
+                        interface_namespace, interface_name
+                    )
+                elif interface_info is not None:
+                    interface_namespace = interface_info.get_namespace()
+                    interface_name = interface_info.get_name()
+
+                    if interface_namespace == "GObject" and interface_name == "Value":
+                        py_type = self.get_import("typing", "Any")
+
+                    elif (
+                        interface_namespace == "GObject" and interface_name == "Closure"
+                    ):
+                        py_type = f"{
+                            self.get_import('collections.abc', 'Callable')
+                        }[..., {self.get_import('typing', 'Any')}]"
+
+                    elif (
+                        interface_namespace == "cairo"
+                        and interface_name == "Context"
+                        and not out
+                    ):
+                        some_surface = self.get_typevar(
+                            "_SomeSurface",
+                            bound=f"{self.get_namespace_member('cairo', 'Surface')}",
+                        )
+                        py_type = f"{self.get_namespace_member('cairo', 'Context')}[{
+                            some_surface
+                        }]"
+                    else:
+                        py_type = self.get_namespace_member(
+                            interface_namespace, f"{interface_name}"
+                        )
+            case GI.TypeTag.VOID:
+                if info.is_pointer():
+                    if closure_target:
+                        # Arguments passed to callbacks are specially handled by the
+                        # PyGObject marshalling code, so they can be anything
+                        py_type = f"{self.get_import('typing', 'Any')} | None"
+                    else:
+                        # Pointers can be int | CapsuleType | None, but we don't have
+                        # CapsuleType until 3.13 This is what typeshed did until 3.13
+                        py_type = (
+                            "int"
+                            if out
+                            else f"int | {self.get_import('typing', 'Any')} | None"
+                        )
+
+                    # All return/out/inout pointers get marshalled as int, regardless of
+                    # nullable
+                    nullable = nullable and not out
+                else:
+                    py_type = "None"
+            case GI.TypeTag.GTYPE:
+                py_type = f"type[{self.get_import('typing', 'Any')}]"
+            case GI.TypeTag.ERROR:
+                py_type = self.get_namespace_member("GLib", "Error")
+
+        if py_type is None:
+            raise ValueError(f"Unsupported GI type tag: {info.get_tag()}")
+
+        if nullable:
+            py_type = make_nullable(py_type)
+
+        return py_type
+
+    def render_callback(self, node: Callback, /) -> str:
+        callable_symbol = self.get_import("collections.abc", "Callable")
+        param_types = [self.render_param(param) for param in node.params]
+        return_types = [self.render_return(ret) for ret in node.returns]
+
+        return f"{callable_symbol}[[{', '.join(param_types)}], {
+            get_return_type(return_types)
+        }]"
+
+    def render_return(self, node: Return, /) -> str:
+        type_info = (
+            self.render_type_info(node)
+            if isinstance(node.info, GI.TypeInfo)
+            else self.render_callback(node.info)
+        )
+
+        if node.nullable:
+            type_info = make_nullable(type_info)
+
+        return type_info
+
+    def render_param(self, node: Param, /) -> str:
+        type_info = (
+            self.render_type_info(node)
+            if isinstance(node.info, GI.TypeInfo)
+            else self.render_callback(node.info)
+        )
+
+        if node.kind == "callback":
+            return type_info
+
+        return ""
+
+    def render_gi_function(
+        self,
+        node: GIFunction,
+        /,
+    ) -> str:
+        lines: list[str] = []
+
+        # Flags
+        function_flags = node.info.get_flags()
+
+        is_vfunc = isinstance(node.info, GI.VFuncInfo)
+        constructor = bool(function_flags & GI.FunctionInfoFlags.IS_CONSTRUCTOR)
+        method = is_vfunc or bool(function_flags & GI.FunctionInfoFlags.IS_METHOD)
+        static = not isinstance(node.parent, Module) and not method and not constructor
+
+        return_type = get_return_type([self.render_return(ret) for ret in node.returns])
+        if node.wrapped is not MISSING:
+            if node.wrapped is None:
+                return_type = make_nullable(return_type)
+            else:
+                if type(node.wrapped) is tuple:
+                    if len(node.wrapped) > 0:
+                        return_type = f"({return_type} | tuple{
+                            str(node.wrapped).replace('(', '[').replace(')', ']')
+                        })"
+                    else:
+                        return_type = f"({return_type} | tuple[()])"
+                else:
+                    return_type = f"({return_type} | {
+                        self.get_import('typing', 'Literal')
+                    }[{node.wrapped}])"
+
+        params = node.params
+
+        param_types = [
+            param.name if param.name == "*" else self.render_param(param)
+            for param in params
+        ]
+
+        if constructor:
+            if node.name == "__init__":
+                # We pass the "new" constructor with the name __init__ because type
+                # checkers do better with __init__ signatures, so we have to change the
+                # signature a bit
+                param_types.insert(0, "self")
+                return_type = "None"
+            else:
+                lines.append("@classmethod")
+                param_types.insert(0, "cls")
+                # Override return value, for example Gtk.Button.new returns a Gtk.Widget
+                # instead of Gtk.Button
+                class_method_return_type = node.info.get_container().get_name()
+                if (
+                    class_method_return_type is not None
+                    and return_type != f"{class_method_return_type} | None"
+                ):
+                    return_type = class_method_return_type
+        elif method:
+            param_types.insert(0, "self")
+        elif static:
+            lines.append("@staticmethod")
+
+        lines.append(f"def {node.name}() -> None: ...")
+
+        result = "\n".join(lines).strip()
+
+        if node.wrapped is not MISSING:
+            result = f"{result} # CHECK Wrapped function"
+
+        return result
+
+    def render_python_function(
+        self, node: PyFunction, /, overload: Callable[..., object] | None = None
+    ) -> str:
+        if overload is None and (overloads := get_overloads(node.func)):
+            return "\n".join(
+                f"@{self.get_import('typing', 'overload')}\n{
+                    self.render_python_function(node, overload=overload)
+                }"
+                for overload in overloads
+            )
+
+        function = node.func if overload is None else overload
+        signature_string: str
+        missing_annotation = False
+
+        try:
+            signature = inspect.signature(function)
+
+            if node.name == "__init__" and signature.parameters:
+                # Since we pass in __new__ with the name __init__, we need to replace
+                # the `cls` parameter with `self` and set the return annotation to
+                # `None`
+                parameters = list(signature.parameters.values())
+                parameters[0] = parameters[0].replace(
+                    name="self", annotation=inspect.Parameter.empty
+                )
+                signature = signature.replace(
+                    parameters=parameters, return_annotation=None
+                )
+            for param in signature.parameters.values():
+                if param.name != "self" and param.annotation is inspect.Parameter.empty:
+                    missing_annotation = True
+            if signature.return_annotation is inspect.Signature.empty:
+                missing_annotation = True
+
+            signature_string = self.format_signature(signature)
+        except Exception:
+            missing_annotation = True
+            signature_string = f"({
+                'self, ' if isinstance(node.parent, (Class, Enum)) else ''
+            }*args, **kwargs)".strip()
+
+        function_string = f"def {node.name}{signature_string}:"
+        if docstring := (function.__doc__ or "").strip():
+            docstring = textwrap.indent(f'"""\n{docstring}\n"""', "    ")
+            function_string = f"{function_string}\n{docstring}"
+        else:
+            function_string = f"{function_string} ..."
+
+        if missing_annotation:
+            function_string = (
+                f"{function_string}  # FIXME: Override is missing typing annotation"
+            )
+
+        return function_string
+
+    def render_function(self, node: PyFunction | GIFunction, /) -> str:
+        if node.name.startswith("_") and node.name not in _ALLOWED_FUNCTIONS:
+            return ""
+
+        if (override := self.check_override(node)) is not None:
+            return override
+
+        if isinstance(node, GIFunction):
+            if node.name == "access":
+                breakpoint()
+
+            return self.render_gi_function(node)
+
+        return self.render_python_function(node)
+
+        in_class = node.parent.cls if isinstance(node.parent, (Class, Enum)) else None
+
+        if hasattr(node.func, "__wrapped__") and _strip_boolean_result_re.search(
+            str(node.func)
+        ):
+            return self.render_wrapped_boolean_result_function(node)
+
+        if isinstance(info := node.callable_info, (GI.FunctionInfo, GI.VFuncInfo)):
+            if in_class is None and info.get_namespace() != self.namespace:
+                # Set up a constant for functions that are aliases
+                return f"{node.name}: {self.get_final()} = {
+                    self.get_namespace_member(info)
+                }\n"
+
+            if isinstance(info, GI.FunctionInfo):
+                finish_func = node.finish_function
+
+                if finish_func is not None and not (
+                    info.get_flags() & GI.FunctionInfoFlags.IS_CONSTRUCTOR
+                ):
+                    return ""  # TODO: build async overrides
+
+            return self.render_gi_function(node, info)
+
+        if (
+            isinstance(node.parent, Module)
+            and (alias := self.get_alias(node.name, node.func)) is not None
+        ):
+            # Set up a constant for functions that are aliases
+            return f"{node.name}: {self.get_final()} = {alias}\n"
+
+        return self.render_python_function(node)
+
+    @_check_override
+    def render_gobject_init(self, node: GObjectInit, /) -> str:
+        if not node.init_properties:
+            return ""
+
+        args = [
+            f"{name}: {
+                self.type_info_to_python(prop.type_info, nullable=prop.write_nullable)
+            } = ..."
+            for name, prop in node.init_properties.items()
+        ]
+
+        return f"def __init__(self, *, {', '.join(args)}) -> None: ..."
+
+    @_check_override
+    def render_class_init(self, node: PyFunction | GObjectInit, /) -> str:
+        if isinstance(node, GObjectInit):
+            return self.render_gobject_init(node)
+
+        return self.render_function(node)
+
+    @_check_override
+    def render_class(self, node: Class, /) -> str:
+        in_class = node.parent.cls if isinstance(node.parent, Class) else None
+
+        if not in_class and (alias := self.get_alias(node.name, node.cls)) is not None:
+            # Set up a constant for classes that are aliases
+            # NOTE: this should not use `Final` because doing so turns the alias into
+            # a variable rather than a class
+            return f"{node.name} = {alias}"
+
+        body: list[str] = []
+
+        # extracting docs
+        docs = (
+            f"{(getattr(node.cls, '__doc__', '') or '').strip()}\n\n{
+                getattr(node.cls, '__gdoc__', '') or ''
+            }"
+        ).strip()
+
+        if docs:
+            body.append('"""\n' + docs.strip() + '\n"""')
+
+        if node.is_gobject and (class_props := self.render_props(node)):
+            body.append(class_props)
+
+        body.extend(self.render_field(field) for field in node.fields.values())
+
+        if node.init:
+            body.append(self.render_class_init(node.init))
+
+        for name, annotation in sorted(node.annotations.items()):
+            body.append(f"{name}: {self.format_annotation(annotation)}")
+
+        body.extend(
+            self.render_constant(constant)
+            for name, constant in sorted(node.constants.items())
+            if not name[0].isdigit()
+        )
+
+        if body and node.methods:
+            body.append("")
+
+        body.extend(
+            self.render_function(func) for _, func in sorted(node.methods.items())
+        )
+
+        if body and node.nested_classes:
+            body.append("")
+
+        body.extend(
+            self.render_class(cls) for _, cls in sorted(node.nested_classes.items())
+        )
+
+        body_string = textwrap.indent("\n".join(body), "    ")
+        body_string = f"\n{body_string}" if body_string else " ..."
+
+        string_parents = ""
+        if node.bases:
+            bases_strings = [
+                self.get_class_import(base) for base in node.bases if base is not object
+            ]
+
+            string_parents = f"({', '.join(bases_strings)})"
+
+        return f"class {node.name}{string_parents}:{body_string}"
+
+    def render_module(self, node: Module, /) -> str:
+        parts: list[str] = []
+
+        for name, annotation in sorted(node.annotations.items()):
+            if name not in node.constants:
+                parts.append(f"{name}: {self.format_annotation(annotation)}")
+
+        parts.extend(
+            self.render_constant(constant)
+            for name, constant in sorted(node.constants.items())
+            if not name[0].isdigit()
+        )
+
+        if parts and node.functions:
+            parts.append("")
+
+        parts.extend(
+            self.render_function(func) for _, func in sorted(node.functions.items())
+        )
+
+        if parts and node.classes:
+            parts.append("")
+
+        parts.extend(self.render_class(cls) for _, cls in sorted(node.classes.items()))
+
+        if parts and node.flags:
+            parts.append("")
+
+        parts.extend(self.render_enum(enum) for _, enum in sorted(node.flags.items()))
+
+        if parts and node.enums:
+            parts.append("")
+
+        parts.extend(self.render_enum(enum) for _, enum in sorted(node.enums.items()))
+
+        extras: list[str] = []
+
+        if self.namespace == "GObject":
+            # TODO: find a better way to keep things (like protocols) that aren't in the
+            # actual module but are needed for the stubs
+            object_protocol = self.check_override("", "ObjectProtocol")
+
+            if object_protocol is not None:
+                extras.append(object_protocol)
+
+        if self.namespace == "Gio":
+            async_ready_callback = self.get_type_alias("_AsyncReadyCallback")
+            async_ready_var_args_callback = self.get_type_alias(
+                "_AsyncReadyVarArgsCallback"
+            )
+            unpack_data_ts_symbol = self.get_unpack_data_ts()
+            gobject_protocol_symbol = self.get_namespace_member(
+                "GObject", "ObjectProtocol"
+            )
+            source_typevar_symbol = self.get_typevar(
+                "_SourceObjectT", bound=f"{gobject_protocol_symbol} | None"
+            )
+            t_co_symbol = self.get_typevar(
+                "_T", covariant=True, default=self.get_import("typing", "Any")
+            )
+
+            async_result_symbol = self.get_namespace_member("Gio", "AsyncResult")
+            callable_symbol = self.get_import("collections.abc", "Callable")
+            extras.extend(
+                [
+                    f"{async_ready_callback} = {callable_symbol}[[{
+                        source_typevar_symbol
+                    }, {async_result_symbol}, {t_co_symbol}], None]",
+                    f"{async_ready_var_args_callback} = {callable_symbol}[[{
+                        source_typevar_symbol
+                    }, {async_result_symbol}, {unpack_data_ts_symbol}], None]",
+                ]
+            )
+
+        imports = [f"{_import}" for _import in self.needed_imports.values()]
+
+        imports_str = "\n".join(imports)
+        extras_str = "\n".join(extras)
+        parts_str = "\n".join(parts)
+
+        # Only keep the typevars that are actually used in the generated stubs
+        used_typevars: list[str] = []
+        for typevar in self.needed_typevars:
+            typevar_re = re.compile(rf"\b{typevar.name}\b")
+
+            if (
+                typevar_re.search(extras_str) is not None
+                or typevar_re.search(parts_str) is not None
+            ):
+                used_typevars.append(typevar.build(self))
+
+        used_typevars_str = "\n".join(used_typevars)
+
+        return f"{imports_str}\n\n{used_typevars_str}\n\n{extras_str}\n\n{parts_str}\n"
+
+    def build_from_info(self) -> str:
+        module = Module.from_module(
+            cast("Any", self.parent), DiscoveryContext(self.namespace, self.repo)
+        )
+        return self.render_module(module)

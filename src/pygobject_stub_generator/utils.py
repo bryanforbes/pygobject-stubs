@@ -177,3 +177,16 @@ def cache_slot(
         return wrap
 
     return wrap(func)
+
+
+_RESERVED_KEYWORDS: Final = {"async"}
+
+
+def fix_python_identifier(name: str | None, /) -> str:
+    if name is None:
+        raise ValueError("Argument name cannot be None")
+
+    if name in _RESERVED_KEYWORDS:
+        name = f"_{name}"
+
+    return name.replace("-", "_")

@@ -29,10 +29,18 @@ def _build(
     module: str,
     version: str,
     init: str | None,
-    overrides: Overrides,
-    imports: Imports,
-    typevars: TypeVars,
+    overrides: Overrides | None = None,
+    imports: Imports | None = None,
+    typevars: TypeVars | None = None,
+    test_discovery: bool = False,
 ) -> str:
+    if overrides is None:
+        overrides = {}
+    if imports is None:
+        imports = []
+    if typevars is None:
+        typevars = []
+
     repo = GIRepository.Repository()
     repo.require(module, version, 0)  # type: ignore
 
@@ -42,7 +50,7 @@ def _build(
     if init:
         exec(init)
     stub = Stub(repo, m, module, overrides, imports, typevars)
-    return stub.build()
+    return stub.build() if not test_discovery else stub.build_from_info()
 
 
 def _format(output: str, formatters: list[str], /, *, file: Path | None = None) -> str:
@@ -95,30 +103,52 @@ def main() -> None:
         default=[],
         help='Formatter to run on generated stub (e.g. --format "black -q -")',
     )
+    parser.add_argument(
+        "--test-discovery",
+        action="store_true",
+    )
 
     args = parser.parse_args()
     update_file: Path | None = args.update
 
+    overrides: Overrides | None = None
+    imports: Imports | None = None
+    typevars: TypeVars | None = None
+
+    if update_file and update_file.exists():
+        overrides, imports, typevars = parse(update_file.read_text())
+
+    output = _build(
+        args.module,
+        args.version,
+        args.init,
+        overrides,
+        imports,
+        typevars,
+        test_discovery=True,
+    )
+
+    # if args.test_discovery:
+    #     new_output = _build(
+    #         args.module,
+    #         args.version,
+    #         args.init,
+    #         overrides,
+    #         imports,
+    #         typevars,
+    #         test_discovery=True,
+    #     )
+
+    #     assert _format(output, args.format) == _format(new_output, args.format), (
+    #         "Discovery test failed: generated output differs when building from info vs "
+    #         "building from stub"
+    #     )
+    #     return
+
     if update_file is not None:
-        overrides: Overrides = {}
-        imports: Imports = []
-        typevars: TypeVars = []
-
-        if update_file.exists():
-            overrides, imports, typevars = parse(update_file.read_text())
-
-        output = _build(
-            args.module, args.version, args.init, overrides, imports, typevars
-        )
-
         print("Running with these overrides:")
         pprint.pprint(overrides)
 
-        output = _format(output, args.format, file=update_file)
-        update_file.write_text(output)
+        update_file.write_text(_format(output, args.format, file=update_file))
     else:
-        print(
-            _format(
-                _build(args.module, args.version, args.init, {}, [], []), args.format
-            )
-        )
+        print(_format(output, args.format))

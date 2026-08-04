@@ -18,3 +18,4 @@ src/gi-stubs/repository/GtkSource.pyi
 src/gi-stubs/repository/JavaScriptCore.pyi
 src/gi-stubs/repository/Soup.pyi
 src/gi-stubs/repository/WebKit.pyi
+third-party/

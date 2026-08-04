@@ -45,7 +45,7 @@ exclude = ["pygobject_stub_generator"]
 "*" = ["*.pyi"]
 
 [tool.codespell]
-skip = "*__pycache__*,.mypy_cache,.git,pyproject.toml,test,*.pyi,*venv"
+skip = "*__pycache__*,.mypy_cache,.git,pyproject.toml,test,*.pyi,*venv,third-party,stuff"
 ignore-words-list = """
     astroid,
     inout"""
@@ -58,6 +58,7 @@ exclude = [
   ".ruff_cache",
   ".venv",
 ]
+target-version = "py310"
 
 [tool.ruff.lint]
 select = [
@@ -113,3 +114,11 @@ typing = ["_typeshed", "typing", "typing_extensions"]
 pythonVersion = "3.10"
 
 reportMissingModuleSource = "none"
+
+[tool.mypy]
+strict = true
+disable_error_code = ["override"]
+
+[[tool.mypy.overrides]]
+module = "pygobject_stub_generator.*"
+enable_error_code = ["override"]
